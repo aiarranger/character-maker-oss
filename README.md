@@ -1,7 +1,8 @@
 # Character Studio（character-maker）
 
+**日本語** | [English](README.en.md)
+
 ブラウザで 3D キャラクターを選んで、その場でカスタマイズし、ゲームでそのまま使える GLB に書き出すキャラクターメイクです。
-A browser-based 3D character creator. Pick a character, customise it, and export a game-ready GLB (idle / walk / run / sword / **hit reaction** / **＞＜ face**).
 
 ![Character Studio](docs/media/studio-hero.png)
 
@@ -130,7 +131,7 @@ props は `onPlay?: (file: File) => void | Promise<void>`・`initialName?: strin
 
 部品の配信は `@aiarranger/character-maker/server` を使います。取り込み用の tgz は `pnpm pack:vendor` で作れます（`tools/pack.mjs`、50 MiB 未満）。
 
-- `serveMakerAsset(req, res)`: `/maker-assets/…`・`/character-maker/…`・`/portraits/…`・`/review-swing-2026-10-02/…`・`/api/character-maker/assets/…`・`/models/…` を届けます（開発サーバー用）。
+- `serveMakerAsset(req, res)`: `/maker-assets/…`・`/character-maker/…`・`/portraits/…`・`/review-swing-2026-10-02/…`・`/api/character-maker/assets/…`・`/models/…` を届けます（開発サーバー用）。それ以外のパス（取り込み先自身の `/models/…` など）は取り込み先に任せます。
 - `await ensureStudioModels(cacheDir)`: オリジナル4体の表示用モデル（`/models/`、約97MB）は tgz に入りません。公開リポジトリの固定コミットから取り、SHA-256 を確かめて `cacheDir` に置きます（足りないもの・違うものだけ）。一覧はパッケージの `studio-models.json` です。まだ取っていないモデルは、`serveMakerAsset` が頼まれたときにも取ります。
 - `copyMakerAssets(outRoot)`: 静的書き出し用。部品と、`ensureStudioModels` で用意したモデルを `outRoot` へ写します。
 
@@ -151,7 +152,7 @@ await ensureStudioModels('.cache/character-maker-models');
 | `distribution/` | オリジナル4体のモデルと動作（CC BY 4.0）。一覧と SHA-256 は `distribution/manifest.json` |
 | `public/review-swing-2026-10-02/` | 食べ物の武器（CC BY 4.0） |
 | `tools/character-maker/` | 部品の組み立て・サムネイル撮影・書き出し確認・受入計測 |
-| `docs/` | 画面の設計（[studio-quality-spec.md](docs/studio-quality-spec.md)）、メインキャラ対応（[main-character-spec.md](docs/main-character-spec.md)） |
+| `docs/` | 画面の設計（[studio-quality-spec.md](docs/studio-quality-spec.md)）、メインキャラ対応（[main-character-spec.md](docs/main-character-spec.md)）、yukikau.jp への経路（[yukikau-route.md](docs/yukikau-route.md)） |
 
 ## 確認 / Checks
 

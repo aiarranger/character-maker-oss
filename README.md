@@ -3,11 +3,35 @@
 ブラウザで 3D キャラクターを選んで、その場でカスタマイズし、ゲームでそのまま使える GLB に書き出すキャラクターメイクです。
 A browser-based 3D character creator. Pick a character, customise it, and export a game-ready GLB (idle / walk / run / sword / **hit reaction** / **＞＜ face**).
 
+![Character Studio](docs/media/studio-hero.png)
+
+![操作の流れ: キャラを選ぶ → 髪型・髪色 → 武器 → 構える・振る → のけぞる（＞＜）→ セレネへ切り替え → 書き出し](docs/media/demo.gif)
+
+[操作動画（MP4・32秒）](docs/media/demo.mp4)
+
 - 16キャラ: オリジナル4体（ハル・ナミ・ルクス・モカ）＋ファンタジー8体＋アメコミ4体
 - 体型・髪型・髪色・顔・目・口・表情・服の色・武器（食べ物の武器12種）を編集
 - 動き: 待機・歩く・走る・武器を構える・武器を振る・**のけぞる（被弾）**、顔: **＞＜**
 - 保存（ブラウザ）、JSON の書き出し・読み込み、GLB の書き出し
 - Next.js 15 / React 19 / three.js / React Three Fiber。サーバーやアカウントは不要
+
+## 画面 / Screens
+
+| ファンタジーのセレネ | スマホ（390px） |
+|---|---|
+| ![セレネ](docs/media/studio-fantasy-selene.png) | <img src="docs/media/studio-phone.png" alt="スマホ" width="300"> |
+
+**＞＜ の顔**（上: オリジナル4体、下: プリセット）
+
+![＞＜ の顔](docs/media/hurt-face-grid.png)
+
+**のけぞり**（被弾。①待機 ②のけぞる＋＞＜ ③よろめく ④立て直す）
+
+![のけぞり](docs/media/hit-sequence.png)
+
+**書き出した GLB を素の three.js で再生**（idle・run・hit・hit の顔）
+
+![three.js](docs/media/glb-threejs.png)
 
 ## Quick start
 
@@ -34,7 +58,7 @@ http://127.0.0.1:4284/character-maker を開きます。開発サーバーは `1
 
 | クリップ名 | 内容 | 再生のしかた |
 |---|---|---|
-| `idle` / `walk` / `run` | 待機・歩く・走る（標準の書き出し） | ループ |
+| `idle` / `walk` / `run` | 待機・歩く・走る（標準の書き出し）。オリジナル4体は `preset:biped:idle` のように接頭辞が付く | ループ |
 | `sword_idle` / `sword_attack` | 武器を構える・振る（武器ありの書き出し） | 構えはループ、振るは一回再生のあと `sword_idle` へ |
 | `hit` | のけぞり（被弾）。再生中は顔が ＞＜ になる | 一回再生（約0.66秒）のあと元の動きへ |
 | `face_hurt` | ＞＜ の顔だけ（体は動かさない） | 他のクリップと同時にループ再生 |
@@ -50,7 +74,8 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 const gltf = await new GLTFLoader().loadAsync('/my-character.glb');
 scene.add(gltf.scene);
 const mixer = new THREE.AnimationMixer(gltf.scene);
-const clip = name => THREE.AnimationClip.findByName(gltf.animations, name);
+// オリジナル4体の標準の書き出しは `preset:biped:idle` のように接頭辞が付くので、末尾の名前で探す
+const clip = name => gltf.animations.find(c => c.name === name || c.name.endsWith(`:${name}`));
 
 const idle = mixer.clipAction(clip('idle') ?? clip('sword_idle')).play();
 

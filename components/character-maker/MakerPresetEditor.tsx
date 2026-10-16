@@ -41,6 +41,8 @@ export type MakerPresetEditorProps = {
   onBackToList?: (session: MakerEditorSession) => void;
   embedded?: boolean;
   editorRef?: Ref<MakerEditorHandle>;
+  /** ゲームへ渡す（yukikau.jp への組み込み）。あるときは「この姿で遊ぶ」を出し、yukikau.jp 用の .character.zip を渡す。docs/yukikau-route.md */
+  onPlay?: (file: File) => void | Promise<void>;
   /** Studio の表紙の情報（page から渡す）。docs/studio-quality-spec.md §8 */
   accent?: string;
   look?: string;

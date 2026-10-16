@@ -1,0 +1,21 @@
+node_modules/
+.next/
+out/
+.pack/
+*.tgz
+*.log
+.env*
+!.env.example
+.vercel/
+.DS_Store
+*.tsbuildinfo
+next-env.d.ts
+
+# public/ の実行時素材は parts/assets/studio-runtime-v1/manifest.json から同期する（pnpm assets:sync）。
+/public/maker-assets/*
+!/public/maker-assets/*.json
+/public/models/
+/public/portraits/
+/public/character-maker/original-parts/*
+!/public/character-maker/original-parts/*.json
+.claude/

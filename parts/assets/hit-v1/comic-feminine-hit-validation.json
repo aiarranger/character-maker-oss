@@ -1,0 +1,48 @@
+{
+  "input": {
+    "path": "parts/assets/v1/feminine.glb",
+    "bytes": 3175368,
+    "sha256": "dc2c09a99b8922bab4b8042ccb8f5bc9484a2ff00ebe2bb2a22eb9aeeeb87c95"
+  },
+  "sourceSHA256": "69591853d817488edaa8fd9bf8fc1d821eaeaf789f8627b3cd23b41c4ed67997",
+  "sourceClip": "Hit_Chest",
+  "stretch": 2,
+  "duration": 0.66666669,
+  "samples": 11,
+  "tracks": 66,
+  "pelvisHeightRatio": 1.0164721304885487,
+  "tPoseError": 0.0000039058751326592756,
+  "worldRotationError": 0.000001380590775239551,
+  "endToIdleDegrees": 1.01008808,
+  "snapshots": [
+    {
+      "time": 0,
+      "headZ": -0.19086897,
+      "floorY": -0.02264228
+    },
+    {
+      "time": 0.33333334,
+      "headZ": -0.05715718,
+      "floorY": -0.01803374
+    },
+    {
+      "time": 0.66666669,
+      "headZ": 0.01087275,
+      "floorY": -0.01369465
+    }
+  ],
+  "canonical": {
+    "status": "passed",
+    "path": "parts/assets/v1/feminine.glb",
+    "bytes": 3175368,
+    "sha256": "dc2c09a99b8922bab4b8042ccb8f5bc9484a2ff00ebe2bb2a22eb9aeeeb87c95",
+    "localError": 0,
+    "worldError": 0,
+    "inverseBindError": 0
+  },
+  "output": {
+    "path": "public/maker-assets/comic-feminine-hit-motions.json",
+    "bytes": 75028,
+    "sha256": "396a973615d4f3078c55b54fe44866c56f2d7f6b2918fcb1dccdc0dd78c51b66"
+  }
+}

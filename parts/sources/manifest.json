@@ -1,0 +1,161 @@
+{
+  "schemaVersion": 1,
+  "license": "CC0-1.0",
+  "author": "Quaternius",
+  "packs": {
+    "base": {
+      "zip": "Universal Base Characters[Standard].zip",
+      "prefix": "Universal Base Characters[Standard]/",
+      "sha256": "fdbf1804c90dfc1ea03e992bff7da2dfd1a79318e13270a660180f9308455f40",
+      "url": "https://quaternius.itch.io/universal-base-characters"
+    },
+    "outfits": {
+      "zip": "Modular Character Outfits - Fantasy[Standard].zip",
+      "prefix": "Modular Character Outfits - Fantasy[Standard]/",
+      "sha256": "c3468b18871cc8c8f05ab14df7712baf22cb9f389cbd870babf130e595187f70",
+      "url": "https://quaternius.itch.io/modular-character-outfits-fantasy"
+    }
+  },
+  "files": [
+    {
+      "path": "base/License_Standard.txt",
+      "bytes": 806,
+      "sha256": "0f4beaf0fe360a7732e58bbe3dbf60a2422367fbea60cb9ea4add968f383268e"
+    },
+    {
+      "path": "base/Base Characters/Godot - UE/Superhero_Male_FullBody.gltf",
+      "bytes": 30989,
+      "sha256": "e7fcea214ecf8855afbf910b50de6f9c7d1decfb71ca28bad8a4481452dafeb4"
+    },
+    {
+      "path": "base/Base Characters/Godot - UE/Superhero_Male_FullBody.bin",
+      "bytes": 720076,
+      "sha256": "459003f9745853ae562a85506a2b94dd56515c1f37728f9fa3d2ce1a3e4cd92f"
+    },
+    {
+      "path": "base/Base Characters/Textures/T_Superhero_Male_Ligh.png",
+      "bytes": 1389170,
+      "sha256": "419f96dbb8811511e2d515bcdabc085ff2f219ec7b8b4e91050a84cba6888fe9"
+    },
+    {
+      "path": "base/Base Characters/Godot - UE/Superhero_Female_FullBody.gltf",
+      "bytes": 31656,
+      "sha256": "adedf28000a0716f689b009a70314506fc62f827498f77ba852acb5610f3f3f4"
+    },
+    {
+      "path": "base/Base Characters/Godot - UE/Superhero_Female_FullBody.bin",
+      "bytes": 990808,
+      "sha256": "3a8220a485b33d05d879115a50697728b45a151781106033afb8b8c243fca208"
+    },
+    {
+      "path": "base/Base Characters/Textures/T_Superhero_Female_Light_BaseColor.png",
+      "bytes": 1317541,
+      "sha256": "743f811857db0b950f3ad09a0733dfa4888801ead332313ca25becea14c54f8d"
+    },
+    {
+      "path": "base/Base Characters/Godot - UE/T_Eye_Brown.png",
+      "bytes": 35958,
+      "sha256": "d08e3356a83211bc6ca21fe3a8e39f4b5c1a3b8f85457fc2c0fb57be09935025"
+    },
+    {
+      "path": "base/Base Characters/Godot - UE/T_Hair_1_BaseColor.png",
+      "bytes": 1570376,
+      "sha256": "bc7aa863bd22ab0a995cd838cceb4d3a5186ee54ee2fb0108fad85d20c057e6e"
+    },
+    {
+      "path": "base/Base Characters/Godot - UE/T_Hair_2_BaseColor.png",
+      "bytes": 1729467,
+      "sha256": "f9f4f2fb3eeeefb0b6f0fdef38b0770fd6607640c1c680b8139dd76697e9f9b3"
+    },
+    {
+      "path": "base/Hairstyles/Rigged to Head Bone/glTF (Godot -Unreal)/Hair_SimpleParted.gltf",
+      "bytes": 23114,
+      "sha256": "fe0f354d7f95d83d38e15c60794dcc063fa4d60550706f3d7ba51491cdc07c56"
+    },
+    {
+      "path": "base/Hairstyles/Rigged to Head Bone/glTF (Godot -Unreal)/Hair_SimpleParted.bin",
+      "bytes": 51332,
+      "sha256": "ecd7c81959f3985d6254458a440daaaa18a8bfbb1dbe111c68a04a72374d54db"
+    },
+    {
+      "path": "base/Hairstyles/Rigged to Head Bone/glTF (Godot -Unreal)/Hair_Long.gltf",
+      "bytes": 23813,
+      "sha256": "27e2c63e8f98c79fb600268ffcc92b36c621b8653b5a7dcbadb08328f3f887a9"
+    },
+    {
+      "path": "base/Hairstyles/Rigged to Head Bone/glTF (Godot -Unreal)/Hair_Long.bin",
+      "bytes": 181756,
+      "sha256": "268fd531d2c2ac321783d36fcf106d15c5c76e8923eec2c8704d5fe9de953589"
+    },
+    {
+      "path": "base/Hairstyles/Rigged to Head Bone/glTF (Godot -Unreal)/Hair_Buns.gltf",
+      "bytes": 23807,
+      "sha256": "cbdd6f509ec8f1021361b53da6fa1a077b95762ebc8bc2d8acae59bb0cb263c1"
+    },
+    {
+      "path": "base/Hairstyles/Rigged to Head Bone/glTF (Godot -Unreal)/Hair_Buns.bin",
+      "bytes": 205916,
+      "sha256": "811606cc84f0bfdefa2e6f1396f3d94c35138308a96d78a4f447b2e7dfc6ed6c"
+    },
+    {
+      "path": "base/Hairstyles/Rigged to Head Bone/glTF (Godot -Unreal)/Hair_Buzzed.gltf",
+      "bytes": 23108,
+      "sha256": "6e709c691d4feccda9788df917bf9604e751f02da21cee2bc81bcc3d26b3b580"
+    },
+    {
+      "path": "base/Hairstyles/Rigged to Head Bone/glTF (Godot -Unreal)/Hair_Buzzed.bin",
+      "bytes": 33372,
+      "sha256": "5d4b5452ff879ed1d516694be57d1106c070c7133e747a8c9432b01ebf20e908"
+    },
+    {
+      "path": "base/Hairstyles/Rigged to Head Bone/glTF (Godot -Unreal)/Hair_BuzzedFemale.gltf",
+      "bytes": 23779,
+      "sha256": "096a7a4ea5bcadc588f4c1e95f04b3461f8a20f3643a0308cfd23e81e180ab32"
+    },
+    {
+      "path": "base/Hairstyles/Rigged to Head Bone/glTF (Godot -Unreal)/Hair_BuzzedFemale.bin",
+      "bytes": 33372,
+      "sha256": "48fcdac8751e85c1d08ac9ff25b5c4d649e5b5d450d37ad8743b9f111a3a7e04"
+    },
+    {
+      "path": "base/Hairstyles/Rigged to Head Bone/glTF (Godot -Unreal)/T_Hair_1_BaseColor.png",
+      "bytes": 1570376,
+      "sha256": "bc7aa863bd22ab0a995cd838cceb4d3a5186ee54ee2fb0108fad85d20c057e6e"
+    },
+    {
+      "path": "base/Hairstyles/Rigged to Head Bone/glTF (Godot -Unreal)/T_Hair_2_BaseColor.png",
+      "bytes": 1729467,
+      "sha256": "f9f4f2fb3eeeefb0b6f0fdef38b0770fd6607640c1c680b8139dd76697e9f9b3"
+    },
+    {
+      "path": "outfits/License_Standard.txt",
+      "bytes": 728,
+      "sha256": "2202cc2f608c4210790b112e5f121bc2e7f8dced7b5b1c7f4be6203461bdebbb"
+    },
+    {
+      "path": "outfits/Exports/glTF (Godot-Unreal)/Outfits/Male_Peasant.gltf",
+      "bytes": 32681,
+      "sha256": "8f5a6cf6c1cf96e0a0f8e1a861b4245d42b7f88d44e5076da3d48f3fc52f4e76"
+    },
+    {
+      "path": "outfits/Exports/glTF (Godot-Unreal)/Outfits/Male_Peasant.bin",
+      "bytes": 674764,
+      "sha256": "e46bde795f7b69b351d322d7a5628e07131cfb48ed0afe366293f1b3f530433c"
+    },
+    {
+      "path": "outfits/Exports/glTF (Godot-Unreal)/Outfits/Female_Peasant.gltf",
+      "bytes": 29529,
+      "sha256": "43ba98058b933cae9acbde0f3ef8c3dda4ba9f69f338606f9d87666d9efffb31"
+    },
+    {
+      "path": "outfits/Exports/glTF (Godot-Unreal)/Outfits/Female_Peasant.bin",
+      "bytes": 658600,
+      "sha256": "40eccaa2bd545c893142ef7dca0866ea8f20df3a86c67c5615024bc4fe546e83"
+    },
+    {
+      "path": "outfits/Exports/glTF (Godot-Unreal)/Outfits/T_Peasant_BaseColor.png",
+      "bytes": 5055760,
+      "sha256": "a43635628d95571cd62fd4db0cc3a6ea32778b2bc02f242dda224c89d07f1ade"
+    }
+  ]
+}

@@ -1,0 +1,912 @@
+{
+  "schemaVersion": 1,
+  "version": "v1",
+  "sourceLicense": "CC0-1.0",
+  "builder": "tools/character-maker/build-assets.mjs",
+  "builderSha256": "968844ecac45670047951f24947a8342899b29eac9eed61598a8fb7c6c97a2d2",
+  "sourceManifestSha256": "183a19ab0e375eb96a1a690854e243acf45e1b6f5349a91798b761a9c94b5198",
+  "morphNames": [
+    "bodySlim",
+    "bodyBroad",
+    "faceRound",
+    "faceAngular",
+    "eyesRound",
+    "eyesSlender",
+    "mouthSmile",
+    "mouthFull"
+  ],
+  "hairFitMorphNames": [
+    "hairFitMasculine",
+    "hairFitFeminine"
+  ],
+  "assets": [
+    {
+      "file": "feminine.glb",
+      "sha256": "dc2c09a99b8922bab4b8042ccb8f5bc9484a2ff00ebe2bb2a22eb9aeeeb87c95",
+      "bytes": 3175368,
+      "kind": "body",
+      "base": "feminine",
+      "skeleton": {
+        "bones": 65,
+        "root": "maker-root",
+        "jointRoot": "root",
+        "head": "Head",
+        "headLocalMatrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          0.916216505,
+          -0.400683559,
+          0,
+          0,
+          0.400683559,
+          0.916216505,
+          0,
+          0,
+          0.071191214,
+          2e-8,
+          1
+        ],
+        "headWorldMatrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          0.999836248,
+          0.018083916,
+          0,
+          0,
+          -0.018083952,
+          0.999836311,
+          0,
+          0,
+          1.549600006,
+          -0.010899782,
+          1
+        ],
+        "rootMatrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "signatureSha256": "6ee2d6fde06c2e6f043973a22a425bad5f00706020c2d1fb33eee3c934c91022"
+      },
+      "sourceHeadExtraction": {
+        "vertices": 1813,
+        "triangles": 3266,
+        "rule": "Start with triangles whose vertices have nonzero Head + neck_01 weights, then separate the neck along the actual garment opening.",
+        "neckCut": {
+          "collarEdges": 32,
+          "overlapMeters": 0.01,
+          "beforeVertices": 1838,
+          "afterVertices": 1813,
+          "rule": "Clip head/neck to the original garment neck opening minus an inside overlap; interpolate cut-edge UV and joint weights, without welding to the garment or changing skeleton."
+        }
+      },
+      "landmarks": {
+        "sex": "Female",
+        "eyeY": 1.6555,
+        "eyeX": 0.033,
+        "mouthY": 1.581,
+        "chinY": 1.545,
+        "faceZ": 0.064
+      },
+      "front": "+Z",
+      "up": "+Y",
+      "unit": "meter",
+      "bounds": {
+        "min": [
+          -0.831941128,
+          -0.006743608,
+          -0.16725491
+        ],
+        "max": [
+          0.831941128,
+          1.766643882,
+          0.167541504
+        ],
+        "height": 1.7733874898403883
+      },
+      "materials": [
+        "maker-outfit",
+        "maker-skin",
+        "maker-eyes",
+        "maker-brow"
+      ],
+      "meshes": [
+        {
+          "name": "maker-arms",
+          "targets": [
+            "bodySlim",
+            "bodyBroad"
+          ],
+          "vertices": 5436
+        },
+        {
+          "name": "maker-body",
+          "targets": [
+            "bodySlim",
+            "bodyBroad"
+          ],
+          "vertices": 1730
+        },
+        {
+          "name": "maker-feet",
+          "targets": [
+            "bodySlim",
+            "bodyBroad"
+          ],
+          "vertices": 1892
+        },
+        {
+          "name": "maker-legs",
+          "targets": [
+            "bodySlim",
+            "bodyBroad"
+          ],
+          "vertices": 1126
+        },
+        {
+          "name": "maker-head",
+          "targets": [
+            "bodySlim",
+            "bodyBroad",
+            "faceRound",
+            "faceAngular",
+            "eyesRound",
+            "eyesSlender",
+            "mouthSmile",
+            "mouthFull"
+          ],
+          "vertices": 1813
+        },
+        {
+          "name": "maker-eyes",
+          "targets": [
+            "eyesRound",
+            "eyesSlender"
+          ],
+          "vertices": 556
+        },
+        {
+          "name": "maker-brow",
+          "targets": [
+            "eyesRound",
+            "eyesSlender"
+          ],
+          "vertices": 912
+        }
+      ]
+    },
+    {
+      "file": "hair-buns.glb",
+      "sha256": "467f6214a78988fde3eb30e099f6c44b664d103fc637f3ae964573fafa83cd5e",
+      "bytes": 600040,
+      "kind": "hair",
+      "hair": "buns",
+      "attachTo": "Head",
+      "coordinateSpace": "Head-local",
+      "rootMatrix": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "donor": "Female",
+      "donorHeadWorldMatrix": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0.999836248,
+        0.018083916,
+        0,
+        0,
+        -0.018083952,
+        0.999836311,
+        0,
+        0,
+        1.549600006,
+        -0.010899782,
+        1
+      ],
+      "fit": {
+        "targets": [
+          "hairFitMasculine",
+          "hairFitFeminine"
+        ],
+        "selectedBaseWeight": 1,
+        "otherBaseWeight": 0,
+        "donorShapeUnchanged": true,
+        "method": "Head-local radial transfer of original donor-to-target scalp surface difference, smoothly reduced by absolute scalp distance for both internal caps and detached lengths/tips",
+        "origin": [
+          0,
+          0.14,
+          -0.012
+        ],
+        "changedVertices": 3321,
+        "maximumShiftMeters": 0.01680943068886162,
+        "maximumShiftVertex": {
+          "vertex": 916,
+          "headLocalPosition": [
+            0.081024169921875,
+            0.11145718395709991,
+            -0.02755054272711277
+          ],
+          "sourceScalpRadius": 0.09467350990403436,
+          "targetScalpRadius": 0.07786407921517274,
+          "lowerScalpY": 0.10904668795776486,
+          "scalpDistance": 0.007372720455739751,
+          "falloff": 1,
+          "delta": [
+            -0.015600891779231326,
+            0.005495809270112267,
+            0.002994197094865899
+          ]
+        }
+      },
+      "texture": "neutral grayscale, white material factor; tint maker-hair at runtime",
+      "bounds": {
+        "min": [
+          -0.150756836,
+          -0.018779844,
+          -0.126188114
+        ],
+        "max": [
+          0.150756836,
+          0.229387254,
+          0.110785641
+        ],
+        "height": 0.24816709756851196
+      },
+      "materials": [
+        "maker-hair"
+      ],
+      "meshes": [
+        {
+          "name": "hair-buns",
+          "targets": [
+            "hairFitMasculine",
+            "hairFitFeminine"
+          ],
+          "vertices": 3501
+        }
+      ]
+    },
+    {
+      "file": "hair-crop.glb",
+      "sha256": "704a236dee65e5e6014a3a4605d314aad0f1664a4e5d8ba0f6e11bcd82e57222",
+      "bytes": 419652,
+      "kind": "hair",
+      "hair": "crop",
+      "attachTo": "Head",
+      "coordinateSpace": "Head-local",
+      "rootMatrix": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "donor": "Male",
+      "donorHeadWorldMatrix": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0.999580419,
+        0.028966201,
+        0,
+        0,
+        -0.028966201,
+        0.999580419,
+        0,
+        0,
+        1.599799969,
+        -0.017399986,
+        1
+      ],
+      "fit": {
+        "targets": [
+          "hairFitMasculine",
+          "hairFitFeminine"
+        ],
+        "selectedBaseWeight": 1,
+        "otherBaseWeight": 0,
+        "donorShapeUnchanged": true,
+        "method": "Head-local radial transfer of original donor-to-target scalp surface difference, smoothly reduced by absolute scalp distance for both internal caps and detached lengths/tips",
+        "origin": [
+          0,
+          0.14,
+          -0.012
+        ],
+        "changedVertices": 448,
+        "maximumShiftMeters": 0.015372426589668817,
+        "maximumShiftVertex": {
+          "vertex": 269,
+          "headLocalPosition": [
+            -0.06871680915355682,
+            0.08764511346817017,
+            -0.021670950576663017
+          ],
+          "sourceScalpRadius": 0.08488014131457806,
+          "targetScalpRadius": 0.10123790069695006,
+          "lowerScalpY": 0.07902690379076367,
+          "scalpDistance": 0.002048342446864526,
+          "falloff": 0.9397635843839942,
+          "delta": [
+            -0.012151875409310653,
+            -0.00925843423232439,
+            -0.0017102101792095081
+          ]
+        }
+      },
+      "texture": "neutral grayscale, white material factor; tint maker-hair at runtime",
+      "bounds": {
+        "min": [
+          -0.077295288,
+          0.042454712,
+          -0.094362646
+        ],
+        "max": [
+          0.077295206,
+          0.213880569,
+          0.095352687
+        ],
+        "height": 0.17142585664987564
+      },
+      "materials": [
+        "maker-hair"
+      ],
+      "meshes": [
+        {
+          "name": "hair-crop",
+          "targets": [
+            "hairFitMasculine",
+            "hairFitFeminine"
+          ],
+          "vertices": 466
+        }
+      ]
+    },
+    {
+      "file": "hair-long.glb",
+      "sha256": "2dd87a5e6e87437aa297b20cd19c9670aa7859b2b1425bfcc8c70a06266904b5",
+      "bytes": 584304,
+      "kind": "hair",
+      "hair": "long",
+      "attachTo": "Head",
+      "coordinateSpace": "Head-local",
+      "rootMatrix": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "donor": "Female",
+      "donorHeadWorldMatrix": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0.999836248,
+        0.018083916,
+        0,
+        0,
+        -0.018083952,
+        0.999836311,
+        0,
+        0,
+        1.549600006,
+        -0.010899782,
+        1
+      ],
+      "fit": {
+        "targets": [
+          "hairFitMasculine",
+          "hairFitFeminine"
+        ],
+        "selectedBaseWeight": 1,
+        "otherBaseWeight": 0,
+        "donorShapeUnchanged": true,
+        "method": "Head-local radial transfer of original donor-to-target scalp surface difference, smoothly reduced by absolute scalp distance for both internal caps and detached lengths/tips",
+        "origin": [
+          0,
+          0.14,
+          -0.012
+        ],
+        "changedVertices": 2784,
+        "maximumShiftMeters": 0.017072578282653197,
+        "maximumShiftVertex": {
+          "vertex": 1489,
+          "headLocalPosition": [
+            -0.07882463932037354,
+            0.10869643837213516,
+            -0.03129497170448303
+          ],
+          "sourceScalpRadius": 0.09517271689947801,
+          "targetScalpRadius": 0.07810013861682481,
+          "lowerScalpY": 0.10574795822830195,
+          "scalpDistance": 0.008192646379540452,
+          "falloff": 1,
+          "delta": [
+            0.01547181805388983,
+            0.0061443098772273235,
+            0.0037872458934240178
+          ]
+        }
+      },
+      "texture": "neutral grayscale, white material factor; tint maker-hair at runtime",
+      "bounds": {
+        "min": [
+          -0.122355282,
+          -0.050570738,
+          -0.150699735
+        ],
+        "max": [
+          0.122355282,
+          0.227468297,
+          0.116962813
+        ],
+        "height": 0.27803903445601463
+      },
+      "materials": [
+        "maker-hair"
+      ],
+      "meshes": [
+        {
+          "name": "hair-long",
+          "targets": [
+            "hairFitMasculine",
+            "hairFitFeminine"
+          ],
+          "vertices": 3080
+        }
+      ]
+    },
+    {
+      "file": "hair-parted.glb",
+      "sha256": "351c83e53ab22bc6561a724fbf1a96c7c001724ae71a62df29a2fed383af99cf",
+      "bytes": 431800,
+      "kind": "hair",
+      "hair": "parted",
+      "attachTo": "Head",
+      "coordinateSpace": "Head-local",
+      "rootMatrix": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "donor": "Male",
+      "donorHeadWorldMatrix": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0.999580419,
+        0.028966201,
+        0,
+        0,
+        -0.028966201,
+        0.999580419,
+        0,
+        0,
+        1.599799969,
+        -0.017399986,
+        1
+      ],
+      "fit": {
+        "targets": [
+          "hairFitMasculine",
+          "hairFitFeminine"
+        ],
+        "selectedBaseWeight": 1,
+        "otherBaseWeight": 0,
+        "donorShapeUnchanged": true,
+        "method": "Head-local radial transfer of original donor-to-target scalp surface difference, smoothly reduced by absolute scalp distance for both internal caps and detached lengths/tips",
+        "origin": [
+          0,
+          0.14,
+          -0.012
+        ],
+        "changedVertices": 756,
+        "maximumShiftMeters": 0.017958118410866156,
+        "maximumShiftVertex": {
+          "vertex": 100,
+          "headLocalPosition": [
+            -0.06997289508581161,
+            0.09915288537740707,
+            -0.02458590269088745
+          ],
+          "sourceScalpRadius": 0.08056263040902593,
+          "targetScalpRadius": 0.09852074881989209,
+          "lowerScalpY": 0.09092002026027138,
+          "scalpDistance": 0.0014318679809619955,
+          "falloff": 1,
+          "delta": [
+            -0.015325193277303547,
+            -0.00894617731113916,
+            -0.0027565158061652857
+          ]
+        }
+      },
+      "texture": "neutral grayscale, white material factor; tint maker-hair at runtime",
+      "bounds": {
+        "min": [
+          -0.08542496,
+          0.058706019,
+          -0.094393469
+        ],
+        "max": [
+          0.089996338,
+          0.241252273,
+          0.091286257
+        ],
+        "height": 0.182546254247427
+      },
+      "materials": [
+        "maker-hair"
+      ],
+      "meshes": [
+        {
+          "name": "hair-parted",
+          "targets": [
+            "hairFitMasculine",
+            "hairFitFeminine"
+          ],
+          "vertices": 757
+        }
+      ]
+    },
+    {
+      "file": "hair-pixie.glb",
+      "sha256": "6481658bd8d10bb889edb55f357d4af89466f66a99d0a4e06ee832b210b01b60",
+      "bytes": 419660,
+      "kind": "hair",
+      "hair": "pixie",
+      "attachTo": "Head",
+      "coordinateSpace": "Head-local",
+      "rootMatrix": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "donor": "Female",
+      "donorHeadWorldMatrix": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0.999836248,
+        0.018083916,
+        0,
+        0,
+        -0.018083952,
+        0.999836311,
+        0,
+        0,
+        1.549600006,
+        -0.010899782,
+        1
+      ],
+      "fit": {
+        "targets": [
+          "hairFitMasculine",
+          "hairFitFeminine"
+        ],
+        "selectedBaseWeight": 1,
+        "otherBaseWeight": 0,
+        "donorShapeUnchanged": true,
+        "method": "Head-local radial transfer of original donor-to-target scalp surface difference, smoothly reduced by absolute scalp distance for both internal caps and detached lengths/tips",
+        "origin": [
+          0,
+          0.14,
+          -0.012
+        ],
+        "changedVertices": 466,
+        "maximumShiftMeters": 0.014057022336610964,
+        "maximumShiftVertex": {
+          "vertex": 127,
+          "headLocalPosition": [
+            1.1496141224306283e-13,
+            0.19304950535297394,
+            -0.07888296991586685
+          ],
+          "sourceScalpRadius": 0.08282898614401654,
+          "targetScalpRadius": 0.06877196380740558,
+          "lowerScalpY": 0.18273670617348337,
+          "scalpDistance": 0.002538347672625285,
+          "falloff": 1,
+          "delta": [
+            -1.8930134836119756e-14,
+            -0.008735403208147802,
+            0.01101329232169294
+          ]
+        }
+      },
+      "texture": "neutral grayscale, white material factor; tint maker-hair at runtime",
+      "bounds": {
+        "min": [
+          -0.079331145,
+          0.049791314,
+          -0.106287226
+        ],
+        "max": [
+          0.079331145,
+          0.22132574,
+          0.090577222
+        ],
+        "height": 0.17153442651033401
+      },
+      "materials": [
+        "maker-hair"
+      ],
+      "meshes": [
+        {
+          "name": "hair-pixie",
+          "targets": [
+            "hairFitMasculine",
+            "hairFitFeminine"
+          ],
+          "vertices": 466
+        }
+      ]
+    },
+    {
+      "file": "masculine.glb",
+      "sha256": "16c878b8d1ce17f61fb22c54a19e40da8062a3be9db2181f7aead1ae9147b2e0",
+      "bytes": 3040184,
+      "kind": "body",
+      "base": "masculine",
+      "skeleton": {
+        "bones": 65,
+        "root": "maker-root",
+        "jointRoot": "root",
+        "head": "Head",
+        "headLocalMatrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          0.965114988,
+          -0.261826392,
+          0,
+          0,
+          0.261826392,
+          0.965114988,
+          0,
+          0,
+          0.082852349,
+          9e-9,
+          1
+        ],
+        "headWorldMatrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          0.999580419,
+          0.028966201,
+          0,
+          0,
+          -0.028966201,
+          0.999580419,
+          0,
+          0,
+          1.599799969,
+          -0.017399986,
+          1
+        ],
+        "rootMatrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "signatureSha256": "2aa9c8855d65cbe237080a938643d5bacbcf915366ace2d01f03b9e0704b9d63"
+      },
+      "sourceHeadExtraction": {
+        "vertices": 1679,
+        "triangles": 3014,
+        "rule": "Start with triangles whose vertices have nonzero Head + neck_01 weights, then separate the neck along the actual garment opening.",
+        "neckCut": {
+          "collarEdges": 24,
+          "overlapMeters": 0.01,
+          "beforeVertices": 1739,
+          "afterVertices": 1679,
+          "rule": "Clip head/neck to the original garment neck opening minus an inside overlap; interpolate cut-edge UV and joint weights, without welding to the garment or changing skeleton."
+        }
+      },
+      "landmarks": {
+        "sex": "Male",
+        "eyeY": 1.6985,
+        "eyeX": 0.032,
+        "mouthY": 1.625,
+        "chinY": 1.587,
+        "faceZ": 0.066
+      },
+      "front": "+Z",
+      "up": "+Y",
+      "unit": "meter",
+      "bounds": {
+        "min": [
+          -0.899414539,
+          -0.003967255,
+          -0.18447724
+        ],
+        "max": [
+          0.899414659,
+          1.810076714,
+          0.167541504
+        ],
+        "height": 1.8140439689159393
+      },
+      "materials": [
+        "maker-outfit",
+        "maker-skin",
+        "maker-eyes",
+        "maker-brow"
+      ],
+      "meshes": [
+        {
+          "name": "maker-arms",
+          "targets": [
+            "bodySlim",
+            "bodyBroad"
+          ],
+          "vertices": 3315
+        },
+        {
+          "name": "maker-body",
+          "targets": [
+            "bodySlim",
+            "bodyBroad"
+          ],
+          "vertices": 3006
+        },
+        {
+          "name": "maker-feet",
+          "targets": [
+            "bodySlim",
+            "bodyBroad"
+          ],
+          "vertices": 1878
+        },
+        {
+          "name": "maker-legs",
+          "targets": [
+            "bodySlim",
+            "bodyBroad"
+          ],
+          "vertices": 656
+        },
+        {
+          "name": "maker-head",
+          "targets": [
+            "bodySlim",
+            "bodyBroad",
+            "faceRound",
+            "faceAngular",
+            "eyesRound",
+            "eyesSlender",
+            "mouthSmile",
+            "mouthFull"
+          ],
+          "vertices": 1679
+        },
+        {
+          "name": "maker-eyes",
+          "targets": [
+            "eyesRound",
+            "eyesSlender"
+          ],
+          "vertices": 556
+        },
+        {
+          "name": "maker-brow",
+          "targets": [
+            "eyesRound",
+            "eyesSlender"
+          ],
+          "vertices": 646
+        }
+      ]
+    }
+  ]
+}

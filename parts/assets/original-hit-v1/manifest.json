@@ -1,0 +1,195 @@
+{
+  "version": "original-hit-v1",
+  "sourceAnimation": {
+    "path": "distribution/characters/_shared/character-maker/sources/animations/UAL1_Standard.glb",
+    "sha256": "69591853d817488edaa8fd9bf8fc1d821eaeaf789f8627b3cd23b41c4ed67997",
+    "clip": "Hit_Chest",
+    "license": "CC0 (parts/sources/animations/License.txt)"
+  },
+  "timeScale": 2,
+  "builder": {
+    "path": "tools/character-maker/build-original-hit-motions.mjs",
+    "sha256": "0bef3124b4f32edfa47caf3d1683ee97566de65acd15b035289bf2cc18a28a9d"
+  },
+  "method": "world-quaternion-delta-over-anatomically-aligned-reference (as the original sword clips); additive output only; source models, sword clips and preset clips untouched",
+  "mapping": [
+    [
+      "root",
+      "Root"
+    ],
+    [
+      "pelvis",
+      "Hip"
+    ],
+    [
+      "spine_01",
+      "Waist"
+    ],
+    [
+      "spine_02",
+      "Spine01"
+    ],
+    [
+      "spine_03",
+      "Spine02"
+    ],
+    [
+      "neck_01",
+      "NeckTwist01"
+    ],
+    [
+      "Head",
+      "Head"
+    ],
+    [
+      "clavicle_l",
+      "L_Clavicle"
+    ],
+    [
+      "upperarm_l",
+      "L_Upperarm"
+    ],
+    [
+      "lowerarm_l",
+      "L_Forearm"
+    ],
+    [
+      "hand_l",
+      "L_Hand"
+    ],
+    [
+      "thigh_l",
+      "L_Thigh"
+    ],
+    [
+      "calf_l",
+      "L_Calf"
+    ],
+    [
+      "foot_l",
+      "L_Foot"
+    ],
+    [
+      "ball_l",
+      "L_ToeBase"
+    ],
+    [
+      "clavicle_r",
+      "R_Clavicle"
+    ],
+    [
+      "upperarm_r",
+      "R_Upperarm"
+    ],
+    [
+      "lowerarm_r",
+      "R_Forearm"
+    ],
+    [
+      "hand_r",
+      "R_Hand"
+    ],
+    [
+      "thigh_r",
+      "R_Thigh"
+    ],
+    [
+      "calf_r",
+      "R_Calf"
+    ],
+    [
+      "foot_r",
+      "R_Foot"
+    ],
+    [
+      "ball_r",
+      "R_ToeBase"
+    ]
+  ],
+  "characters": [
+    {
+      "id": "generic-human-a",
+      "model": {
+        "path": "parts/assets/studio-runtime-v1/models/337222c108d0ca174a7e44df8c37f84adcbfc3ac0beaf9403813acaee7e46697.glb",
+        "sha256": "337222c108d0ca174a7e44df8c37f84adcbfc3ac0beaf9403813acaee7e46697"
+      },
+      "output": {
+        "path": "parts/assets/original-hit-v1/generic-human-a-hit.json",
+        "sha256": "170c5c67d7358e1ac380675809ba45b697fd934b1e5f952e2c8a294f7d647047"
+      },
+      "clip": "hit",
+      "duration": 0.666667,
+      "samples": 11,
+      "tracks": 42,
+      "floorOffset": 0.056080251610352114,
+      "bindResidual": 0.00000497564867740774,
+      "headOffsetAlongForward": {
+        "start": -0.07716344998292878,
+        "end": 0.05077417185829354
+      }
+    },
+    {
+      "id": "generic-human-b",
+      "model": {
+        "path": "parts/assets/studio-runtime-v1/models/15fff552ee550c51132c2b0d761f4cbb38101a63591ad1a823c14d16c3d4b33d.glb",
+        "sha256": "15fff552ee550c51132c2b0d761f4cbb38101a63591ad1a823c14d16c3d4b33d"
+      },
+      "output": {
+        "path": "parts/assets/original-hit-v1/generic-human-b-hit.json",
+        "sha256": "4d18ea9c0bec20d79e0075baebd33692ac1c76ea204881b7ed75ea30b050281f"
+      },
+      "clip": "hit",
+      "duration": 0.666667,
+      "samples": 11,
+      "tracks": 42,
+      "floorOffset": 0.04250552973019948,
+      "bindResidual": 0.0006845590498766891,
+      "headOffsetAlongForward": {
+        "start": -0.06720722877832339,
+        "end": 0.04456847028303761
+      }
+    },
+    {
+      "id": "generic-robot",
+      "model": {
+        "path": "distribution/characters/generic-robot/experiments/character-maker-species-2026-10-03-v5/editable.glb",
+        "sha256": "7136ac1a4a1c32801ba8d927533eaba9379abdbbc4f9d0bee9e00f6b5604682f"
+      },
+      "output": {
+        "path": "parts/assets/original-hit-v1/generic-robot-hit.json",
+        "sha256": "0de703522e09f5ba13444ba9c307b9bb05c4e33bca53809797d7ba340bf02f3c"
+      },
+      "clip": "hit",
+      "duration": 0.666667,
+      "samples": 11,
+      "tracks": 42,
+      "floorOffset": 0.048011822780370514,
+      "bindResidual": 0.0000035145857091552085,
+      "headOffsetAlongForward": {
+        "start": -0.0721030395094199,
+        "end": 0.04997324960406083
+      }
+    },
+    {
+      "id": "generic-cat",
+      "model": {
+        "path": "distribution/characters/generic-cat/experiments/character-maker-species-2026-10-03-v11/editable.glb",
+        "sha256": "40cf7018765408408598e3d5411f81f15ec33e96ef7bb271f2d8fa7be626b21a"
+      },
+      "output": {
+        "path": "parts/assets/original-hit-v1/generic-cat-hit.json",
+        "sha256": "d31ec85070e795cc64d771e1d0a7646d13ab5c012cd304e451f5f8bcbe83c8eb"
+      },
+      "clip": "hit",
+      "duration": 0.666667,
+      "samples": 11,
+      "tracks": 42,
+      "floorOffset": 0.043817772567753724,
+      "bindResidual": 0.0000012078924473760474,
+      "headOffsetAlongForward": {
+        "start": -0.09277319619755586,
+        "end": 0.06221038456434977
+      }
+    }
+  ]
+}

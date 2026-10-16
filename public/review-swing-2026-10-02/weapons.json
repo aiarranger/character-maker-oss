@@ -1,0 +1,302 @@
+{
+  "schema": "swing-compare-weapons-v1",
+  "source": {
+    "repo": "aisns",
+    "branch": "main",
+    "commit": "ed4e58a60e8d97c077ab8780510aac1ca6c43a38",
+    "definitions": "lib/wilds/weapons.ts の WEAPONS",
+    "files": "public/models/wilds/weapons/<id>.glb・<id>.png"
+  },
+  "modelConvention": "原点 = 握りの中心、長い向き = +Y（頭・刃が +Y 側）、正面 = +Z、長さ 1.0 に正規化。実寸は length（m）を掛ける。grip は手のひらに対する微調整（pos は武器の軸での m、rot は武器の軸の XYZ オイラー角 rad、scale は倍率）",
+  "paths": "model・thumb はこのファイル（public/review-swing-2026-10-02/weapons.json）からの相対",
+  "weapons": [
+    {
+      "id": "baguette_sword",
+      "name": "バゲットの剣",
+      "length": 0.75,
+      "grip": {
+        "pos": [
+          0,
+          0,
+          0
+        ],
+        "rot": [
+          0,
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "model": "weapons/baguette_sword.glb",
+      "thumb": "weapons/baguette_sword.png",
+      "sha256": {
+        "model": "9d066b9afa8417adb6b262e62d7d94a0047bbcd77739f083b7d9f9ae063c77a2",
+        "thumb": "7fc9a110e6259f11ca3b93c7d4358a9a7eb218830fb6b83d3eda28f664204002"
+      }
+    },
+    {
+      "id": "cake_sword",
+      "name": "ケーキの剣",
+      "length": 0.7,
+      "grip": {
+        "pos": [
+          0,
+          0,
+          0
+        ],
+        "rot": [
+          0,
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "model": "weapons/cake_sword.glb",
+      "thumb": "weapons/cake_sword.png",
+      "sha256": {
+        "model": "23bf4da251fc962fff3bfb54aeaca7ec035d4561cb2492e0420b3666d83c29e5",
+        "thumb": "a8bfe95a2d5459768e82c4586d51ca533cef396630b6fadd13f65aed9ce17e6b"
+      }
+    },
+    {
+      "id": "candy_axe",
+      "name": "キャンディの斧",
+      "length": 0.65,
+      "grip": {
+        "pos": [
+          0,
+          0,
+          0
+        ],
+        "rot": [
+          0,
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "model": "weapons/candy_axe.glb",
+      "thumb": "weapons/candy_axe.png",
+      "sha256": {
+        "model": "829a95747a0dc1b5dec2ce5ca05109511cf446b891bde7fd7641e1df1ffb088e",
+        "thumb": "8b80a15360efe8cac4f2f2b6c685ebc26da0ff1f0c206aeba0bc0efe6f480750"
+      }
+    },
+    {
+      "id": "daikon_club",
+      "name": "大根のこん棒",
+      "length": 0.6,
+      "grip": {
+        "pos": [
+          0,
+          0,
+          0
+        ],
+        "rot": [
+          0,
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "model": "weapons/daikon_club.glb",
+      "thumb": "weapons/daikon_club.png",
+      "sha256": {
+        "model": "659e5f1bbdd88e924bcae61587ed1fba77705db2f3e41c2bac627dc36215e5a1",
+        "thumb": "9d1b022447fcf621d85e277b933ef6629537aecd8cdad0173fb18cd21dea5a45"
+      }
+    },
+    {
+      "id": "ebi_lance",
+      "name": "エビフライの槍",
+      "length": 0.85,
+      "grip": {
+        "pos": [
+          0,
+          0,
+          0
+        ],
+        "rot": [
+          0,
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "model": "weapons/ebi_lance.glb",
+      "thumb": "weapons/ebi_lance.png",
+      "sha256": {
+        "model": "07906b8b8b29a836f35c637edaf209cc49200a5c5dee00d9a39b3a2b308fd486",
+        "thumb": "a3133223baec61ce69db9e724518829223c9557abeea911a4f2604bf78b1bdfb"
+      }
+    },
+    {
+      "id": "gyoza_mace",
+      "name": "餃子のメイス",
+      "length": 0.6,
+      "grip": {
+        "pos": [
+          0,
+          0,
+          0
+        ],
+        "rot": [
+          0,
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "model": "weapons/gyoza_mace.glb",
+      "thumb": "weapons/gyoza_mace.png",
+      "sha256": {
+        "model": "138b802cbdb7296080ad2fbeff751f44496f56797e7a427b266884c966bda6ee",
+        "thumb": "a1730624be3d97310c0aed9403f168b98d9a7f2bf1c94e93e40f7999b8bc1623"
+      }
+    },
+    {
+      "id": "ika_spear",
+      "name": "イカの槍",
+      "length": 0.85,
+      "grip": {
+        "pos": [
+          0,
+          0,
+          0
+        ],
+        "rot": [
+          0,
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "model": "weapons/ika_spear.glb",
+      "thumb": "weapons/ika_spear.png",
+      "sha256": {
+        "model": "96998b28b9fe09a12712062a597286f5c7251659121f4f601baf4600d61e187d",
+        "thumb": "12a281a413853428c09284536a964d1000bdd7819c6991a4b317ba757047742a"
+      }
+    },
+    {
+      "id": "momo_hammer",
+      "name": "鶏モモのハンマー",
+      "length": 0.65,
+      "grip": {
+        "pos": [
+          0,
+          0,
+          0
+        ],
+        "rot": [
+          0,
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "model": "weapons/momo_hammer.glb",
+      "thumb": "weapons/momo_hammer.png",
+      "sha256": {
+        "model": "bbfc224527dae244c1e76fb309b58194eaaa757bfb8ac596950985d3192e95c8",
+        "thumb": "d9822806991b00600526006b18bd6aa07ffe1d2ce7a471c27be7504722d3a906"
+      }
+    },
+    {
+      "id": "saba_sword",
+      "name": "サバの剣",
+      "length": 0.75,
+      "grip": {
+        "pos": [
+          0,
+          0,
+          0
+        ],
+        "rot": [
+          0,
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "model": "weapons/saba_sword.glb",
+      "thumb": "weapons/saba_sword.png",
+      "sha256": {
+        "model": "9a1e9a417083555e85a80ff772fb49b971bd314d86b53f877a3efe623966416b",
+        "thumb": "08af2a707201ef9f6e8db8fc65ba63497eeaaf65daa6a5d107187386035ebb16"
+      }
+    },
+    {
+      "id": "softserve_staff",
+      "name": "ソフトクリームの杖",
+      "length": 0.85,
+      "grip": {
+        "pos": [
+          0,
+          0,
+          0
+        ],
+        "rot": [
+          0,
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "model": "weapons/softserve_staff.glb",
+      "thumb": "weapons/softserve_staff.png",
+      "sha256": {
+        "model": "e9bf8dcaf1f8d9cbaddde559e90e491f15430136825a3b62037e0fa40be8ce4d",
+        "thumb": "10b8a84878f4eff866e908546dd27bdbb197425c5b21baecdf84f2d9b1c6fa02"
+      }
+    },
+    {
+      "id": "taiyaki_sword",
+      "name": "たい焼きの剣",
+      "length": 0.7,
+      "grip": {
+        "pos": [
+          0,
+          0,
+          0
+        ],
+        "rot": [
+          0,
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "model": "weapons/taiyaki_sword.glb",
+      "thumb": "weapons/taiyaki_sword.png",
+      "sha256": {
+        "model": "bd1659f1449ce600d6c292e55b3198566abdd5d5034442212c711371f3c8ef91",
+        "thumb": "303556b2f824187d6a466140eb287c682d0597bbb64b54179d1426ae3a41f87a"
+      }
+    },
+    {
+      "id": "tamago_pan",
+      "name": "目玉焼きのフライパン",
+      "length": 0.55,
+      "grip": {
+        "pos": [
+          0,
+          0,
+          0
+        ],
+        "rot": [
+          0,
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "model": "weapons/tamago_pan.glb",
+      "thumb": "weapons/tamago_pan.png",
+      "sha256": {
+        "model": "a74d91962907cccca211bf56ce8074bec405aa1eadc97c9450c60eb572967f20",
+        "thumb": "366ea866c624f5109bffafc85e5ee6e5dc2d4ba3fc1352514043501f8a61caae"
+      }
+    }
+  ]
+}

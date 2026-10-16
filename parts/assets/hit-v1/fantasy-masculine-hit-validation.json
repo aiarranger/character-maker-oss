@@ -1,0 +1,48 @@
+{
+  "input": {
+    "path": "parts/sources/fantasy-v1/Sakurada_Fumiriya.vrm",
+    "bytes": 19589760,
+    "sha256": "a36e91b81518c59f6da0e3f34a176b79090a8c68cc6bd5fe03c1560744b283f3"
+  },
+  "sourceSHA256": "69591853d817488edaa8fd9bf8fc1d821eaeaf789f8627b3cd23b41c4ed67997",
+  "sourceClip": "Hit_Chest",
+  "stretch": 2,
+  "duration": 0.66666669,
+  "samples": 11,
+  "tracks": 53,
+  "pelvisHeightRatio": 1.2375332931854393,
+  "tPoseError": 0.000003915015804090281,
+  "worldRotationError": 5.960464477539063e-8,
+  "endToIdleDegrees": 1.01008808,
+  "snapshots": [
+    {
+      "time": 0,
+      "headZ": -0.16055368,
+      "floorY": -0.02871302
+    },
+    {
+      "time": 0.33333334,
+      "headZ": -0.04734113,
+      "floorY": -0.0234126
+    },
+    {
+      "time": 0.66666669,
+      "headZ": 0.01055247,
+      "floorY": -0.01729512
+    }
+  ],
+  "canonical": {
+    "status": "passed",
+    "path": "parts/assets/fantasy-v1/masculine.glb",
+    "bytes": 5358956,
+    "sha256": "a342e4976f00813059f73f8338853d4f2c67488cc1d28adb3958c7449039cbbe",
+    "localError": 0,
+    "worldError": 0,
+    "inverseBindError": 0
+  },
+  "output": {
+    "path": "public/maker-assets/fantasy-masculine-hit-motions.json",
+    "bytes": 61823,
+    "sha256": "92d70c5f54c4b102f77895e052d91d338afed0486cbae7b5d9401d52e8b4f987"
+  }
+}

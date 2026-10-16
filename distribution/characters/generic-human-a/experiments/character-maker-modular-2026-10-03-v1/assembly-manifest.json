@@ -1,0 +1,711 @@
+{
+  "version": "original-human-modular-v1",
+  "characterId": "generic-human-a",
+  "sourceSha256": "f733b29a2afab79a75237246a14e2686aaf945af5f48d078b8c8f64dc838a413",
+  "headSourceSha256": "ba6a586de602338e2ca949794dc87a4861d15202a259dc9d3446e637c0679531",
+  "hairSourceSha256": "8f82ada6315aef272b3c3dc06792b34f5766d86d3a3d84cdd0bcc27c11d194c2",
+  "hairstyles": [
+    "haru-short-v2",
+    "haru-crop-v2",
+    "haru-center-v2",
+    "haru-swept-v2"
+  ],
+  "fit": {
+    "head": {
+      "scale": [
+        0.41,
+        0.44,
+        0.4
+      ],
+      "offset": [
+        0,
+        1.535,
+        -0.025
+      ]
+    },
+    "hair": {
+      "scale": [
+        0.36,
+        0.36,
+        0.41
+      ],
+      "offset": [
+        0,
+        1.68,
+        -0.025
+      ]
+    }
+  },
+  "face": {
+    "method": "New source-surface projected NPC paste face; independent eyes/brows; 32-segment five-ring mouth; same-field Basis and targets",
+    "texture": {
+      "width": 2048,
+      "height": 2048,
+      "patchedTexels": 331807
+    },
+    "skinChart": {
+      "box": [
+        -0.34,
+        0,
+        0.34,
+        1
+      ],
+      "width": 1024,
+      "height": 1536,
+      "triangles": 6862,
+      "method": "Same head triangles with continuous front-space UV, avoiding generated atlas UV slivers"
+    },
+    "profile": {
+      "eyes": [
+        {
+          "side": "Right",
+          "box": [
+            -0.228,
+            0.476,
+            -0.067,
+            0.622
+          ]
+        },
+        {
+          "side": "Left",
+          "box": [
+            0.066,
+            0.476,
+            0.228,
+            0.622
+          ]
+        }
+      ],
+      "brows": [
+        {
+          "side": "Right",
+          "box": [
+            -0.245,
+            0.607,
+            -0.048,
+            0.694
+          ]
+        },
+        {
+          "side": "Left",
+          "box": [
+            0.047,
+            0.607,
+            0.245,
+            0.694
+          ]
+        }
+      ],
+      "mouth": {
+        "box": [
+          -0.099,
+          0.323,
+          0.098,
+          0.369
+        ],
+        "center": [
+          0,
+          0.344
+        ],
+        "halfWidth": 0.081,
+        "lineThickness": 0.0026
+      }
+    },
+    "glyphs": [
+      {
+        "kind": "eye",
+        "side": "Right",
+        "box": [
+          -0.228,
+          0.476,
+          -0.067,
+          0.622
+        ],
+        "vertices": 7549
+      },
+      {
+        "kind": "eye",
+        "side": "Left",
+        "box": [
+          0.066,
+          0.476,
+          0.228,
+          0.622
+        ],
+        "vertices": 6802
+      },
+      {
+        "kind": "brow",
+        "side": "Right",
+        "box": [
+          -0.245,
+          0.607,
+          -0.048,
+          0.694
+        ],
+        "vertices": 2124
+      },
+      {
+        "kind": "brow",
+        "side": "Left",
+        "box": [
+          0.047,
+          0.607,
+          0.245,
+          0.694
+        ],
+        "vertices": 2342
+      }
+    ],
+    "targets": [
+      "blinkLeft",
+      "blinkRight",
+      "mouthClose",
+      "aa",
+      "ee",
+      "ou",
+      "happy"
+    ]
+  },
+  "neck": {
+    "method": "New neck blended to measured native cut segments; hidden native gaps continue inside collar",
+    "cut": {
+      "cut": 0.18,
+      "removedTriangles": 3162,
+      "boundaryVertices": 234
+    },
+    "bodyManifestSha256": "6ed25c296d04507609e6f9c7e69c5c3cd9cf4695004cb9e1c4d6665d85a71760"
+  },
+  "catalogEligible": true,
+  "output": {
+    "file": "editable.glb",
+    "sha256": "b98c6af4eaf7c0a2048782d1f6d69faed5f584e40caf6157e4798bf29f32224e",
+    "bytes": 18395236
+  },
+  "verified": {
+    "sourceSkeletonRestBindAndClipsExact": true,
+    "faceAndHairVisual": "Front, side, back, opposite; blink, vowels, parts and three source clips directly rendered",
+    "makerUiRoundTrip": "pending",
+    "ownerFinalAcceptance": "pending"
+  },
+  "builder": {
+    "path": "tools/character-maker/build-original-modular-head.mjs",
+    "sha256": "219145332e3e273f4036e57744aa4a8d9093e0050e427a60e7df9035942bbebf"
+  },
+  "faceBuilder": {
+    "path": "tools/character-maker/modular-human-face.mjs",
+    "sha256": "b57fdefbb6a3aeca471eaf028835e5879e70d6bb20bac4a66c95b1d2531074a2"
+  },
+  "additionalHair": [
+    {
+      "hairstyleId": "haru-crop-v2",
+      "characterId": "generic-human-a",
+      "sourceSha256": "66c4083ca74df76dee1d66e5d6f0b47baeeb7057ddbe6b2cd74a9fd8af3e4815",
+      "outputSha256": "5abe2825d1c722b61b40ae8a829b2d6bcbd9988db9d22f7bce64fc88f718278e",
+      "fit": {
+        "scale": [
+          0.36,
+          0.36,
+          0.45
+        ],
+        "offset": [
+          0,
+          1.7,
+          -0.025
+        ],
+        "backBend": {
+          "startZ": -0.01,
+          "endZ": -0.16,
+          "anchorY": 1.65,
+          "compression": 0.75
+        },
+        "wrapHead": true
+      },
+      "removedSupport": [
+        {
+          "material": "tripo_material_168edaf2-93a8-4014-bc34-58e8e9bb2b69",
+          "beforeTriangles": 1952080,
+          "removedTriangles": 3109,
+          "bounds": {
+            "min": [
+              -0.4080810546875,
+              0.10705560445785522,
+              -0.08005516976118088
+            ],
+            "max": [
+              0.2886047959327698,
+              0.509490966796875,
+              0.294769287109375
+            ]
+          },
+          "histogram": [
+            9078,
+            37076,
+            135084,
+            312987,
+            344481,
+            578919,
+            352580,
+            115169,
+            28086,
+            13176,
+            6981,
+            4199,
+            2504,
+            1805,
+            2130,
+            1728,
+            1660,
+            1694,
+            1545,
+            708,
+            377,
+            72,
+            37,
+            4,
+            0,
+            0
+          ],
+          "rule": "source atlas RGB min > 160 and channel spread < 32, triangle centroid; fixed source SHA"
+        }
+      ],
+      "verifiedAngles": [
+        "front",
+        "side",
+        "back",
+        "opposite"
+      ],
+      "thumbnail": "/tmp/modular-hairstyles-final/haru-crop-v2-thumbnail.jpg",
+      "file": "../../../../../tmp/modular-hairstyles-final/haru-crop-v2-fitted.glb"
+    },
+    {
+      "hairstyleId": "haru-center-v2",
+      "characterId": "generic-human-a",
+      "sourceSha256": "0a6e7d06561e4f25d5352317a69f350223b6b45b0a90533270234b774c84252e",
+      "outputSha256": "f58981abf819048ab2565d0a63b61a9a23c6b586433eb8ea097d78ae8a1931d2",
+      "fit": {
+        "scale": [
+          0.36,
+          0.36,
+          0.48
+        ],
+        "offset": [
+          0,
+          1.66,
+          -0.035
+        ],
+        "backBend": {
+          "startZ": -0.01,
+          "endZ": -0.16,
+          "anchorY": 1.64,
+          "compression": 0.72
+        },
+        "wrapHead": true
+      },
+      "removedSupport": [
+        {
+          "material": "tripo_material_13b19ca6-1964-4657-b6cc-f7db095c9698",
+          "beforeTriangles": 1996272,
+          "removedTriangles": 527,
+          "bounds": {
+            "min": [
+              -0.456085205078125,
+              0.025848388671875,
+              -0.18424983322620392
+            ],
+            "max": [
+              0.4310913681983948,
+              0.927490234375,
+              0.17591850459575653
+            ]
+          },
+          "histogram": [
+            100303,
+            172555,
+            629547,
+            409887,
+            328061,
+            225013,
+            68097,
+            29227,
+            13903,
+            6857,
+            4501,
+            3232,
+            1714,
+            1322,
+            807,
+            664,
+            301,
+            134,
+            106,
+            30,
+            9,
+            2,
+            0,
+            0,
+            0,
+            0
+          ],
+          "rule": "source atlas RGB min > 160 and channel spread < 32, triangle centroid; fixed source SHA"
+        }
+      ],
+      "verifiedAngles": [
+        "front",
+        "side",
+        "back",
+        "opposite"
+      ],
+      "thumbnail": "/tmp/modular-hairstyles-final/haru-center-v2-thumbnail.jpg",
+      "file": "../../../../../tmp/modular-hairstyles-final/haru-center-v2-fitted.glb"
+    },
+    {
+      "hairstyleId": "haru-swept-v2",
+      "characterId": "generic-human-a",
+      "sourceSha256": "fe6ade33333ae2406d82822eef47ce3ff83b3507804c50078947ded452397d9e",
+      "outputSha256": "6206436b3299b99fbb0392d5d8b4f2991660db638a45cc3dba6bcfabadb9c31b",
+      "fit": {
+        "scale": [
+          0.36,
+          0.36,
+          0.43
+        ],
+        "offset": [
+          0,
+          1.66,
+          -0.03
+        ],
+        "backBend": {
+          "startZ": -0.01,
+          "endZ": -0.18,
+          "anchorY": 1.67,
+          "compression": 0.5
+        },
+        "wrapHead": true
+      },
+      "removedSupport": [
+        {
+          "material": "tripo_material_69e0a69b-8390-4ef1-95fe-b97aabf6dc2d",
+          "beforeTriangles": 1929947,
+          "removedTriangles": 54,
+          "bounds": {
+            "min": [
+              0.37078857421875,
+              0.7001800537109375,
+              0.09613030403852463
+            ],
+            "max": [
+              0.443206787109375,
+              0.81707763671875,
+              0.24034112691879272
+            ]
+          },
+          "histogram": [
+            5324,
+            37276,
+            569217,
+            579478,
+            443507,
+            232294,
+            46844,
+            10200,
+            2778,
+            1280,
+            738,
+            422,
+            223,
+            126,
+            117,
+            66,
+            45,
+            12,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "rule": "source atlas RGB min > 160 and channel spread < 32, triangle centroid; fixed source SHA"
+        }
+      ],
+      "verifiedAngles": [
+        "front",
+        "side",
+        "back",
+        "opposite"
+      ],
+      "thumbnail": "/tmp/modular-hairstyles-final/haru-swept-v2-thumbnail.jpg",
+      "file": "../../../../../tmp/modular-hairstyles-final/haru-swept-v2-fitted.glb"
+    }
+  ],
+  "base": {
+    "file": "characters/generic-human-a/experiments/character-maker-modular-2026-10-03-v1/editable.glb",
+    "sha256": "59fa6ece215cfa2dc882f75a589449b16cf64a6d783ce4d7163ab03f65deeb3b"
+  },
+  "reproductionInputs": {
+    "version": "original-modular-hairstyles-v1",
+    "parts": [
+      {
+        "hairstyleId": "haru-crop-v2",
+        "characterId": "generic-human-a",
+        "sourceSha256": "66c4083ca74df76dee1d66e5d6f0b47baeeb7057ddbe6b2cd74a9fd8af3e4815",
+        "outputSha256": "5abe2825d1c722b61b40ae8a829b2d6bcbd9988db9d22f7bce64fc88f718278e",
+        "fit": {
+          "scale": [
+            0.36,
+            0.36,
+            0.45
+          ],
+          "offset": [
+            0,
+            1.7,
+            -0.025
+          ],
+          "backBend": {
+            "startZ": -0.01,
+            "endZ": -0.16,
+            "anchorY": 1.65,
+            "compression": 0.75
+          },
+          "wrapHead": true
+        },
+        "removedSupport": [
+          {
+            "material": "tripo_material_168edaf2-93a8-4014-bc34-58e8e9bb2b69",
+            "beforeTriangles": 1952080,
+            "removedTriangles": 3109,
+            "bounds": {
+              "min": [
+                -0.4080810546875,
+                0.10705560445785522,
+                -0.08005516976118088
+              ],
+              "max": [
+                0.2886047959327698,
+                0.509490966796875,
+                0.294769287109375
+              ]
+            },
+            "histogram": [
+              9078,
+              37076,
+              135084,
+              312987,
+              344481,
+              578919,
+              352580,
+              115169,
+              28086,
+              13176,
+              6981,
+              4199,
+              2504,
+              1805,
+              2130,
+              1728,
+              1660,
+              1694,
+              1545,
+              708,
+              377,
+              72,
+              37,
+              4,
+              0,
+              0
+            ],
+            "rule": "source atlas RGB min > 160 and channel spread < 32, triangle centroid; fixed source SHA"
+          }
+        ],
+        "verifiedAngles": [
+          "front",
+          "side",
+          "back",
+          "opposite"
+        ],
+        "thumbnail": "/tmp/modular-hairstyles-final/haru-crop-v2-thumbnail.jpg",
+        "file": "parts/haru-crop-v2-fitted.glb"
+      },
+      {
+        "hairstyleId": "haru-center-v2",
+        "characterId": "generic-human-a",
+        "sourceSha256": "0a6e7d06561e4f25d5352317a69f350223b6b45b0a90533270234b774c84252e",
+        "outputSha256": "f58981abf819048ab2565d0a63b61a9a23c6b586433eb8ea097d78ae8a1931d2",
+        "fit": {
+          "scale": [
+            0.36,
+            0.36,
+            0.48
+          ],
+          "offset": [
+            0,
+            1.66,
+            -0.035
+          ],
+          "backBend": {
+            "startZ": -0.01,
+            "endZ": -0.16,
+            "anchorY": 1.64,
+            "compression": 0.72
+          },
+          "wrapHead": true
+        },
+        "removedSupport": [
+          {
+            "material": "tripo_material_13b19ca6-1964-4657-b6cc-f7db095c9698",
+            "beforeTriangles": 1996272,
+            "removedTriangles": 527,
+            "bounds": {
+              "min": [
+                -0.456085205078125,
+                0.025848388671875,
+                -0.18424983322620392
+              ],
+              "max": [
+                0.4310913681983948,
+                0.927490234375,
+                0.17591850459575653
+              ]
+            },
+            "histogram": [
+              100303,
+              172555,
+              629547,
+              409887,
+              328061,
+              225013,
+              68097,
+              29227,
+              13903,
+              6857,
+              4501,
+              3232,
+              1714,
+              1322,
+              807,
+              664,
+              301,
+              134,
+              106,
+              30,
+              9,
+              2,
+              0,
+              0,
+              0,
+              0
+            ],
+            "rule": "source atlas RGB min > 160 and channel spread < 32, triangle centroid; fixed source SHA"
+          }
+        ],
+        "verifiedAngles": [
+          "front",
+          "side",
+          "back",
+          "opposite"
+        ],
+        "thumbnail": "/tmp/modular-hairstyles-final/haru-center-v2-thumbnail.jpg",
+        "file": "parts/haru-center-v2-fitted.glb"
+      },
+      {
+        "hairstyleId": "haru-swept-v2",
+        "characterId": "generic-human-a",
+        "sourceSha256": "fe6ade33333ae2406d82822eef47ce3ff83b3507804c50078947ded452397d9e",
+        "outputSha256": "6206436b3299b99fbb0392d5d8b4f2991660db638a45cc3dba6bcfabadb9c31b",
+        "fit": {
+          "scale": [
+            0.36,
+            0.36,
+            0.43
+          ],
+          "offset": [
+            0,
+            1.66,
+            -0.03
+          ],
+          "backBend": {
+            "startZ": -0.01,
+            "endZ": -0.18,
+            "anchorY": 1.67,
+            "compression": 0.5
+          },
+          "wrapHead": true
+        },
+        "removedSupport": [
+          {
+            "material": "tripo_material_69e0a69b-8390-4ef1-95fe-b97aabf6dc2d",
+            "beforeTriangles": 1929947,
+            "removedTriangles": 54,
+            "bounds": {
+              "min": [
+                0.37078857421875,
+                0.7001800537109375,
+                0.09613030403852463
+              ],
+              "max": [
+                0.443206787109375,
+                0.81707763671875,
+                0.24034112691879272
+              ]
+            },
+            "histogram": [
+              5324,
+              37276,
+              569217,
+              579478,
+              443507,
+              232294,
+              46844,
+              10200,
+              2778,
+              1280,
+              738,
+              422,
+              223,
+              126,
+              117,
+              66,
+              45,
+              12,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "rule": "source atlas RGB min > 160 and channel spread < 32, triangle centroid; fixed source SHA"
+          }
+        ],
+        "verifiedAngles": [
+          "front",
+          "side",
+          "back",
+          "opposite"
+        ],
+        "thumbnail": "/tmp/modular-hairstyles-final/haru-swept-v2-thumbnail.jpg",
+        "file": "parts/haru-swept-v2-fitted.glb"
+      }
+    ]
+  },
+  "replay": {
+    "file": "recipe/reproduction.json",
+    "sha256": "a3ea51bf004a4e02ae287f79ef835cbd72ec7d9aaa34fc32630fdfce1b850e6c",
+    "result": "byte-identical to output.sha256",
+    "frozenBuilder": {
+      "file": "recipe/build-original-modular-head.mjs",
+      "sha256": "c4905486e29dc18e6b1985897f48920b8fbcc63e0d8e72d47a3538b74d29aeb7",
+      "bytes": 34680
+    },
+    "frozenFaceBuilder": {
+      "file": "recipe/modular-human-face.mjs",
+      "sha256": "b57fdefbb6a3aeca471eaf028835e5879e70d6bb20bac4a66c95b1d2531074a2",
+      "bytes": 19844
+    }
+  }
+}

@@ -1,0 +1,274 @@
+/* Stage presentation layers (spec §5.1, §5.5, §6). Tokens come from the shell with fallbacks. */
+
+.backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background:
+    radial-gradient(55% 16% at 50% 92%, color-mix(in oklab, var(--accent, #B0512A) 20%, transparent), transparent 70%),
+    linear-gradient(180deg,
+      var(--wall, color-mix(in oklab, var(--accent, #B0512A) 7%, #FBF9F5)) 0%,
+      color-mix(in oklab, var(--accent, #B0512A) 10%, #F4EFE6) 68%,
+      var(--floor, color-mix(in oklab, var(--accent, #B0512A) 16%, #EDE6DA)) 84%,
+      color-mix(in oklab, var(--accent, #B0512A) 12%, #F1EBE1) 100%);
+  box-shadow: inset 0 0 120px rgba(23, 21, 28, .06);
+}
+
+/* Paper grain: feTurbulence, multiplied at 5%. */
+.backdrop::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: .05;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.look {
+  position: absolute;
+  /* Inside the corner marks (inset 12 + arm 14), never under them. */
+  top: 26px;
+  left: 26px;
+  margin: 0;
+  font-family: var(--font-display, "Avenir Next Condensed", "DIN Condensed", "Bahnschrift", "Roboto Condensed", "Arial Narrow", system-ui, sans-serif);
+  font-weight: 800;
+  font-size: var(--t-look-size, clamp(140px, 26vh, 300px));
+  line-height: .78;
+  letter-spacing: -.04em;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in oklab, var(--accent, #B0512A) 15%, transparent);
+  user-select: none;
+  animation: lookIn 360ms var(--ease-out-expo, cubic-bezier(.16, 1, .3, 1)) both;
+}
+
+@keyframes lookIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* ---------- Overlay (z2, pointer-events none) ---------- */
+
+.overlay {
+  position: absolute;
+  inset: 0 0 var(--tray-h, 0px) 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.poster {
+  position: absolute;
+  left: 50%;
+  bottom: 6%;
+  height: 70%;
+  width: auto;
+  max-width: 80%;
+  object-fit: contain;
+  transform: translateX(-50%);
+  filter: blur(14px) saturate(.8);
+  opacity: .3;
+  /* No rectangular mount and no dark oval: a soft core that dissolves into the wall,
+     arriving only after the swap ghost (420 ms) has gone. */
+  -webkit-mask-image: radial-gradient(closest-side, #000 40%, transparent 100%);
+  mask-image: radial-gradient(closest-side, #000 40%, transparent 100%);
+  animation: posterIn 240ms ease 420ms both;
+  transition: opacity var(--d-base, 240ms) ease;
+}
+
+.poster[data-hidden="true"] { opacity: 0; animation: none; }
+
+@keyframes posterIn {
+  from { opacity: 0; }
+}
+
+/* A load error shows one board: no portrait, loader line or hint behind it. */
+:has([data-stage-error]) > .overlay .poster,
+:has([data-stage-error]) > .overlay .loader,
+:has([data-stage-error]) > .overlay .hint { display: none; }
+
+.loader {
+  position: absolute;
+  left: 50%;
+  bottom: 6%;
+  width: min(160px, 30%);
+  height: 2px;
+  transform: translateX(-50%);
+  overflow: hidden;
+  border-radius: 2px;
+  background: color-mix(in oklab, var(--accent, #B0512A) 16%, transparent);
+}
+
+.loader::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 36%;
+  border-radius: 2px;
+  background: var(--accent, #B0512A);
+  animation: shuttle 1.2s cubic-bezier(.7, 0, .2, 1) infinite alternate;
+}
+
+@keyframes shuttle {
+  from { left: 0; }
+  to { left: 64%; }
+}
+
+/* M3: equip ring at the stage centre (48% of the canvas height). */
+.equipRing {
+  position: absolute;
+  left: 50%;
+  top: 48%;
+  width: min(42%, 320px);
+  aspect-ratio: 1;
+  margin: 0;
+  border: 2px solid var(--accent, #B0512A);
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(.6);
+  opacity: 0;
+  animation: equip 560ms var(--ease-out-expo, cubic-bezier(.16, 1, .3, 1)) both;
+}
+
+@keyframes equip {
+  from { transform: translate(-50%, -50%) scale(.6); opacity: .5; }
+  to { transform: translate(-50%, -50%) scale(1.4); opacity: 0; }
+}
+
+/* M2: four crop marks (safe frame, IF-1: one size at every width), nudged 6px inward on a turntable move.
+   Ink 48% keeps them ≈2.5:1 against the wall. */
+.marks {
+  position: absolute;
+  inset: 12px;
+}
+
+.mark {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-color: color-mix(in oklab, var(--ink, #17151C) 48%, transparent);
+  border-style: solid;
+  border-width: 0;
+}
+
+.mark:nth-child(1) { top: 0; left: 0; border-top-width: 1.5px; border-left-width: 1.5px; --dx: 6px; --dy: 6px; }
+.mark:nth-child(2) { top: 0; right: 0; border-top-width: 1.5px; border-right-width: 1.5px; --dx: -6px; --dy: 6px; }
+.mark:nth-child(3) { bottom: 0; left: 0; border-bottom-width: 1.5px; border-left-width: 1.5px; --dx: 6px; --dy: -6px; }
+.mark:nth-child(4) { bottom: 0; right: 0; border-bottom-width: 1.5px; border-right-width: 1.5px; --dx: -6px; --dy: -6px; }
+
+.marks[data-pulse="a"] .mark { animation: nudgeA 240ms var(--ease-spring, cubic-bezier(.34, 1.4, .64, 1)); }
+.marks[data-pulse="b"] .mark { animation: nudgeB 240ms var(--ease-spring, cubic-bezier(.34, 1.4, .64, 1)); }
+
+@keyframes nudgeA {
+  50% { transform: translate(var(--dx), var(--dy)); }
+}
+
+@keyframes nudgeB {
+  50% { transform: translate(var(--dx), var(--dy)); }
+}
+
+/* M8: first-run hint, bottom-left. */
+.hint {
+  position: absolute;
+  /* Inside the bottom-left corner mark. */
+  left: 34px;
+  bottom: 34px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 32px;
+  padding: 0 14px 0 10px;
+  border-radius: 999px;
+  background: rgba(251, 249, 245, .92);
+  color: var(--ink-2, #4A4652);
+  font: 600 12px/1.4 var(--font-ui, "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans JP", system-ui, sans-serif);
+  font-feature-settings: "palt";
+  box-shadow: 0 0 0 1px var(--line, #E3DCD0), 0 8px 18px -12px rgba(23, 21, 28, .3);
+  transition: opacity 200ms ease, transform 200ms ease;
+}
+
+.hint[data-leaving="true"] {
+  opacity: 0;
+  transform: translateY(4px);
+}
+
+.hint svg {
+  flex: none;
+  color: var(--accent, #B0512A);
+}
+
+.hintText { display: inline-flex; white-space: nowrap; }
+.hintPinch { display: none; }
+.hintPinch::before { content: "・"; }
+
+@media (pointer: coarse) {
+  .hintPinch { display: inline; }
+}
+
+@media (max-width: 600px) {
+  .hint {
+    max-width: 120px;
+    padding: 6px 12px 6px 9px;
+    border-radius: 18px;
+  }
+  .hintText { flex-direction: column; font-size: var(--t-11, 11px); line-height: 1.25; }
+  .hintPinch { display: block; }
+  .hintPinch::before { content: none; }
+}
+
+/* Smallest phones: a 36px icon disc; the words stay for title and assistive tech. */
+@media (max-width: 380px) {
+  .hint {
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    min-height: 36px;
+    padding: 0;
+    border-radius: 50%;
+  }
+  .hintText {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+}
+
+/* M1: swap ghost (fixed, over the old canvas rect). */
+.ghost {
+  position: fixed;
+  z-index: 4;
+  pointer-events: none;
+  object-fit: fill;
+  animation: ghost 420ms cubic-bezier(.4, 0, .6, 1) both;
+}
+
+/* Still readable at 150 ms (≈.65), gone at 420 ms. */
+@keyframes ghost {
+  0% { opacity: .9; filter: blur(0) saturate(1); transform: translateY(0); }
+  47.6% { opacity: .6; }
+  100% { opacity: 0; filter: blur(8px) saturate(0); transform: translateY(12px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .look { animation: fadeOnly 120ms linear both; }
+  .loader::after { animation: none; left: 32%; }
+  .equipRing { display: none; }
+  .marks[data-pulse] .mark { animation: none; }
+  .hint { transition: opacity 120ms linear; }
+  .hint[data-leaving="true"] { transform: none; }
+  .ghost { animation: fadeOut 120ms linear both; }
+  .poster { animation: none; }
+}
+
+@keyframes fadeOnly {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeOut {
+  from { opacity: .9; }
+  to { opacity: 0; }
+}

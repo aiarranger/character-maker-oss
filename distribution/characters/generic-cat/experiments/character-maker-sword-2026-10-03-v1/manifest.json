@@ -1,0 +1,243 @@
+{
+  "version": "original-sword-v3-support-ground-20261006",
+  "characterId": "generic-cat",
+  "sourceModel": {
+    "path": "characters/generic-cat/experiments/mouth-defaults-2026-09-16-v1/npc-compact.glb",
+    "sha256": "4392298cc4747bc7888487a34cbc967b6c0c48e71d2468fa75f367b29194081d"
+  },
+  "sourceAnimation": {
+    "path": "characters/_shared/character-maker/sources/animations/UAL1_Standard.glb",
+    "sha256": "69591853d817488edaa8fd9bf8fc1d821eaeaf789f8627b3cd23b41c4ed67997"
+  },
+  "builder": {
+    "path": "tools/character-maker/build-original-motions.mjs",
+    "sha256": "50d238363094516f17adda21bef9084136bfb164980a489166c0c02b6fb41b28"
+  },
+  "method": "world-quaternion-delta-over-anatomically-aligned-reference; original rest/bind and three clips untouched; ready-gaze rotational correction across actual three-joint neck/head chain",
+  "mapping": [
+    [
+      "root",
+      "Root"
+    ],
+    [
+      "pelvis",
+      "Hip"
+    ],
+    [
+      "spine_01",
+      "Waist"
+    ],
+    [
+      "spine_02",
+      "Spine01"
+    ],
+    [
+      "spine_03",
+      "Spine02"
+    ],
+    [
+      "neck_01",
+      "NeckTwist01"
+    ],
+    [
+      "Head",
+      "Head"
+    ],
+    [
+      "clavicle_l",
+      "L_Clavicle"
+    ],
+    [
+      "upperarm_l",
+      "L_Upperarm"
+    ],
+    [
+      "lowerarm_l",
+      "L_Forearm"
+    ],
+    [
+      "hand_l",
+      "L_Hand"
+    ],
+    [
+      "thigh_l",
+      "L_Thigh"
+    ],
+    [
+      "calf_l",
+      "L_Calf"
+    ],
+    [
+      "foot_l",
+      "L_Foot"
+    ],
+    [
+      "ball_l",
+      "L_ToeBase"
+    ],
+    [
+      "clavicle_r",
+      "R_Clavicle"
+    ],
+    [
+      "upperarm_r",
+      "R_Upperarm"
+    ],
+    [
+      "lowerarm_r",
+      "R_Forearm"
+    ],
+    [
+      "hand_r",
+      "R_Hand"
+    ],
+    [
+      "thigh_r",
+      "R_Thigh"
+    ],
+    [
+      "calf_r",
+      "R_Calf"
+    ],
+    [
+      "foot_r",
+      "R_Foot"
+    ],
+    [
+      "ball_r",
+      "R_ToeBase"
+    ]
+  ],
+  "bindResidual": 0.0000012078924473760474,
+  "socket": {
+    "bone": "R_Hand",
+    "point": [
+      0.00157922,
+      0.03977562,
+      -0.01333583
+    ],
+    "blade": [
+      0.8769295,
+      0.47599944,
+      -0.06647695
+    ],
+    "palm": [
+      -0.10528072,
+      0.33621527,
+      0.93588208
+    ],
+    "size": 0.56,
+    "measuredHandVertices": 548
+  },
+  "clips": [
+    {
+      "name": "sword_idle",
+      "sourceName": "Sword_Idle",
+      "duration": 1.6666666269302368,
+      "samples": 51,
+      "tracks": 42,
+      "floorOffset": 0.040228272579481736,
+      "phases": [
+        {
+          "time": 0,
+          "floorY": 0.0019030764919799326
+        },
+        {
+          "time": 0.4000000059604645,
+          "floorY": 0.0005283349549553285
+        },
+        {
+          "time": 0.8333333134651184,
+          "floorY": 0.000017637386735165628
+        },
+        {
+          "time": 1.2666666507720947,
+          "floorY": 0.0005393178287564707
+        },
+        {
+          "time": 1.6666666269302368,
+          "floorY": 0.001903098006483639
+        }
+      ]
+    },
+    {
+      "name": "sword_attack",
+      "sourceName": "Sword_Attack",
+      "duration": 1.5333333015441895,
+      "samples": 47,
+      "tracks": 42,
+      "floorOffset": 0.06491015020291435,
+      "phases": [
+        {
+          "time": 0,
+          "floorY": 0.025724446086708173
+        },
+        {
+          "time": 0.36666667461395264,
+          "floorY": 0.008467669298347275
+        },
+        {
+          "time": 0.7666666507720947,
+          "floorY": 0.000017637386735172567
+        },
+        {
+          "time": 1.1666666269302368,
+          "floorY": 0.026984346298590284
+        },
+        {
+          "time": 1.5333333015441895,
+          "floorY": 0.025724336666382713
+        }
+      ]
+    }
+  ],
+  "output": {
+    "path": "characters/generic-cat/experiments/character-maker-sword-2026-10-03-v1/motions.json",
+    "sha256": "b34ece76876e0d7906792a76683daa261126e63f534dfa02238f5749d5224b81"
+  },
+  "readyGazeCorrection": {
+    "version": "ready-gaze-20261006",
+    "baseMotionSha256": "72d1862f7c09f66d83344c292996c68123f9805541b9ce5b13c6690681d6c867",
+    "calibrationModelSha256": "40cf7018765408408598e3d5411f81f15ec33e96ef7bb271f2d8fa7be626b21a",
+    "calibration": "per-character source-rest Head world frame and mean sword_idle world frame; actual display/eye geometry confirms native +X forward, +Y up",
+    "targetMeanPitchDegrees": -3,
+    "targetMeanYawDegrees": 0,
+    "worldDeltaQuaternion": [
+      -0.08100141693924996,
+      0.10227300130702859,
+      0.3265121197939671,
+      0.9361457361357454
+    ],
+    "correctionDegrees": 41.1719161750329,
+    "jointRotationShares": {
+      "NeckTwist01": 0.4,
+      "NeckTwist02": 0.45,
+      "Head": 0.15
+    },
+    "armedIdle": "constant world rotation delta, preserving original breathing",
+    "armedAttack": {
+      "entryFadeSeconds": 0.3,
+      "returnFadeSeconds": 0.45,
+      "shape": "cubic smoothstep; zero endpoint derivative"
+    },
+    "unchanged": [
+      "all local translations",
+      "every non-neck/head track",
+      "clip names/durations/sample times",
+      "source GLB geometry/textures/rest transforms/inverse binds",
+      "body/arms/hands/weapon socket"
+    ],
+    "generatorSha256": "4220951acb81d6f43671e0035bc9b2901e1dced419e4a270291d915e68018bf6",
+    "sharedConsumption": "originalClipsWithSword: preview and armed export"
+  },
+  "attackGrounding": {
+    "version": "support-ground-20261006",
+    "baseMotionSha256": "2a7bb23ff446af4df9676accc5d0d114c17329c093fd49f1faaf690094116343",
+    "calibrationModelSha256": "40cf7018765408408598e3d5411f81f15ec33e96ef7bb271f2d8fa7be626b21a",
+    "method": "vertical hip compensation to the ready-pose sole support plane at 120 Hz across the attack including between original rotation keys; all quaternion tracks, horizontal root motion, timings and source geometry unchanged",
+    "supportPlaneY": 0.0019030797121439536,
+    "track": "Hip.position",
+    "sampleCount": 185,
+    "sampleRateHz": 120
+  }
+}

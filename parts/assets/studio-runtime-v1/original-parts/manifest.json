@@ -1,0 +1,168 @@
+{
+  "version": "original-human-part-thumbnails-v1",
+  "method": "Cropped direct production-helper render; 240px JPEG",
+  "records": [
+    {
+      "characterId": "generic-human-a",
+      "category": "head",
+      "choice": "original",
+      "file": "/character-maker/original-parts/generic-human-a/head-original.jpg",
+      "sha256": "07ab8c8b3129faeef1b499ee53191bae6dc2e7d62523dc38744def7f267a45e1",
+      "modelSha256": "59fa6ece215cfa2dc882f75a589449b16cf64a6d783ce4d7163ab03f65deeb3b",
+      "sourceImage": "/tmp/original-human-pilot-coverage/generic-human-a/haru-short-v2_original_original_original-front.png"
+    },
+    {
+      "characterId": "generic-human-a",
+      "category": "head",
+      "choice": "rounded",
+      "file": "/character-maker/original-parts/generic-human-a/head-rounded.jpg",
+      "sha256": "fba8b20bb383289de2b9a7f9cd37886b30949ee1def7d7012da6b2c87ad07dbe",
+      "modelSha256": "59fa6ece215cfa2dc882f75a589449b16cf64a6d783ce4d7163ab03f65deeb3b",
+      "sourceImage": "/tmp/original-human-pilot-coverage/generic-human-a/haru-short-v2_rounded_original_original-front.png"
+    },
+    {
+      "characterId": "generic-human-a",
+      "category": "head",
+      "choice": "slim",
+      "file": "/character-maker/original-parts/generic-human-a/head-slim.jpg",
+      "sha256": "c7f44af8a21580c82fbce8d4b167449d576db186b3c6d11866936be76f7413a8",
+      "modelSha256": "59fa6ece215cfa2dc882f75a589449b16cf64a6d783ce4d7163ab03f65deeb3b",
+      "sourceImage": "/tmp/original-human-pilot-coverage/generic-human-a/haru-short-v2_slim_original_original-front.png"
+    },
+    {
+      "characterId": "generic-human-a",
+      "category": "eyes",
+      "choice": "original",
+      "file": "/character-maker/original-parts/generic-human-a/eyes-original.jpg",
+      "sha256": "31e9af0306afef348ad8beb62b7362dc1a0e643328c868a74f898adae49dc4ad",
+      "modelSha256": "59fa6ece215cfa2dc882f75a589449b16cf64a6d783ce4d7163ab03f65deeb3b",
+      "sourceImage": "/tmp/original-human-pilot-coverage/generic-human-a/haru-short-v2_original_original_original-front.png"
+    },
+    {
+      "characterId": "generic-human-a",
+      "category": "eyes",
+      "choice": "large",
+      "file": "/character-maker/original-parts/generic-human-a/eyes-large.jpg",
+      "sha256": "f3f057dfb2e7a894730a945c2e822ce4e4152d28ccb79e001e66f7d0d9d2e253",
+      "modelSha256": "59fa6ece215cfa2dc882f75a589449b16cf64a6d783ce4d7163ab03f65deeb3b",
+      "sourceImage": "/tmp/original-human-pilot-coverage/generic-human-a/haru-short-v2_original_large_original-front.png"
+    },
+    {
+      "characterId": "generic-human-a",
+      "category": "eyes",
+      "choice": "narrow",
+      "file": "/character-maker/original-parts/generic-human-a/eyes-narrow.jpg",
+      "sha256": "68fe4095a0370f16c6d00ad899a17315003b9d79e629fb46db89452a22970194",
+      "modelSha256": "59fa6ece215cfa2dc882f75a589449b16cf64a6d783ce4d7163ab03f65deeb3b",
+      "sourceImage": "/tmp/original-human-pilot-coverage/generic-human-a/haru-short-v2_original_narrow_original-front.png"
+    },
+    {
+      "characterId": "generic-human-a",
+      "category": "mouth",
+      "choice": "original",
+      "file": "/character-maker/original-parts/generic-human-a/mouth-original.jpg",
+      "sha256": "d7ad849a7010dac8615b2996ecae2d015a0ddfc1a6bfdcd746bf92f1497ef550",
+      "modelSha256": "59fa6ece215cfa2dc882f75a589449b16cf64a6d783ce4d7163ab03f65deeb3b",
+      "sourceImage": "/tmp/original-human-pilot-coverage/generic-human-a/haru-short-v2_original_original_original-front.png"
+    },
+    {
+      "characterId": "generic-human-a",
+      "category": "mouth",
+      "choice": "small",
+      "file": "/character-maker/original-parts/generic-human-a/mouth-small.jpg",
+      "sha256": "d7ce59f2627021a1d4217e2911021855563c8f5c04704a843cc46b4d72402af0",
+      "modelSha256": "59fa6ece215cfa2dc882f75a589449b16cf64a6d783ce4d7163ab03f65deeb3b",
+      "sourceImage": "/tmp/original-human-pilot-coverage/generic-human-a/haru-short-v2_original_original_small-front.png"
+    },
+    {
+      "characterId": "generic-human-a",
+      "category": "mouth",
+      "choice": "wide",
+      "file": "/character-maker/original-parts/generic-human-a/mouth-wide.jpg",
+      "sha256": "58e74cadb5427bb1910a59f72a7e759e664e51879ff07c9546a1c6aaa9d037b9",
+      "modelSha256": "59fa6ece215cfa2dc882f75a589449b16cf64a6d783ce4d7163ab03f65deeb3b",
+      "sourceImage": "/tmp/original-human-pilot-coverage/generic-human-a/haru-short-v2_original_original_wide-front.png"
+    },
+    {
+      "characterId": "generic-human-b",
+      "category": "head",
+      "choice": "original",
+      "file": "/character-maker/original-parts/generic-human-b/head-original.jpg",
+      "sha256": "5efcf0e2d0f694ae7397a1e2dd17a0df248e3f54e73f40ecbb568b86c20446ef",
+      "modelSha256": "7b1e2e07b3975c132f7ae56fa2076fa95cd375065dbceed209cda8bbd122c2f5",
+      "sourceImage": "/tmp/original-human-pilot-coverage/generic-human-b/nagi-bob-v2_original_original_original-front.png"
+    },
+    {
+      "characterId": "generic-human-b",
+      "category": "head",
+      "choice": "rounded",
+      "file": "/character-maker/original-parts/generic-human-b/head-rounded.jpg",
+      "sha256": "7301599bf3496ed84280d2ba7c4925913c7eeaf2c506f03050268322be6d5701",
+      "modelSha256": "7b1e2e07b3975c132f7ae56fa2076fa95cd375065dbceed209cda8bbd122c2f5",
+      "sourceImage": "/tmp/original-human-pilot-coverage/generic-human-b/nagi-bob-v2_rounded_original_original-front.png"
+    },
+    {
+      "characterId": "generic-human-b",
+      "category": "head",
+      "choice": "slim",
+      "file": "/character-maker/original-parts/generic-human-b/head-slim.jpg",
+      "sha256": "3446808e9cabd9cfa04a3ba202c75399ce16013ecdd93fc8b936ef8a1862fce6",
+      "modelSha256": "7b1e2e07b3975c132f7ae56fa2076fa95cd375065dbceed209cda8bbd122c2f5",
+      "sourceImage": "/tmp/original-human-pilot-coverage/generic-human-b/nagi-bob-v2_slim_original_original-front.png"
+    },
+    {
+      "characterId": "generic-human-b",
+      "category": "eyes",
+      "choice": "original",
+      "file": "/character-maker/original-parts/generic-human-b/eyes-original.jpg",
+      "sha256": "caab9ed6a9d11595bb209b88a83185b671c11fa2c7438074e7f84801fcc28579",
+      "modelSha256": "7b1e2e07b3975c132f7ae56fa2076fa95cd375065dbceed209cda8bbd122c2f5",
+      "sourceImage": "/tmp/original-human-pilot-coverage/generic-human-b/nagi-bob-v2_original_original_original-front.png"
+    },
+    {
+      "characterId": "generic-human-b",
+      "category": "eyes",
+      "choice": "large",
+      "file": "/character-maker/original-parts/generic-human-b/eyes-large.jpg",
+      "sha256": "a09c9dcebb23c8f37a3cf92ba2879ef1b05e7bdeb45cf9fa648bafbe2a8d5ac9",
+      "modelSha256": "7b1e2e07b3975c132f7ae56fa2076fa95cd375065dbceed209cda8bbd122c2f5",
+      "sourceImage": "/tmp/original-human-pilot-coverage/generic-human-b/nagi-bob-v2_original_large_original-front.png"
+    },
+    {
+      "characterId": "generic-human-b",
+      "category": "eyes",
+      "choice": "narrow",
+      "file": "/character-maker/original-parts/generic-human-b/eyes-narrow.jpg",
+      "sha256": "f6d6380c315b4f44026f7c47ebff472fff3b773f97707968ad5ac0b0897d8b61",
+      "modelSha256": "7b1e2e07b3975c132f7ae56fa2076fa95cd375065dbceed209cda8bbd122c2f5",
+      "sourceImage": "/tmp/original-human-pilot-coverage/generic-human-b/nagi-bob-v2_original_narrow_original-front.png"
+    },
+    {
+      "characterId": "generic-human-b",
+      "category": "mouth",
+      "choice": "original",
+      "file": "/character-maker/original-parts/generic-human-b/mouth-original.jpg",
+      "sha256": "5100ee29d693dd38d629a54390c7746812df0796d60cde1d480c18ef8c7d3554",
+      "modelSha256": "7b1e2e07b3975c132f7ae56fa2076fa95cd375065dbceed209cda8bbd122c2f5",
+      "sourceImage": "/tmp/original-human-pilot-coverage/generic-human-b/nagi-bob-v2_original_original_original-front.png"
+    },
+    {
+      "characterId": "generic-human-b",
+      "category": "mouth",
+      "choice": "small",
+      "file": "/character-maker/original-parts/generic-human-b/mouth-small.jpg",
+      "sha256": "9c6a974275bfe8e5a0ca8d6e9668c54d50c7313d9682025396aa93f3171fe7e8",
+      "modelSha256": "7b1e2e07b3975c132f7ae56fa2076fa95cd375065dbceed209cda8bbd122c2f5",
+      "sourceImage": "/tmp/original-human-pilot-coverage/generic-human-b/nagi-bob-v2_original_original_small-front.png"
+    },
+    {
+      "characterId": "generic-human-b",
+      "category": "mouth",
+      "choice": "wide",
+      "file": "/character-maker/original-parts/generic-human-b/mouth-wide.jpg",
+      "sha256": "a248f8b7cd9a04316fdbaa4924a1e1e422f5528145c79c67926d8ff6332605fa",
+      "modelSha256": "7b1e2e07b3975c132f7ae56fa2076fa95cd375065dbceed209cda8bbd122c2f5",
+      "sourceImage": "/tmp/original-human-pilot-coverage/generic-human-b/nagi-bob-v2_original_original_wide-front.png"
+    }
+  ]
+}

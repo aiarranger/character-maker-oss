@@ -1,0 +1,184 @@
+[
+  {
+    "id": "generic-human-b",
+    "name": "ナミ",
+    "nameEn": "Nami",
+    "thumbnail": "/portraits/nagi-selector-quality-v1.jpg",
+    "thumbnailIsSheet": false,
+    "modelSha256": "90f30bb8cfb8a93e284e4a518169a391b5b4d7fd2240d8fba1936489386d36d2",
+    "modelUrl": "/models/90f30bb8cfb8a93e284e4a518169a391b5b4d7fd2240d8fba1936489386d36d2.glb",
+    "viewer": {
+      "fullSpan": 2.3,
+      "faceHeight": 1.74,
+      "faceSpan": 0.78,
+      "headTurnDegrees": 15,
+      "neutralMouthClose": 0,
+      "note": "Aポーズ原画から制作。瞬き・会話の口形、待機・歩行・走行に対応。"
+    },
+    "expressions": [
+      "blinkLeft",
+      "blinkRight",
+      "mouthClose",
+      "aa",
+      "ee",
+      "ou",
+      "happy"
+    ],
+    "motions": [
+      "idle",
+      "walk",
+      "run",
+      "sword_idle",
+      "sword_attack"
+    ],
+    "hairMotion": false,
+    "modularModel": {
+      "version": "original-human-modular-v1",
+      "sha256": "15fff552ee550c51132c2b0d761f4cbb38101a63591ad1a823c14d16c3d4b33d",
+      "hairstyles": [
+        "nagi-bob-v2",
+        "nagi-pixie-v2",
+        "nagi-long-v2",
+        "nagi-pony-v2",
+        "nagi-wavy-lob-v3"
+      ],
+      "url": "/models/15fff552ee550c51132c2b0d761f4cbb38101a63591ad1a823c14d16c3d4b33d.glb"
+    }
+  },
+  {
+    "id": "generic-human-a",
+    "name": "ハル",
+    "nameEn": "Haru",
+    "thumbnail": "/portraits/haru-maker-quality-20261005.png",
+    "thumbnailIsSheet": false,
+    "modelSha256": "f733b29a2afab79a75237246a14e2686aaf945af5f48d078b8c8f64dc838a413",
+    "modelUrl": "/models/f733b29a2afab79a75237246a14e2686aaf945af5f48d078b8c8f64dc838a413.glb",
+    "viewer": {
+      "bodyHz": 30,
+      "fullSpan": 2.35,
+      "faceHeight": 1.65,
+      "faceSpan": 0.8,
+      "headTurnDegrees": 0,
+      "neutralMouthClose": 0,
+      "note": "待機・歩行・走行と、目の開閉・口形状を確認できます。原画測定から作成した表情候補です。",
+      "expressionsAvailable": true
+    },
+    "expressions": [
+      "blinkLeft",
+      "blinkRight",
+      "mouthClose",
+      "aa",
+      "ee",
+      "ou",
+      "happy"
+    ],
+    "motions": [
+      "idle",
+      "walk",
+      "run",
+      "sword_idle",
+      "sword_attack"
+    ],
+    "hairMotion": false,
+    "appearanceModel": {
+      "version": "original-appearance-v1",
+      "sha256": "23f731fb25a9cd1eb5c5dd246e9ad2fad98fa2cd0a3d44d7834fb032cb9016ac",
+      "url": "/models/23f731fb25a9cd1eb5c5dd246e9ad2fad98fa2cd0a3d44d7834fb032cb9016ac.glb"
+    },
+    "modularModel": {
+      "version": "original-human-modular-v1",
+      "sha256": "337222c108d0ca174a7e44df8c37f84adcbfc3ac0beaf9403813acaee7e46697",
+      "hairstyles": [
+        "haru-short-v2",
+        "haru-crop-v2",
+        "haru-center-v2",
+        "haru-swept-v2",
+        "haru-sidepart-v3",
+        "haru-buzz-v3"
+      ],
+      "url": "/models/337222c108d0ca174a7e44df8c37f84adcbfc3ac0beaf9403813acaee7e46697.glb"
+    }
+  },
+  {
+    "id": "generic-robot",
+    "name": "ルクス",
+    "nameEn": "Lux",
+    "thumbnail": "/portraits/selector-lux-v1.jpg",
+    "thumbnailIsSheet": false,
+    "modelSha256": "fdf4bcfc33276f4ac8a2c36e0cdc95a114638009cbb123839ee51b511d30e323",
+    "modelUrl": "/models/fdf4bcfc33276f4ac8a2c36e0cdc95a114638009cbb123839ee51b511d30e323.glb",
+    "viewer": {
+      "bodyHz": 30,
+      "fullSpan": 2.35,
+      "faceHeight": 1.65,
+      "faceSpan": 0.8,
+      "headTurnDegrees": 0,
+      "neutralMouthClose": 0,
+      "note": "待機・歩行・走行と、表示面の目の開閉・口形状を確認できます。原画測定から作成した表情候補です。",
+      "expressionsAvailable": true
+    },
+    "expressions": [
+      "blinkLeft",
+      "blinkRight",
+      "mouthClose",
+      "aa",
+      "ee",
+      "ou",
+      "happy"
+    ],
+    "motions": [
+      "idle",
+      "walk",
+      "run",
+      "sword_idle",
+      "sword_attack"
+    ],
+    "hairMotion": false,
+    "appearanceModel": {
+      "version": "original-appearance-v1",
+      "sha256": "7136ac1a4a1c32801ba8d927533eaba9379abdbbc4f9d0bee9e00f6b5604682f",
+      "url": "/models/7136ac1a4a1c32801ba8d927533eaba9379abdbbc4f9d0bee9e00f6b5604682f.glb"
+    }
+  },
+  {
+    "id": "generic-cat",
+    "name": "モカ",
+    "nameEn": "Moka",
+    "thumbnail": "/portraits/selector-moka-v1.jpg",
+    "thumbnailIsSheet": false,
+    "modelSha256": "4392298cc4747bc7888487a34cbc967b6c0c48e71d2468fa75f367b29194081d",
+    "modelUrl": "/models/4392298cc4747bc7888487a34cbc967b6c0c48e71d2468fa75f367b29194081d.glb",
+    "viewer": {
+      "bodyHz": 30,
+      "fullSpan": 2.35,
+      "faceHeight": 1.65,
+      "faceSpan": 0.8,
+      "headTurnDegrees": 0,
+      "neutralMouthClose": 0,
+      "note": "待機・歩行・走行と、猫用の目の開閉・口形状を確認できます。原画測定から作成した表情候補です。",
+      "expressionsAvailable": true
+    },
+    "expressions": [
+      "blinkLeft",
+      "blinkRight",
+      "mouthClose",
+      "aa",
+      "ee",
+      "ou",
+      "happy"
+    ],
+    "motions": [
+      "idle",
+      "walk",
+      "run",
+      "sword_idle",
+      "sword_attack"
+    ],
+    "hairMotion": false,
+    "appearanceModel": {
+      "version": "original-appearance-v1",
+      "sha256": "40cf7018765408408598e3d5411f81f15ec33e96ef7bb271f2d8fa7be626b21a",
+      "url": "/models/40cf7018765408408598e3d5411f81f15ec33e96ef7bb271f2d8fa7be626b21a.glb"
+    }
+  }
+]

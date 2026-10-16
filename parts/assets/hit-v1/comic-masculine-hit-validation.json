@@ -1,0 +1,48 @@
+{
+  "input": {
+    "path": "parts/assets/v1/masculine.glb",
+    "bytes": 3040184,
+    "sha256": "16c878b8d1ce17f61fb22c54a19e40da8062a3be9db2181f7aead1ae9147b2e0"
+  },
+  "sourceSHA256": "69591853d817488edaa8fd9bf8fc1d821eaeaf789f8627b3cd23b41c4ed67997",
+  "sourceClip": "Hit_Chest",
+  "stretch": 2,
+  "duration": 0.66666669,
+  "samples": 11,
+  "tracks": 66,
+  "pelvisHeightRatio": 1.0353441818666547,
+  "tPoseError": 0.0000039150712159985446,
+  "worldRotationError": 0.0000015022853804980345,
+  "endToIdleDegrees": 1.01008808,
+  "snapshots": [
+    {
+      "time": 0,
+      "headZ": -0.20751743,
+      "floorY": -0.01448169
+    },
+    {
+      "time": 0.33333334,
+      "headZ": -0.06207851,
+      "floorY": -0.01112625
+    },
+    {
+      "time": 0.66666669,
+      "headZ": 0.01226184,
+      "floorY": -0.0079107
+    }
+  ],
+  "canonical": {
+    "status": "passed",
+    "path": "parts/assets/v1/masculine.glb",
+    "bytes": 3040184,
+    "sha256": "16c878b8d1ce17f61fb22c54a19e40da8062a3be9db2181f7aead1ae9147b2e0",
+    "localError": 0,
+    "worldError": 0,
+    "inverseBindError": 0
+  },
+  "output": {
+    "path": "public/maker-assets/comic-masculine-hit-motions.json",
+    "bytes": 74776,
+    "sha256": "7374c577dac44d72e48d0141d4eaaca2edffd59674e000f743cce526d14cf543"
+  }
+}

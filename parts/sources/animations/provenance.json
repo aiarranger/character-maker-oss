@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "name": "Quaternius Universal Animation Library Standard",
+  "author": "Quaternius",
+  "url": "https://quaternius.itch.io/universal-animation-library",
+  "license": "CC0-1.0",
+  "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "licenseFile": "License.txt",
+  "officialAnimationViewer": "https://quaternius.com/animviewer.html",
+  "acquisition": "Downloaded from the official Quaternius link in the in-app browser, 2026-10-02.",
+  "archiveName": "Universal Animation Library[Standard].zip",
+  "archiveSha256": "cc73fc4e495b82958207316596317a3f40b9fa38065bde1027937452da537724",
+  "files": {
+    "UAL1_Standard.glb": {
+      "archiveEntry": "Universal Animation Library[Standard]/Unreal-Godot/UAL1_Standard.glb",
+      "bytes": 7618436,
+      "sha256": "69591853d817488edaa8fd9bf8fc1d821eaeaf789f8627b3cd23b41c4ed67997"
+    },
+    "License.txt": {
+      "archiveEntry": "Universal Animation Library[Standard]/License.txt",
+      "bytes": 332,
+      "sha256": "6d01f55c6e4c49a2c9963e147e561945ae2c83958c8ca667d90a6bffdbfac061"
+    },
+    "README.txt": {
+      "archiveEntry": "Universal Animation Library[Standard]/README.txt",
+      "bytes": 702,
+      "sha256": "ccd02718886b5a57f10f0a8911a38cfe10c36880e1d6dfa3445923fba32d2a72"
+    }
+  },
+  "sourceUnmodified": true,
+  "rootMotion": "Disabled in the author-provided UAL1_Standard.glb; the _RM variant is not used.",
+  "derivedClips": {
+    "idle": "Idle_Loop",
+    "walk": "Walk_Loop",
+    "run": "Jog_Fwd_Loop"
+  },
+  "generator": "tools/character-maker/build-motions.mjs",
+  "manifestMaintenance": "Independent source manifest linked from the shared README. Neither build-assets.mjs nor build-motions.mjs generates or overwrites this file. Keep the fixed source hashes and license files when rebuilding derived assets.",
+  "referencePose": "A_TPose is used only for numerical target-rest recovery verification.",
+  "notes": "The complete small source GLB is retained to reproduce the three selected derived clips. The source rig and animation samples are not edited.",
+  "rebuildCommand": "node tools/character-maker/build-motions.mjs --masculine 'parts/sources/outfits/Exports/glTF (Godot-Unreal)/Outfits/Male_Peasant.gltf' --feminine 'parts/sources/outfits/Exports/glTF (Godot-Unreal)/Outfits/Female_Peasant.gltf' --canonical-dir parts/assets/v1",
+  "runtimeValidation": {
+    "date": "2026-10-02",
+    "method": "Loaded the generated canonical GLBs with Three GLTFLoader and the serialized clips with AnimationClip.parse. AnimationMixer sampled four times per clip and the five body-direction vectors matched the independent retarget calculation. For this CPU-only check, material/image references were removed in memory; the files were unchanged.",
+    "clipsPerBase": 3,
+    "framesPerBase": 12,
+    "maximumDirectionError": {
+      "masculine": 1.5029366890330113e-07,
+      "feminine": 1.8570176378191005e-07
+    },
+    "visualAcceptance": "Not asserted by this CPU validation; inspect in the maker viewer."
+  }
+}

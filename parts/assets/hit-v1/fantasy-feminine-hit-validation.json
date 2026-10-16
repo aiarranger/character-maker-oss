@@ -1,0 +1,48 @@
+{
+  "input": {
+    "path": "parts/sources/fantasy-v1/Victoria_Rubin.vrm",
+    "bytes": 15321932,
+    "sha256": "ad5750ce944b708155abb7ac6807e19d7f5e73a939f0ee32daf0539acfca57c0"
+  },
+  "sourceSHA256": "69591853d817488edaa8fd9bf8fc1d821eaeaf789f8627b3cd23b41c4ed67997",
+  "sourceClip": "Hit_Chest",
+  "stretch": 2,
+  "duration": 0.66666669,
+  "samples": 11,
+  "tracks": 53,
+  "pelvisHeightRatio": 1.1014959491440555,
+  "tPoseError": 0.000003915015804090281,
+  "worldRotationError": 5.960464477539063e-8,
+  "endToIdleDegrees": 1.01008808,
+  "snapshots": [
+    {
+      "time": 0,
+      "headZ": -0.15318678,
+      "floorY": -0.03068757
+    },
+    {
+      "time": 0.33333334,
+      "headZ": -0.05159495,
+      "floorY": -0.0247967
+    },
+    {
+      "time": 0.66666669,
+      "headZ": 0.0009639,
+      "floorY": -0.01809632
+    }
+  ],
+  "canonical": {
+    "status": "passed",
+    "path": "parts/assets/fantasy-v1/feminine.glb",
+    "bytes": 4211708,
+    "sha256": "0cd1bb11c894c7c3295917f66faa2caa3f5360502863955584ccee6388f856a0",
+    "localError": 0,
+    "worldError": 0,
+    "inverseBindError": 0
+  },
+  "output": {
+    "path": "public/maker-assets/fantasy-feminine-hit-motions.json",
+    "bytes": 61831,
+    "sha256": "6a2b9bdba3b46e1d281b0fe0eda5ff13857f3e1a8f1b4489c2eaf2295680e5ee"
+  }
+}

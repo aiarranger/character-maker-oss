@@ -1,0 +1,1794 @@
+{
+  "version": "studio-runtime-v1",
+  "note": "Canonical Character Studio runtime binaries for /character-maker. public/* is populated by tools/character-maker/sync-studio-runtime-assets.mjs. Prefer existing characters/_shared or experiment paths when SHA matches; otherwise files live under this folder.",
+  "newFantasyHairsPromotedToFantasyV1": [
+    "parts/assets/fantasy-v1/hair-feminine-bluntBob.glb",
+    "parts/assets/fantasy-v1/hair-feminine-longLoose.glb",
+    "parts/assets/fantasy-v1/hair-feminine-sideSweep.glb",
+    "parts/assets/fantasy-v1/hair-feminine-sweptBack.glb",
+    "parts/assets/fantasy-v1/hair-masculine-bluntBob.glb",
+    "parts/assets/fantasy-v1/hair-masculine-longLoose.glb",
+    "parts/assets/fantasy-v1/hair-masculine-sideSweep.glb",
+    "parts/assets/fantasy-v1/hair-masculine-sweptBack.glb"
+  ],
+  "entries": [
+    {
+      "public": "public/models/15fff552ee550c51132c2b0d761f4cbb38101a63591ad1a823c14d16c3d4b33d.glb",
+      "source": "parts/assets/studio-runtime-v1/models/15fff552ee550c51132c2b0d761f4cbb38101a63591ad1a823c14d16c3d4b33d.glb",
+      "sha256": "15fff552ee550c51132c2b0d761f4cbb38101a63591ad1a823c14d16c3d4b33d",
+      "bytes": 25738144,
+      "kind": "model"
+    },
+    {
+      "public": "public/models/23f731fb25a9cd1eb5c5dd246e9ad2fad98fa2cd0a3d44d7834fb032cb9016ac.glb",
+      "source": "distribution/characters/generic-human-a/experiments/character-maker-appearance-2026-10-03-final-v2/editable.glb",
+      "sha256": "23f731fb25a9cd1eb5c5dd246e9ad2fad98fa2cd0a3d44d7834fb032cb9016ac",
+      "bytes": 8148704,
+      "kind": "model"
+    },
+    {
+      "public": "public/models/337222c108d0ca174a7e44df8c37f84adcbfc3ac0beaf9403813acaee7e46697.glb",
+      "source": "parts/assets/studio-runtime-v1/models/337222c108d0ca174a7e44df8c37f84adcbfc3ac0beaf9403813acaee7e46697.glb",
+      "sha256": "337222c108d0ca174a7e44df8c37f84adcbfc3ac0beaf9403813acaee7e46697",
+      "bytes": 21299840,
+      "kind": "model"
+    },
+    {
+      "public": "public/models/40cf7018765408408598e3d5411f81f15ec33e96ef7bb271f2d8fa7be626b21a.glb",
+      "source": "distribution/characters/generic-cat/experiments/character-maker-species-2026-10-03-v11/editable.glb",
+      "sha256": "40cf7018765408408598e3d5411f81f15ec33e96ef7bb271f2d8fa7be626b21a",
+      "bytes": 10558700,
+      "kind": "model"
+    },
+    {
+      "public": "public/models/4392298cc4747bc7888487a34cbc967b6c0c48e71d2468fa75f367b29194081d.glb",
+      "source": "distribution/characters/generic-cat/experiments/mouth-defaults-2026-09-16-v1/npc-compact.glb",
+      "sha256": "4392298cc4747bc7888487a34cbc967b6c0c48e71d2468fa75f367b29194081d",
+      "bytes": 1305956,
+      "kind": "model"
+    },
+    {
+      "public": "public/models/7136ac1a4a1c32801ba8d927533eaba9379abdbbc4f9d0bee9e00f6b5604682f.glb",
+      "source": "distribution/characters/generic-robot/experiments/character-maker-species-2026-10-03-v5/editable.glb",
+      "sha256": "7136ac1a4a1c32801ba8d927533eaba9379abdbbc4f9d0bee9e00f6b5604682f",
+      "bytes": 5351800,
+      "kind": "model"
+    },
+    {
+      "public": "public/models/90f30bb8cfb8a93e284e4a518169a391b5b4d7fd2240d8fba1936489386d36d2.glb",
+      "source": "distribution/characters/generic-human-b/experiments/character-maker-modular-2026-10-03-v18-rc/editable.glb",
+      "sha256": "90f30bb8cfb8a93e284e4a518169a391b5b4d7fd2240d8fba1936489386d36d2",
+      "bytes": 25585876,
+      "kind": "model"
+    },
+    {
+      "public": "public/models/f733b29a2afab79a75237246a14e2686aaf945af5f48d078b8c8f64dc838a413.glb",
+      "source": "distribution/characters/generic-human-a/experiments/face-size-2026-09-15-v2/npc-compact.glb",
+      "sha256": "f733b29a2afab79a75237246a14e2686aaf945af5f48d078b8c8f64dc838a413",
+      "bytes": 1896664,
+      "kind": "model"
+    },
+    {
+      "public": "public/models/fdf4bcfc33276f4ac8a2c36e0cdc95a114638009cbb123839ee51b511d30e323.glb",
+      "source": "distribution/characters/generic-robot/experiments/mouth-defaults-2026-09-29-v1/npc-compact.glb",
+      "sha256": "fdf4bcfc33276f4ac8a2c36e0cdc95a114638009cbb123839ee51b511d30e323",
+      "bytes": 1369724,
+      "kind": "model"
+    },
+    {
+      "public": "public/maker-assets/comic-feminine-sword-motions.json",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/comic-feminine-sword-motions.json",
+      "sha256": "cb9efe3624e23590cdd6a76dea3e3c11e8a58bc2f18800ad98d309004a899c92",
+      "bytes": 644260,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/comic-masculine-sword-motions.json",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/comic-masculine-sword-motions.json",
+      "sha256": "b9fd60cb687148d0cad9cd3008a725e83cf34307e984ec1e4816dd0f26e67b19",
+      "bytes": 646879,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/fantasy-feminine-mature-skin.png",
+      "source": "parts/assets/mature-v1/feminine-mature-skin.png",
+      "sha256": "a57d3d2e269510908af3e8278ee42bd3e931e29d88e15a1e12655809c1852b95",
+      "bytes": 302972,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/fantasy-feminine-motions.json",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/fantasy-feminine-motions.json",
+      "sha256": "e2daf85f9878b324599dc002f66ef3022958cb28613f818d9ff83df1dc19551d",
+      "bytes": 1314143,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/fantasy-feminine.glb",
+      "source": "parts/assets/fantasy-v1/feminine.glb",
+      "sha256": "0cd1bb11c894c7c3295917f66faa2caa3f5360502863955584ccee6388f856a0",
+      "bytes": 4211708,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/fantasy-hair-feminine-animeParted.glb",
+      "source": "parts/assets/fantasy-v1/hair-feminine-animeParted.glb",
+      "sha256": "c864fb79bb59a620e44b28aed69074eee2c5e44be6da57ef6d227d1ffb3a9569",
+      "bytes": 1131948,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/fantasy-hair-feminine-bluntBob.glb",
+      "source": "parts/assets/fantasy-v1/hair-feminine-bluntBob.glb",
+      "sha256": "48f223a605ec3fd37ef9c902ff30c57b539e9303a6581a79ab7c33e0bd29de01",
+      "bytes": 670228,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/fantasy-hair-feminine-layered.glb",
+      "source": "parts/assets/fantasy-v1/hair-feminine-layered.glb",
+      "sha256": "263a3f894d288c67829713fa077bf0b4d2d71e852944ea59153dab47c9c3a299",
+      "bytes": 384304,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/fantasy-hair-feminine-longLoose.glb",
+      "source": "parts/assets/fantasy-v1/hair-feminine-longLoose.glb",
+      "sha256": "cd5ddf474b9182047df4cb2b2fb6dde147e5161b1b4f6d3117b751b5a76d66ff",
+      "bytes": 730324,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/fantasy-hair-feminine-sidePony.glb",
+      "source": "parts/assets/fantasy-v1/hair-feminine-sidePony.glb",
+      "sha256": "99746beabe7403493a20603cdb5cdf014d639db72b9e678ae6b257f7d10bd844",
+      "bytes": 808620,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/fantasy-hair-feminine-sideSweep.glb",
+      "source": "parts/assets/fantasy-v1/hair-feminine-sideSweep.glb",
+      "sha256": "1124e24596cb818614ea5c4dc1c757c93c9e6aa7484c8ac6ffa03ee8784d9a37",
+      "bytes": 1056860,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/fantasy-hair-feminine-sweptBack.glb",
+      "source": "parts/assets/fantasy-v1/hair-feminine-sweptBack.glb",
+      "sha256": "9d8789a8b11af1b21b148dc312c4ca00dad85bd94999aedd8b2b540ca4692bb5",
+      "bytes": 941456,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/fantasy-hair-masculine-animeParted.glb",
+      "source": "parts/assets/fantasy-v1/hair-masculine-animeParted.glb",
+      "sha256": "d050c48b8d56d915ff3018173f0f2a24efdc3c75bebf09134f093c99bc9a2a4d",
+      "bytes": 1131952,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/fantasy-hair-masculine-bluntBob.glb",
+      "source": "parts/assets/fantasy-v1/hair-masculine-bluntBob.glb",
+      "sha256": "fd378746440f5cbc4cc423598e8a7474dfe77a580839470aadb116513ace3798",
+      "bytes": 670228,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/fantasy-hair-masculine-layered.glb",
+      "source": "parts/assets/fantasy-v1/hair-masculine-layered.glb",
+      "sha256": "cde9f393f783015bbbfffa59b7c016572ddb1b3e9d77bd0b8fa0e3249caf3f4d",
+      "bytes": 384304,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/fantasy-hair-masculine-longLoose.glb",
+      "source": "parts/assets/fantasy-v1/hair-masculine-longLoose.glb",
+      "sha256": "0a17491705b0cb2a79fc17c3a3c73c0216a8a94d9ab642163d580172ea3ee7d1",
+      "bytes": 730324,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/fantasy-hair-masculine-sidePony.glb",
+      "source": "parts/assets/fantasy-v1/hair-masculine-sidePony.glb",
+      "sha256": "e18c820db20a20afb18e4bfd869980984dee226bc7d9ea1b2dcc9afa592f09de",
+      "bytes": 808620,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/fantasy-hair-masculine-sideSweep.glb",
+      "source": "parts/assets/fantasy-v1/hair-masculine-sideSweep.glb",
+      "sha256": "efb3746d1b13f5084c9e1bc946a93bbe8b17478680bad5be3dcbe28d45ebcdaa",
+      "bytes": 1056860,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/fantasy-hair-masculine-sweptBack.glb",
+      "source": "parts/assets/fantasy-v1/hair-masculine-sweptBack.glb",
+      "sha256": "039cd7df0f7d9bb032fae0aef8c08b22ac717a54c7c00c0026fb0c79dd197dcc",
+      "bytes": 943740,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/fantasy-masculine-mature-eyelash.png",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/fantasy-masculine-mature-eyelash.png",
+      "sha256": "e4b1ddab1639a923e660bf75fa416221d98d80d2ef8f3c2d11428c3fe5313291",
+      "bytes": 21953,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/fantasy-masculine-mature-eyeline.png",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/fantasy-masculine-mature-eyeline.png",
+      "sha256": "8f1b2b95ef819d058ccdda513f4209f73a6a5662be7662e93134d8df74ed6857",
+      "bytes": 40766,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/fantasy-masculine-mature-skin.png",
+      "source": "parts/assets/mature-v1/masculine-mature-skin.png",
+      "sha256": "f089a24c670d9a720fb1dc8f9ed0f02629f5c7aa24cc05be394c52b787d647ad",
+      "bytes": 496459,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/fantasy-masculine-motions.json",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/fantasy-masculine-motions.json",
+      "sha256": "b4267149bc981d99f75ea88b0713ea4c1ef8785d7637826beff315f7e9c509a1",
+      "bytes": 1314166,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/fantasy-masculine.glb",
+      "source": "parts/assets/fantasy-v1/masculine.glb",
+      "sha256": "a342e4976f00813059f73f8338853d4f2c67488cc1d28adb3958c7449039cbbe",
+      "bytes": 5358956,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/feminine-motions.json",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/feminine-motions.json",
+      "sha256": "ce6c67a293893f10ae393c89e8eb8f895addc15ba07d8bffbd722871419fdc4b",
+      "bytes": 947310,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/feminine.glb",
+      "source": "parts/assets/v1/feminine.glb",
+      "sha256": "dc2c09a99b8922bab4b8042ccb8f5bc9484a2ff00ebe2bb2a22eb9aeeeb87c95",
+      "bytes": 3175368,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/hair-buns.glb",
+      "source": "parts/assets/v1/hair-buns.glb",
+      "sha256": "467f6214a78988fde3eb30e099f6c44b664d103fc637f3ae964573fafa83cd5e",
+      "bytes": 600040,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/hair-crop.glb",
+      "source": "parts/assets/v1/hair-crop.glb",
+      "sha256": "704a236dee65e5e6014a3a4605d314aad0f1664a4e5d8ba0f6e11bcd82e57222",
+      "bytes": 419652,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/hair-long.glb",
+      "source": "parts/assets/v1/hair-long.glb",
+      "sha256": "2dd87a5e6e87437aa297b20cd19c9670aa7859b2b1425bfcc8c70a06266904b5",
+      "bytes": 584304,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/hair-parted.glb",
+      "source": "parts/assets/v1/hair-parted.glb",
+      "sha256": "351c83e53ab22bc6561a724fbf1a96c7c001724ae71a62df29a2fed383af99cf",
+      "bytes": 431800,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/hair-pixie.glb",
+      "source": "parts/assets/v1/hair-pixie.glb",
+      "sha256": "6481658bd8d10bb889edb55f357d4af89466f66a99d0a4e06ee832b210b01b60",
+      "bytes": 419660,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/look-comic-bright.jpg",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/look-comic-bright.jpg",
+      "sha256": "e62ef4b006e865978ccd54deb86b6b07eea14c8535bda9e5759ea88c6b0d5d01",
+      "bytes": 64353,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/look-comic-calm.jpg",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/look-comic-calm.jpg",
+      "sha256": "37963f89c2b38f0df84193be752fd4d3c6b085f3c1820bb927c63047a23e2a9b",
+      "bytes": 70897,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/look-comic-fresh.jpg",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/look-comic-fresh.jpg",
+      "sha256": "2a35b3a5f89cb9792ada948d9fa089be025741fb0fab91d507f5bfb31c32b00e",
+      "bytes": 89734,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/look-comic-soft.jpg",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/look-comic-soft.jpg",
+      "sha256": "e35c2c660ecf0157a1074fdfa33abfc52e6520298e5004111bea2de14cd74c6a",
+      "bytes": 71954,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/look-fantasy-bold.jpg",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/look-fantasy-bold.jpg",
+      "sha256": "0d150c23bae8dbe5580f5725f96eed3e9180835e70ca99a216b0bc5dbee3f12c",
+      "bytes": 34976,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/look-fantasy-bright.jpg",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/look-fantasy-bright.jpg",
+      "sha256": "96cc3ac34ddc6c90d4c7e7c02bbbf89ac1e8d16f84f95f9ca5e6e0b1218a6d83",
+      "bytes": 33914,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/look-fantasy-calm.jpg",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/look-fantasy-calm.jpg",
+      "sha256": "b28854a8cc9c9840da9f49df01ade13b7247c72c53056d849eb924f5e36bb6a4",
+      "bytes": 72094,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/look-fantasy-composed.jpg",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/look-fantasy-composed.jpg",
+      "sha256": "b7f65617f08f813e24099511acdc8ec8355029d4ce147c78f7fda14bae00fcc3",
+      "bytes": 70355,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/look-fantasy-elegant.jpg",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/look-fantasy-elegant.jpg",
+      "sha256": "46e3374cb8b9115fb24b8a6c820dc0a8684b7a7ac35924fcbc607b7537f922ac",
+      "bytes": 70565,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/look-fantasy-fresh.jpg",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/look-fantasy-fresh.jpg",
+      "sha256": "a3a1707d91546909c81a663a222e346fcbbf1e82edac4c9e3655b021c86d9656",
+      "bytes": 33883,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/look-fantasy-scholar.jpg",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/look-fantasy-scholar.jpg",
+      "sha256": "abac15e38917975caa18e5169cf957cab6e6990fb18c7cdfc81deecdb8edf277",
+      "bytes": 65365,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/look-fantasy-soft.jpg",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/look-fantasy-soft.jpg",
+      "sha256": "c69883b4d20ce3c28a4345561c5248eb060f63ed2d944ccae7951640d401549e",
+      "bytes": 39080,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/masculine-motions.json",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/masculine-motions.json",
+      "sha256": "f4d8222c92f95fcc4600f10f2b7f0f8cbebda8ff8ac347bd07ab8b6f349c2854",
+      "bytes": 945989,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/masculine.glb",
+      "source": "parts/assets/v1/masculine.glb",
+      "sha256": "16c878b8d1ce17f61fb22c54a19e40da8062a3be9db2181f7aead1ae9147b2e0",
+      "bytes": 3040184,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/outfit-comic-feminine-cobalt-outfit.png",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/outfit-comic-feminine-cobalt-outfit.png",
+      "sha256": "159ed86c5117f25cb350125fcdeb699202a677a764bf168df0ee00ee334c9822",
+      "bytes": 694351,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/outfit-comic-feminine-ink-outfit.png",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/outfit-comic-feminine-ink-outfit.png",
+      "sha256": "e33f35d8586272748a9f170e6378b1620b22c2e6eeee5f70192076c7430174d6",
+      "bytes": 567398,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/outfit-comic-feminine-ochre-outfit.png",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/outfit-comic-feminine-ochre-outfit.png",
+      "sha256": "56def3df93c5580b1cfa830c55427281fc12b3a100053ea5147f23374639e2be",
+      "bytes": 726503,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/outfit-comic-feminine-pearl-outfit.png",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/outfit-comic-feminine-pearl-outfit.png",
+      "sha256": "128decb3bd777e29421dd841c6f857fb43217224a692c7542a9870d8056a84fb",
+      "bytes": 790447,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/outfit-comic-feminine-sage-outfit.png",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/outfit-comic-feminine-sage-outfit.png",
+      "sha256": "69e8a48b682256378455e1cf5806a1fe45d06e03d5faf287f1fbd3c247147c0e",
+      "bytes": 645434,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/outfit-comic-feminine-wine-outfit.png",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/outfit-comic-feminine-wine-outfit.png",
+      "sha256": "04402afe23b4f096358fbbb23a1d6de0bea195fb0dacf7c8d4d4c6e431376bfd",
+      "bytes": 653667,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/outfit-comic-masculine-cobalt-outfit.png",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/outfit-comic-masculine-cobalt-outfit.png",
+      "sha256": "159ed86c5117f25cb350125fcdeb699202a677a764bf168df0ee00ee334c9822",
+      "bytes": 694351,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/outfit-comic-masculine-ink-outfit.png",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/outfit-comic-masculine-ink-outfit.png",
+      "sha256": "e33f35d8586272748a9f170e6378b1620b22c2e6eeee5f70192076c7430174d6",
+      "bytes": 567398,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/outfit-comic-masculine-ochre-outfit.png",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/outfit-comic-masculine-ochre-outfit.png",
+      "sha256": "56def3df93c5580b1cfa830c55427281fc12b3a100053ea5147f23374639e2be",
+      "bytes": 726503,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/outfit-comic-masculine-pearl-outfit.png",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/outfit-comic-masculine-pearl-outfit.png",
+      "sha256": "128decb3bd777e29421dd841c6f857fb43217224a692c7542a9870d8056a84fb",
+      "bytes": 790447,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/outfit-comic-masculine-sage-outfit.png",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/outfit-comic-masculine-sage-outfit.png",
+      "sha256": "69e8a48b682256378455e1cf5806a1fe45d06e03d5faf287f1fbd3c247147c0e",
+      "bytes": 645434,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/outfit-comic-masculine-wine-outfit.png",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/outfit-comic-masculine-wine-outfit.png",
+      "sha256": "04402afe23b4f096358fbbb23a1d6de0bea195fb0dacf7c8d4d4c6e431376bfd",
+      "bytes": 653667,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/outfit-fantasy-feminine-cobalt-onepice.png",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/outfit-fantasy-feminine-cobalt-onepice.png",
+      "sha256": "a6c27d7437d220895a9fff4a70eb579349662e8bb90bf6d814300d90a6455e3f",
+      "bytes": 400138,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/outfit-fantasy-feminine-cobalt-shoes.png",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/outfit-fantasy-feminine-cobalt-shoes.png",
+      "sha256": "19170f464f58530c1ad87fd7764a24edeeca35c35897c715598aa7c714ef7e67",
+      "bytes": 68001,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/outfit-fantasy-feminine-ink-onepice.png",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/outfit-fantasy-feminine-ink-onepice.png",
+      "sha256": "1cc3a9eb99b488d1268badd4cbbab2eb8ae1c6a63c8e3476d251c728440bfa32",
+      "bytes": 345783,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/outfit-fantasy-feminine-ink-shoes.png",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/outfit-fantasy-feminine-ink-shoes.png",
+      "sha256": "44b714fed5b09861bd947bbc611e139086150f184363043d781acb8f57322418",
+      "bytes": 59026,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/outfit-fantasy-feminine-ochre-onepice.png",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/outfit-fantasy-feminine-ochre-onepice.png",
+      "sha256": "370e75a4108d98050c4ea177505d4a43860c65b11c5cba4ac243616454703ef1",
+      "bytes": 428399,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/outfit-fantasy-feminine-ochre-shoes.png",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/outfit-fantasy-feminine-ochre-shoes.png",
+      "sha256": "7f1eb8cd2db3f2124ad5b44620537bf3e0e5cb2d791d443db06767da5d14b900",
+      "bytes": 66683,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/outfit-fantasy-feminine-pearl-onepice.png",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/outfit-fantasy-feminine-pearl-onepice.png",
+      "sha256": "0956ca624f49428941045d92a48fabcaeb275049917992f7560dc1c7691441cd",
+      "bytes": 495366,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/outfit-fantasy-feminine-pearl-shoes.png",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/outfit-fantasy-feminine-pearl-shoes.png",
+      "sha256": "b61a171683b29665bca7696f20396f8185ca82e9c70a22efd0381c07dbb1c6f8",
+      "bytes": 68481,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/outfit-fantasy-feminine-sage-onepice.png",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/outfit-fantasy-feminine-sage-onepice.png",
+      "sha256": "97577cb4fecc9268a69b48eb9e8b51ac5dd9b8da587d2067429aa639df989524",
+      "bytes": 384719,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/outfit-fantasy-feminine-sage-shoes.png",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/outfit-fantasy-feminine-sage-shoes.png",
+      "sha256": "316bdcdc58cf6ad3e7219f8e8306108c1aeee027fbcbe50cfa70f8afcad4d634",
+      "bytes": 66558,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/outfit-fantasy-feminine-wine-onepice.png",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/outfit-fantasy-feminine-wine-onepice.png",
+      "sha256": "161ad3d25c41c96450469037da2f4bcef87176e9dbed6fdc5b7dc4df1aea5d81",
+      "bytes": 397097,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/outfit-fantasy-feminine-wine-shoes.png",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/outfit-fantasy-feminine-wine-shoes.png",
+      "sha256": "b5de7a9151f86781c2fa3e3a82fb092886e65a69d1c2ff9fd28fc59a6c1f9a3a",
+      "bytes": 67351,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/outfit-fantasy-masculine-cobalt-accessory.png",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/outfit-fantasy-masculine-cobalt-accessory.png",
+      "sha256": "87ad0c816993018e0cc9a36067985a8e3e97c6f2431ee8490308155ff278d0c8",
+      "bytes": 31730,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/outfit-fantasy-masculine-cobalt-bottoms.png",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/outfit-fantasy-masculine-cobalt-bottoms.png",
+      "sha256": "34c6e789332a80f86f17355ca634b9de813d57bd90cc64a74cfc7d6498640df0",
+      "bytes": 388636,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/outfit-fantasy-masculine-cobalt-shoes.png",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/outfit-fantasy-masculine-cobalt-shoes.png",
+      "sha256": "767f585cdeba6fbc10b5dd59e3925750e9fcb6bbb4d3302f45e95b1323260c1d",
+      "bytes": 81194,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/outfit-fantasy-masculine-cobalt-tops.png",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/outfit-fantasy-masculine-cobalt-tops.png",
+      "sha256": "3fb3f0f00cf4e44c772a5a1178a16a1494a92193ddf750534ae687268d6f9961",
+      "bytes": 536112,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/outfit-fantasy-masculine-ink-accessory.png",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/outfit-fantasy-masculine-ink-accessory.png",
+      "sha256": "c296cfa4b8bad09f523c8aa148a279897855c5c6fdcf1d4a7e5ebf6019060084",
+      "bytes": 31177,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/outfit-fantasy-masculine-ink-bottoms.png",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/outfit-fantasy-masculine-ink-bottoms.png",
+      "sha256": "acf3562df3c61b5fc5898efece6aa2e4111ffb2d9d570946e9968925033a9004",
+      "bytes": 298389,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/outfit-fantasy-masculine-ink-shoes.png",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/outfit-fantasy-masculine-ink-shoes.png",
+      "sha256": "d67eda1f332b383bab4e332b56c109981bf3e516681f7ba12fb236c346b2dc50",
+      "bytes": 69266,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/outfit-fantasy-masculine-ink-tops.png",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/outfit-fantasy-masculine-ink-tops.png",
+      "sha256": "1f9b43b81c07aafb57319b0999d6ac083839af355363617bad42eb47c02c96ee",
+      "bytes": 440631,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/outfit-fantasy-masculine-ochre-accessory.png",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/outfit-fantasy-masculine-ochre-accessory.png",
+      "sha256": "0959ecdbac54c57348a573ffd30f7b80e7d5567fb6fc1b094805bfb1e3c9635e",
+      "bytes": 31643,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/outfit-fantasy-masculine-ochre-bottoms.png",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/outfit-fantasy-masculine-ochre-bottoms.png",
+      "sha256": "0ea8bc6b510f20cdc2cbbe8ec741d62b9ae4cb9d591553e03eafd5990f317434",
+      "bytes": 372669,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/outfit-fantasy-masculine-ochre-shoes.png",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/outfit-fantasy-masculine-ochre-shoes.png",
+      "sha256": "d02e79f2d58eb462e1592002d8fc2941da5a72066ba95fd00030dba94e1e987f",
+      "bytes": 81907,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/outfit-fantasy-masculine-ochre-tops.png",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/outfit-fantasy-masculine-ochre-tops.png",
+      "sha256": "9467125cd64c339a1adda96cf6f0b693a1f12de2fa2ee9e7b4c8d2d03043ecfe",
+      "bytes": 571647,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/outfit-fantasy-masculine-pearl-accessory.png",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/outfit-fantasy-masculine-pearl-accessory.png",
+      "sha256": "a7a7531b9ca8fa9190652998bdbc9908f7ad00534538ca37463ce2d361b03c67",
+      "bytes": 31395,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/outfit-fantasy-masculine-pearl-bottoms.png",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/outfit-fantasy-masculine-pearl-bottoms.png",
+      "sha256": "b0df12a1c1df0bb652f1eaf896070190ce227b465d99d3767d4fcb8eaaadf3e6",
+      "bytes": 406965,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/outfit-fantasy-masculine-pearl-shoes.png",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/outfit-fantasy-masculine-pearl-shoes.png",
+      "sha256": "21d9f9532220ab0a22787f1d5132ea4373c2a85ed1b98c1d2e4bd482227f0abd",
+      "bytes": 84075,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/outfit-fantasy-masculine-pearl-tops.png",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/outfit-fantasy-masculine-pearl-tops.png",
+      "sha256": "e45d267fed722e604680949dea0c7fb210ba78b1fde6adea4231a7195f47068a",
+      "bytes": 548565,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/outfit-fantasy-masculine-sage-accessory.png",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/outfit-fantasy-masculine-sage-accessory.png",
+      "sha256": "3554bd92bf4e45f0b3440a72f481139337c24319f25132e81e2ab1cfc571ae8e",
+      "bytes": 31372,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/outfit-fantasy-masculine-sage-bottoms.png",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/outfit-fantasy-masculine-sage-bottoms.png",
+      "sha256": "7063878fe3bd6b98c9c3fdd2363e489703476a28f88b4be02a00864779b8a50c",
+      "bytes": 375640,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/outfit-fantasy-masculine-sage-shoes.png",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/outfit-fantasy-masculine-sage-shoes.png",
+      "sha256": "d6640acf21347c2f896d52174529cdc84b513fff9d7d3f0a53767a427b9cd6f4",
+      "bytes": 81320,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/outfit-fantasy-masculine-sage-tops.png",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/outfit-fantasy-masculine-sage-tops.png",
+      "sha256": "855fd88670b01de903cb3ce8cd05d423fec0351b8dc35f153eed0b6bca2e580e",
+      "bytes": 497045,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/outfit-fantasy-masculine-wine-accessory.png",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/outfit-fantasy-masculine-wine-accessory.png",
+      "sha256": "236e9b6d540f496fc019fd495afa66cf03d21507f1db484c067f2bd895bed580",
+      "bytes": 31660,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/outfit-fantasy-masculine-wine-bottoms.png",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/outfit-fantasy-masculine-wine-bottoms.png",
+      "sha256": "88d0c40ca3c7655524691113d5950801ffbe76ffddbea5041ef5ba90bfc6f7bb",
+      "bytes": 351582,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/outfit-fantasy-masculine-wine-shoes.png",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/outfit-fantasy-masculine-wine-shoes.png",
+      "sha256": "997da9702b976f27cdb12fd32ff3ad188fce7388682fdd67ac5ef24621fbe2d5",
+      "bytes": 75117,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/outfit-fantasy-masculine-wine-tops.png",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/outfit-fantasy-masculine-wine-tops.png",
+      "sha256": "d1c46f623a9988adbf94030e24d2a4cb5e47564ab9a414ace53bec65fb833ca6",
+      "bytes": 529200,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/thumb-comic-feminine-eyes-almond.jpg",
+      "source": "parts/assets/thumbnails-v2/thumb-comic-feminine-eyes-almond.jpg",
+      "sha256": "aa76d32ad2c65e0afd661dc52c7c81b6d67e2add1ccdddbe220fcc904a76615d",
+      "bytes": 17857,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/thumb-comic-feminine-eyes-round.jpg",
+      "source": "parts/assets/thumbnails-v2/thumb-comic-feminine-eyes-round.jpg",
+      "sha256": "a1c92c9833745781b78f924911042c117c277d737dea86cfe0fb4c87deb3fbd0",
+      "bytes": 18079,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/thumb-comic-feminine-eyes-slender.jpg",
+      "source": "parts/assets/thumbnails-v2/thumb-comic-feminine-eyes-slender.jpg",
+      "sha256": "90b04990856d9ab55ccfaa61a12a093fb3c571b66c5dcfcf0f155290e6a526a5",
+      "bytes": 17626,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/thumb-comic-feminine-face-angular.jpg",
+      "source": "parts/assets/thumbnails-v2/thumb-comic-feminine-face-angular.jpg",
+      "sha256": "1087c299a6e071cd87484d3f9664ae510e5043db5225a65f5c860fe6b0b017a5",
+      "bytes": 17846,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/thumb-comic-feminine-face-oval.jpg",
+      "source": "parts/assets/thumbnails-v2/thumb-comic-feminine-face-oval.jpg",
+      "sha256": "aa76d32ad2c65e0afd661dc52c7c81b6d67e2add1ccdddbe220fcc904a76615d",
+      "bytes": 17857,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/thumb-comic-feminine-face-round.jpg",
+      "source": "parts/assets/thumbnails-v2/thumb-comic-feminine-face-round.jpg",
+      "sha256": "3be23083324fa4d03e68eef7c0ffdce75a746afe664e0805e03399b2549f0d0b",
+      "bytes": 17985,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/thumb-comic-feminine-hair-buns.jpg",
+      "source": "parts/assets/thumbnails-v2/thumb-comic-feminine-hair-buns.jpg",
+      "sha256": "1fb913a9e7b884b2eefffaf6c54c2d5352b438eb5d2ad824f9123b54b483b9dd",
+      "bytes": 13020,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/thumb-comic-feminine-hair-crop.jpg",
+      "source": "parts/assets/thumbnails-v2/thumb-comic-feminine-hair-crop.jpg",
+      "sha256": "bc9629741d7d25891cf8e9fb01e2c0c227336d967d08e717a69dd49cb3f5466b",
+      "bytes": 10875,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/thumb-comic-feminine-hair-long.jpg",
+      "source": "parts/assets/thumbnails-v2/thumb-comic-feminine-hair-long.jpg",
+      "sha256": "f63c990f23ed85ed1d8054cda5b93db07989b5884ce3806256b681f5747bd623",
+      "bytes": 12588,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/thumb-comic-feminine-hair-none.jpg",
+      "source": "parts/assets/thumbnails-v2/thumb-comic-feminine-hair-none.jpg",
+      "sha256": "a25477be4a128a22a3cca912b4a2afda042a22721ad72b5dbea5e14af81ea251",
+      "bytes": 10142,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/thumb-comic-feminine-hair-parted.jpg",
+      "source": "parts/assets/thumbnails-v2/thumb-comic-feminine-hair-parted.jpg",
+      "sha256": "3e06a5e593b0201b9acba90ef535b3af6b81e28df3df3ca6a37dcc074d8be631",
+      "bytes": 11458,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/thumb-comic-feminine-hair-pixie.jpg",
+      "source": "parts/assets/thumbnails-v2/thumb-comic-feminine-hair-pixie.jpg",
+      "sha256": "5059a9db0597b5ba934f3dddcfe18d56a5c87b9645277ba0f1c53176658caa0b",
+      "bytes": 10763,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/thumb-comic-feminine-mouth-full.jpg",
+      "source": "parts/assets/thumbnails-v2/thumb-comic-feminine-mouth-full.jpg",
+      "sha256": "d4cf89ecb48bd5a313b823b1af6fc8f6436000f8d72ea73af080664a907cc8ca",
+      "bytes": 17925,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/thumb-comic-feminine-mouth-natural.jpg",
+      "source": "parts/assets/thumbnails-v2/thumb-comic-feminine-mouth-natural.jpg",
+      "sha256": "aa76d32ad2c65e0afd661dc52c7c81b6d67e2add1ccdddbe220fcc904a76615d",
+      "bytes": 17857,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/thumb-comic-feminine-mouth-smile.jpg",
+      "source": "parts/assets/thumbnails-v2/thumb-comic-feminine-mouth-smile.jpg",
+      "sha256": "f3284f9150c2e9c1c7e4bb393b321d92a84a287bee485d7226cdc4805ecba6ed",
+      "bytes": 17857,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/thumb-comic-feminine-preset-bright.jpg",
+      "source": "parts/assets/thumbnails-v2/thumb-comic-feminine-preset-bright.jpg",
+      "sha256": "654e2549cfa5de150898470ef138c7f0e3dd07789c0065f843c206e6cd255a18",
+      "bytes": 13082,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/thumb-comic-feminine-preset-calm.jpg",
+      "source": "parts/assets/thumbnails-v2/thumb-comic-feminine-preset-calm.jpg",
+      "sha256": "10af00b03cf09c581a0984ba5aae12cde370e111841b072501303ccbaf538696",
+      "bytes": 12460,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/thumb-comic-feminine-preset-soft.jpg",
+      "source": "parts/assets/thumbnails-v2/thumb-comic-feminine-preset-soft.jpg",
+      "sha256": "3e06a5e593b0201b9acba90ef535b3af6b81e28df3df3ca6a37dcc074d8be631",
+      "bytes": 11458,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/thumb-comic-masculine-eyes-almond.jpg",
+      "source": "parts/assets/thumbnails-v2/thumb-comic-masculine-eyes-almond.jpg",
+      "sha256": "973a700c23e76d7ee54a4ef14921dd84d9461878f86a346e173d5cba3ffa8742",
+      "bytes": 17497,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/thumb-comic-masculine-eyes-round.jpg",
+      "source": "parts/assets/thumbnails-v2/thumb-comic-masculine-eyes-round.jpg",
+      "sha256": "e6d0ca130dca2af1b5170a2fd14f19b4490d59a5db1bac953d1fba666841d2a0",
+      "bytes": 17794,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/thumb-comic-masculine-eyes-slender.jpg",
+      "source": "parts/assets/thumbnails-v2/thumb-comic-masculine-eyes-slender.jpg",
+      "sha256": "50633d2a4d09dba3f198c23ecd3ca012c419792cadbc12b97bb881a3ab28128b",
+      "bytes": 17274,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/thumb-comic-masculine-face-angular.jpg",
+      "source": "parts/assets/thumbnails-v2/thumb-comic-masculine-face-angular.jpg",
+      "sha256": "026f098f845ceb606897e256d93a64fc312ff9e12ae2228c9fd849519a231a1c",
+      "bytes": 17608,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/thumb-comic-masculine-face-oval.jpg",
+      "source": "parts/assets/thumbnails-v2/thumb-comic-masculine-face-oval.jpg",
+      "sha256": "973a700c23e76d7ee54a4ef14921dd84d9461878f86a346e173d5cba3ffa8742",
+      "bytes": 17497,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/thumb-comic-masculine-face-round.jpg",
+      "source": "parts/assets/thumbnails-v2/thumb-comic-masculine-face-round.jpg",
+      "sha256": "5e1735962f624c863aa1e114ded307c14b38689f63f943bbcc26b9cf54200557",
+      "bytes": 17467,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/thumb-comic-masculine-hair-buns.jpg",
+      "source": "parts/assets/thumbnails-v2/thumb-comic-masculine-hair-buns.jpg",
+      "sha256": "9e4e93d4acbaf8152716e382eb345279119a912681355056b7998808dfb6cb47",
+      "bytes": 12726,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/thumb-comic-masculine-hair-crop.jpg",
+      "source": "parts/assets/thumbnails-v2/thumb-comic-masculine-hair-crop.jpg",
+      "sha256": "ffca78351c6f3c8be13567e3cf5b368a21e1fc3ea78b022b867d92215193fdf3",
+      "bytes": 10540,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/thumb-comic-masculine-hair-long.jpg",
+      "source": "parts/assets/thumbnails-v2/thumb-comic-masculine-hair-long.jpg",
+      "sha256": "a71f0a0b03d83594b46c9479d5bde69cd1697768fdd024c476fde69e3da5c93d",
+      "bytes": 12255,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/thumb-comic-masculine-hair-none.jpg",
+      "source": "parts/assets/thumbnails-v2/thumb-comic-masculine-hair-none.jpg",
+      "sha256": "057e6bee35fb7f139e7e1327ef91fcc5d1fb79ea536f4d660a547b38b7bc84b1",
+      "bytes": 9946,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/thumb-comic-masculine-hair-parted.jpg",
+      "source": "parts/assets/thumbnails-v2/thumb-comic-masculine-hair-parted.jpg",
+      "sha256": "2bd372be26ce3c029ceb11720e34f8f9131c724ffed227a7df8536cf040e8cbf",
+      "bytes": 11274,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/thumb-comic-masculine-hair-pixie.jpg",
+      "source": "parts/assets/thumbnails-v2/thumb-comic-masculine-hair-pixie.jpg",
+      "sha256": "72ba8d882ea8dda881e3f9348e27e667a544a5e722915ba7a8faa043428f9dd4",
+      "bytes": 10662,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/thumb-comic-masculine-mouth-full.jpg",
+      "source": "parts/assets/thumbnails-v2/thumb-comic-masculine-mouth-full.jpg",
+      "sha256": "28b14ba2faa50ea99f43f129696d041492325012b6ef3daabf1c314dfbc11851",
+      "bytes": 17497,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/thumb-comic-masculine-mouth-natural.jpg",
+      "source": "parts/assets/thumbnails-v2/thumb-comic-masculine-mouth-natural.jpg",
+      "sha256": "973a700c23e76d7ee54a4ef14921dd84d9461878f86a346e173d5cba3ffa8742",
+      "bytes": 17497,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/thumb-comic-masculine-mouth-smile.jpg",
+      "source": "parts/assets/thumbnails-v2/thumb-comic-masculine-mouth-smile.jpg",
+      "sha256": "71aec3ed49e5bc85f289ca3a5645999380309cc48209ad78a0122587ca278933",
+      "bytes": 17513,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/thumb-comic-masculine-preset-fresh.jpg",
+      "source": "parts/assets/thumbnails-v2/thumb-comic-masculine-preset-fresh.jpg",
+      "sha256": "18264f6b5e757eb6b4ddcd149806c98aad3db2c3dcb67380adb4782334318e12",
+      "bytes": 10615,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/thumb-fantasy-feminine-expression-angry.jpg",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/thumb-fantasy-feminine-expression-angry.jpg",
+      "sha256": "41da67f40b61f8fc2f9407c8d035de500431433ad1e25ea88aeaecb3b01f27b1",
+      "bytes": 16555,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/thumb-fantasy-feminine-expression-happy.jpg",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/thumb-fantasy-feminine-expression-happy.jpg",
+      "sha256": "408678f0d9c7549778f32737b87d18ef1f417484d934d9b643408048f16ea818",
+      "bytes": 16448,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/thumb-fantasy-feminine-expression-neutral.jpg",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/thumb-fantasy-feminine-expression-neutral.jpg",
+      "sha256": "8418e07c4d747336c26e8ae800ad5d3b37f22aae49df4a78e7d865433f9f57c3",
+      "bytes": 16585,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/thumb-fantasy-feminine-expression-relaxed.jpg",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/thumb-fantasy-feminine-expression-relaxed.jpg",
+      "sha256": "224f3625a003e0248c546993a3e5cd4cc4875032ef102ae764c025ee0ffca7f6",
+      "bytes": 16533,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/thumb-fantasy-feminine-expression-sad.jpg",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/thumb-fantasy-feminine-expression-sad.jpg",
+      "sha256": "70c84cc3983bff82966dce3b995e83354438ec875a7356cb3afffd085b62dbd3",
+      "bytes": 16514,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/thumb-fantasy-feminine-expression-surprised.jpg",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/thumb-fantasy-feminine-expression-surprised.jpg",
+      "sha256": "8e3d2c8890933f0014a507ae2e24d819da9c544294413ecd093630ebf983fa98",
+      "bytes": 16688,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/thumb-fantasy-feminine-eyes-almond.jpg",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/thumb-fantasy-feminine-eyes-almond.jpg",
+      "sha256": "8418e07c4d747336c26e8ae800ad5d3b37f22aae49df4a78e7d865433f9f57c3",
+      "bytes": 16585,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/thumb-fantasy-feminine-eyes-round.jpg",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/thumb-fantasy-feminine-eyes-round.jpg",
+      "sha256": "f22455afe402a5591ce89ff184c4590989dfe547ef0a75fe63c1751f8cb6cafa",
+      "bytes": 16681,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/thumb-fantasy-feminine-eyes-slender.jpg",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/thumb-fantasy-feminine-eyes-slender.jpg",
+      "sha256": "3b436e56d174cae4ea999ac8095c379484c14489509bc6e65cc4ec85e5aa03d9",
+      "bytes": 16466,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/thumb-fantasy-feminine-face-angular.jpg",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/thumb-fantasy-feminine-face-angular.jpg",
+      "sha256": "66f01d5c9be5540c82a23c2bc19266b4d0c17831a79b32e29e9c3761b5d6bda1",
+      "bytes": 16537,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/thumb-fantasy-feminine-face-mature.jpg",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/thumb-fantasy-feminine-face-mature.jpg",
+      "sha256": "7ecf1c083e5349a1c1b32c93298ddbc4a6f1d7cb5921c0654c916dd9a86622f4",
+      "bytes": 16183,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/thumb-fantasy-feminine-face-oval.jpg",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/thumb-fantasy-feminine-face-oval.jpg",
+      "sha256": "8418e07c4d747336c26e8ae800ad5d3b37f22aae49df4a78e7d865433f9f57c3",
+      "bytes": 16585,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/thumb-fantasy-feminine-face-round.jpg",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/thumb-fantasy-feminine-face-round.jpg",
+      "sha256": "fe0cd796a830af7f2d8a2899d8ebd7ec97716325d492cc64cc9aacad8090e5af",
+      "bytes": 16612,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/thumb-fantasy-feminine-hair-animeParted.jpg",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/thumb-fantasy-feminine-hair-animeParted.jpg",
+      "sha256": "87e990e3ac21eea56061a2d59e95c2c30bcafe3d36809b410c8cf8662e20dbe0",
+      "bytes": 14035,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/thumb-fantasy-feminine-hair-bluntBob.jpg",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/thumb-fantasy-feminine-hair-bluntBob.jpg",
+      "sha256": "3618fc7f219f2589777adfd46ef7c0b105b2c83f00aeb59041484c100f52f010",
+      "bytes": 13630,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/thumb-fantasy-feminine-hair-layered.jpg",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/thumb-fantasy-feminine-hair-layered.jpg",
+      "sha256": "d98e6d9fa1b73230b5149db610c300db8158d160476c995f6e11bb09091b82bb",
+      "bytes": 13865,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/thumb-fantasy-feminine-hair-longLoose.jpg",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/thumb-fantasy-feminine-hair-longLoose.jpg",
+      "sha256": "f02160c9f6003ba0f06232aefd0176a511a398ce4c0368673fd0074f159dc017",
+      "bytes": 14802,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/thumb-fantasy-feminine-hair-none.jpg",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/thumb-fantasy-feminine-hair-none.jpg",
+      "sha256": "60e1bd8931c91391e9bf5d044428a4530bbf85411d62990fb135d0c02fe6f9ac",
+      "bytes": 9588,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/thumb-fantasy-feminine-hair-sidePony.jpg",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/thumb-fantasy-feminine-hair-sidePony.jpg",
+      "sha256": "8418e07c4d747336c26e8ae800ad5d3b37f22aae49df4a78e7d865433f9f57c3",
+      "bytes": 16585,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/thumb-fantasy-feminine-hair-sideSweep.jpg",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/thumb-fantasy-feminine-hair-sideSweep.jpg",
+      "sha256": "6fdbea0d95e1acd40c1a3611d9576a3ab57444878a2d3d4d66d840b17b7753d1",
+      "bytes": 13693,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/thumb-fantasy-feminine-hair-sweptBack.jpg",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/thumb-fantasy-feminine-hair-sweptBack.jpg",
+      "sha256": "8d9a8c46e7182bad8cbfe9586b35df7fb491a8d00f9388a324750ecc709c412b",
+      "bytes": 13441,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/thumb-fantasy-feminine-mouth-full.jpg",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/thumb-fantasy-feminine-mouth-full.jpg",
+      "sha256": "3d6c0fc5f88e30eedf455e72c19db23e78dbbaf038c8e582c29efcaec541a102",
+      "bytes": 16607,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/thumb-fantasy-feminine-mouth-natural.jpg",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/thumb-fantasy-feminine-mouth-natural.jpg",
+      "sha256": "8418e07c4d747336c26e8ae800ad5d3b37f22aae49df4a78e7d865433f9f57c3",
+      "bytes": 16585,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/thumb-fantasy-feminine-mouth-smile.jpg",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/thumb-fantasy-feminine-mouth-smile.jpg",
+      "sha256": "e64914ac2c722124f9ec72b9897c636090d3deaeeb4110eccab146481800f4be",
+      "bytes": 16599,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/thumb-fantasy-feminine-preset-bright.jpg",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/thumb-fantasy-feminine-preset-bright.jpg",
+      "sha256": "053291b8f30b314746cbd317a2beea7336841c19a6c7821e0cb1a3f44d154a7b",
+      "bytes": 15213,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/thumb-fantasy-feminine-preset-calm.jpg",
+      "source": "parts/assets/thumbnails-v2/thumb-fantasy-feminine-preset-calm.jpg",
+      "sha256": "16b9d964da1686279b7a9015aba628673f10ced3f9e385f6ab257226b6995482",
+      "bytes": 11968,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/thumb-fantasy-feminine-preset-elegant.jpg",
+      "source": "parts/assets/thumbnails-v2/thumb-fantasy-feminine-preset-elegant.jpg",
+      "sha256": "455b02ec73a16db12843576a90849beae25e6c15832c351a993538ec06dea8d1",
+      "bytes": 11476,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/thumb-fantasy-feminine-preset-soft.jpg",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/thumb-fantasy-feminine-preset-soft.jpg",
+      "sha256": "6b3722db113f55ccbc275a27c682186e642313d6586f2120653aa3d46f326eb2",
+      "bytes": 15474,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/thumb-fantasy-masculine-expression-angry.jpg",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/thumb-fantasy-masculine-expression-angry.jpg",
+      "sha256": "edf174a911dd664b8723d1b6546845fedb1b6892281a2dab3878caf32640fc60",
+      "bytes": 12837,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/thumb-fantasy-masculine-expression-happy.jpg",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/thumb-fantasy-masculine-expression-happy.jpg",
+      "sha256": "1783709334c18a84c3511f65411c6a6720ce174d64988cce92f09fda14e340a8",
+      "bytes": 12699,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/thumb-fantasy-masculine-expression-neutral.jpg",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/thumb-fantasy-masculine-expression-neutral.jpg",
+      "sha256": "317a1e9d522b8310a72a9638bd16b2ae6d22615216a9061ce1bb8f4281573f37",
+      "bytes": 12793,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/thumb-fantasy-masculine-expression-relaxed.jpg",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/thumb-fantasy-masculine-expression-relaxed.jpg",
+      "sha256": "79700432e81e0847664ddf84dff061ec23a6929dddb798b04f0babd311bb1799",
+      "bytes": 12692,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/thumb-fantasy-masculine-expression-sad.jpg",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/thumb-fantasy-masculine-expression-sad.jpg",
+      "sha256": "b5b3a101991a0d1540a2db08f0b349e26a4372b06565c6ab6e7edd22c5137a94",
+      "bytes": 12574,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/thumb-fantasy-masculine-expression-surprised.jpg",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/thumb-fantasy-masculine-expression-surprised.jpg",
+      "sha256": "dd4a3e35c4b51288442856a52fa1a1b887013308d8ff9c8cd77503afb53594d9",
+      "bytes": 12898,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/thumb-fantasy-masculine-eyes-almond.jpg",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/thumb-fantasy-masculine-eyes-almond.jpg",
+      "sha256": "317a1e9d522b8310a72a9638bd16b2ae6d22615216a9061ce1bb8f4281573f37",
+      "bytes": 12793,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/thumb-fantasy-masculine-eyes-round.jpg",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/thumb-fantasy-masculine-eyes-round.jpg",
+      "sha256": "fd28e00e26578dfcadd771615d9b63527aab2b453bb977d0fa922b13c24bb41a",
+      "bytes": 12870,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/thumb-fantasy-masculine-eyes-slender.jpg",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/thumb-fantasy-masculine-eyes-slender.jpg",
+      "sha256": "aa3d077130b77c61427a5a7d624a35e038355625f9907b161969feae30dcc04d",
+      "bytes": 12682,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/thumb-fantasy-masculine-face-angular.jpg",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/thumb-fantasy-masculine-face-angular.jpg",
+      "sha256": "438a94b5d91931d81ddadd336613afc5074d7351807a0a17306f28fc89a968d6",
+      "bytes": 12899,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/thumb-fantasy-masculine-face-mature.jpg",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/thumb-fantasy-masculine-face-mature.jpg",
+      "sha256": "acbf12fbba6e7d2fcc1d7dc9ff3fb81921109abb7027a93eb98de1c2f0ef38ab",
+      "bytes": 13021,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/thumb-fantasy-masculine-face-oval.jpg",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/thumb-fantasy-masculine-face-oval.jpg",
+      "sha256": "317a1e9d522b8310a72a9638bd16b2ae6d22615216a9061ce1bb8f4281573f37",
+      "bytes": 12793,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/thumb-fantasy-masculine-face-round.jpg",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/thumb-fantasy-masculine-face-round.jpg",
+      "sha256": "14e1ea09edcaeb61c5292fbf4ef08fc4e3f8f10a31e478573beb3267ae5ddb91",
+      "bytes": 12785,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/thumb-fantasy-masculine-hair-animeParted.jpg",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/thumb-fantasy-masculine-hair-animeParted.jpg",
+      "sha256": "e54a442544d15c748703e18009331b36699f3c8f239381316ad2939531c0dd4a",
+      "bytes": 12987,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/thumb-fantasy-masculine-hair-bluntBob.jpg",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/thumb-fantasy-masculine-hair-bluntBob.jpg",
+      "sha256": "8c238d41cd2a373eb5d408e746455b1c6038bab0e08382aac6b5e39dbbf28c37",
+      "bytes": 12698,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/thumb-fantasy-masculine-hair-layered.jpg",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/thumb-fantasy-masculine-hair-layered.jpg",
+      "sha256": "5db4458026cd687fc92f10d203c573607a8f6bc701061b355b810201bd2e00ff",
+      "bytes": 13103,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/thumb-fantasy-masculine-hair-longLoose.jpg",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/thumb-fantasy-masculine-hair-longLoose.jpg",
+      "sha256": "095d41a25d8ec150974935a01ec6ebb72a52f11c0a98e5f10b0097ef71865765",
+      "bytes": 12743,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/thumb-fantasy-masculine-hair-none.jpg",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/thumb-fantasy-masculine-hair-none.jpg",
+      "sha256": "49645fab6a0e7a45c3baecb4cb583b39e2c522e0579116f747f61178a9bf4180",
+      "bytes": 9705,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/thumb-fantasy-masculine-hair-sidePony.jpg",
+      "source": "parts/assets/thumbnails-v2/thumb-fantasy-masculine-hair-sidePony.jpg",
+      "sha256": "3b1167d5b3edb0a5dfd3677f42e4c0ad5227e6fb2044acc69da9b4326864e8b4",
+      "bytes": 13676,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/thumb-fantasy-masculine-hair-sideSweep.jpg",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/thumb-fantasy-masculine-hair-sideSweep.jpg",
+      "sha256": "317a1e9d522b8310a72a9638bd16b2ae6d22615216a9061ce1bb8f4281573f37",
+      "bytes": 12793,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/thumb-fantasy-masculine-hair-sweptBack.jpg",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/thumb-fantasy-masculine-hair-sweptBack.jpg",
+      "sha256": "769c346046faa2843fe95e1cb51fa8aa6e4faba2405dd0bee02ed89595a9d2f1",
+      "bytes": 12476,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/thumb-fantasy-masculine-mouth-full.jpg",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/thumb-fantasy-masculine-mouth-full.jpg",
+      "sha256": "a71b2bc1c4cadb5850b57ccfa31783a983d4046698291c97e6605efc429521a4",
+      "bytes": 12826,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/thumb-fantasy-masculine-mouth-natural.jpg",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/thumb-fantasy-masculine-mouth-natural.jpg",
+      "sha256": "317a1e9d522b8310a72a9638bd16b2ae6d22615216a9061ce1bb8f4281573f37",
+      "bytes": 12793,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/thumb-fantasy-masculine-mouth-smile.jpg",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/thumb-fantasy-masculine-mouth-smile.jpg",
+      "sha256": "e5a5b58fd0c9a780e308ba4dfaa762e2c5e5f589586a2776544a9b7c723de621",
+      "bytes": 12806,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/thumb-fantasy-masculine-preset-bold.jpg",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/thumb-fantasy-masculine-preset-bold.jpg",
+      "sha256": "f6d47d4b7cefb16d386d4534146cb7f8b263f38504c9505d20df4cdca8d397be",
+      "bytes": 12516,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/thumb-fantasy-masculine-preset-composed.jpg",
+      "source": "parts/assets/thumbnails-v2/thumb-fantasy-masculine-preset-composed.jpg",
+      "sha256": "db41f48980a78d5d7e6d44b90cf38cd5ee1d3927c4bce3f303c7c4dfb7c9e36c",
+      "bytes": 11771,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/thumb-fantasy-masculine-preset-fresh.jpg",
+      "source": "parts/assets/studio-runtime-v1/maker-assets/thumb-fantasy-masculine-preset-fresh.jpg",
+      "sha256": "9d5f36dcdbaf7fa12ca3c156730c7a154f3af83ff0f5bc81ef75c6f9b83ddacd",
+      "bytes": 13499,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/thumb-fantasy-masculine-preset-scholar.jpg",
+      "source": "parts/assets/thumbnails-v2/thumb-fantasy-masculine-preset-scholar.jpg",
+      "sha256": "4accc003036339b41731ab32cd586840c60f5407947485f8f84a3749955f0019",
+      "bytes": 12430,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/portraits/haru-maker-quality-20261005.png",
+      "source": "parts/assets/studio-runtime-v1/portraits/haru-maker-quality-20261005.png",
+      "sha256": "fcd8374583601669d8890b4c90806fe746691768ab54a86e4756272e3e73ecbd",
+      "bytes": 251429,
+      "kind": "portrait"
+    },
+    {
+      "public": "public/portraits/nagi-selector-quality-v1.jpg",
+      "source": "parts/assets/studio-runtime-v1/portraits/nagi-selector-quality-v1.jpg",
+      "sha256": "55cdce4369e4d3b29e63db22bc8619cb8ac2b4863522ac64957cd38ed9689e15",
+      "bytes": 59763,
+      "kind": "portrait"
+    },
+    {
+      "public": "public/portraits/selector-comic-bright-v1.jpg",
+      "source": "parts/assets/studio-runtime-v1/portraits/selector-comic-bright-v1.jpg",
+      "sha256": "81507f6b4f610227206e8cc6161e912206ddbba249780f72291ea47552820b7e",
+      "bytes": 29218,
+      "kind": "portrait"
+    },
+    {
+      "public": "public/portraits/selector-comic-calm-v1.jpg",
+      "source": "parts/assets/studio-runtime-v1/portraits/selector-comic-calm-v1.jpg",
+      "sha256": "c44f3036a1d12986f73d96f3869a16b48db74903d544540be220807541934cf5",
+      "bytes": 27308,
+      "kind": "portrait"
+    },
+    {
+      "public": "public/portraits/selector-comic-fresh-v1.jpg",
+      "source": "parts/assets/studio-runtime-v1/portraits/selector-comic-fresh-v1.jpg",
+      "sha256": "10dd0538cf9f5d27e8b5e341267b3bdb78da41ac0ef012e7b3a73bf237e07102",
+      "bytes": 23757,
+      "kind": "portrait"
+    },
+    {
+      "public": "public/portraits/selector-comic-soft-v1.jpg",
+      "source": "parts/assets/studio-runtime-v1/portraits/selector-comic-soft-v1.jpg",
+      "sha256": "7c7d7e833519ce938a9a86e1ba564b3155d26a407c243a68b9c15bf80643d9a8",
+      "bytes": 23826,
+      "kind": "portrait"
+    },
+    {
+      "public": "public/portraits/selector-lux-v1.jpg",
+      "source": "parts/assets/studio-runtime-v1/portraits/selector-lux-v1.jpg",
+      "sha256": "d65667c483cd1a36a006e9181974152d4653a3c153329dfe0e205479da28f252",
+      "bytes": 17717,
+      "kind": "portrait"
+    },
+    {
+      "public": "public/portraits/selector-moka-v1.jpg",
+      "source": "parts/assets/studio-runtime-v1/portraits/selector-moka-v1.jpg",
+      "sha256": "66a20bf22173a94ebce5b0ce32532fd0f8920e00ac50d33a717bf8f5b6025450",
+      "bytes": 26008,
+      "kind": "portrait"
+    },
+    {
+      "public": "public/character-maker/original-parts/generic-cat/ears-folded.jpg",
+      "source": "parts/assets/studio-runtime-v1/original-parts/generic-cat/ears-folded.jpg",
+      "sha256": "4c6ad3f68b99adf4451e55d735f10871bc7997e70472f9d962d1ce6f9e2bd549",
+      "bytes": 11071,
+      "kind": "original-part"
+    },
+    {
+      "public": "public/character-maker/original-parts/generic-cat/ears-original.jpg",
+      "source": "parts/assets/studio-runtime-v1/original-parts/generic-cat/ears-original.jpg",
+      "sha256": "50788f96f0b77a079f3b8fa458fa37f6524d83527001f459d723cc79c3587017",
+      "bytes": 12500,
+      "kind": "original-part"
+    },
+    {
+      "public": "public/character-maker/original-parts/generic-cat/ears-rounded.jpg",
+      "source": "parts/assets/studio-runtime-v1/original-parts/generic-cat/ears-rounded.jpg",
+      "sha256": "08e8f89a32f1beb6c046817b74ee954a7f448a7f60621c57607b8ed50d84788f",
+      "bytes": 11556,
+      "kind": "original-part"
+    },
+    {
+      "public": "public/character-maker/original-parts/generic-cat/eyes-large.jpg",
+      "source": "parts/assets/studio-runtime-v1/original-parts/generic-cat/eyes-large.jpg",
+      "sha256": "01343d13f14f01d8580eb197c5be9f35b74a749e6f30485b21aba8ff229a7c55",
+      "bytes": 15032,
+      "kind": "original-part"
+    },
+    {
+      "public": "public/character-maker/original-parts/generic-cat/eyes-narrow.jpg",
+      "source": "parts/assets/studio-runtime-v1/original-parts/generic-cat/eyes-narrow.jpg",
+      "sha256": "618f3e6e63625186cf4d7c9135087f1d5b274407deb6d2b2a67c0d7c964d9a18",
+      "bytes": 14059,
+      "kind": "original-part"
+    },
+    {
+      "public": "public/character-maker/original-parts/generic-cat/eyes-original.jpg",
+      "source": "parts/assets/studio-runtime-v1/original-parts/generic-cat/eyes-original.jpg",
+      "sha256": "0c31a3b607c3ea4090b69e6ed87d535759d206288cd25413592bf38b3ef21e04",
+      "bytes": 14236,
+      "kind": "original-part"
+    },
+    {
+      "public": "public/character-maker/original-parts/generic-cat/head-cheeks.jpg",
+      "source": "parts/assets/studio-runtime-v1/original-parts/generic-cat/head-cheeks.jpg",
+      "sha256": "a0ae59e90683e42528f3bf079c443942ac85de001deb347fe6d91a7aaf04e728",
+      "bytes": 14008,
+      "kind": "original-part"
+    },
+    {
+      "public": "public/character-maker/original-parts/generic-cat/head-original.jpg",
+      "source": "parts/assets/studio-runtime-v1/original-parts/generic-cat/head-original.jpg",
+      "sha256": "0c31a3b607c3ea4090b69e6ed87d535759d206288cd25413592bf38b3ef21e04",
+      "bytes": 14236,
+      "kind": "original-part"
+    },
+    {
+      "public": "public/character-maker/original-parts/generic-cat/head-slim.jpg",
+      "source": "parts/assets/studio-runtime-v1/original-parts/generic-cat/head-slim.jpg",
+      "sha256": "3eddb0a77f5cc2883ce0f2ccba6e32cb09aac0aaac6a032b7dc37d59843caa0e",
+      "bytes": 15084,
+      "kind": "original-part"
+    },
+    {
+      "public": "public/character-maker/original-parts/generic-cat/mouth-original.jpg",
+      "source": "parts/assets/studio-runtime-v1/original-parts/generic-cat/mouth-original.jpg",
+      "sha256": "f635d25c7f217052ad4bbe9efcc31a038414610cdc878a40084b9c72986156b3",
+      "bytes": 14214,
+      "kind": "original-part"
+    },
+    {
+      "public": "public/character-maker/original-parts/generic-cat/mouth-small.jpg",
+      "source": "parts/assets/studio-runtime-v1/original-parts/generic-cat/mouth-small.jpg",
+      "sha256": "d4500653208cea56c23cdb72b587b70645d0ce0a6f77b66a4daf4d6083ac85c7",
+      "bytes": 13983,
+      "kind": "original-part"
+    },
+    {
+      "public": "public/character-maker/original-parts/generic-cat/mouth-wide.jpg",
+      "source": "parts/assets/studio-runtime-v1/original-parts/generic-cat/mouth-wide.jpg",
+      "sha256": "cf1cd55a873b2a7a33e141198aa811e33b758421d8dc39ed481abe29d2705dd2",
+      "bytes": 14474,
+      "kind": "original-part"
+    },
+    {
+      "public": "public/character-maker/original-parts/generic-human-a/eyes-large.jpg",
+      "source": "parts/assets/studio-runtime-v1/original-parts/generic-human-a/eyes-large.jpg",
+      "sha256": "7022fa777c52220d710618bc1a821c22c227ff1c4797d6f979b45d84898781e0",
+      "bytes": 32782,
+      "kind": "original-part"
+    },
+    {
+      "public": "public/character-maker/original-parts/generic-human-a/eyes-narrow.jpg",
+      "source": "parts/assets/studio-runtime-v1/original-parts/generic-human-a/eyes-narrow.jpg",
+      "sha256": "162a2993b0ea7de162229b41d5e4d90f8cbdd90516da6be180ab26e6b846b674",
+      "bytes": 31700,
+      "kind": "original-part"
+    },
+    {
+      "public": "public/character-maker/original-parts/generic-human-a/eyes-original.jpg",
+      "source": "parts/assets/studio-runtime-v1/original-parts/generic-human-a/eyes-original.jpg",
+      "sha256": "6bb7105bcdc021a59507f53ae5ba6c7198ecbb0bddb37e53abd67261bb70775a",
+      "bytes": 32248,
+      "kind": "original-part"
+    },
+    {
+      "public": "public/character-maker/original-parts/generic-human-a/hair-haru-buzz-v3.jpg",
+      "source": "parts/assets/studio-runtime-v1/original-parts/generic-human-a/hair-haru-buzz-v3.jpg",
+      "sha256": "f96d4359a241c3b2a9a9be1639527e0542076368ffc5a5cf7c604d4c0a097c5e",
+      "bytes": 39834,
+      "kind": "original-part"
+    },
+    {
+      "public": "public/character-maker/original-parts/generic-human-a/hair-haru-center-v2.jpg",
+      "source": "parts/assets/studio-runtime-v1/original-parts/generic-human-a/hair-haru-center-v2.jpg",
+      "sha256": "eae99fb8154972ff770dda0524da7ebe4c95361bfc141114be459836719df1d5",
+      "bytes": 44968,
+      "kind": "original-part"
+    },
+    {
+      "public": "public/character-maker/original-parts/generic-human-a/hair-haru-crop-v2.jpg",
+      "source": "parts/assets/studio-runtime-v1/original-parts/generic-human-a/hair-haru-crop-v2.jpg",
+      "sha256": "f9370c31bc28b301eef17c83fd6870191042b67976cbdcc9fd3e89b9ad5ddb55",
+      "bytes": 44308,
+      "kind": "original-part"
+    },
+    {
+      "public": "public/character-maker/original-parts/generic-human-a/hair-haru-short-v2.jpg",
+      "source": "parts/assets/studio-runtime-v1/original-parts/generic-human-a/hair-haru-short-v2.jpg",
+      "sha256": "09bf4aed609886a59b961d4c3a786f4df58296ca9aedd1604d12444d4cdf3a20",
+      "bytes": 47894,
+      "kind": "original-part"
+    },
+    {
+      "public": "public/character-maker/original-parts/generic-human-a/hair-haru-sidepart-v3.jpg",
+      "source": "parts/assets/studio-runtime-v1/original-parts/generic-human-a/hair-haru-sidepart-v3.jpg",
+      "sha256": "1de6eaf2bb8b45c4d2c2eb1de02c096a3581b81275c7c312dfcc9e1613ba7896",
+      "bytes": 45500,
+      "kind": "original-part"
+    },
+    {
+      "public": "public/character-maker/original-parts/generic-human-a/hair-haru-swept-v2.jpg",
+      "source": "parts/assets/studio-runtime-v1/original-parts/generic-human-a/hair-haru-swept-v2.jpg",
+      "sha256": "d01c6c092015773ad834a8e8c141e53d152c1c43faa7dd5a16ec6fae2ff67a02",
+      "bytes": 46511,
+      "kind": "original-part"
+    },
+    {
+      "public": "public/character-maker/original-parts/generic-human-a/head-original.jpg",
+      "source": "parts/assets/studio-runtime-v1/original-parts/generic-human-a/head-original.jpg",
+      "sha256": "6bb7105bcdc021a59507f53ae5ba6c7198ecbb0bddb37e53abd67261bb70775a",
+      "bytes": 32248,
+      "kind": "original-part"
+    },
+    {
+      "public": "public/character-maker/original-parts/generic-human-a/head-rounded.jpg",
+      "source": "parts/assets/studio-runtime-v1/original-parts/generic-human-a/head-rounded.jpg",
+      "sha256": "525d1676df0325ed98eca062f5da2a7c430df4295781da3a22964f1097285b41",
+      "bytes": 32425,
+      "kind": "original-part"
+    },
+    {
+      "public": "public/character-maker/original-parts/generic-human-a/head-slim.jpg",
+      "source": "parts/assets/studio-runtime-v1/original-parts/generic-human-a/head-slim.jpg",
+      "sha256": "c5a407cac5e2e92ad9769bd293eeb7979c87f6bbc2a3b23117d5c447b79c8fd2",
+      "bytes": 31414,
+      "kind": "original-part"
+    },
+    {
+      "public": "public/character-maker/original-parts/generic-human-a/mouth-original.jpg",
+      "source": "parts/assets/studio-runtime-v1/original-parts/generic-human-a/mouth-original.jpg",
+      "sha256": "6bb7105bcdc021a59507f53ae5ba6c7198ecbb0bddb37e53abd67261bb70775a",
+      "bytes": 32248,
+      "kind": "original-part"
+    },
+    {
+      "public": "public/character-maker/original-parts/generic-human-a/mouth-small.jpg",
+      "source": "parts/assets/studio-runtime-v1/original-parts/generic-human-a/mouth-small.jpg",
+      "sha256": "b95218377c373b244a1a64c834abf64d98bf9bac50a2e58e87e3fb2818a2d1ee",
+      "bytes": 32205,
+      "kind": "original-part"
+    },
+    {
+      "public": "public/character-maker/original-parts/generic-human-a/mouth-wide.jpg",
+      "source": "parts/assets/studio-runtime-v1/original-parts/generic-human-a/mouth-wide.jpg",
+      "sha256": "00dad02383a62ef03cff44821e94ce0a9501f95e3b5de570c2a24867636ba408",
+      "bytes": 32332,
+      "kind": "original-part"
+    },
+    {
+      "public": "public/character-maker/original-parts/generic-human-b/eyes-large.jpg",
+      "source": "parts/assets/studio-runtime-v1/original-parts/generic-human-b/eyes-large.jpg",
+      "sha256": "8e4513259cd2defb8a82aef30bf99d649ae668e495ce910f2d450f9b951d4e08",
+      "bytes": 80400,
+      "kind": "original-part"
+    },
+    {
+      "public": "public/character-maker/original-parts/generic-human-b/eyes-narrow.jpg",
+      "source": "parts/assets/studio-runtime-v1/original-parts/generic-human-b/eyes-narrow.jpg",
+      "sha256": "75e1f3d252d5de30afd11695706c9e3cc2b7f8e5dc1232642e3bcb7f724d3a95",
+      "bytes": 78506,
+      "kind": "original-part"
+    },
+    {
+      "public": "public/character-maker/original-parts/generic-human-b/eyes-original.jpg",
+      "source": "parts/assets/studio-runtime-v1/original-parts/generic-human-b/eyes-original.jpg",
+      "sha256": "fefb58e8299693cf7abb5419eca69904bc5488399ef364194f6e1beb3cd68404",
+      "bytes": 79115,
+      "kind": "original-part"
+    },
+    {
+      "public": "public/character-maker/original-parts/generic-human-b/hair-nagi-bob-v2.jpg",
+      "source": "parts/assets/studio-runtime-v1/original-parts/generic-human-b/hair-nagi-bob-v2.jpg",
+      "sha256": "4dd05f6490a5d20af40c1964ab4e40cbcaa13bfc136616a1582b102370222519",
+      "bytes": 50514,
+      "kind": "original-part"
+    },
+    {
+      "public": "public/character-maker/original-parts/generic-human-b/hair-nagi-long-v2-front-3ebd4576e87ca87e.jpg",
+      "source": "parts/assets/studio-runtime-v1/original-parts/generic-human-b/hair-nagi-long-v2-front-3ebd4576e87ca87e.jpg",
+      "sha256": "3ebd4576e87ca87eaadf170177a6b31345e8c23c843990ac5a9e246a46b549b0",
+      "bytes": 55310,
+      "kind": "original-part"
+    },
+    {
+      "public": "public/character-maker/original-parts/generic-human-b/hair-nagi-long-v2.jpg",
+      "source": "parts/assets/studio-runtime-v1/original-parts/generic-human-b/hair-nagi-long-v2.jpg",
+      "sha256": "d1102ed9605a03f50796fb1a4e6865365c47115e77600a294d215fe105f4f14f",
+      "bytes": 55925,
+      "kind": "original-part"
+    },
+    {
+      "public": "public/character-maker/original-parts/generic-human-b/hair-nagi-pixie-v2.jpg",
+      "source": "parts/assets/studio-runtime-v1/original-parts/generic-human-b/hair-nagi-pixie-v2.jpg",
+      "sha256": "a8f3ab133bc0c0cef7f312e48e2d296352f2304c58a1cb587c67d747587c2cc0",
+      "bytes": 49724,
+      "kind": "original-part"
+    },
+    {
+      "public": "public/character-maker/original-parts/generic-human-b/hair-nagi-pony-v2.jpg",
+      "source": "parts/assets/studio-runtime-v1/original-parts/generic-human-b/hair-nagi-pony-v2.jpg",
+      "sha256": "974faf1bef0ee07693b62680f7a0a13c483e15c7a0a65fbc67a9520228267294",
+      "bytes": 51283,
+      "kind": "original-part"
+    },
+    {
+      "public": "public/character-maker/original-parts/generic-human-b/hair-nagi-wavy-lob-v3.jpg",
+      "source": "parts/assets/studio-runtime-v1/original-parts/generic-human-b/hair-nagi-wavy-lob-v3.jpg",
+      "sha256": "66b66da2d014070e18bd4c526022d07d766556d3f8427451fb412d6acabc4fa7",
+      "bytes": 54061,
+      "kind": "original-part"
+    },
+    {
+      "public": "public/character-maker/original-parts/generic-human-b/head-original.jpg",
+      "source": "parts/assets/studio-runtime-v1/original-parts/generic-human-b/head-original.jpg",
+      "sha256": "a30d8fbfd6ff5019e62f4f9b20d06fa002600e9bc52d3d44cb89aa9ffe03de2a",
+      "bytes": 57304,
+      "kind": "original-part"
+    },
+    {
+      "public": "public/character-maker/original-parts/generic-human-b/head-rounded.jpg",
+      "source": "parts/assets/studio-runtime-v1/original-parts/generic-human-b/head-rounded.jpg",
+      "sha256": "8f80c00be3d7260563b11f319f79653ebf025a9f64d8848f4900c56bbf8e2f9f",
+      "bytes": 59932,
+      "kind": "original-part"
+    },
+    {
+      "public": "public/character-maker/original-parts/generic-human-b/head-slim.jpg",
+      "source": "parts/assets/studio-runtime-v1/original-parts/generic-human-b/head-slim.jpg",
+      "sha256": "5e078f4037e087761624835a247a5d61dc5598ed40f365af38ab70dba75402db",
+      "bytes": 55697,
+      "kind": "original-part"
+    },
+    {
+      "public": "public/character-maker/original-parts/generic-human-b/mouth-original.jpg",
+      "source": "parts/assets/studio-runtime-v1/original-parts/generic-human-b/mouth-original.jpg",
+      "sha256": "5fcf0e8dd009fa8a452fb97f724ec9108477c37783921a91bd4e1a803651b1a0",
+      "bytes": 66363,
+      "kind": "original-part"
+    },
+    {
+      "public": "public/character-maker/original-parts/generic-human-b/mouth-small.jpg",
+      "source": "parts/assets/studio-runtime-v1/original-parts/generic-human-b/mouth-small.jpg",
+      "sha256": "efcdb72bbb792083f5fd1816f137d4a1161995cac70b06a7c9f1995fd6a5659d",
+      "bytes": 66237,
+      "kind": "original-part"
+    },
+    {
+      "public": "public/character-maker/original-parts/generic-human-b/mouth-wide.jpg",
+      "source": "parts/assets/studio-runtime-v1/original-parts/generic-human-b/mouth-wide.jpg",
+      "sha256": "e3f339703498200057241aff2456c8e242f931dfb42c4a1e225d0f0865a14b8d",
+      "bytes": 66596,
+      "kind": "original-part"
+    },
+    {
+      "public": "public/character-maker/original-parts/generic-robot/ears-original.jpg",
+      "source": "parts/assets/studio-runtime-v1/original-parts/generic-robot/ears-original.jpg",
+      "sha256": "0b33134cb5ecb51237563bea6467f63bb675494777e4b6cb34d63a62c2e987db",
+      "bytes": 9058,
+      "kind": "original-part"
+    },
+    {
+      "public": "public/character-maker/original-parts/generic-robot/eyes-large.jpg",
+      "source": "parts/assets/studio-runtime-v1/original-parts/generic-robot/eyes-large.jpg",
+      "sha256": "22d6c6b85da6254a2fc48fd97e611a0cb46c30cc3d23db00ba928f7cda335386",
+      "bytes": 8313,
+      "kind": "original-part"
+    },
+    {
+      "public": "public/character-maker/original-parts/generic-robot/eyes-narrow.jpg",
+      "source": "parts/assets/studio-runtime-v1/original-parts/generic-robot/eyes-narrow.jpg",
+      "sha256": "5310650b1bca5fc4590e0a73136975ff1f2adec925bc324d0b0500681d9bcf13",
+      "bytes": 7213,
+      "kind": "original-part"
+    },
+    {
+      "public": "public/character-maker/original-parts/generic-robot/eyes-original.jpg",
+      "source": "parts/assets/studio-runtime-v1/original-parts/generic-robot/eyes-original.jpg",
+      "sha256": "9ec2859d28dea9ec778edd6b7ba099bd774459be8dee66db78007b284453915a",
+      "bytes": 7999,
+      "kind": "original-part"
+    },
+    {
+      "public": "public/character-maker/original-parts/generic-robot/head-original.jpg",
+      "source": "parts/assets/studio-runtime-v1/original-parts/generic-robot/head-original.jpg",
+      "sha256": "0b33134cb5ecb51237563bea6467f63bb675494777e4b6cb34d63a62c2e987db",
+      "bytes": 9058,
+      "kind": "original-part"
+    },
+    {
+      "public": "public/character-maker/original-parts/generic-robot/head-rounded.jpg",
+      "source": "parts/assets/studio-runtime-v1/original-parts/generic-robot/head-rounded.jpg",
+      "sha256": "504dfa57f0be1794c02e422bc62d64dac12f14560bf57e36e7b46f348f8c3491",
+      "bytes": 8546,
+      "kind": "original-part"
+    },
+    {
+      "public": "public/character-maker/original-parts/generic-robot/head-wide.jpg",
+      "source": "parts/assets/studio-runtime-v1/original-parts/generic-robot/head-wide.jpg",
+      "sha256": "361f1e35f721c2bc970b0fac0cbd1ef6cfabb1c07899d508013010f94be7415e",
+      "bytes": 9561,
+      "kind": "original-part"
+    },
+    {
+      "public": "public/character-maker/original-parts/generic-robot/mouth-original.jpg",
+      "source": "parts/assets/studio-runtime-v1/original-parts/generic-robot/mouth-original.jpg",
+      "sha256": "460aa8a53231d516de93e5262704ffd5bb2e2081a73bf5b61de891f5bdd187d9",
+      "bytes": 6834,
+      "kind": "original-part"
+    },
+    {
+      "public": "public/character-maker/original-parts/generic-robot/mouth-small.jpg",
+      "source": "parts/assets/studio-runtime-v1/original-parts/generic-robot/mouth-small.jpg",
+      "sha256": "adaab7d56071e4a0ef33d58566bc8a2d39133e68f46ac061ffe640b73e8a51c1",
+      "bytes": 6568,
+      "kind": "original-part"
+    },
+    {
+      "public": "public/character-maker/original-parts/generic-robot/mouth-wide.jpg",
+      "source": "parts/assets/studio-runtime-v1/original-parts/generic-robot/mouth-wide.jpg",
+      "sha256": "2a5b2a9fc870f913df9d4be64337ee372227fc071808dc856fea247a762201d2",
+      "bytes": 7091,
+      "kind": "original-part"
+    },
+    {
+      "public": "public/character-maker/original-parts/hair-manifest.json",
+      "source": "parts/assets/studio-runtime-v1/original-parts/hair-manifest.json",
+      "sha256": "ce53065a16b6ae0dd293584ce5d879ce98dd1bd80f8e569dfa521fdc5b669ce1",
+      "bytes": 4148,
+      "kind": "original-part"
+    },
+    {
+      "public": "public/character-maker/original-parts/manifest.json",
+      "source": "parts/assets/studio-runtime-v1/original-parts/manifest.json",
+      "sha256": "f7e9375928115117fd58be2c50bc385889a567e852d7d9c3812cb20540819865",
+      "bytes": 8815,
+      "kind": "original-part"
+    }
+  ]
+}

@@ -1,0 +1,80 @@
+{
+  "version": "original-closed-hand-v1",
+  "characterId": "generic-human-a",
+  "source": {
+    "path": "characters/generic-human-a/experiments/face-size-2026-09-15-v2/npc-compact.glb",
+    "sha256": "f733b29a2afab79a75237246a14e2686aaf945af5f48d078b8c8f64dc838a413",
+    "node": "tripo_node_8a50f247-7f06-4b2b-a580-f1e40",
+    "vertexCount": 17598
+  },
+  "donor": {
+    "path": "characters/_shared/character-maker/assets/fantasy-v1/masculine.glb",
+    "sha256": "a342e4976f00813059f73f8338853d4f2c67488cc1d28adb3958c7449039cbbe",
+    "motion": "characters/_shared/character-maker/assets/fantasy-v1/masculine-motions.json",
+    "motionSha256": "99d3bfa7a885f8706cd06af91d7dbc365e628aa8f808ad31d22c8b40136cb77f",
+    "clip": "sword_idle",
+    "phase": 0,
+    "license": "CC0 Sakurada Fumiriya; see fantasy-v1 provenance.json"
+  },
+  "fit": {
+    "scale": [
+      1.051260245548809,
+      0.6259187998892306,
+      0.501128804578133
+    ],
+    "translation": [
+      0.021084458880160993,
+      0,
+      -0.017025982648215525
+    ],
+    "wristFit": {
+      "center": [
+        0.009,
+        -0.025,
+        -0.002
+      ],
+      "radius": [
+        0.01,
+        0.013
+      ],
+      "transition": 0.026
+    }
+  },
+  "socket": {
+    "bone": "R_Hand",
+    "point": [
+      0.00005925396918481443,
+      0.04356394847229045,
+      -0.01226525900472326
+    ],
+    "blade": [
+      0.025710998237717407,
+      0.01575779977822219,
+      0.9995452147430698
+    ],
+    "palm": [
+      -1,
+      0,
+      0
+    ],
+    "size": 0.62,
+    "measuredHandVertices": 554
+  },
+  "output": {
+    "path": "characters/generic-human-a/experiments/character-maker-sword-hand-2026-10-03-v1/hand.json",
+    "sha256": "33cc9cb5885c1ea1c5a10bd43978fc61995d70c3cb242f3c93d37e0ad920f939",
+    "vertices": 579,
+    "triangles": 1121
+  },
+  "nativeTriangles": 691,
+  "builder": {
+    "path": "tools/character-maker/build-original-closed-hand.mjs",
+    "sha256": "41dfcb0bb5f24f8dfc912991b058fd138d584b67105f1aae2a1e667b2d88b9fd",
+    "dependencies": [
+      {
+        "path": "tools/character-maker/prepare-original-grip-authoring.mjs",
+        "sha256": "0875c0e8bad7ecf5511e6cdcc9056687166db127bd36521e5eff4b1def7ff0ef"
+      }
+    ]
+  }
+}

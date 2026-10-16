@@ -1,0 +1,76 @@
+{
+  "version": "original-modular-hair-thumbnails-v1",
+  "records": [
+    {
+      "id": "generic-human-a",
+      "hairstyle": "haru-short-v2",
+      "file": "public/character-maker/original-parts/generic-human-a/hair-haru-short-v2.jpg",
+      "source": "/tmp/haru-canonical-v2-coverage/generic-human-a/haru-short-v2_original_original_original-front.png",
+      "sha256": "ee59f9ae567ffe7a681fb8f14a8e18c6329a2f53639b67759203872005de2549",
+      "sourceSha256": "df1c596812dadf352a26f30d647a873768dd48352787fadcb7143d2785c0e2e0",
+      "modularModelSha256": "c9de0818112b1e6a6bc681965f80595fb2ee738245e4648c7ccaedf039fd58a0",
+      "revision": "v2"
+    },
+    {
+      "id": "generic-human-a",
+      "hairstyle": "haru-crop-v2",
+      "file": "public/character-maker/original-parts/generic-human-a/hair-haru-crop-v2.jpg",
+      "source": "/tmp/haru-canonical-v2-coverage/generic-human-a/haru-crop-v2_original_original_original-front.png",
+      "sha256": "8ec3708c0538d3998ff76b4878b485e9b58c64231019487fd81dbdb33ac535e4",
+      "sourceSha256": "447778ae27572e8e7331a056a934166c1b71391475cf4ec4c4fb57c7b55f7a76",
+      "modularModelSha256": "c9de0818112b1e6a6bc681965f80595fb2ee738245e4648c7ccaedf039fd58a0",
+      "revision": "v2"
+    },
+    {
+      "id": "generic-human-a",
+      "hairstyle": "haru-center-v2",
+      "file": "public/character-maker/original-parts/generic-human-a/hair-haru-center-v2.jpg",
+      "source": "/tmp/haru-canonical-v2-coverage/generic-human-a/haru-center-v2_original_original_original-front.png",
+      "sha256": "52188d00d14f9ac88027cbbd7b535550b47e1a04e4f3612216b9f8d1c1804b32",
+      "sourceSha256": "d380645639e31d59604d2ba153d567156e1cc1ecc7eef63597f0c43c126ff366",
+      "modularModelSha256": "c9de0818112b1e6a6bc681965f80595fb2ee738245e4648c7ccaedf039fd58a0",
+      "revision": "v2"
+    },
+    {
+      "id": "generic-human-a",
+      "hairstyle": "haru-swept-v2",
+      "file": "public/character-maker/original-parts/generic-human-a/hair-haru-swept-v2.jpg",
+      "source": "/tmp/haru-canonical-v2-coverage/generic-human-a/haru-swept-v2_original_original_original-front.png",
+      "sha256": "ba31546e332ad2ffb4b066011f821863594a45892c1b4f8a8d1a0f925a85c6be",
+      "sourceSha256": "4bf5b27ec874ee0863d50ea4828c3ec04fb5d3b812e0e068bc6800850440d20a",
+      "modularModelSha256": "c9de0818112b1e6a6bc681965f80595fb2ee738245e4648c7ccaedf039fd58a0",
+      "revision": "v2"
+    },
+    {
+      "id": "generic-human-b",
+      "hairstyle": "nagi-bob-v2",
+      "file": "public/character-maker/original-parts/generic-human-b/hair-nagi-bob-v2.jpg",
+      "source": "/tmp/original-human-nagi-four-hair-coverage/generic-human-b/nagi-bob-v2_original_original_original-front.png",
+      "sha256": "133108cad9a0e31700e300daa3b9810de244b288ada9e8a0097e77036551445a"
+    },
+    {
+      "id": "generic-human-b",
+      "hairstyle": "nagi-long-v2",
+      "file": "public/character-maker/original-parts/generic-human-b/hair-nagi-long-v2.jpg",
+      "source": "/tmp/original-human-nagi-four-hair-coverage/generic-human-b/nagi-long-v2_original_original_original-front.png",
+      "sha256": "074a2239f2db22be7b3fe280d97d75d301e2081de1e93571ed01ead35c5dabb3"
+    },
+    {
+      "id": "generic-human-b",
+      "hairstyle": "nagi-pony-v2",
+      "file": "public/character-maker/original-parts/generic-human-b/hair-nagi-pony-v2.jpg",
+      "source": "/tmp/nagi-canonical-v2-coverage/generic-human-b/nagi-pony-v2_original_original_original-front.png",
+      "sha256": "4a47de2572e9151218868885ff6e65140f67f60c89709e8cd4640680c7bb2584",
+      "sourceSha256": "dc3e09a6ddad04a292ec44be03e3f9fa180939e8ec181b343dba9da5ab17045e",
+      "modularModelSha256": "37d8648d52fc7bc4a8b5c1454c2b8372ab6ddb665088c92b18062b8fc78ad798",
+      "revision": "v2"
+    },
+    {
+      "id": "generic-human-b",
+      "hairstyle": "nagi-pixie-v2",
+      "file": "public/character-maker/original-parts/generic-human-b/hair-nagi-pixie-v2.jpg",
+      "source": "/tmp/original-human-nagi-four-hair-coverage/generic-human-b/nagi-pixie-v2_original_original_original-front.png",
+      "sha256": "056a74d7beeaa0c1eaf55070dd0501d06395f73a0842d4577d2e75382145730d"
+    }
+  ]
+}

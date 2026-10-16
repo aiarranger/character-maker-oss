@@ -1,0 +1,691 @@
+{
+  "input": {
+    "path": "characters/_shared/character-maker/assets/v1/feminine.glb",
+    "bytes": 3175368,
+    "sha256": "dc2c09a99b8922bab4b8042ccb8f5bc9484a2ff00ebe2bb2a22eb9aeeeb87c95"
+  },
+  "sourceSHA256": "69591853d817488edaa8fd9bf8fc1d821eaeaf789f8627b3cd23b41c4ed67997",
+  "jointCount": 65,
+  "mapping": [
+    {
+      "source": "root",
+      "target": "root"
+    },
+    {
+      "source": "pelvis",
+      "target": "pelvis"
+    },
+    {
+      "source": "spine_01",
+      "target": "spine_01"
+    },
+    {
+      "source": "spine_02",
+      "target": "spine_02"
+    },
+    {
+      "source": "spine_03",
+      "target": "spine_03"
+    },
+    {
+      "source": "neck_01",
+      "target": "neck_01"
+    },
+    {
+      "source": "Head",
+      "target": "Head"
+    },
+    {
+      "source": "clavicle_l",
+      "target": "clavicle_l"
+    },
+    {
+      "source": "upperarm_l",
+      "target": "upperarm_l"
+    },
+    {
+      "source": "lowerarm_l",
+      "target": "lowerarm_l"
+    },
+    {
+      "source": "hand_l",
+      "target": "hand_l"
+    },
+    {
+      "source": "index_01_l",
+      "target": "index_01_l"
+    },
+    {
+      "source": "index_02_l",
+      "target": "index_02_l"
+    },
+    {
+      "source": "index_03_l",
+      "target": "index_03_l"
+    },
+    {
+      "source": "index_04_leaf_l",
+      "target": "index_04_leaf_l"
+    },
+    {
+      "source": "middle_01_l",
+      "target": "middle_01_l"
+    },
+    {
+      "source": "middle_02_l",
+      "target": "middle_02_l"
+    },
+    {
+      "source": "middle_03_l",
+      "target": "middle_03_l"
+    },
+    {
+      "source": "middle_04_leaf_l",
+      "target": "middle_04_leaf_l"
+    },
+    {
+      "source": "pinky_01_l",
+      "target": "pinky_01_l"
+    },
+    {
+      "source": "pinky_02_l",
+      "target": "pinky_02_l"
+    },
+    {
+      "source": "pinky_03_l",
+      "target": "pinky_03_l"
+    },
+    {
+      "source": "pinky_04_leaf_l",
+      "target": "pinky_04_leaf_l"
+    },
+    {
+      "source": "ring_01_l",
+      "target": "ring_01_l"
+    },
+    {
+      "source": "ring_02_l",
+      "target": "ring_02_l"
+    },
+    {
+      "source": "ring_03_l",
+      "target": "ring_03_l"
+    },
+    {
+      "source": "ring_04_leaf_l",
+      "target": "ring_04_leaf_l"
+    },
+    {
+      "source": "thumb_01_l",
+      "target": "thumb_01_l"
+    },
+    {
+      "source": "thumb_02_l",
+      "target": "thumb_02_l"
+    },
+    {
+      "source": "thumb_03_l",
+      "target": "thumb_03_l"
+    },
+    {
+      "source": "thumb_04_leaf_l",
+      "target": "thumb_04_leaf_l"
+    },
+    {
+      "source": "clavicle_r",
+      "target": "clavicle_r"
+    },
+    {
+      "source": "upperarm_r",
+      "target": "upperarm_r"
+    },
+    {
+      "source": "lowerarm_r",
+      "target": "lowerarm_r"
+    },
+    {
+      "source": "hand_r",
+      "target": "hand_r"
+    },
+    {
+      "source": "index_01_r",
+      "target": "index_01_r"
+    },
+    {
+      "source": "index_02_r",
+      "target": "index_02_r"
+    },
+    {
+      "source": "index_03_r",
+      "target": "index_03_r"
+    },
+    {
+      "source": "index_04_leaf_r",
+      "target": "index_04_leaf_r"
+    },
+    {
+      "source": "middle_01_r",
+      "target": "middle_01_r"
+    },
+    {
+      "source": "middle_02_r",
+      "target": "middle_02_r"
+    },
+    {
+      "source": "middle_03_r",
+      "target": "middle_03_r"
+    },
+    {
+      "source": "middle_04_leaf_r",
+      "target": "middle_04_leaf_r"
+    },
+    {
+      "source": "pinky_01_r",
+      "target": "pinky_01_r"
+    },
+    {
+      "source": "pinky_02_r",
+      "target": "pinky_02_r"
+    },
+    {
+      "source": "pinky_03_r",
+      "target": "pinky_03_r"
+    },
+    {
+      "source": "pinky_04_leaf_r",
+      "target": "pinky_04_leaf_r"
+    },
+    {
+      "source": "ring_01_r",
+      "target": "ring_01_r"
+    },
+    {
+      "source": "ring_02_r",
+      "target": "ring_02_r"
+    },
+    {
+      "source": "ring_03_r",
+      "target": "ring_03_r"
+    },
+    {
+      "source": "ring_04_leaf_r",
+      "target": "ring_04_leaf_r"
+    },
+    {
+      "source": "thumb_01_r",
+      "target": "thumb_01_r"
+    },
+    {
+      "source": "thumb_02_r",
+      "target": "thumb_02_r"
+    },
+    {
+      "source": "thumb_03_r",
+      "target": "thumb_03_r"
+    },
+    {
+      "source": "thumb_04_leaf_r",
+      "target": "thumb_04_leaf_r"
+    },
+    {
+      "source": "thigh_l",
+      "target": "thigh_l"
+    },
+    {
+      "source": "calf_l",
+      "target": "calf_l"
+    },
+    {
+      "source": "foot_l",
+      "target": "foot_l"
+    },
+    {
+      "source": "ball_l",
+      "target": "ball_l"
+    },
+    {
+      "source": "ball_leaf_l",
+      "target": "ball_leaf_l"
+    },
+    {
+      "source": "thigh_r",
+      "target": "thigh_r"
+    },
+    {
+      "source": "calf_r",
+      "target": "calf_r"
+    },
+    {
+      "source": "foot_r",
+      "target": "foot_r"
+    },
+    {
+      "source": "ball_r",
+      "target": "ball_r"
+    },
+    {
+      "source": "ball_leaf_r",
+      "target": "ball_leaf_r"
+    }
+  ],
+  "excludedHumanoid": [],
+  "bindResidual": 4.773370434474344e-7,
+  "pelvisHeightRatio": 1.0164721304885487,
+  "tPoseError": 0.0000039058751326592756,
+  "restDirections": {
+    "torso": [
+      0,
+      0.99995749,
+      0.00922065
+    ],
+    "rightArm": [
+      -0.99998479,
+      2.4e-7,
+      0.00551586
+    ],
+    "leftArm": [
+      0.99998479,
+      1.4e-7,
+      0.00551589
+    ],
+    "rightLeg": [
+      3e-8,
+      -0.99960034,
+      -0.02826956
+    ],
+    "leftLeg": [
+      -2e-8,
+      -0.99960034,
+      -0.02826956
+    ]
+  },
+  "clips": {
+    "sword_idle": {
+      "sourceClip": "Sword_Idle",
+      "duration": 1.6666666269302368,
+      "samples": 51,
+      "tracks": 67,
+      "worldRotationError": 0.0000011083098639123016,
+      "snapshots": [
+        {
+          "time": 0,
+          "directions": {
+            "torso": [
+              -0.09408022,
+              0.98421055,
+              0.14992832
+            ],
+            "rightArm": [
+              -0.37274404,
+              -0.77269676,
+              -0.51381086
+            ],
+            "leftArm": [
+              0.35957958,
+              -0.74119533,
+              0.56686154
+            ],
+            "rightLeg": [
+              -0.15952887,
+              -0.96165036,
+              -0.22311235
+            ],
+            "leftLeg": [
+              0.10831556,
+              -0.96709542,
+              0.23020467
+            ]
+          },
+          "floorY": -0.00943572,
+          "sourceFloorY": -0.00012639
+        },
+        {
+          "time": 0.40000001,
+          "directions": {
+            "torso": [
+              -0.0951246,
+              0.98392858,
+              0.15111539
+            ],
+            "rightArm": [
+              -0.31807518,
+              -0.76648672,
+              -0.55796621
+            ],
+            "leftArm": [
+              0.38252323,
+              -0.73055939,
+              0.56564915
+            ],
+            "rightLeg": [
+              -0.11742406,
+              -0.96918578,
+              -0.21654219
+            ],
+            "leftLeg": [
+              0.14146409,
+              -0.96476846,
+              0.22183265
+            ]
+          },
+          "floorY": -0.01100888,
+          "sourceFloorY": -0.00012247
+        },
+        {
+          "time": 0.83333331,
+          "directions": {
+            "torso": [
+              -0.0940802,
+              0.98421055,
+              0.14992832
+            ],
+            "rightArm": [
+              -0.37274408,
+              -0.77269676,
+              -0.51381083
+            ],
+            "leftArm": [
+              0.40529203,
+              -0.71615858,
+              0.56820354
+            ],
+            "rightLeg": [
+              -0.0751709,
+              -0.97146226,
+              -0.22496758
+            ],
+            "leftLeg": [
+              0.19086128,
+              -0.95452344,
+              0.22903489
+            ]
+          },
+          "floorY": -0.00823921,
+          "sourceFloorY": -0.00011695
+        },
+        {
+          "time": 1.26666665,
+          "directions": {
+            "torso": [
+              -0.09303572,
+              0.98449,
+              0.14874073
+            ],
+            "rightArm": [
+              -0.31566033,
+              -0.76713208,
+              -0.55845047
+            ],
+            "leftArm": [
+              0.37967161,
+              -0.72929027,
+              0.56919695
+            ],
+            "rightLeg": [
+              -0.11739615,
+              -0.96968141,
+              -0.21432709
+            ],
+            "leftLeg": [
+              0.14128921,
+              -0.96433714,
+              0.22381072
+            ]
+          },
+          "floorY": -0.01100651,
+          "sourceFloorY": -0.00012201
+        },
+        {
+          "time": 1.66666663,
+          "directions": {
+            "torso": [
+              -0.09408023,
+              0.98421055,
+              0.14992833
+            ],
+            "rightArm": [
+              -0.37274406,
+              -0.77269675,
+              -0.51381086
+            ],
+            "leftArm": [
+              0.35957958,
+              -0.74119533,
+              0.56686154
+            ],
+            "rightLeg": [
+              -0.15952893,
+              -0.96165033,
+              -0.22311243
+            ],
+            "leftLeg": [
+              0.10831555,
+              -0.9670954,
+              0.23020477
+            ]
+          },
+          "floorY": -0.00943569,
+          "sourceFloorY": -0.00012631
+        }
+      ]
+    },
+    "sword_attack": {
+      "sourceClip": "Sword_Attack",
+      "duration": 1.5333333015441895,
+      "samples": 47,
+      "tracks": 67,
+      "worldRotationError": 0.0000013831617100086837,
+      "snapshots": [
+        {
+          "time": 0,
+          "directions": {
+            "torso": [
+              -0.10315032,
+              0.98167779,
+              0.16021466
+            ],
+            "rightArm": [
+              -0.36617193,
+              -0.76888983,
+              -0.52414363
+            ],
+            "leftArm": [
+              0.37225738,
+              -0.74680918,
+              0.55109028
+            ],
+            "rightLeg": [
+              -0.13191781,
+              -0.96666762,
+              -0.21943429
+            ],
+            "leftLeg": [
+              0.13107363,
+              -0.96532648,
+              0.22575315
+            ]
+          },
+          "floorY": -0.01019572,
+          "sourceFloorY": -0.00010903
+        },
+        {
+          "time": 0.36666667,
+          "directions": {
+            "torso": [
+              0.10728851,
+              0.92445176,
+              0.36589359
+            ],
+            "rightArm": [
+              -0.68060186,
+              0.45057169,
+              -0.57772508
+            ],
+            "leftArm": [
+              0.9786121,
+              -0.19583117,
+              -0.06299617
+            ],
+            "rightLeg": [
+              -0.0315082,
+              -0.88665058,
+              0.46136534
+            ],
+            "leftLeg": [
+              0.22465884,
+              -0.90251485,
+              -0.36741713
+            ]
+          },
+          "floorY": 0.01396205,
+          "sourceFloorY": -0.00012546
+        },
+        {
+          "time": 0.76666665,
+          "directions": {
+            "torso": [
+              0.28709509,
+              0.89633798,
+              0.33786776
+            ],
+            "rightArm": [
+              0.75675867,
+              -0.56366777,
+              0.33105129
+            ],
+            "leftArm": [
+              -0.11409186,
+              0.21770547,
+              -0.96932315
+            ],
+            "rightLeg": [
+              -0.17638827,
+              -0.87721166,
+              0.44652758
+            ],
+            "leftLeg": [
+              0.21394391,
+              -0.52952903,
+              -0.82086966
+            ]
+          },
+          "floorY": 0.01891428,
+          "sourceFloorY": -0.00149509
+        },
+        {
+          "time": 1.16666663,
+          "directions": {
+            "torso": [
+              -0.08090018,
+              0.98720181,
+              0.13743271
+            ],
+            "rightArm": [
+              -0.56614198,
+              -0.77443793,
+              -0.2823635
+            ],
+            "leftArm": [
+              0.39046022,
+              -0.66403004,
+              0.6376558
+            ],
+            "rightLeg": [
+              -0.13141476,
+              -0.99050659,
+              -0.04033419
+            ],
+            "leftLeg": [
+              0.12463807,
+              -0.97029073,
+              0.20736742
+            ]
+          },
+          "floorY": -0.00579203,
+          "sourceFloorY": 0.00112625
+        },
+        {
+          "time": 1.5333333,
+          "directions": {
+            "torso": [
+              -0.10315032,
+              0.98167779,
+              0.16021466
+            ],
+            "rightArm": [
+              -0.36617193,
+              -0.76888983,
+              -0.52414363
+            ],
+            "leftArm": [
+              0.37225738,
+              -0.74680918,
+              0.55109028
+            ],
+            "rightLeg": [
+              -0.1319176,
+              -0.9666677,
+              -0.21943406
+            ],
+            "leftLeg": [
+              0.13107363,
+              -0.96532648,
+              0.22575315
+            ]
+          },
+          "floorY": -0.01019599,
+          "sourceFloorY": -0.00010903
+        }
+      ]
+    }
+  },
+  "grip": {
+    "attachmentBone": "hand_r",
+    "handLocalAtSwordIdle": {
+      "index_01_r": [
+        -0.00419998,
+        0.08823654,
+        0.03620496
+      ],
+      "pinky_01_r": [
+        -0.00379997,
+        0.06994835,
+        -0.03399414
+      ],
+      "middle_01_r": [
+        -0.00189993,
+        0.08634158,
+        0.01067166
+      ],
+      "middle_02_r": [
+        -0.03753489,
+        0.09389573,
+        0.01075514
+      ],
+      "middle_03_r": [
+        -0.04984594,
+        0.06732181,
+        0.01200509
+      ],
+      "thumb_03_r": [
+        -0.04988893,
+        0.05419583,
+        0.02801752
+      ]
+    }
+  },
+  "canonical": {
+    "status": "passed",
+    "path": "characters/_shared/character-maker/assets/v1/feminine.glb",
+    "bytes": 3175368,
+    "sha256": "dc2c09a99b8922bab4b8042ccb8f5bc9484a2ff00ebe2bb2a22eb9aeeeb87c95",
+    "localError": 0,
+    "worldError": 0,
+    "inverseBindError": 0
+  },
+  "output": {
+    "path": "characters/_shared/character-maker/assets/extended-v1/feminine-sword-motions.json",
+    "bytes": 634207,
+    "sha256": "de801e6a51e271e8d9c2415b8137e17f34fd1900f18fe6c339ec52d82ad53607"
+  }
+}

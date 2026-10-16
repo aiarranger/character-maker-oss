@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "version": "mature-skin-v1",
+  "sourceLicense": "CC0-1.0",
+  "provenance": "../../sources/fantasy-v1/provenance.json",
+  "builder": "tools/character-maker/build-mature-skin.mjs",
+  "builderSha256": "21ce42d7e9442e18630c1ed1fdf4146668a99122b26564a060d5eebd6b824aac",
+  "settings": {
+    "strength": 0.75,
+    "cheekCenters": [
+      [
+        0.318,
+        0.651
+      ],
+      [
+        0.682,
+        0.651
+      ]
+    ],
+    "ellipseRadius": [
+      0.125,
+      0.083
+    ],
+    "eyeExclusion": [
+      0.6,
+      0.619
+    ],
+    "lowerFade": [
+      0.7,
+      0.733
+    ],
+    "skinReferenceY": 0.738,
+    "referenceSampleRadiusPixels": 4,
+    "method": "Reduce excess R-G and B-G cheek chroma toward adjacent unblushed skin; retain source R shading and alpha. Compact elliptical mask excludes eyes, lips, nose and ears."
+  },
+  "assets": [
+    {
+      "base": "feminine",
+      "file": "feminine-mature-skin.png",
+      "publicName": "fantasy-feminine-mature-skin.png",
+      "input": "parts/assets/fantasy-v1/feminine.glb",
+      "inputSha256": "0cd1bb11c894c7c3295917f66faa2caa3f5360502863955584ccee6388f856a0",
+      "material": "F00_000_00_Face_00_SKIN",
+      "inputImageSha256": "e8148087476d90a502430c9f773995c3e9fefc4ef3f7299cc4fea8dc21db9b23",
+      "outputSha256": "a57d3d2e269510908af3e8278ee42bd3e931e29d88e15a1e12655809c1852b95",
+      "bytes": 302972,
+      "width": 1024,
+      "height": 1024,
+      "references": [
+        [
+          252.97530864197532,
+          239.93827160493828,
+          227.8148148148148
+        ],
+        [
+          253,
+          240.02469135802468,
+          228.55555555555554
+        ]
+      ],
+      "changedPixels": 43983,
+      "maximumChannelDelta": 32
+    },
+    {
+      "base": "masculine",
+      "file": "masculine-mature-skin.png",
+      "publicName": "fantasy-masculine-mature-skin.png",
+      "input": "parts/assets/fantasy-v1/masculine.glb",
+      "inputSha256": "a342e4976f00813059f73f8338853d4f2c67488cc1d28adb3958c7449039cbbe",
+      "material": "M00_000_00_Face_00_SKIN",
+      "inputImageSha256": "0607a543d9d4a0a63ff06634d84c1b5cbab93ee654b59f28f1366bbb0597fcb6",
+      "outputSha256": "f089a24c670d9a720fb1dc8f9ed0f02629f5c7aa24cc05be394c52b787d647ad",
+      "bytes": 496459,
+      "width": 1024,
+      "height": 1024,
+      "references": [
+        [
+          245.55555555555554,
+          228.8641975308642,
+          211
+        ],
+        [
+          245.77777777777777,
+          228.98765432098764,
+          211.8641975308642
+        ]
+      ],
+      "changedPixels": 8242,
+      "maximumChannelDelta": 1
+    }
+  ]
+}

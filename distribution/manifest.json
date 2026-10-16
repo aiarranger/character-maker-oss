@@ -1,0 +1,135 @@
+{
+  "version": 1,
+  "note": "characters の配布モデル。キャラメイクはこの一覧のファイルだけを characters から受け取る。更新は node tools/import-characters.mjs --from ../characters",
+  "source": {
+    "repo": "aiarranger/characters",
+    "commit": "8e5fcb1270fb600bb497e7a963c5c9384fe54c9e"
+  },
+  "files": [
+    {
+      "path": "characters/generic-cat/experiments/character-maker-species-2026-10-03-v11/editable.glb",
+      "sha256": "40cf7018765408408598e3d5411f81f15ec33e96ef7bb271f2d8fa7be626b21a",
+      "bytes": 10558700
+    },
+    {
+      "path": "characters/generic-cat/experiments/character-maker-sword-2026-10-03-v1/manifest.json",
+      "sha256": "689ba2158e13f59205df1e3de17c06ee528f8afbdc48ccbe016652786476f263",
+      "bytes": 5976
+    },
+    {
+      "path": "characters/generic-cat/experiments/character-maker-sword-2026-10-03-v1/motions.json",
+      "sha256": "b34ece76876e0d7906792a76683daa261126e63f534dfa02238f5749d5224b81",
+      "bytes": 296727
+    },
+    {
+      "path": "characters/generic-cat/experiments/mouth-defaults-2026-09-16-v1/npc-compact.glb",
+      "sha256": "4392298cc4747bc7888487a34cbc967b6c0c48e71d2468fa75f367b29194081d",
+      "bytes": 1305956
+    },
+    {
+      "path": "characters/generic-human-a/experiments/character-maker-appearance-2026-10-03-final-v2/editable.glb",
+      "sha256": "23f731fb25a9cd1eb5c5dd246e9ad2fad98fa2cd0a3d44d7834fb032cb9016ac",
+      "bytes": 8148704
+    },
+    {
+      "path": "characters/generic-human-a/experiments/character-maker-appearance-2026-10-03-final-v2/manifest.json",
+      "sha256": "12ba89667b1d36bffdd568e9cd9d4519f06186cba6fe94edb5428dbc6c79ba5b",
+      "bytes": 62339
+    },
+    {
+      "path": "characters/generic-human-a/experiments/character-maker-modular-2026-10-03-v1/assembly-manifest.json",
+      "sha256": "91554079762f5372a5c2737cb65c70618ebc0fcf971428052b6423bd55717ecb",
+      "bytes": 17473
+    },
+    {
+      "path": "characters/generic-human-a/experiments/character-maker-modular-2026-10-03-v1/body-vertex-map.json",
+      "sha256": "813d88658c2736a12a888bbc53a354e3c8eabfb1480cf277c8321137e5cf4a46",
+      "bytes": 108698
+    },
+    {
+      "path": "characters/generic-human-a/experiments/character-maker-sword-2026-10-03-v1/manifest.json",
+      "sha256": "42e6debb0b743c3369314bd96f5a9439d001f9a2d07eb851954c9bc11bdab1fc",
+      "bytes": 5957
+    },
+    {
+      "path": "characters/generic-human-a/experiments/character-maker-sword-2026-10-03-v1/motions.json",
+      "sha256": "4641fdcefb7fbbd560f50c02308e26111ebd807bcc9034ca98971c28ea0c25bb",
+      "bytes": 296829
+    },
+    {
+      "path": "characters/generic-human-a/experiments/character-maker-sword-hand-2026-10-03-v1/hand.json",
+      "sha256": "33cc9cb5885c1ea1c5a10bd43978fc61995d70c3cb242f3c93d37e0ad920f939",
+      "bytes": 91998
+    },
+    {
+      "path": "characters/generic-human-a/experiments/character-maker-sword-hand-2026-10-03-v1/manifest.json",
+      "sha256": "3c7e5c93cc4a24e537124c20731a0f6b7677eae5ff850c8c2af692fa90e250c8",
+      "bytes": 2212
+    },
+    {
+      "path": "characters/generic-human-a/experiments/face-size-2026-09-15-v2/npc-compact.glb",
+      "sha256": "f733b29a2afab79a75237246a14e2686aaf945af5f48d078b8c8f64dc838a413",
+      "bytes": 1896664
+    },
+    {
+      "path": "characters/generic-human-b/experiments/character-maker-modular-2026-10-03-v1/body-vertex-map.json",
+      "sha256": "5bbf9faf7abfbf2ce66ddd1b9e8af71fcbc47a85ebbb89660bc498be754d2cdb",
+      "bytes": 76350
+    },
+    {
+      "path": "characters/generic-human-b/experiments/character-maker-modular-2026-10-03-v18-rc/body-vertex-map.json",
+      "sha256": "b177a0c9e3f9d5243f569766188db766d9155dd1ec8f315ad08703973bfcf214",
+      "bytes": 76825
+    },
+    {
+      "path": "characters/generic-human-b/experiments/character-maker-modular-2026-10-03-v18-rc/editable.glb",
+      "sha256": "90f30bb8cfb8a93e284e4a518169a391b5b4d7fd2240d8fba1936489386d36d2",
+      "bytes": 25585876
+    },
+    {
+      "path": "characters/generic-human-b/experiments/character-maker-sword-2026-10-03-v1/manifest.json",
+      "sha256": "73fd33831b7a966ecc1640ba43cf37180f940e7ff00fbb4fd14bed6f2f9a2081",
+      "bytes": 5959
+    },
+    {
+      "path": "characters/generic-human-b/experiments/character-maker-sword-2026-10-03-v1/motions.json",
+      "sha256": "2f91425675b37d6d4925b48d70762669efb545120985cb70d7b1051a277a69f0",
+      "bytes": 297063
+    },
+    {
+      "path": "characters/generic-human-b/experiments/character-maker-sword-hand-2026-10-03-v1/hand.json",
+      "sha256": "3cc301d4146467f772c652f11eb5c3b2c30f969d2b049eefb42fbda942edbf20",
+      "bytes": 90349
+    },
+    {
+      "path": "characters/generic-human-b/experiments/character-maker-sword-hand-2026-10-03-v1/manifest.json",
+      "sha256": "dd6d525632761aa4500d8964b243ad63f78286d54746bd42e0252e538ab5facf",
+      "bytes": 2247
+    },
+    {
+      "path": "characters/generic-robot/experiments/character-maker-species-2026-10-03-v5/editable.glb",
+      "sha256": "7136ac1a4a1c32801ba8d927533eaba9379abdbbc4f9d0bee9e00f6b5604682f",
+      "bytes": 5351800
+    },
+    {
+      "path": "characters/generic-robot/experiments/character-maker-sword-2026-10-03-v1/manifest.json",
+      "sha256": "38384d6a300fedde35d3545bc3254e482418749edd1b481a385eef9be2d9c4b4",
+      "bytes": 5987
+    },
+    {
+      "path": "characters/generic-robot/experiments/character-maker-sword-2026-10-03-v1/motions.json",
+      "sha256": "f72eb69f6315ff116fab8060083bba68a6a329e7934736045031112c7ad86aca",
+      "bytes": 296863
+    },
+    {
+      "path": "characters/generic-robot/experiments/mouth-defaults-2026-09-29-v1/npc-compact.glb",
+      "sha256": "fdf4bcfc33276f4ac8a2c36e0cdc95a114638009cbb123839ee51b511d30e323",
+      "bytes": 1369724
+    },
+    {
+      "path": "characters/_shared/character-maker/sources/animations/UAL1_Standard.glb",
+      "sha256": "69591853d817488edaa8fd9bf8fc1d821eaeaf789f8627b3cd23b41c4ed67997",
+      "bytes": 7618436
+    }
+  ]
+}

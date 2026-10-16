@@ -1,0 +1,1207 @@
+{
+  "input": {
+    "path": "characters/_shared/character-maker/sources/fantasy-v1/Victoria_Rubin.vrm",
+    "bytes": 15321932,
+    "sha256": "ad5750ce944b708155abb7ac6807e19d7f5e73a939f0ee32daf0539acfca57c0"
+  },
+  "sourceSHA256": "69591853d817488edaa8fd9bf8fc1d821eaeaf789f8627b3cd23b41c4ed67997",
+  "jointCount": 166,
+  "mapping": [
+    {
+      "source": "pelvis",
+      "semantic": "hips",
+      "target": "J_Bip_C_Hips"
+    },
+    {
+      "source": "spine_01",
+      "semantic": "spine",
+      "target": "J_Bip_C_Spine"
+    },
+    {
+      "source": "spine_02",
+      "semantic": "chest",
+      "target": "J_Bip_C_Chest"
+    },
+    {
+      "source": "spine_03",
+      "semantic": "upperChest",
+      "target": "J_Bip_C_UpperChest"
+    },
+    {
+      "source": "neck_01",
+      "semantic": "neck",
+      "target": "J_Bip_C_Neck"
+    },
+    {
+      "source": "Head",
+      "semantic": "head",
+      "target": "J_Bip_C_Head"
+    },
+    {
+      "source": "clavicle_l",
+      "semantic": "leftShoulder",
+      "target": "J_Bip_L_Shoulder"
+    },
+    {
+      "source": "upperarm_l",
+      "semantic": "leftUpperArm",
+      "target": "J_Bip_L_UpperArm"
+    },
+    {
+      "source": "lowerarm_l",
+      "semantic": "leftLowerArm",
+      "target": "J_Bip_L_LowerArm"
+    },
+    {
+      "source": "hand_l",
+      "semantic": "leftHand",
+      "target": "J_Bip_L_Hand"
+    },
+    {
+      "source": "thigh_l",
+      "semantic": "leftUpperLeg",
+      "target": "J_Bip_L_UpperLeg"
+    },
+    {
+      "source": "calf_l",
+      "semantic": "leftLowerLeg",
+      "target": "J_Bip_L_LowerLeg"
+    },
+    {
+      "source": "foot_l",
+      "semantic": "leftFoot",
+      "target": "J_Bip_L_Foot"
+    },
+    {
+      "source": "ball_l",
+      "semantic": "leftToes",
+      "target": "J_Bip_L_ToeBase"
+    },
+    {
+      "source": "index_01_l",
+      "semantic": "leftIndexProximal",
+      "target": "J_Bip_L_Index1"
+    },
+    {
+      "source": "index_02_l",
+      "semantic": "leftIndexIntermediate",
+      "target": "J_Bip_L_Index2"
+    },
+    {
+      "source": "index_03_l",
+      "semantic": "leftIndexDistal",
+      "target": "J_Bip_L_Index3"
+    },
+    {
+      "source": "middle_01_l",
+      "semantic": "leftMiddleProximal",
+      "target": "J_Bip_L_Middle1"
+    },
+    {
+      "source": "middle_02_l",
+      "semantic": "leftMiddleIntermediate",
+      "target": "J_Bip_L_Middle2"
+    },
+    {
+      "source": "middle_03_l",
+      "semantic": "leftMiddleDistal",
+      "target": "J_Bip_L_Middle3"
+    },
+    {
+      "source": "ring_01_l",
+      "semantic": "leftRingProximal",
+      "target": "J_Bip_L_Ring1"
+    },
+    {
+      "source": "ring_02_l",
+      "semantic": "leftRingIntermediate",
+      "target": "J_Bip_L_Ring2"
+    },
+    {
+      "source": "ring_03_l",
+      "semantic": "leftRingDistal",
+      "target": "J_Bip_L_Ring3"
+    },
+    {
+      "source": "pinky_01_l",
+      "semantic": "leftLittleProximal",
+      "target": "J_Bip_L_Little1"
+    },
+    {
+      "source": "pinky_02_l",
+      "semantic": "leftLittleIntermediate",
+      "target": "J_Bip_L_Little2"
+    },
+    {
+      "source": "pinky_03_l",
+      "semantic": "leftLittleDistal",
+      "target": "J_Bip_L_Little3"
+    },
+    {
+      "source": "thumb_01_l",
+      "semantic": "leftThumbProximal",
+      "target": "J_Bip_L_Thumb1"
+    },
+    {
+      "source": "thumb_02_l",
+      "semantic": "leftThumbIntermediate",
+      "target": "J_Bip_L_Thumb2"
+    },
+    {
+      "source": "thumb_03_l",
+      "semantic": "leftThumbDistal",
+      "target": "J_Bip_L_Thumb3"
+    },
+    {
+      "source": "clavicle_r",
+      "semantic": "rightShoulder",
+      "target": "J_Bip_R_Shoulder"
+    },
+    {
+      "source": "upperarm_r",
+      "semantic": "rightUpperArm",
+      "target": "J_Bip_R_UpperArm"
+    },
+    {
+      "source": "lowerarm_r",
+      "semantic": "rightLowerArm",
+      "target": "J_Bip_R_LowerArm"
+    },
+    {
+      "source": "hand_r",
+      "semantic": "rightHand",
+      "target": "J_Bip_R_Hand"
+    },
+    {
+      "source": "thigh_r",
+      "semantic": "rightUpperLeg",
+      "target": "J_Bip_R_UpperLeg"
+    },
+    {
+      "source": "calf_r",
+      "semantic": "rightLowerLeg",
+      "target": "J_Bip_R_LowerLeg"
+    },
+    {
+      "source": "foot_r",
+      "semantic": "rightFoot",
+      "target": "J_Bip_R_Foot"
+    },
+    {
+      "source": "ball_r",
+      "semantic": "rightToes",
+      "target": "J_Bip_R_ToeBase"
+    },
+    {
+      "source": "index_01_r",
+      "semantic": "rightIndexProximal",
+      "target": "J_Bip_R_Index1"
+    },
+    {
+      "source": "index_02_r",
+      "semantic": "rightIndexIntermediate",
+      "target": "J_Bip_R_Index2"
+    },
+    {
+      "source": "index_03_r",
+      "semantic": "rightIndexDistal",
+      "target": "J_Bip_R_Index3"
+    },
+    {
+      "source": "middle_01_r",
+      "semantic": "rightMiddleProximal",
+      "target": "J_Bip_R_Middle1"
+    },
+    {
+      "source": "middle_02_r",
+      "semantic": "rightMiddleIntermediate",
+      "target": "J_Bip_R_Middle2"
+    },
+    {
+      "source": "middle_03_r",
+      "semantic": "rightMiddleDistal",
+      "target": "J_Bip_R_Middle3"
+    },
+    {
+      "source": "ring_01_r",
+      "semantic": "rightRingProximal",
+      "target": "J_Bip_R_Ring1"
+    },
+    {
+      "source": "ring_02_r",
+      "semantic": "rightRingIntermediate",
+      "target": "J_Bip_R_Ring2"
+    },
+    {
+      "source": "ring_03_r",
+      "semantic": "rightRingDistal",
+      "target": "J_Bip_R_Ring3"
+    },
+    {
+      "source": "pinky_01_r",
+      "semantic": "rightLittleProximal",
+      "target": "J_Bip_R_Little1"
+    },
+    {
+      "source": "pinky_02_r",
+      "semantic": "rightLittleIntermediate",
+      "target": "J_Bip_R_Little2"
+    },
+    {
+      "source": "pinky_03_r",
+      "semantic": "rightLittleDistal",
+      "target": "J_Bip_R_Little3"
+    },
+    {
+      "source": "thumb_01_r",
+      "semantic": "rightThumbProximal",
+      "target": "J_Bip_R_Thumb1"
+    },
+    {
+      "source": "thumb_02_r",
+      "semantic": "rightThumbIntermediate",
+      "target": "J_Bip_R_Thumb2"
+    },
+    {
+      "source": "thumb_03_r",
+      "semantic": "rightThumbDistal",
+      "target": "J_Bip_R_Thumb3"
+    }
+  ],
+  "excludedHumanoid": [
+    {
+      "semantic": "leftEye",
+      "name": "J_Adj_L_FaceEye"
+    },
+    {
+      "semantic": "rightEye",
+      "name": "J_Adj_R_FaceEye"
+    }
+  ],
+  "bindResidual": 3.1582142678843184e-8,
+  "pelvisHeightRatio": 1.1014959491440555,
+  "tPoseError": 0.000003915015804090281,
+  "restDirections": {
+    "torso": [
+      1e-8,
+      0.99835074,
+      -0.05740905
+    ],
+    "rightArm": [
+      -0.99868634,
+      -0.02461541,
+      0.04494091
+    ],
+    "leftArm": [
+      0.99868617,
+      -0.02461756,
+      0.04494333
+    ],
+    "rightLeg": [
+      0.03993179,
+      -0.99844753,
+      -0.03883262
+    ],
+    "leftLeg": [
+      -0.03993024,
+      -0.9984476,
+      -0.03883255
+    ]
+  },
+  "clips": {
+    "idle": {
+      "sourceClip": "Idle_Loop",
+      "duration": 2.5,
+      "samples": 76,
+      "tracks": 54,
+      "worldRotationError": 5.960464477539063e-8,
+      "snapshots": [
+        {
+          "time": 0,
+          "directions": {
+            "torso": [
+              -0.00345007,
+              0.99991601,
+              0.01249311
+            ],
+            "rightArm": [
+              -0.23329629,
+              -0.9706775,
+              -0.05794848
+            ],
+            "leftArm": [
+              0.24728339,
+              -0.96616096,
+              0.07337521
+            ],
+            "rightLeg": [
+              -0.05769357,
+              -0.96975833,
+              -0.23715024
+            ],
+            "leftLeg": [
+              0.10276692,
+              -0.97942694,
+              0.17367159
+            ]
+          },
+          "floorY": -0.01810886,
+          "sourceFloorY": -0.00010138
+        },
+        {
+          "time": 0.63333333,
+          "directions": {
+            "torso": [
+              -0.00944652,
+              0.99924006,
+              0.0378161
+            ],
+            "rightArm": [
+              -0.19789934,
+              -0.98020541,
+              -0.00576213
+            ],
+            "leftArm": [
+              0.22237155,
+              -0.96838834,
+              0.11302619
+            ],
+            "rightLeg": [
+              -0.05208093,
+              -0.96946491,
+              -0.2396359
+            ],
+            "leftLeg": [
+              0.10839136,
+              -0.97849592,
+              0.17549089
+            ]
+          },
+          "floorY": -0.0191585,
+          "sourceFloorY": -0.00009945
+        },
+        {
+          "time": 1.26666665,
+          "directions": {
+            "torso": [
+              -0.00285683,
+              0.99994611,
+              0.00998036
+            ],
+            "rightArm": [
+              -0.23467832,
+              -0.97048137,
+              -0.05560573
+            ],
+            "leftArm": [
+              0.24598419,
+              -0.96605893,
+              0.07887912
+            ],
+            "rightLeg": [
+              -0.04810249,
+              -0.97022305,
+              -0.23738869
+            ],
+            "leftLeg": [
+              0.11218426,
+              -0.9783853,
+              0.17371497
+            ]
+          },
+          "floorY": -0.01819169,
+          "sourceFloorY": -0.00009496
+        },
+        {
+          "time": 1.89999998,
+          "directions": {
+            "torso": [
+              -0.0100036,
+              0.99914254,
+              0.04017593
+            ],
+            "rightArm": [
+              -0.19665285,
+              -0.98043958,
+              -0.0081174
+            ],
+            "leftArm": [
+              0.22359619,
+              -0.96869771,
+              0.10784011
+            ],
+            "rightLeg": [
+              -0.05227653,
+              -0.96945546,
+              -0.23963153
+            ],
+            "leftLeg": [
+              0.10819843,
+              -0.97851718,
+              0.1754914
+            ]
+          },
+          "floorY": -0.01916107,
+          "sourceFloorY": -0.00009985
+        },
+        {
+          "time": 2.5,
+          "directions": {
+            "torso": [
+              -0.00321055,
+              0.99992902,
+              0.01147402
+            ],
+            "rightArm": [
+              -0.23410442,
+              -0.97055081,
+              -0.05680009
+            ],
+            "leftArm": [
+              0.24518794,
+              -0.9661747,
+              0.07993328
+            ],
+            "rightLeg": [
+              -0.05768771,
+              -0.96976468,
+              -0.23712568
+            ],
+            "leftLeg": [
+              0.10276156,
+              -0.97941241,
+              0.1737567
+            ]
+          },
+          "floorY": -0.01805417,
+          "sourceFloorY": -0.00010193
+        }
+      ]
+    },
+    "walk": {
+      "sourceClip": "Walk_Loop",
+      "duration": 1.3333333730697632,
+      "samples": 41,
+      "tracks": 54,
+      "worldRotationError": 5.960464477539063e-8,
+      "snapshots": [
+        {
+          "time": 0,
+          "directions": {
+            "torso": [
+              0.03984012,
+              0.99681383,
+              0.0691011
+            ],
+            "rightArm": [
+              -0.20140343,
+              -0.8594206,
+              0.46992859
+            ],
+            "leftArm": [
+              0.12637361,
+              -0.99044171,
+              -0.05527136
+            ],
+            "rightLeg": [
+              0.05057761,
+              -0.90113423,
+              -0.43057985
+            ],
+            "leftLeg": [
+              -0.02025843,
+              -0.94362436,
+              0.33039774
+            ]
+          },
+          "floorY": -0.00887394,
+          "sourceFloorY": -0.00474049
+        },
+        {
+          "time": 0.33333334,
+          "directions": {
+            "torso": [
+              -0.00085007,
+              0.99556143,
+              0.09411015
+            ],
+            "rightArm": [
+              -0.17995054,
+              -0.97488779,
+              0.131193
+            ],
+            "leftArm": [
+              0.20595942,
+              -0.97571262,
+              0.07460298
+            ],
+            "rightLeg": [
+              0.00291452,
+              -0.96406562,
+              -0.26564825
+            ],
+            "leftLeg": [
+              -0.07727967,
+              -0.99476442,
+              -0.06686996
+            ]
+          },
+          "floorY": 0.00138613,
+          "sourceFloorY": 0.00058486
+        },
+        {
+          "time": 0.66666669,
+          "directions": {
+            "torso": [
+              -0.04539269,
+              0.99660953,
+              0.0686218
+            ],
+            "rightArm": [
+              -0.12912654,
+              -0.98930873,
+              -0.06778333
+            ],
+            "leftArm": [
+              0.21321038,
+              -0.85179073,
+              0.47853305
+            ],
+            "rightLeg": [
+              0.01074559,
+              -0.94390906,
+              0.33003063
+            ],
+            "leftLeg": [
+              -0.06138972,
+              -0.90432902,
+              -0.42239831
+            ]
+          },
+          "floorY": -0.00920724,
+          "sourceFloorY": -0.00472025
+        },
+        {
+          "time": 1,
+          "directions": {
+            "torso": [
+              -0.00600669,
+              0.99555005,
+              0.09404262
+            ],
+            "rightArm": [
+              -0.20268951,
+              -0.97868354,
+              0.03309826
+            ],
+            "leftArm": [
+              0.1723934,
+              -0.97435812,
+              0.14459176
+            ],
+            "rightLeg": [
+              0.06646805,
+              -0.99612702,
+              -0.05755834
+            ],
+            "leftLeg": [
+              -0.0148699,
+              -0.96379965,
+              -0.26621256
+            ]
+          },
+          "floorY": 0.00400166,
+          "sourceFloorY": 0.00137565
+        },
+        {
+          "time": 1.33333337,
+          "directions": {
+            "torso": [
+              0.03984012,
+              0.99681383,
+              0.0691011
+            ],
+            "rightArm": [
+              -0.20140343,
+              -0.8594206,
+              0.46992859
+            ],
+            "leftArm": [
+              0.12637361,
+              -0.99044171,
+              -0.05527136
+            ],
+            "rightLeg": [
+              0.05057761,
+              -0.90113423,
+              -0.43057985
+            ],
+            "leftLeg": [
+              -0.02025843,
+              -0.94362436,
+              0.33039774
+            ]
+          },
+          "floorY": -0.00887394,
+          "sourceFloorY": -0.00474049
+        }
+      ]
+    },
+    "run": {
+      "sourceClip": "Jog_Fwd_Loop",
+      "duration": 0.9333333373069763,
+      "samples": 29,
+      "tracks": 54,
+      "worldRotationError": 5.16191365590357e-8,
+      "snapshots": [
+        {
+          "time": 0,
+          "directions": {
+            "torso": [
+              -0.02459495,
+              0.9338114,
+              0.35691926
+            ],
+            "rightArm": [
+              -0.00727752,
+              -0.74061226,
+              0.67189324
+            ],
+            "leftArm": [
+              0.56244678,
+              -0.61734015,
+              -0.55004069
+            ],
+            "rightLeg": [
+              0.01977084,
+              -0.39662294,
+              -0.91776868
+            ],
+            "leftLeg": [
+              -0.06032465,
+              -0.815021,
+              0.57628266
+            ]
+          },
+          "floorY": 0.06461537,
+          "sourceFloorY": 0.05651936
+        },
+        {
+          "time": 0.23333333,
+          "directions": {
+            "torso": [
+              -0.0287176,
+              0.92364754,
+              0.38216557
+            ],
+            "rightArm": [
+              -0.65355735,
+              -0.6909491,
+              -0.30895328
+            ],
+            "leftArm": [
+              0.22712505,
+              -0.94143406,
+              0.24923107
+            ],
+            "rightLeg": [
+              0.06345484,
+              -0.84377626,
+              0.53293068
+            ],
+            "leftLeg": [
+              -0.03203757,
+              -0.67521307,
+              -0.73692666
+            ]
+          },
+          "floorY": 0.25527305,
+          "sourceFloorY": 0.12631795
+        },
+        {
+          "time": 0.46666667,
+          "directions": {
+            "torso": [
+              0.00536688,
+              0.94564195,
+              0.32516535
+            ],
+            "rightArm": [
+              -0.55295208,
+              -0.65681851,
+              -0.51267285
+            ],
+            "leftArm": [
+              -0.02733092,
+              -0.71693248,
+              0.69660666
+            ],
+            "rightLeg": [
+              0.05845001,
+              -0.81463004,
+              0.57702816
+            ],
+            "leftLeg": [
+              -0.02207992,
+              -0.397491,
+              -0.91734039
+            ]
+          },
+          "floorY": 0.06405575,
+          "sourceFloorY": 0.05590898
+        },
+        {
+          "time": 0.69999999,
+          "directions": {
+            "torso": [
+              -0.0375647,
+              0.94552857,
+              0.32336454
+            ],
+            "rightArm": [
+              -0.16236081,
+              -0.90579697,
+              0.39137043
+            ],
+            "leftArm": [
+              0.71150829,
+              -0.68107468,
+              -0.17289661
+            ],
+            "rightLeg": [
+              0.03352277,
+              -0.67558819,
+              -0.73651669
+            ],
+            "leftLeg": [
+              -0.0641581,
+              -0.87704128,
+              0.47611167
+            ]
+          },
+          "floorY": 0.25516683,
+          "sourceFloorY": 0.12632011
+        },
+        {
+          "time": 0.93333334,
+          "directions": {
+            "torso": [
+              -0.02459495,
+              0.9338114,
+              0.35691926
+            ],
+            "rightArm": [
+              -0.00727752,
+              -0.74061226,
+              0.67189324
+            ],
+            "leftArm": [
+              0.55569935,
+              -0.62014197,
+              -0.55373475
+            ],
+            "rightLeg": [
+              0.01977084,
+              -0.39662294,
+              -0.91776868
+            ],
+            "leftLeg": [
+              -0.06032465,
+              -0.815021,
+              0.57628266
+            ]
+          },
+          "floorY": 0.06461537,
+          "sourceFloorY": 0.05651936
+        }
+      ]
+    },
+    "sword_idle": {
+      "sourceClip": "Sword_Idle",
+      "duration": 1.6666666269302368,
+      "samples": 51,
+      "tracks": 54,
+      "worldRotationError": 5.16191365590357e-8,
+      "snapshots": [
+        {
+          "time": 0,
+          "directions": {
+            "torso": [
+              -0.05837425,
+              0.99438442,
+              0.08827267
+            ],
+            "rightArm": [
+              -0.37307801,
+              -0.79224609,
+              -0.48286534
+            ],
+            "leftArm": [
+              0.3306569,
+              -0.76006642,
+              0.5594328
+            ],
+            "rightLeg": [
+              -0.13474039,
+              -0.96795425,
+              -0.21191883
+            ],
+            "leftLeg": [
+              0.0709761,
+              -0.97508774,
+              0.21015778
+            ]
+          },
+          "floorY": -0.05824335,
+          "sourceFloorY": -0.00012639
+        },
+        {
+          "time": 0.40000001,
+          "directions": {
+            "torso": [
+              -0.05935306,
+              0.99422455,
+              0.08941342
+            ],
+            "rightArm": [
+              -0.32101576,
+              -0.78696822,
+              -0.52690597
+            ],
+            "leftArm": [
+              0.35392395,
+              -0.75024029,
+              0.5584598
+            ],
+            "rightLeg": [
+              -0.09265763,
+              -0.97396727,
+              -0.20688722
+            ],
+            "leftLeg": [
+              0.1057238,
+              -0.97364965,
+              0.20206147
+            ]
+          },
+          "floorY": -0.05308099,
+          "sourceFloorY": -0.00012247
+        },
+        {
+          "time": 0.83333331,
+          "directions": {
+            "torso": [
+              -0.05837423,
+              0.99438442,
+              0.08827268
+            ],
+            "rightArm": [
+              -0.37307806,
+              -0.79224608,
+              -0.48286531
+            ],
+            "leftArm": [
+              0.3769997,
+              -0.73665947,
+              0.56143036
+            ],
+            "rightLeg": [
+              -0.05008071,
+              -0.9755488,
+              -0.21400108
+            ],
+            "leftLeg": [
+              0.15322417,
+              -0.96560424,
+              0.21007335
+            ]
+          },
+          "floorY": -0.056558,
+          "sourceFloorY": -0.00011695
+        },
+        {
+          "time": 1.26666665,
+          "directions": {
+            "torso": [
+              -0.05739542,
+              0.99454203,
+              0.08713158
+            ],
+            "rightArm": [
+              -0.318967,
+              -0.78755483,
+              -0.52727359
+            ],
+            "leftArm": [
+              0.35097999,
+              -0.74888095,
+              0.5621302
+            ],
+            "rightLeg": [
+              -0.09263712,
+              -0.97443072,
+              -0.20470257
+            ],
+            "leftLeg": [
+              0.10559734,
+              -0.97324791,
+              0.20405322
+            ]
+          },
+          "floorY": -0.05299759,
+          "sourceFloorY": -0.00012201
+        },
+        {
+          "time": 1.66666663,
+          "directions": {
+            "torso": [
+              -0.05837426,
+              0.99438442,
+              0.08827268
+            ],
+            "rightArm": [
+              -0.37307803,
+              -0.79224608,
+              -0.48286534
+            ],
+            "leftArm": [
+              0.3306569,
+              -0.76006641,
+              0.5594328
+            ],
+            "rightLeg": [
+              -0.13474044,
+              -0.96795423,
+              -0.21191891
+            ],
+            "leftLeg": [
+              0.07097607,
+              -0.97508772,
+              0.21015788
+            ]
+          },
+          "floorY": -0.05824333,
+          "sourceFloorY": -0.00012631
+        }
+      ]
+    },
+    "sword_attack": {
+      "sourceClip": "Sword_Attack",
+      "duration": 1.5333333015441895,
+      "samples": 47,
+      "tracks": 54,
+      "worldRotationError": 5.960464477539063e-8,
+      "snapshots": [
+        {
+          "time": 0,
+          "directions": {
+            "torso": [
+              -0.06687779,
+              0.99292078,
+              0.09816154
+            ],
+            "rightArm": [
+              -0.36569643,
+              -0.78900396,
+              -0.49369917
+            ],
+            "leftArm": [
+              0.34372627,
+              -0.76606079,
+              0.5431419
+            ],
+            "rightLeg": [
+              -0.10710971,
+              -0.97201137,
+              -0.20909663
+            ],
+            "leftLeg": [
+              0.09456881,
+              -0.97398863,
+              0.20591961
+            ]
+          },
+          "floorY": -0.0553799,
+          "sourceFloorY": -0.00010903
+        },
+        {
+          "time": 0.36666667,
+          "directions": {
+            "torso": [
+              0.10578705,
+              0.94752993,
+              0.30165566
+            ],
+            "rightArm": [
+              -0.68769106,
+              0.44353099,
+              -0.57477062
+            ],
+            "leftArm": [
+              0.97116884,
+              -0.23088098,
+              -0.05937218
+            ],
+            "rightLeg": [
+              -0.00058919,
+              -0.89324822,
+              0.44956341
+            ],
+            "leftLeg": [
+              0.17516113,
+              -0.91371235,
+              -0.36667195
+            ]
+          },
+          "floorY": -0.04118075,
+          "sourceFloorY": -0.00012546
+        },
+        {
+          "time": 0.76666665,
+          "directions": {
+            "torso": [
+              0.22000783,
+              0.92047326,
+              0.32299465
+            ],
+            "rightArm": [
+              0.7650782,
+              -0.56040307,
+              0.31718092
+            ],
+            "leftArm": [
+              -0.10473379,
+              0.18022857,
+              -0.97803297
+            ],
+            "rightLeg": [
+              -0.15222921,
+              -0.89038378,
+              0.42900231
+            ],
+            "leftLeg": [
+              0.16326936,
+              -0.56425378,
+              -0.80929648
+            ]
+          },
+          "floorY": -0.0712655,
+          "sourceFloorY": -0.00149509
+        },
+        {
+          "time": 1.16666663,
+          "directions": {
+            "torso": [
+              -0.05751034,
+              0.99586237,
+              0.07036118
+            ],
+            "rightArm": [
+              -0.55438073,
+              -0.79246474,
+              -0.25428653
+            ],
+            "leftArm": [
+              0.36006139,
+              -0.68208145,
+              0.63649092
+            ],
+            "rightLeg": [
+              -0.09690638,
+              -0.99480907,
+              -0.03104956
+            ],
+            "leftLeg": [
+              0.08460067,
+              -0.97849154,
+              0.18814099
+            ]
+          },
+          "floorY": -0.04655093,
+          "sourceFloorY": 0.00112625
+        },
+        {
+          "time": 1.5333333,
+          "directions": {
+            "torso": [
+              -0.06687779,
+              0.99292078,
+              0.09816154
+            ],
+            "rightArm": [
+              -0.36569643,
+              -0.78900396,
+              -0.49369917
+            ],
+            "leftArm": [
+              0.34372627,
+              -0.76606079,
+              0.5431419
+            ],
+            "rightLeg": [
+              -0.10710951,
+              -0.97201144,
+              -0.20909641
+            ],
+            "leftLeg": [
+              0.09456881,
+              -0.97398863,
+              0.20591961
+            ]
+          },
+          "floorY": -0.05538013,
+          "sourceFloorY": -0.00010903
+        }
+      ]
+    }
+  },
+  "grip": {
+    "attachmentBone": "J_Bip_R_Hand",
+    "handLocalAtSwordIdle": {
+      "index_01_r": [
+        0.06390625,
+        0.00556183,
+        -0.02144229
+      ],
+      "pinky_01_r": [
+        0.06326181,
+        0.00312471,
+        0.02679395
+      ],
+      "middle_01_r": [
+        0.06611258,
+        0.00837207,
+        -0.00477936
+      ],
+      "middle_02_r": [
+        0.0725968,
+        -0.0278537,
+        -0.00865511
+      ],
+      "middle_03_r": [
+        0.05117397,
+        -0.03516705,
+        -0.01161746
+      ],
+      "thumb_03_r": [
+        0.06570655,
+        -0.02335939,
+        -0.04983697
+      ]
+    }
+  },
+  "canonical": {
+    "status": "passed",
+    "path": "characters/_shared/character-maker/assets/fantasy-v1/feminine.glb",
+    "bytes": 4211708,
+    "sha256": "0cd1bb11c894c7c3295917f66faa2caa3f5360502863955584ccee6388f856a0",
+    "localError": 0,
+    "worldError": 0,
+    "inverseBindError": 0
+  },
+  "output": {
+    "path": "characters/_shared/character-maker/assets/fantasy-v1/feminine-motions.json",
+    "bytes": 1303996,
+    "sha256": "1a5edd80814e49597825ff25fec8b5c4e3bfef8a39fdd49948ede47c596d3443"
+  }
+}

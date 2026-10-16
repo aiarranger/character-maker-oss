@@ -1,0 +1,12 @@
+* { box-sizing: border-box; }
+html, body { margin: 0; min-height: 100%; }
+body { background: #faf7fa; color: #352e37; font-family: -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN", sans-serif; }
+button, input { font: inherit; }
+a { color: inherit; }
+
+/* Character Studio（/character-maker）だけに効く。classic は上の既定のまま。 */
+@property --accent { syntax: '<color>'; inherits: true; initial-value: #B0512A; }
+html:has([data-studio-page]), html:has([data-studio-page]) body { background: #F7F3EC; }
+@media (max-width: 899px) {
+  html:has([data-studio-page]) { scroll-padding-top: calc(52px + clamp(320px, 50svh, 640px)); }
+}

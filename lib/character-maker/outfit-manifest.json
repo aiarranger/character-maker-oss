@@ -1,0 +1,154 @@
+{
+  "field": "outfitPalette",
+  "default": "original",
+  "palettes": {
+    "pearl": {
+      "label": "真珠と青磁",
+      "main": "#E9E0C9",
+      "accent": "#4D9692",
+      "dark": "#294647",
+      "metal": "#D4BB76"
+    },
+    "ink": {
+      "label": "黒曜と銀",
+      "main": "#272B38",
+      "accent": "#9EAABD",
+      "dark": "#171B24",
+      "metal": "#BBC3CB"
+    },
+    "sage": {
+      "label": "深緑と真鍮",
+      "main": "#31594E",
+      "accent": "#BFAB6C",
+      "dark": "#213B35",
+      "metal": "#D9C08A"
+    },
+    "wine": {
+      "label": "ワインと黒",
+      "main": "#71364F",
+      "accent": "#CAB7C0",
+      "dark": "#282331",
+      "metal": "#D7BE94"
+    },
+    "cobalt": {
+      "label": "群青と白",
+      "main": "#284D85",
+      "accent": "#E1E5EE",
+      "dark": "#253143",
+      "metal": "#B8C5D4"
+    },
+    "ochre": {
+      "label": "琥珀と墨",
+      "main": "#B56B35",
+      "accent": "#EDD8A4",
+      "dark": "#39353A",
+      "metal": "#E5BB71"
+    }
+  },
+  "files": {
+    "fantasy:feminine": {
+      "pearl": {
+        "F00_002_01_Onepice_01_CLOTH": "outfit-fantasy-feminine-pearl-onepice.png",
+        "F00_002_01_Shoes_01_CLOTH": "outfit-fantasy-feminine-pearl-shoes.png"
+      },
+      "ink": {
+        "F00_002_01_Onepice_01_CLOTH": "outfit-fantasy-feminine-ink-onepice.png",
+        "F00_002_01_Shoes_01_CLOTH": "outfit-fantasy-feminine-ink-shoes.png"
+      },
+      "sage": {
+        "F00_002_01_Onepice_01_CLOTH": "outfit-fantasy-feminine-sage-onepice.png",
+        "F00_002_01_Shoes_01_CLOTH": "outfit-fantasy-feminine-sage-shoes.png"
+      },
+      "wine": {
+        "F00_002_01_Onepice_01_CLOTH": "outfit-fantasy-feminine-wine-onepice.png",
+        "F00_002_01_Shoes_01_CLOTH": "outfit-fantasy-feminine-wine-shoes.png"
+      },
+      "cobalt": {
+        "F00_002_01_Onepice_01_CLOTH": "outfit-fantasy-feminine-cobalt-onepice.png",
+        "F00_002_01_Shoes_01_CLOTH": "outfit-fantasy-feminine-cobalt-shoes.png"
+      },
+      "ochre": {
+        "F00_002_01_Onepice_01_CLOTH": "outfit-fantasy-feminine-ochre-onepice.png",
+        "F00_002_01_Shoes_01_CLOTH": "outfit-fantasy-feminine-ochre-shoes.png"
+      }
+    },
+    "fantasy:masculine": {
+      "pearl": {
+        "M00_001_01_Tops_01_CLOTH": "outfit-fantasy-masculine-pearl-tops.png",
+        "M00_001_01_Accessory_01_CLOTH": "outfit-fantasy-masculine-pearl-accessory.png",
+        "M00_001_01_Bottoms_01_CLOTH": "outfit-fantasy-masculine-pearl-bottoms.png",
+        "M00_001_01_Shoes_01_CLOTH": "outfit-fantasy-masculine-pearl-shoes.png"
+      },
+      "ink": {
+        "M00_001_01_Tops_01_CLOTH": "outfit-fantasy-masculine-ink-tops.png",
+        "M00_001_01_Accessory_01_CLOTH": "outfit-fantasy-masculine-ink-accessory.png",
+        "M00_001_01_Bottoms_01_CLOTH": "outfit-fantasy-masculine-ink-bottoms.png",
+        "M00_001_01_Shoes_01_CLOTH": "outfit-fantasy-masculine-ink-shoes.png"
+      },
+      "sage": {
+        "M00_001_01_Tops_01_CLOTH": "outfit-fantasy-masculine-sage-tops.png",
+        "M00_001_01_Accessory_01_CLOTH": "outfit-fantasy-masculine-sage-accessory.png",
+        "M00_001_01_Bottoms_01_CLOTH": "outfit-fantasy-masculine-sage-bottoms.png",
+        "M00_001_01_Shoes_01_CLOTH": "outfit-fantasy-masculine-sage-shoes.png"
+      },
+      "wine": {
+        "M00_001_01_Tops_01_CLOTH": "outfit-fantasy-masculine-wine-tops.png",
+        "M00_001_01_Accessory_01_CLOTH": "outfit-fantasy-masculine-wine-accessory.png",
+        "M00_001_01_Bottoms_01_CLOTH": "outfit-fantasy-masculine-wine-bottoms.png",
+        "M00_001_01_Shoes_01_CLOTH": "outfit-fantasy-masculine-wine-shoes.png"
+      },
+      "cobalt": {
+        "M00_001_01_Tops_01_CLOTH": "outfit-fantasy-masculine-cobalt-tops.png",
+        "M00_001_01_Accessory_01_CLOTH": "outfit-fantasy-masculine-cobalt-accessory.png",
+        "M00_001_01_Bottoms_01_CLOTH": "outfit-fantasy-masculine-cobalt-bottoms.png",
+        "M00_001_01_Shoes_01_CLOTH": "outfit-fantasy-masculine-cobalt-shoes.png"
+      },
+      "ochre": {
+        "M00_001_01_Tops_01_CLOTH": "outfit-fantasy-masculine-ochre-tops.png",
+        "M00_001_01_Accessory_01_CLOTH": "outfit-fantasy-masculine-ochre-accessory.png",
+        "M00_001_01_Bottoms_01_CLOTH": "outfit-fantasy-masculine-ochre-bottoms.png",
+        "M00_001_01_Shoes_01_CLOTH": "outfit-fantasy-masculine-ochre-shoes.png"
+      }
+    },
+    "comic:feminine": {
+      "pearl": {
+        "maker-outfit": "outfit-comic-feminine-pearl-outfit.png"
+      },
+      "ink": {
+        "maker-outfit": "outfit-comic-feminine-ink-outfit.png"
+      },
+      "sage": {
+        "maker-outfit": "outfit-comic-feminine-sage-outfit.png"
+      },
+      "wine": {
+        "maker-outfit": "outfit-comic-feminine-wine-outfit.png"
+      },
+      "cobalt": {
+        "maker-outfit": "outfit-comic-feminine-cobalt-outfit.png"
+      },
+      "ochre": {
+        "maker-outfit": "outfit-comic-feminine-ochre-outfit.png"
+      }
+    },
+    "comic:masculine": {
+      "pearl": {
+        "maker-outfit": "outfit-comic-masculine-pearl-outfit.png"
+      },
+      "ink": {
+        "maker-outfit": "outfit-comic-masculine-ink-outfit.png"
+      },
+      "sage": {
+        "maker-outfit": "outfit-comic-masculine-sage-outfit.png"
+      },
+      "wine": {
+        "maker-outfit": "outfit-comic-masculine-wine-outfit.png"
+      },
+      "cobalt": {
+        "maker-outfit": "outfit-comic-masculine-cobalt-outfit.png"
+      },
+      "ochre": {
+        "maker-outfit": "outfit-comic-masculine-ochre-outfit.png"
+      }
+    }
+  }
+}

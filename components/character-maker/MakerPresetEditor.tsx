@@ -25,7 +25,7 @@ const CharacterMakerScene = dynamic(() => import('./CharacterMakerScene'), {
 });
 
 type Category = 'body' | 'hair' | 'hairColor' | 'face' | 'eyes' | 'mouth' | 'expression' | 'motion';
-type Notice = { type: 'success' | 'error'; text: string } | null;
+type Notice = { type: 'success' | 'error'; text: string; link?: { href: string; label: string } } | null;
 type PendingCharacter = { kind: 'saved'; entry: SavedCharacter } | { kind: 'import'; document: CharacterMakerDocument };
 type HistoryState = { past: CharacterMakerDocument[]; future: CharacterMakerDocument[]; lastGroup: string; lastAt: number };
 export type MakerEditorHandle = { captureSession: () => MakerEditorSession | null };
@@ -119,7 +119,7 @@ function withConfig(document: CharacterMakerDocument, config: CharacterConfig): 
 }
 
 /** Mount with key={selectionKey}; only a matching explicitly supplied session is restored. */
-export default function MakerPresetEditor({ selectionKey, initialDocument, initialSession, initialEntry, onBackToList, embedded = false, editorRef, accent, look = '', groupLabel = '', poster }: MakerPresetEditorProps) {
+export default function MakerPresetEditor({ selectionKey, initialDocument, initialSession, initialEntry, onBackToList, embedded = false, editorRef, onPlay, accent, look = '', groupLabel = '', poster }: MakerPresetEditorProps) {
   const [initial] = useState(() => makeDocument(initialDocument.name, initialDocument.config));
   const session = initialSession?.selectionKey === selectionKey ? initialSession : undefined;
   const [document, setDocument] = useState<CharacterMakerDocument>(() => currentCharacterDocument(session?.document ?? (initialEntry ? makeDocument(initialEntry.name, initialEntry.config) : initial)));
@@ -159,6 +159,8 @@ export default function MakerPresetEditor({ selectionKey, initialDocument, initi
   const [ready, setReady] = useState(false);
   const [sceneError, setSceneError] = useState('');
   const [exporting, setExporting] = useState(false);
+  // yukikau.jp 用の .character.zip を作っている間（'download' は書き出し、'play' は「この姿で遊ぶ」）
+  const [packaging, setPackaging] = useState<'download' | 'play' | null>(null);
   const [notice, setNotice] = useState<Notice>(null);
   const [storageError, setStorageError] = useState('');
   const [importing, setImporting] = useState(false);
@@ -350,7 +352,7 @@ export default function MakerPresetEditor({ selectionKey, initialDocument, initi
   }, [category, detailsOpen]);
   // M5: 保存できたら保存ボタンに✓を1.6秒出す。成功の通知は4秒で消え、エラーは残る。
   useEffect(() => {
-    if (!notice || notice.type === 'error') return;
+    if (!notice || notice.type === 'error' || notice.link) return;
     if (notice.text.endsWith('保存しました。')) setSaveDone(true);
     const hide = window.setTimeout(() => setNotice(null), 4000);
     return () => window.clearTimeout(hide);
@@ -499,6 +501,20 @@ export default function MakerPresetEditor({ selectionKey, initialDocument, initi
     } catch (error) { if (alive.current) setNotice({ type: 'error', text: `GLBを書き出せませんでした。${errorMessage(error)}` }); }
     finally { if (alive.current) setExporting(false); }
   }
+  /** yukikau.jp 用（.character.zip）。'download' は保存して持ち込みへのリンクを出し、'play' は onPlay へ渡す。docs/yukikau-route.md */
+  async function exportYukikau(kind: 'download' | 'play') {
+    if (exporting || !ready) return;
+    setExporting(true); setPackaging(kind);
+    try {
+      const snapshot = makeDocument(document.name, config);
+      const { exportPresetYukikauPackage, downloadYukikauPackage, YUKIKAU_IMPORT_URL } = await import('../../lib/character-maker/yukikau-package');
+      const file = await exportPresetYukikauPackage(snapshot.name, snapshot.config, rootRef.current?.querySelector<HTMLCanvasElement>('#studio-stage canvas'));
+      if (!alive.current) return;
+      if (kind === 'play' && onPlay) { await onPlay(file); if (alive.current) setNotice({ type: 'success', text: 'この姿で遊べます。' }); }
+      else { downloadYukikauPackage(file); setNotice({ type: 'success', text: 'yukikau.jp 用のファイルを書き出しました。', link: { href: YUKIKAU_IMPORT_URL, label: 'yukikau.jp で読み込む' } }); }
+    } catch (error) { if (alive.current) setNotice({ type: 'error', text: `yukikau.jp 用のファイルを作れませんでした。${errorMessage(error)}` }); }
+    finally { if (alive.current) { setExporting(false); setPackaging(null); } }
+  }
 
   function shapeChoices<T extends string>(items: Array<[T, string]>, selected: T, onChange: (value: T) => void, kind: Category) {
     return <div className={styles.originalHairChoices} role="group" aria-label={activeCategory.label}>
@@ -553,11 +569,13 @@ export default function MakerPresetEditor({ selectionKey, initialDocument, initi
       <span className={styles.historyStatus} aria-live="polite">{dirty && <span className={styles.dirtyChip}>未保存</span>}</span>
       <span className={styles.srOnly} aria-live="polite">{historyAnnouncement}</span>
       <div className={styles.saveArea}>
+        {onPlay && <button type="button" className={styles.primary} disabled={!ready || exporting} onClick={() => exportYukikau('play')}>{packaging === 'play' ? '姿を作っています…' : 'この姿で遊ぶ'}</button>}
         <button type="button" className={styles.primary} data-done={saveDone} disabled={!hydrated} onClick={() => save()}><span className={styles.primaryCheck} aria-hidden="true"><StudioIcon name="check" size={18} /></span>保存する</button>
         <details className={styles.workspaceMenu} data-menu><summary><span className={styles.menuLabel}>書き出し</span><StudioIcon name="download" /></summary><div className={styles.menuPanel} data-menu-panel>
           <strong>ファイルに書き出す</strong>
-          <button type="button" disabled={!ready || exporting} onClick={exportGlb}>{exporting ? 'GLBを書き出し中…' : '3DモデルのGLB'}</button>
+          <button type="button" disabled={!ready || exporting} onClick={exportGlb}>{exporting && !packaging ? 'GLBを書き出し中…' : '3DモデルのGLB'}</button>
           <button type="button" onClick={exportJson}>編集用のJSON</button>
+          <button type="button" disabled={!ready || exporting} onClick={() => exportYukikau('download')}>{packaging === 'download' ? '書き出し中…' : 'yukikau.jp 用（.character.zip）'}</button>
           <small>JSONは編集を続けるための設定です。GLBにはモデルと5種類の動作、のけぞり・＞＜が入ります。</small>
         </div></details>
         <details className={`${styles.workspaceMenu} ${styles.moreMenu}`} data-menu><summary aria-label="その他の操作"><StudioIcon name="more" /><span className={styles.srOnly}>•••</span></summary><div className={styles.menuPanel} data-menu-panel>
@@ -591,7 +609,7 @@ export default function MakerPresetEditor({ selectionKey, initialDocument, initi
     </section>
     {/* 通知はステージに重ねるが、3Dプレビューの section の外に置く（section 内の alert は描画エラーだけ）。 */}
     <div className={styles.toasts}>
-        {notice && <div className={notice.type === 'error' ? styles.error : styles.success} role={notice.type === 'error' ? 'alert' : 'status'}>{notice.type !== 'error' && <StudioIcon name="check" size={18} />}<span>{notice.text}</span><button type="button" aria-label="通知を閉じる" onClick={() => setNotice(null)}><StudioIcon name="close" size={16} /></button></div>}
+        {notice && <div className={notice.type === 'error' ? styles.error : styles.success} role={notice.type === 'error' ? 'alert' : 'status'}>{notice.type !== 'error' && <StudioIcon name="check" size={18} />}<span>{notice.text}{notice.link && <> <a href={notice.link.href} target="_blank" rel="noopener">{notice.link.label}</a></>}</span><button type="button" aria-label="通知を閉じる" onClick={() => setNotice(null)}><StudioIcon name="close" size={16} /></button></div>}
         {storageError && <div className={styles.error} role="alert"><span>{storageError}</span></div>}
     </div>
     <div className={styles.rail}>

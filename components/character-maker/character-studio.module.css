@@ -1,6 +1,15 @@
 /* Character Studio（/character-maker）。docs/studio-quality-spec.md §3〜§6。
    classic（/character-maker/classic）は character-maker.module.css を使い、このファイルの影響を受けない。 */
 
+/* ── 全体の指定（埋め込み先がこのリポジトリの globals.css を読まなくても同じに見えるよう、Studio に要るものはここに置く） ── */
+@property --accent { syntax: '<color>'; inherits: true; initial-value: #B0512A; }
+:global(html):has(.selectionStudio), :global(html):has(.selectionStudio) :global(body) { background: #F7F3EC; }
+:global(html):has(.selectionStudio) :global(body) { margin: 0; }
+@media (max-width: 899px) {
+  :global(html):has(.selectionStudio) { scroll-padding-top: calc(52px + clamp(320px, 50svh, 640px)); }
+}
+:where(.shell) a { color: inherit; }
+
 /* ── §4 トークン ───────────────────────────────────────── */
 .shell, .selectionStudio {
   --paper: #F7F3EC; --paper-2: #FBF9F5; --card: #FFFFFF;

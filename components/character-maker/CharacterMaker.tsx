@@ -415,13 +415,15 @@ export default function CharacterMaker({ originals, onPlay, initialName }: { ori
     setExporting(true);
     try {
       const snapshot = makeDocument(document.name, config);
-      const { exportCharacterGlb } = await import('../../lib/character-maker/assembly');
-      const bytes = await exportCharacterGlb(snapshot.config);
-      const filename = `${downloadFileName(snapshot.name)}.glb`;
       if (onPlay) {
-        await onPlay(new File([bytes], filename, { type: 'model/gltf-binary' }));
+        // ゲームへの組み込みでは、yukikau.jp がそのまま読める .character.zip を渡す（+Z の正面・背丈つき）。docs/yukikau-route.md
+        const { exportPresetYukikauPackage } = await import('../../lib/character-maker/yukikau-package');
+        await onPlay(await exportPresetYukikauPackage(snapshot.name, snapshot.config, previewColumn.current?.querySelector('canvas')));
         setNotice({ type: 'success', text: 'この姿で遊べます。' });
       } else {
+        const { exportCharacterGlb } = await import('../../lib/character-maker/assembly');
+        const bytes = await exportCharacterGlb(snapshot.config);
+        const filename = `${downloadFileName(snapshot.name)}.glb`;
         download(new Blob([bytes], { type: 'model/gltf-binary' }), filename);
         setNotice({ type: 'success', text: '3DモデルのGLBを書き出しました。' });
       }

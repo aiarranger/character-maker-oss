@@ -4,9 +4,4 @@ body { background: #faf7fa; color: #352e37; font-family: -apple-system, BlinkMac
 button, input { font: inherit; }
 a { color: inherit; }
 
-/* Character Studio（/character-maker）だけに効く。classic は上の既定のまま。 */
-@property --accent { syntax: '<color>'; inherits: true; initial-value: #B0512A; }
-html:has([data-studio-page]), html:has([data-studio-page]) body { background: #F7F3EC; }
-@media (max-width: 899px) {
-  html:has([data-studio-page]) { scroll-padding-top: calc(52px + clamp(320px, 50svh, 640px)); }
-}
+/* Character Studio（/character-maker）に要る全体の指定は character-studio.module.css に置く（埋め込み先が globals.css を読まなくても同じに見えるように）。 */

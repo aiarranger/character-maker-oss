@@ -1,4 +1,4 @@
-import { AnimationClip, Group, InterpolateDiscrete, Material, Mesh, NumberKeyframeTrack, PropertyBinding, Quaternion, Texture, TextureLoader, Vector3, VectorKeyframeTrack, type KeyframeTrack, type Object3D } from 'three';
+import { AnimationClip, BufferAttribute, Group, InterpolateDiscrete, Material, Mesh, NumberKeyframeTrack, PropertyBinding, Quaternion, Texture, TextureLoader, Vector3, VectorKeyframeTrack, type KeyframeTrack, type Object3D } from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { GLTFExporter } from 'three/examples/jsm/exporters/GLTFExporter.js';
 import { MeshoptDecoder } from 'three/examples/jsm/libs/meshopt_decoder.module.js';
@@ -17,6 +17,13 @@ import { createHurtFace, worldForward } from './hurt-face';
 import { HIT_CLIP, HURT_FACE_CLIP, HURT_FACE_NODE } from './hurt';
 
 export type OriginalGlbVariant = 'standard' | 'armed';
+/** 書き出しの選択。何も渡さなければ、これまでどおり（動作で通常用・武器用を選び、元の量子化のまま）。
+ * yukikau.jp 用（lib/character-maker/yukikau-package.ts）は variant 'standard' と dequantize を渡す */
+export type OriginalGlbExportOptions = {
+  variant?: OriginalGlbVariant;
+  /** 頂点の位置・法線・UV（モーフも）を 32bit 浮動小数に戻し、KHR_mesh_quantization を使わない GLB にする */
+  dequantize?: boolean;
+};
 // The hand/sword switches are preview-only: an armed GLB shows its sword and closed hand all the time
 // (also through 'hit'), and a standard GLB has neither. The ＞＜ node's scale track is kept.
 const ORIGINAL_GLB_VISIBILITY_TRACKS = ORIGINAL_VISIBILITY_TRACKS;
@@ -146,6 +153,41 @@ function applyStaticHeadTurn(model: Object3D, degrees: number) {
   head.quaternion.premultiply(new Quaternion().setFromAxisAngle(axis, degrees * Math.PI / 180));
 }
 
+type AnyAttribute = Mesh['geometry']['attributes'][string];
+const QUANTIZABLE_ATTRIBUTE = /^(position|normal|tangent|uv\d*)$/;
+/** 整数（正規化つきを含む）の属性を、同じ値の Float32 に置き換える（getX などが正規化を戻す） */
+function floatAttribute(attribute: AnyAttribute): AnyAttribute {
+  if (attribute.array instanceof Float32Array) return attribute;
+  const size = attribute.itemSize, values = new Float32Array(attribute.count * size);
+  const read = [attribute.getX, attribute.getY, attribute.getZ, attribute.getW];
+  for (let index = 0; index < attribute.count; index++) for (let component = 0; component < size; component++) {
+    values[index * size + component] = read[component].call(attribute, index);
+  }
+  const result = new BufferAttribute(values, size);
+  result.name = attribute.name;
+  return result;
+}
+/** 書き出す木の形だけを、浮動小数の形のコピーに差し替える（プレビューや読み込み元の形は変えない） */
+function dequantizeForExport(root: Object3D) {
+  const copies = new Map<Mesh['geometry'], Mesh['geometry']>();
+  root.traverse(object => {
+    if (!(object instanceof Mesh)) return;
+    const source = object.geometry;
+    if (!copies.has(source)) {
+      const geometry = source.clone();
+      for (const name of Object.keys(geometry.attributes)) {
+        if (QUANTIZABLE_ATTRIBUTE.test(name)) geometry.setAttribute(name, floatAttribute(geometry.getAttribute(name)));
+      }
+      for (const name of Object.keys(geometry.morphAttributes)) {
+        geometry.morphAttributes[name] = geometry.morphAttributes[name].map(floatAttribute);
+      }
+      copies.set(source, geometry);
+    }
+    object.geometry = copies.get(source)!;
+  });
+  return [...copies.values()];
+}
+
 function disposeOwnedScenes(materials: Set<Material>, ...scenes: Object3D[]) {
   const geometries = new Set<Mesh['geometry']>();
   const textures = new Set<Texture>();
@@ -166,11 +208,11 @@ function disposeOwnedScenes(materials: Set<Material>, ...scenes: Object3D[]) {
 }
 
 /** Export a fresh source instance; never sample or mutate the live preview. */
-export async function exportOriginalCharacterGlb(character: OriginalCharacter, document: OriginalDocument): Promise<ArrayBuffer> {
+export async function exportOriginalCharacterGlb(character: OriginalCharacter, document: OriginalDocument, options: OriginalGlbExportOptions = {}): Promise<ArrayBuffer> {
   document = validateOriginalDocument(document);
   resolveOriginalCharacter(document, [character]);
   const weaponId = selectedMakerWeaponId(document.config);
-  const variant: OriginalGlbVariant = ['sword_idle', 'sword_attack'].includes(document.config.motion) ? 'armed' : 'standard';
+  const variant: OriginalGlbVariant = options.variant ?? (['sword_idle', 'sword_attack'].includes(document.config.motion) ? 'armed' : 'standard');
   const asset = originalModelAsset(character, document.config.appearance);
   const sourceUrl = asset.url;
   const sourceSha = asset.sha256;
@@ -214,6 +256,7 @@ export async function exportOriginalCharacterGlb(character: OriginalCharacter, d
   let hair: ReturnType<typeof configureOriginalHair> | undefined;
   let detachedNativeHand: Object3D | undefined;
   const ownedMaterials = new Set<Material>();
+  let floatGeometries: Mesh['geometry'][] = [];
   try {
     model.traverse(object => {
       if (!(object instanceof Mesh)) return;
@@ -281,10 +324,14 @@ export async function exportOriginalCharacterGlb(character: OriginalCharacter, d
         },
       },
     };
+    if (options.dequantize) floatGeometries = dequantizeForExport(root);
     const result = await new GLTFExporter().parseAsync(root, {
       binary: true, trs: true, animations, onlyVisible: false,
     });
     if (!(result instanceof ArrayBuffer)) throw new Error('GLBの書き出しに失敗しました。');
+    if (options.dequantize && /KHR_mesh_quantization/.test(new TextDecoder().decode(new Uint8Array(result, 20, new DataView(result).getUint32(12, true))))) {
+      throw new Error('量子化を外したGLBを書き出せませんでした。');
+    }
     if (result.byteLength > 25 * 1024 * 1024) throw new Error('書き出したGLBが25MiBを超えています。');
     return result;
   } finally {
@@ -293,5 +340,6 @@ export async function exportOriginalCharacterGlb(character: OriginalCharacter, d
     humanParts?.dispose();
     hair?.dispose();
     disposeOwnedScenes(ownedMaterials, root, gltf.scene, ...(detachedNativeHand ? [detachedNativeHand] : []));
+    floatGeometries.forEach(geometry => geometry.dispose());
   }
 }

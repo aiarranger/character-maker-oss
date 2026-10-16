@@ -1,6 +1,6 @@
 {
   "name": "@aiarranger/character-maker",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "description": "Character Studio: a browser-based 3D character creator that exports game-ready GLB (idle/walk/run/sword/hit, >< face).",
   "license": "MIT",

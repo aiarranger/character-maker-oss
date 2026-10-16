@@ -50,6 +50,13 @@ http://127.0.0.1:4284/character-maker を開きます。開発サーバーは `1
 | `/character-maker` | Character Studio（16キャラから選んでカスタマイズ） |
 | `/character-maker/classic` | 旧キャラメイク画面（ゲームに埋め込む `CharacterMaker` コンポーネントの単体表示） |
 
+## yukikau.jp で遊ぶ / Play on yukikau.jp
+
+作ったキャラは、ゲーム [yukikau.jp](https://yukikau.jp/) でそのまま遊べます。
+
+1. **ダウンロードして読み込む**: 「書き出し」→ **yukikau.jp 用（.character.zip）** を保存し、表示される「yukikau.jp で読み込む」（`https://yukikau.jp/play?import=1`）で、そのファイルを選びます。中身は yukikau.jp の持ち込み形式（`character.json`・`model.glb`・`thumbnail.png`）で、向き（+Z）・身長・待機／歩く／走る・のけぞり・＞＜ が入ります。
+2. **yukikau.jp の中で作る**: yukikau.jp の入口の「キャラメイク」（`/play?make=1`）で、この Character Studio がそのまま開きます。**この姿で遊ぶ** を押すと、作ったキャラでゲームが始まります。
+
 ## ゲームで使う / Use in your game
 
 画面右上の「書き出し」から **3Dモデル（GLB）** と **編集設定（JSON）** を保存できます。GLB は three.js・Babylon.js・Unity（glTFast）などでそのまま読めます。素材は光源を使わない unlit（`KHR_materials_unlit`）です。
@@ -104,13 +111,35 @@ renderer.setAnimationLoop(() => { mixer.update(clock.getDelta()); renderer.rende
 
 ### React コンポーネントとして埋め込む
 
-`components/character-maker/CharacterMaker.tsx`（旧画面）は、ほかの Next.js アプリへ埋め込めます。`onPlay` を渡すと「この姿で遊ぶ」ボタンが出て、書き出した GLB の `File` を受け取れます。
+Studio（16キャラ、のけぞり・＞＜つき）は `CharacterStudio` として、ほかの Next.js アプリへ埋め込めます。`onPlay` を渡すと各エディタに「この姿で遊ぶ」が出て、yukikau.jp 用の `.character.zip` の `File` を受け取れます。Studio は画面いっぱい（`100dvh`）で、このリポジトリの `globals.css` やレイアウトは要りません（置き場所は埋め込み先が決めます）。
+
+```tsx
+// next.config: transpilePackages: ['@aiarranger/character-maker']
+import CharacterStudio from '@aiarranger/character-maker/CharacterStudio';
+
+<CharacterStudio onPlay={async file => startGame(file)} />
+```
+
+props は `onPlay?: (file: File) => void | Promise<void>`・`initialName?: string`（プリセットの最初の名前）・`className?: string` です。
+
+旧画面の `CharacterMaker`（`components/character-maker/CharacterMaker.tsx`）もそのまま使えます。`onPlay` には書き出した GLB の `File` が渡ります。
 
 ```tsx
 <CharacterMaker originals={[]} initialName="勇者" onPlay={async file => startGame(await file.arrayBuffer())} />
 ```
 
-部品の配信（`/maker-assets/…`・`/api/character-maker/assets/…`）は `server/assets.mjs` を使います。取り込み用の tgz は `pnpm pack:vendor` で作れます（`tools/pack.mjs`）。
+部品の配信は `@aiarranger/character-maker/server` を使います。取り込み用の tgz は `pnpm pack:vendor` で作れます（`tools/pack.mjs`、50 MiB 未満）。
+
+- `serveMakerAsset(req, res)`: `/maker-assets/…`・`/character-maker/…`・`/portraits/…`・`/review-swing-2026-10-02/…`・`/api/character-maker/assets/…`・`/models/…` を届けます（開発サーバー用）。
+- `await ensureStudioModels(cacheDir)`: オリジナル4体の表示用モデル（`/models/`、約97MB）は tgz に入りません。公開リポジトリの固定コミットから取り、SHA-256 を確かめて `cacheDir` に置きます（足りないもの・違うものだけ）。一覧はパッケージの `studio-models.json` です。まだ取っていないモデルは、`serveMakerAsset` が頼まれたときにも取ります。
+- `copyMakerAssets(outRoot)`: 静的書き出し用。部品と、`ensureStudioModels` で用意したモデルを `outRoot` へ写します。
+
+```js
+import { ensureStudioModels, serveMakerAsset, copyMakerAssets } from '@aiarranger/character-maker/server';
+await ensureStudioModels('.cache/character-maker-models');
+// 開発サーバー: if (serveMakerAsset(req, res)) return;
+// 静的書き出し: copyMakerAssets('out');
+```
 
 ## フォルダ / Layout
 

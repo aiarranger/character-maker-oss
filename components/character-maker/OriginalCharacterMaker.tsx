@@ -25,7 +25,7 @@ import { StudioIcon, type StudioIconName } from './StudioIcon';
 import { paintRangeFills } from '../../lib/character-maker/studio-palette';
 
 const OriginalScene = dynamic(() => import('./OriginalCharacterScene'), { ssr: false });
-type Notice = { error?: boolean; text: string } | null;
+type Notice = { error?: boolean; text: string; link?: { href: string; label: string } } | null;
 type Pending = { kind: 'source'; character: OriginalCharacter } | { kind: 'saved'; entry: SavedOriginal } | { kind: 'import'; document: OriginalDocument };
 type Category = 'body' | 'hair' | 'head' | 'ears' | 'eyes' | 'mouth' | 'color' | 'expression' | 'motion';
 
@@ -86,7 +86,7 @@ type Props = {
 
 const MOTION_ICONS: Record<OriginalConfig['motion'], StudioIconName> = { idle: 'idle', walk: 'walk', run: 'run', sword_idle: 'guard', sword_attack: 'swing' };
 
-export default function OriginalCharacterMaker({ characters, initialCharacterId, initialEntry, initialSession, onBackToList, embedded = false, editorRef, accent, look = '', groupLabel = '', poster }: Props) {
+export default function OriginalCharacterMaker({ characters, initialCharacterId, initialEntry, initialSession, onBackToList, embedded = false, editorRef, onPlay, accent, look = '', groupLabel = '', poster }: Props) {
   const initialCharacter = characters.find(item => item.id === initialCharacterId) ?? characters[0];
   const matchingSession = initialSession?.history.present.characterId === initialCharacter.id ? initialSession : undefined;
   const [history, setHistory] = useState(() => matchingSession ? currentOriginalHistory(matchingSession.history) : createEditHistory(initialEntry ? validateOriginalDocument(initialEntry) : makeOriginalDocument(initialCharacter)));
@@ -108,6 +108,8 @@ export default function OriginalCharacterMaker({ characters, initialCharacterId,
   const [ready, setReady] = useState(false), [sceneError, setSceneError] = useState(''), [storageError, setStorageError] = useState('');
   const [notice, setNotice] = useState<Notice>(null);
   const [exporting, setExporting] = useState(false), [importing, setImporting] = useState(false);
+  // yukikau.jp 用の .character.zip を作っている間（'download' は書き出し、'play' は「この姿で遊ぶ」）
+  const [packaging, setPackaging] = useState<'download' | 'play' | null>(null);
   const [pendingWeaponMotion, setPendingWeaponMotion] = useState<ArmedWeaponMotion | null>(null);
   const weaponPicker = useRef<WeaponPickerHandle>(null);
   const [entered, setEntered] = useState(false), [saveDone, setSaveDone] = useState(false);
@@ -321,7 +323,7 @@ export default function OriginalCharacterMaker({ characters, initialCharacterId,
   }, [detailsOpen]);
   // M5: 保存できたら保存ボタンに✓を1.6秒出す。成功の通知は4秒で消え、エラーは残る。
   useEffect(() => {
-    if (!notice || notice.error) return;
+    if (!notice || notice.error || notice.link) return;
     if (notice.text.endsWith('を保存しました。')) setSaveDone(true);
     const hide = window.setTimeout(() => setNotice(null), 4000);
     return () => window.clearTimeout(hide);
@@ -444,6 +446,19 @@ export default function OriginalCharacterMaker({ characters, initialCharacterId,
     } catch (error) { setNotice({ error: true, text: message(error) }); }
     finally { setExporting(false); }
   }
+  /** yukikau.jp 用（.character.zip）。'download' は保存して持ち込みへのリンクを出し、'play' は onPlay へ渡す。docs/yukikau-route.md */
+  async function exportYukikau(kind: 'download' | 'play') {
+    if (!character || !ready || exporting) return;
+    setExporting(true); setPackaging(kind);
+    try {
+      const clean = validateOriginalDocument(document);
+      const { exportOriginalYukikauPackage, downloadYukikauPackage, YUKIKAU_IMPORT_URL } = await import('../../lib/character-maker/yukikau-package');
+      const file = await exportOriginalYukikauPackage(character, clean, rootRef.current?.querySelector<HTMLCanvasElement>('#studio-stage canvas'));
+      if (kind === 'play' && onPlay) { await onPlay(file); setNotice({ text: 'この姿で遊べます。' }); }
+      else { downloadYukikauPackage(file); setNotice({ text: 'yukikau.jp 用のファイルを書き出しました。', link: { href: YUKIKAU_IMPORT_URL, label: 'yukikau.jp で読み込む' } }); }
+    } catch (error) { setNotice({ error: true, text: message(error) }); }
+    finally { setExporting(false); setPackaging(null); }
+  }
 
   if (!hydrated) return <section className={`${styles.shell} ${embedded ? styles.liveEditor : ''} ${styles.editorLoading}`} aria-busy="true"><span className={styles.srOnly} role="status">編集内容を確認しています…</span></section>;
 
@@ -462,11 +477,13 @@ export default function OriginalCharacterMaker({ characters, initialCharacterId,
       <span className={styles.historyStatus} aria-live="polite">{dirty && <span className={styles.dirtyChip}>未保存</span>}</span>
       <span className={styles.srOnly} aria-live="polite">{historyAnnouncement}</span>
       <div className={styles.saveArea}>
+        {onPlay && <button type="button" className={styles.primary} disabled={!character || !ready || exporting} onClick={() => exportYukikau('play')}>{packaging === 'play' ? '姿を作っています…' : 'この姿で遊ぶ'}</button>}
         <button type="button" className={styles.primary} data-done={saveDone} onClick={() => save()}><span className={styles.primaryCheck} aria-hidden="true"><StudioIcon name="check" size={18} /></span>保存する</button>
         <details className={styles.workspaceMenu} data-menu><summary><span className={styles.menuLabel}>書き出し</span><StudioIcon name="download" /></summary><div className={styles.menuPanel} data-menu-panel role="group" aria-label="設定とモデルの書き出し">
           <strong>ファイルに書き出す</strong>
-          <button type="button" aria-describedby="original-glb-help" disabled={!character || !ready || exporting} onClick={exportGlb}>{exporting ? '書き出し中…' : '3Dモデル（GLB）'}</button>
+          <button type="button" aria-describedby="original-glb-help" disabled={!character || !ready || exporting} onClick={exportGlb}>{exporting && !packaging ? '書き出し中…' : '3Dモデル（GLB）'}</button>
           <button type="button" onClick={exportJson}>編集設定（JSON）</button>
+          <button type="button" disabled={!character || !ready || exporting} onClick={() => exportYukikau('download')}>{packaging === 'download' ? '書き出し中…' : 'yukikau.jp 用（.character.zip）'}</button>
           <small id="original-glb-help">{['sword_idle', 'sword_attack'].includes(config.motion) ? 'GLB：選んだ武器と、構える・振るの2動作。' : 'GLB：待機・歩く・走るの3動作。'}{embedded && 'のけぞりと＞＜の顔も入ります。'} JSONには編集・再生設定が入り、読み込み後も5種類の動作を選べます。</small>
         </div></details>
         <details className={`${styles.workspaceMenu} ${styles.moreMenu}`} data-menu><summary aria-label="その他の操作"><StudioIcon name="more" /><span className={styles.srOnly}>•••</span></summary><div className={styles.menuPanel} data-menu-panel>
@@ -498,7 +515,7 @@ export default function OriginalCharacterMaker({ characters, initialCharacterId,
     </section>
     {/* 通知はステージに重ねるが、3Dプレビューの section の外に置く（section 内の alert は描画エラーだけ）。 */}
     <div className={styles.toasts}>
-        {notice && <div className={notice.error ? styles.error : styles.success} role={notice.error ? 'alert' : 'status'}>{!notice.error && <StudioIcon name="check" size={18} />}<span>{notice.text}</span><button type="button" aria-label="通知を閉じる" onClick={() => setNotice(null)}><StudioIcon name="close" size={16} /></button></div>}
+        {notice && <div className={notice.error ? styles.error : styles.success} role={notice.error ? 'alert' : 'status'}>{!notice.error && <StudioIcon name="check" size={18} />}<span>{notice.text}{notice.link && <> <a href={notice.link.href} target="_blank" rel="noopener">{notice.link.label}</a></>}</span><button type="button" aria-label="通知を閉じる" onClick={() => setNotice(null)}><StudioIcon name="close" size={16} /></button></div>}
         {storageError && <div className={styles.error} role="alert"><span>{storageError}</span></div>}
     </div>
     <div className={styles.rail}>

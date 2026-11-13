@@ -1,10 +1,10 @@
-// three r178 の型（@types/three 0.178.1 の src/math/Box3.d.ts。DefinitelyTyped、MIT、lib/map-expansion/kit/types/LICENSE）の写し（段階4 Z の単位 Z-Y）。import の先だけを替えた。中身は変えない。
-import { BufferAttribute } from "../../map-expansion/kit/types/core/BufferAttribute.mjs";
-import { Object3D } from "../../map-expansion/kit/types/core/Object3D.mjs";
+// three r178 の型（@types/three 0.178.1 の src/math/Box3.d.ts。DefinitelyTyped、MIT、lib/engine/r178/LICENSE-types）の写し（aisns の段階4 Z の単位 Z-Y から写した）。import の先だけを替えた（写していない型は ./outside.d.mts）。中身は変えない。
+import { BufferAttribute } from "./outside.mjs";
+import { Object3D } from "./outside.mjs";
 import { Matrix4 } from "./Matrix4.mjs";
 import { Plane } from "./Plane.mjs";
 import { Sphere } from "./Sphere.mjs";
-import { Triangle } from "./Triangle.mjs";
+import { Triangle } from "./outside.mjs";
 import { Vector3 } from "./Vector3.mjs";
 
 export class Box3 {

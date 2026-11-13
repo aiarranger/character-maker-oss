@@ -18,4 +18,10 @@ The original characters (ハル, ナミ, ルクス, モカ) and the food weapons
 
 ## npm dependencies
 
-Installed by the package manager, not bundled in this repository: Next.js, React, three.js, @react-three/fiber, @react-three/drei (MIT); sharp, @gltf-transform/* and others for the build tools (various permissive licenses). See each package's LICENSE in `node_modules` after `pnpm install`.
+Installed by the package manager, not bundled in this repository: Next.js, React (MIT); three.js, sharp, @gltf-transform/* and others for the asset build tools and tests only (various permissive licenses). See each package's LICENSE in `node_modules` after `pnpm install`.
+
+## Copied third-party code
+
+- **three.js r178** (MIT, Copyright © 2010-2025 three.js authors): the math classes in `lib/engine/r178/*.mjs`, and the OrbitControls, Camera and Object3D logic in `lib/engine/orbit-controls.ts`, `camera.ts`, `node.ts` (copied through the aisns project).
+- **@types/three 0.178.1** (DefinitelyTyped, MIT, Copyright (c) Microsoft Corporation): the type declarations `lib/engine/r178/*.d.mts`. License text: `lib/engine/r178/LICENSE-types`.
+- The Rust crates in `vendor/rust/` (island-kit and its character crates) are copied from the AI Arranger characters project (MIT).

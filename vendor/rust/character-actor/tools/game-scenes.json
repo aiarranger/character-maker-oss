@@ -1,0 +1,48 @@
+[
+  {"name":"stop-attack","seconds":1.1,"armed":0.85,"do":[{"at":0,"start":"attack","opts":{"seconds":0.75}},{"at":0.33,"stopCurrent":true,"hit":{"seconds":0.42}}]},
+  {"name":"stop-table","seconds":1.2,"armed":0.85,"do":[{"at":0,"start":"attack","opts":{"seconds":0.4,"from":0.42,"to":0.72,"ease":"swing"}},{"at":0.2,"stopCurrent":true,"hit":{"seconds":0.75}}]},
+  {"name":"stop-skill","seconds":1.1,"armed":0.85,"do":[{"at":0,"start":"skill"},{"at":0.33,"stopCurrent":true,"hit":{"seconds":0.42}}]},
+  {"name":"stop-musou","seconds":1.5,"do":[{"at":0,"start":"skill","opts":{"seconds":2,"cycle":1.1111111111111111}},{"at":0.5,"stopCurrent":true,"hit":{"seconds":0.75}}]},
+  {"name":"stop-dodge","seconds":1.0,"do":[{"at":0,"start":"dodge","opts":{"seconds":0.38}},{"at":0.15,"stopCurrent":true,"hit":{"seconds":0.42}}]},
+  {"name":"stop-jump","seconds":1.5,"grounded":false,"do":[{"at":0,"start":"jump","opts":{"airSeconds":0.8}},{"at":0.3,"stopCurrent":true,"hit":{"seconds":0.75}},{"at":0.8,"grounded":true}]},
+  {"name":"stop-banzai","seconds":1.4,"do":[{"at":0,"start":"banzai"},{"at":0.5,"stopCurrent":true,"hit":{}}]},
+  {"name":"stop-greet","seconds":1.4,"do":[{"at":0,"start":"greet"},{"at":0.5,"stopCurrent":true,"hit":{}}]},
+  {"name":"stop-run","seconds":1.3,"speed":4,"rate":1.3,"do":[{"at":0,"start":"banzai"},{"at":0.4,"stopCurrent":true,"hit":{"seconds":0.4}}]},
+  {"name":"stop-rest-sit","seconds":5,"every":2,"do":[{"at":0,"start":"rest"},{"at":2.5,"stopCurrent":true,"hit":{"seconds":0.75}}]},
+  {"name":"stop-rest-enter","seconds":3,"every":2,"do":[{"at":0,"start":"rest"},{"at":0.1,"stopCurrent":true,"hit":{}}]},
+  {"name":"stop-after","seconds":1.3,"do":[{"at":0,"start":"attack","opts":{"seconds":0.4,"from":0.42,"to":0.72,"ease":"swing"}},{"at":0.25,"stopAfter":true},{"at":0.27,"armed":0.85},{"at":0.5,"armed":0,"start":"skill","opts":{"seconds":0.46,"from":0.1,"to":0.8,"ease":"swing"}},{"at":0.7,"stopAfter":true},{"at":0.72,"armed":0.85}]},
+
+  {"name":"rest-enter-hit","seconds":1.4,"do":[{"at":0,"start":"rest"},{"at":0.1,"hit":{}}]},
+  {"name":"rest-sit-hit","seconds":8,"every":3,"do":[{"at":0,"start":"rest"},{"at":4,"hit":{}},{"at":5,"stop":"rest"}]},
+  {"name":"rest-rise-hit","seconds":5,"every":2,"do":[{"at":0,"start":"rest"},{"at":2,"stop":"rest"},{"at":2.25,"hit":{}}]},
+  {"name":"rest-rise-early","seconds":3,"every":2,"do":[{"at":0,"start":"rest"},{"at":0.1,"stop":"rest"}]},
+  {"name":"rest-long","seconds":15,"every":6,"do":[{"at":0,"start":"rest"},{"at":12,"stop":"rest"}]},
+  {"name":"rest-again","seconds":5.5,"every":3,"do":[{"at":0,"start":"rest"},{"at":2,"stop":"rest"},{"at":2.2,"start":"rest"},{"at":3.5,"stop":"rest"}]},
+
+  {"name":"long-hit","seconds":2.6,"every":2,"do":[{"at":0,"hit":{"seconds":2.4}}]},
+  {"name":"long-hit-run","seconds":3.4,"every":2,"speed":4,"rate":1.3,"do":[{"at":0.2,"hit":{"seconds":3}}]},
+  {"name":"long-attack","seconds":2.6,"every":2,"armed":1,"do":[{"at":0,"start":"attack","opts":{"seconds":2.4}}]},
+  {"name":"long-dodge","seconds":2,"every":2,"do":[{"at":0,"start":"dodge","opts":{"seconds":1.8}}]},
+  {"name":"long-skill","seconds":4.2,"every":3,"do":[{"at":0,"start":"skill","opts":{"seconds":4}}]},
+  {"name":"long-banzai","seconds":3.2,"every":3,"do":[{"at":0,"start":"banzai","opts":{"seconds":3}}]},
+  {"name":"long-air","seconds":2.8,"every":2,"grounded":false,"do":[{"at":0,"start":"jump","opts":{"airSeconds":2}},{"at":2,"grounded":true}]},
+
+  {"name":"rate-attack","dts":[120,144,"uneven"],"seconds":1.7,"armed":1,"do":[{"at":0,"start":"attack"}]},
+  {"name":"rate-run-hit","dts":[120,144,"uneven"],"seconds":1.3,"speed":4,"rate":1.3,"do":[{"at":0.2,"hit":{}}]},
+  {"name":"rate-walk-run-stop","dts":[120,144,"uneven"],"seconds":1.8,"do":[{"at":0,"speed":1,"rate":1},{"at":0.4,"speed":4,"rate":1.3},{"at":1,"speed":0,"rate":1}]},
+  {"name":"rate-rest","dts":[120,144,"uneven"],"seconds":4.5,"every":2,"do":[{"at":0,"start":"rest"},{"at":2,"stop":"rest"}]},
+  {"name":"rate-jump","dts":[120,144,"uneven"],"seconds":1.8,"grounded":false,"do":[{"at":0,"start":"jump","opts":{"airSeconds":0.8}},{"at":0.8,"grounded":true}]},
+  {"name":"rate-dodge","dts":[120,144,"uneven"],"seconds":1.4,"do":[{"at":0,"start":"dodge"}]},
+  {"name":"rate-skill","dts":[120,144,"uneven"],"seconds":2.2,"every":2,"do":[{"at":0,"start":"skill"}]},
+  {"name":"rate-stop-hit","dts":[120,144,"uneven"],"seconds":1.3,"armed":0.85,"do":[{"at":0,"start":"attack","opts":{"seconds":0.75}},{"at":0.3,"stopCurrent":true,"hit":{"seconds":0.42}}]},
+
+  {"name":"ball-slap","holder":"ball","dts":[60,144,"uneven"],"seconds":1.6,"grounded":false,"do":[{"at":0.3,"slap":1,"kick":0.6}]},
+  {"name":"ball-slap-back","holder":"ball","dts":[60,144,"uneven"],"seconds":1.6,"grounded":false,"do":[{"at":0.3,"slap":-1,"kick":0.6}]},
+  {"name":"ball-slap-twice","holder":"ball","seconds":1.8,"grounded":false,"do":[{"at":0.3,"slap":-1,"kick":0.6},{"at":0.55,"slap":1,"kick":1.1,"face":"surprised","faceSeconds":0.45}]},
+  {"name":"ball-ouch","holder":"ball","seconds":1.4,"grounded":false,"do":[{"at":0.3,"ouch":true,"kick":0.4,"face":"sad","faceSeconds":1.4}]},
+  {"name":"ball-stand","holder":"ball","seconds":1.6,"do":[{"at":0.3,"slap":-1,"kick":0.6}]},
+
+  {"name":"friend-swing","holder":"friend","dts":[60,"uneven"],"seconds":1.6,"do":[{"at":0.2,"swing":-1},{"at":0.8,"swing":1},{"at":0.85,"swing":-1},{"at":1.0,"swing":1}]},
+  {"name":"friend-cheer","holder":"friend","seconds":1.8,"do":[{"at":0.2,"cheer":1.2},{"at":0.8,"catch":true},{"at":1.2,"nod":true,"worry":0.4}]},
+  {"name":"friend-jump","holder":"friend","seconds":1.6,"do":[{"at":0.2,"jumpTo":[1.5,3.5,-0.1,0.8]},{"at":0.5,"swing":1}]}
+]

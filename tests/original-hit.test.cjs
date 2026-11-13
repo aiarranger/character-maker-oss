@@ -52,17 +52,6 @@ test('the builder reproduces the saved hit clips without touching the sword clip
   assert.deepEqual(IDS.map(id => sha(read(`distribution/characters/${id}/experiments/character-maker-sword-2026-10-03-v1/motions.json`))), swords);
 });
 
-test('the preview clips add hit after the unchanged motions', () => {
-  const { originalClipsWithSword, originalHitClip } = require('../lib/character-maker/original-weapon.ts');
-  for (const id of IDS) {
-    const clips = originalClipsWithSword(id, []);
-    assert.deepEqual(clips.map(clip => clip.name), ['sword_idle', 'sword_attack', hurt.HIT_CLIP]);
-    const hit = originalHitClip(id);
-    assert.equal(hit.name, hurt.HIT_CLIP);
-    assert.equal(hit.tracks.length, 42);
-  }
-});
-
 test('each original character has a ＞＜ style; Lux draws it in the display colour', () => {
   const config = require('../lib/character-maker/original-config.ts');
   for (const id of IDS) assert.ok(config.originalHurtFaceStyle(id), id);

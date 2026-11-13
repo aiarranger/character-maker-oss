@@ -74,3 +74,31 @@ test('height is clamped to the reader range 0.2–3 m', () => {
   assert.equal(yukikauHeightMeters(12), 3);
   assert.equal(yukikauHeightMeters(Number.NaN), 1.15);
 });
+
+// aisns の lib/wilds/weapons.ts の WEAPONS の id（2026-10-18 時点の12種）。aisns は character.json の weapon をこの id で装備する
+const AISNS_WEAPON_IDS = ['baguette_sword', 'cake_sword', 'candy_axe', 'daikon_club', 'ebi_lance', 'gyoza_mace', 'ika_spear', 'momo_hammer', 'saba_sword', 'softserve_staff', 'taiyaki_sword', 'tamago_pan'];
+
+test('the chosen weapon is written as a top-level weapon id that aisns knows; none is written as "none" so aisns goes bare-handed', async () => {
+  const { yukikauWeaponId } = require('../lib/character-maker/yukikau-package.ts');
+  const { MAKER_WEAPON_CHOICES } = require('../lib/character-maker/weapon-catalog.ts');
+  // Studio の12種はすべて aisns の id に移る。素手（none）も "none" と書く（項目なしだと、aisns は端末に残る前の武器のまま入る）
+  assert.deepEqual(MAKER_WEAPON_CHOICES.filter(item => item.id !== 'none').map(item => yukikauWeaponId(item.id)), AISNS_WEAPON_IDS);
+  assert.equal(yukikauWeaponId('none'), 'none');
+  assert.equal(yukikauWeaponId(undefined), undefined);
+  assert.throws(() => yukikauWeaponId('laser_sword'), /武器/);
+
+  const model = glb({ animations: ORIGINAL_CLIPS });
+  const read = async weapon => JSON.parse(Buffer.from(unzipSync(new Uint8Array(await (await buildYukikauPackage({ name: 'ハル', model, thumbnail: new Uint8Array(PNG), heightMeters: 1.15, license: 'original', weapon })).arrayBuffer()))['character.json']).toString('utf8'));
+  const armed = await read('saba_sword');
+  assert.deepEqual(Object.keys(armed), ['schemaVersion', 'id', 'name', 'author', 'modelVersion', 'model', 'thumbnail', 'coordinates', 'motion', 'terms', 'weapon']);
+  assert.equal(armed.weapon, 'saba_sword');
+  assert.equal(armed.schemaVersion, 1);
+  // 武器は ID だけ。モデルは同じ（GLB に武器を入れない）ので id も同じ
+  const bare = await read('none');
+  assert.equal(bare.weapon, 'none');
+  assert.equal(bare.id, armed.id);
+  // 呼び出し側が武器を渡さないときだけ、項目を書かない
+  const unset = await read(undefined);
+  assert.equal('weapon' in unset, false);
+  assert.equal(unset.id, armed.id);
+});

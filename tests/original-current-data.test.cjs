@@ -8,11 +8,9 @@ require.extensions['.ts'] = (module, filename) => module._compile(ts.transpileMo
 }).outputText, filename);
 const { test } = require('node:test');
 const assert = require('node:assert/strict');
-const { Group } = require('three');
 const config = require('../lib/character-maker/original-config.ts');
 const storage = require('../lib/character-maker/original-storage.ts');
 const { undoEdit, redoEdit } = require('../lib/character-maker/edit-history.ts');
-const { configureOriginalHair } = require('../lib/character-maker/original-hair.ts');
 const catalog = require('../lib/character-maker/studio-catalog.json');
 const nagi = catalog.find(item => item.id === 'generic-human-b');
 const haru = catalog.find(item => item.id === 'generic-human-a');
@@ -139,12 +137,7 @@ test('preview/export boundaries cannot select a retired mesh or fall back to old
   assert.throws(() => config.originalModelAsset({ ...haru, modularModel: undefined }, { ...appearance, hairstyle: 'original' }));
   assert.throws(() => config.originalModelAsset(nagi, { ...appearance, hairstyle: 'unrecognized-hair' }));
   assert.throws(() => config.originalModelAsset(haru, { ...appearance, hairstyle: 'nagi-long-v2' }));
-  const model = new Group();
-  for (const hairstyle of ['nagi-wavy-lob-v3', 'nagi-long-v2', 'nagi-bob-v2']) {
-    const hair = new Group(); hair.name = hairstyle; hair.userData = { originalModularPart: 'hair', hairstyleId: hairstyle }; model.add(hair);
-  }
-  configureOriginalHair(model, nagi.id, appearance);
-  assert.deepEqual(model.children.map(child => child.name), ['nagi-long-v2']);
+  // 選んだ髪型だけを残す形の側（configureOriginalHair）は Rust の rust/game/src/original_edit.rs へ移した（docs/rust-stage-plan.md）
   assert.ok(!config.originalHumanHairstyles(nagi.id).some(item => item.id === 'nagi-wavy-lob-v3'));
 });
 

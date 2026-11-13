@@ -1,0 +1,10 @@
+[
+  {"name":"photo-attack","armed":1,"seconds":1.2,"do":[{"at":0,"start":"attack","opts":{"seconds":0.75}},{"at":0.2,"photo":"idle"},{"at":0.5,"photo":null}]},
+  {"name":"photo-hit","seconds":1.4,"do":[{"at":0,"hit":{}},{"at":0.1,"photo":"walk"},{"at":0.4,"photo":null}]},
+  {"name":"photo-rest","seconds":4,"every":2,"do":[{"at":0,"start":"rest"},{"at":1.5,"photo":"idle"},{"at":2.0,"photo":null},{"at":2.5,"stop":"rest"}]},
+  {"name":"photo-ready","armed":1,"seconds":1.5,"do":[{"at":0.5,"photo":"walk"},{"at":1.0,"photo":null}]},
+  {"name":"photo-skill","armed":1,"seconds":1.6,"do":[{"at":0,"start":"skill"},{"at":0.1,"photo":"idle"},{"at":0.3,"photo":null}]},
+  {"name":"speech-hit","seconds":3,"do":[{"at":0.1,"speech":"こんにちは、今日はいい天気ですね"},{"at":0.5,"face":"happy"},{"at":1.0,"hit":{}},{"at":2.0,"speech":null}]},
+  {"name":"run-speech","dts":["60","uneven"],"speed":4,"rate":1.3,"seconds":2,"do":[{"at":0.2,"speech":"走りながら話す"},{"at":1.0,"start":"attack"}]},
+  {"name":"photo-run","speed":4,"seconds":1.5,"do":[{"at":0.3,"photo":"walk"},{"at":0.9,"photo":null}]}
+]

@@ -1,5 +1,8 @@
 import { useMemo, useRef, type PointerEvent as ReactPointerEvent } from 'react';
-import { Box3, MathUtils, Spherical, Vector3, type Camera, type Object3D } from 'three';
+import { Box3, MathUtils, Spherical, Vector3 } from '../../lib/engine/math';
+// three を読まない（数学は lib/engine/math。今の版の three の Camera・Object3D も、Rust の版の lib/engine のカメラも同じ形で渡せる）
+type Camera = { position: Vector3; lookAt(v: Vector3): void };
+type Object3D = { userData?: Record<string, unknown>; visible: boolean; traverse(f: (o: Object3D) => void): void };
 
 /** Studio camera rules shared by both editors (spec §5.3). */
 export const STAGE_TILT = MathUtils.degToRad(7);

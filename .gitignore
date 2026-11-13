@@ -19,3 +19,5 @@ next-env.d.ts
 /public/character-maker/original-parts/*
 !/public/character-maker/original-parts/*.json
 .claude/
+/public/maker-stage/
+/rust/target/

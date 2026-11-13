@@ -5,8 +5,7 @@ export type OriginalViewer = {
   model?: { version: string; glb: string; sha256: string; bytes: number }; note?: string;
 };
 import type { EditHistory } from './edit-history';
-import type { HurtFaceStyle } from './hurt-face';
-import { defaultOriginalSpeciesParts, validateOriginalSpeciesParts, type OriginalSpeciesParts } from './original-species';
+import { defaultOriginalSpeciesParts, validateOriginalSpeciesParts, type OriginalSpeciesParts } from './original-species-parts';
 import { selectedMakerWeaponId, validateMakerWeaponId, type MakerWeaponId } from './weapon-catalog';
 
 export const ORIGINAL_SIZE_RANGE = { min: 0.65, max: 1.35, step: 0.01 } as const;
@@ -257,6 +256,13 @@ export function sameOriginalDocument(a: OriginalDocument, b: OriginalDocument) {
  * ＞＜ の顔の見た目（lib/character-maker/hurt-face.ts）。オリジナル4体それぞれの目に合わせた値。保存データには入れない。
  * mouth はのけぞり・＞＜ の間に重ねる口のモーフ。ルクスは画面の顔なので、画面の色で目を隠して光る線で描く。
  */
+/** ＞＜ の板の描き方（今の版の lib/character-maker/hurt-face.ts から移した型。Rust の下見と書き出しが読む） */
+export type HurtFaceStyle = {
+  line: string; skin: string; width: number; size: number; open: number; lift: number; inset: number;
+  mouth: Readonly<Record<string, number>>; tall?: number; fixedSkin?: boolean; grid?: readonly [number, number];
+  front?: number; feather?: number; glow?: number; sampled?: boolean;
+};
+
 export const ORIGINAL_HURT_FACE_STYLES: Readonly<Record<string, HurtFaceStyle>> = {
   'generic-human-a': { line: '#3b2a2c', skin: '#f2d6c4', width: .085, size: 1.35, open: 62, lift: 0, inset: 0, mouth: { ee: .7, mouthClose: 0 } },
   'generic-human-b': { line: '#3b2a2c', skin: '#f4dccb', width: .095, size: 1.35, open: 62, lift: 0, inset: 0, mouth: { ee: .7, mouthClose: 0 } },

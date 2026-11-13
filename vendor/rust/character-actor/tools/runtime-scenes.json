@@ -1,0 +1,10 @@
+[
+  {"name":"loco","seconds":3,"do":[{"at":0.5,"moving":true},{"at":1.2,"running":true},{"at":2.0,"moving":false},{"at":2.4,"running":false}]},
+  {"name":"loco-npc","npc":true,"dts":["60","uneven","144"],"seconds":3,"do":[{"at":0.5,"moving":true},{"at":1.2,"running":true},{"at":2.0,"moving":false},{"at":2.4,"running":false}]},
+  {"name":"speech","seconds":4.2,"do":[{"at":0.2,"speech":"こんにちは、今日はいい天気ですね"},{"at":1.0,"face":"happy"},{"at":2.0,"moving":true},{"at":3.0,"face":null}]},
+  {"name":"speech-npc","npc":true,"dts":["60","uneven"],"seconds":3.4,"do":[{"at":0.3,"speech":"やあ"},{"at":1.5,"moving":true}]},
+  {"name":"speech-cut","seconds":2,"do":[{"at":0.2,"speech":"長いお話をします。とても長いお話です。"},{"at":1.0,"speech":null},{"at":1.4,"face":"sad"}]},
+  {"name":"photo","seconds":2.6,"do":[{"at":0,"moving":true},{"at":0.4,"speech":"写真を撮ります"},{"at":0.5,"photo":"walk","face":"surprised"},{"at":1.0,"photo":"idle"},{"at":1.5,"photo":null},{"at":2.0,"face":null}]},
+  {"name":"photo-npc","npc":true,"dts":["uneven"],"seconds":2.2,"do":[{"at":0,"moving":true},{"at":0.5,"photo":"walk"},{"at":1.2,"photo":null}]},
+  {"name":"spring-reset","seconds":2.4,"do":[{"at":0,"moving":true,"running":true},{"at":0.8,"teleport":[6,-4],"springReset":true},{"at":1.6,"springReset":true},{"at":1.8,"moving":false}]}
+]

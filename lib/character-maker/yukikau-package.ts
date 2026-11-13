@@ -4,9 +4,11 @@
 // - character.json は schemaVersion 1。決まったキーだけを書く（余分なキーははじかれる）
 // - model.glb の extensionsRequired は EXT_meshopt_compression / KHR_materials_unlit / KHR_texture_transform だけ
 // - clips は GLB の中で「名前が ':idle' で終わるもの → 名前が 'idle' のもの」の順に探した結果と一致させる
-import { zipSync } from 'three/examples/jsm/libs/fflate.module.js';
+// - 選んだ武器は最上位の任意の項目 weapon（aisns の lib/wilds/weapons.ts と同じ id）。素手は "none"。GLB には武器を入れない
+//   （weapon を受け付けるのは character-runtime 0.2.6 より後の版。0.2.6 以前の読み込みは weapon つきの ZIP をはじく）
+import { zipFiles } from './zip';
 import { downloadFileName, type CharacterConfig } from './config';
-import type { OriginalCharacter, OriginalDocument } from './original-config';
+import { validateMakerWeaponId } from './weapon-catalog';
 
 export const YUKIKAU_IMPORT_URL = 'https://yukikau.jp/play?import=1';
 export const YUKIKAU_REFERENCE = 'https://github.com/aiarranger/character-maker-oss';
@@ -51,12 +53,20 @@ async function sha256(bytes: Uint8Array) {
   return Array.from(new Uint8Array(digest), byte => byte.toString(16).padStart(2, '0')).join('');
 }
 
+/** Studio の武器の id を character.json の weapon に移す。id は aisns の武器と同じ12種なのでそのまま。素手も "none" と書く
+ *  （aisns は項目なしのキャラでは端末に残る前の武器のまま入るので、「持たない」を伝えるには none が要る）。呼び出し側が渡さないときだけ項目なし */
+export function yukikauWeaponId(id: unknown): string | undefined {
+  return id === undefined ? undefined : validateMakerWeaponId(id);
+}
+
 export type YukikauPackageInput = {
   name: string;
   model: ArrayBuffer | Uint8Array;
   thumbnail: Uint8Array;
   heightMeters: number;
   license: YukikauLicense;
+  /** 選んだ武器の id（Studio の weapon-catalog）。素手は "none" と書く。省略なら character.json に weapon を書かない */
+  weapon?: string;
 };
 
 /** <名前>.character.zip（character.json・model.glb・thumbnail.png）を作る */
@@ -70,6 +80,7 @@ export async function buildYukikauPackage(input: YukikauPackageInput): Promise<F
   const clips = yukikauClips(gltf);
   const name = input.name.trim().slice(0, 160) || 'キャラクター';
   const modelSha = await sha256(model);
+  const weapon = yukikauWeaponId(input.weapon);
   const manifest = {
     schemaVersion: 1,
     id: `maker-${modelSha.slice(0, 12)}`,
@@ -87,8 +98,9 @@ export async function buildYukikauPackage(input: YukikauPackageInput): Promise<F
       aiPerformance: 'キャラクターメイク（AI Arranger Character Studio）で作った姿です。AI による会話・演技への出演は、読み込む先の利用条件に従います。',
       reference: YUKIKAU_REFERENCE,
     },
+    ...(weapon ? { weapon } : {}),
   };
-  const zip = zipSync({
+  const zip = await zipFiles({
     'character.json': new TextEncoder().encode(JSON.stringify(manifest, null, 2) + '\n'),
     'model.glb': model,
     'thumbnail.png': [thumbnail, { level: 0 }],
@@ -106,6 +118,8 @@ export async function captureStageThumbnail(source: HTMLCanvasElement | null | u
   if (!context) throw new Error('見本画像を作れませんでした。');
   context.fillStyle = '#eef0f4';
   context.fillRect(0, 0, size, size);
+  // Rust の下見（WebGPU）の canvas は、描いた直後の同じ処理の中でしか読めない。読む前に描き直す（components/character-maker/rust/RustMakerScene.tsx）
+  (source as (HTMLCanvasElement & { __makerRedraw?: () => void }) | null | undefined)?.__makerRedraw?.();
   if (source && source.width > 0 && source.height > 0) {
     const side = Math.min(source.width, source.height);
     context.drawImage(source, (source.width - side) / 2, (source.height - side) / 2, side, side, 0, 0, size, size);
@@ -115,38 +129,13 @@ export async function captureStageThumbnail(source: HTMLCanvasElement | null | u
   return new Uint8Array(await blob.arrayBuffer());
 }
 
-/** yukikau.jp の normalizeCharacter と同じ測り方（Box3.setFromObject）で、GLB の高さ（モデル単位）を測る */
-export async function measureGlbHeight(model: ArrayBuffer): Promise<number> {
-  const [{ GLTFLoader }, { MeshoptDecoder }, { Box3 }] = await Promise.all([
-    import('three/examples/jsm/loaders/GLTFLoader.js'),
-    import('three/examples/jsm/libs/meshopt_decoder.module.js'),
-    import('three'),
-  ]);
-  const gltf = await new GLTFLoader().setMeshoptDecoder(MeshoptDecoder).parseAsync(model.slice(0), '');
-  const bounds = new Box3().setFromObject(gltf.scene);
-  return bounds.max.y - bounds.min.y;
-}
-
 /** 標準の人（大きさ・身長 1）の測った高さ。これを yukikau.jp の 1.15m に合わせる（モデル単位） */
 const REFERENCE_HEIGHT = { original: 2, preset: 1.8 } as const;
 
-async function packageFor(name: string, model: ArrayBuffer, canvas: HTMLCanvasElement | null | undefined, license: YukikauLicense) {
-  const [height, thumbnail] = await Promise.all([measureGlbHeight(model), captureStageThumbnail(canvas)]);
-  return buildYukikauPackage({ name, model, thumbnail, license, heightMeters: YUKIKAU_HUMAN_HEIGHT * height / REFERENCE_HEIGHT[license] });
-}
-
-/** オリジナル4体: 常に通常用（待機・歩く・走る＋hit・face_hurt）で、KHR_mesh_quantization を外して書き出す */
-export async function exportOriginalYukikauPackage(character: OriginalCharacter, document: OriginalDocument, canvas?: HTMLCanvasElement | null): Promise<File> {
-  const { exportOriginalCharacterGlb } = await import('./original-assembly');
-  const model = await exportOriginalCharacterGlb(character, document, { variant: 'standard', dequantize: true });
-  return packageFor(document.name, model, canvas, 'original');
-}
-
-/** プリセット（ファンタジー・アメコミ・クラシック）: 武器を外した通常の GLB（待機・歩く・走る＋hit・face_hurt） */
-export async function exportPresetYukikauPackage(name: string, config: CharacterConfig, canvas?: HTMLCanvasElement | null): Promise<File> {
-  const { exportCharacterGlb } = await import('./assembly');
-  const model = await exportCharacterGlb({ ...config, weaponId: 'none' });
-  return packageFor(name, model, canvas, 'preset');
+/** 高さ（GLB のモデル単位）を測ってある書き出しから作る（Rust の版は Stage の glb_height で測る） */
+export async function packageMeasured(name: string, model: ArrayBuffer | Uint8Array, height: number, canvas: HTMLCanvasElement | null | undefined, license: YukikauLicense, weapon: string) {
+  const thumbnail = await captureStageThumbnail(canvas);
+  return buildYukikauPackage({ name, model, thumbnail, license, weapon, heightMeters: YUKIKAU_HUMAN_HEIGHT * height / REFERENCE_HEIGHT[license] });
 }
 
 /** ファイルを保存させる（a[download]） */

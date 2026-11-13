@@ -1,6 +1,6 @@
 {
   "name": "@aiarranger/character-maker",
-  "version": "0.2.0",
+  "version": "0.2.2",
   "private": true,
   "description": "Character Studio: a browser-based 3D character creator that exports game-ready GLB (idle/walk/run/sword/hit, >< face).",
   "license": "MIT",
@@ -21,15 +21,14 @@
     "assets:sync": "node tools/character-maker/sync-studio-runtime-assets.mjs",
     "assets:check": "node tools/character-maker/sync-studio-runtime-assets.mjs --check",
     "import:characters": "node tools/import-characters.mjs --from ../characters",
-    "pack:vendor": "node tools/pack.mjs"
+    "pack:vendor": "node tools/pack.mjs",
+    "stage:build": "bash rust/web/build.sh",
+    "stage:release": "node tools/character-maker/release-stage.mjs"
   },
   "dependencies": {
-    "@react-three/drei": "^10.3.0",
-    "@react-three/fiber": "^9.1.0",
     "next": "^15.3.0",
     "react": "^19.1.0",
-    "react-dom": "^19.1.0",
-    "three": "^0.178.0"
+    "react-dom": "^19.1.0"
   },
   "devDependencies": {
     "@gltf-transform/core": "4.4.1",
@@ -41,6 +40,7 @@
     "@types/three": "^0.178.0",
     "meshoptimizer": "1.0.1",
     "sharp": "0.34.5",
+    "three": "^0.178.0",
     "typescript": "^5.8.0"
   }
 }

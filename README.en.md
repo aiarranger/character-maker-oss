@@ -14,7 +14,8 @@ A browser-based 3D character creator. Pick a character, customise it on the spot
 - Edit body shape, hairstyle, hair colour, face, eyes, mouth, expression, outfit colour and weapon (12 food-themed weapons)
 - Motions: idle, walk, run, weapon ready stance, weapon swing, **hit reaction**; face: **＞＜** (squeezed eyes)
 - Save (in the browser), export/import JSON, export GLB
-- Next.js 15 / React 19 / three.js / React Three Fiber. No server or account needed
+- Next.js 15 / React 19. The 3D preview, assembly and GLB export run in Rust (wgpu, WebGPU; `rust/game`). No server or account needed
+- Requires WebGPU (latest Chrome or Edge, Safari on iOS 26 or later). Other devices see a notice that 3D cannot open
 
 The UI is in Japanese. UI labels are given below as「Japanese」(English).
 
@@ -43,6 +44,7 @@ Requires Node.js ≥ 22 (24 recommended) and pnpm 11.
 ```sh
 pnpm install --frozen-lockfile
 pnpm assets:sync      # builds the runtime assets in public/ from parts/ and distribution/ (binaries in public/ are not in git)
+pnpm stage:build      # builds the Rust preview stage (wasm) into public/maker-stage/ (Rust 1.99 and wasm-bindgen; rust/web/build.sh)
 pnpm dev
 ```
 
@@ -57,7 +59,7 @@ Open http://127.0.0.1:4284/character-maker. The dev server listens on `127.0.0.1
 
 You can play as the characters you make in the game [yukikau.jp](https://yukikau.jp/).
 
-1. **Download and import**: choose「書き出し」(Export) →「yukikau.jp 用（.character.zip）」(for yukikau.jp) to save the file, then click the「yukikau.jp で読み込む」(Import on yukikau.jp) link that appears (`https://yukikau.jp/play?import=1`) and select that file. The ZIP uses yukikau.jp's import format (`character.json`, `model.glb`, `thumbnail.png`) and includes the facing direction (+Z), height, idle/walk/run, the hit reaction and ＞＜.
+1. **Download and import**: choose「書き出し」(Export) →「yukikau.jp 用（.character.zip）」(for yukikau.jp) to save the file, then click the「yukikau.jp で読み込む」(Import on yukikau.jp) link that appears (`https://yukikau.jp/play?import=1`) and select that file. The ZIP uses yukikau.jp's import format (`character.json`, `model.glb`, `thumbnail.png`) and includes the facing direction (+Z), height, idle/walk/run, the hit reaction, ＞＜, and the chosen weapon (`weapon` in `character.json`; `none` when bare-handed). Reading the weapon needs a yukikau.jp importer that accepts `weapon` (@aiarranger/character-runtime newer than 0.2.6).
 2. **Make it inside yukikau.jp**: the「キャラメイク」(Character maker) entry on yukikau.jp (`/play?make=1`) opens this same Character Studio. Press「この姿で遊ぶ」(Play as this character) to start the game with the character you made.
 
 ## Use in your game

@@ -103,8 +103,10 @@ export function StageOverlay({ poster, entered, weaponId, view, framing }: Stage
 /** Half-resolution WebP of the live stage canvas, taken before a character switch (M1). */
 export function captureStageSnapshot(): StageSnapshot | null {
   try {
-    const canvas = document.querySelector<HTMLCanvasElement>('[data-stage-canvas] canvas');
+    const canvas = document.querySelector<HTMLCanvasElement & { __makerRedraw?: () => void }>('[data-stage-canvas] canvas');
     if (!canvas || canvas.width === 0 || canvas.height === 0) return null;
+    // Rust の下見（WebGPU）の canvas は、描いた直後の同じ処理の中でしか読めない
+    canvas.__makerRedraw?.();
     const rect = canvas.getBoundingClientRect();
     if (rect.width === 0 || rect.height === 0) return null;
     const copy = document.createElement('canvas');

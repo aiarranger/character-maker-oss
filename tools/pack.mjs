@@ -15,6 +15,7 @@ import { copyFileSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync,
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { studioModelManifest } from '../server/studio-models.mjs';
+import { STAGE_FILES_COMMIT, stageFileManifest } from '../server/stage-files.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const pkg = JSON.parse(readFileSync(path.join(ROOT, 'package.json'), 'utf8'));
@@ -38,8 +39,9 @@ const walk = dir => readdirSync(path.join(ROOT, dir), { withFileTypes: true }).f
 });
 
 const source = [
-  ...walk('components/character-maker'), ...walk('components/rig-actor/generic'), ...walk('lib/character-maker'),
-  'lib/viewer-material/generic.mjs', 'lib/viewer-material/generic.d.mts', 'server/assets.mjs', 'server/studio-models.mjs',
+  ...walk('components/character-maker'), ...walk('lib/character-maker'),
+  'server/assets.mjs', 'server/studio-models.mjs', 'server/stage-files.mjs',
+  ...walk('lib/engine'),
   ...walk('distribution').filter(file => file.endsWith('.json')),
   // original-weapon.ts が読む、オリジナル4体ののけぞり
   ...walk('parts/assets/original-hit-v1').filter(file => file.endsWith('.json')),
@@ -81,6 +83,11 @@ for (const file of studioModels.files) {
 }
 writeFileSync(path.join(STAGE, 'studio-models.json'), `${JSON.stringify(studioModels, null, 2)}\n`);
 
+// 下見の Rust の Stage（wasm と JS）も tgz に入れず、公開リポジトリの固定コミットの distribution/maker-stage/ から取る一覧だけを入れる（server/stage-files.mjs）
+if (!STAGE_FILES_COMMIT) throw new Error('server/stage-files.mjs の STAGE_FILES_COMMIT が未定です。node tools/character-maker/release-stage.mjs で distribution/maker-stage/ を作って commit し、公開リポジトリへ push した固定コミットを書いてください。');
+const stageFiles = stageFileManifest(STAGE_FILES_COMMIT);
+writeFileSync(path.join(STAGE, 'stage-files.json'), `${JSON.stringify(stageFiles, null, 2)}\n`);
+
 writeFileSync(path.join(STAGE, 'package.json'), `${JSON.stringify({
   name: pkg.name,
   version: pkg.version,
@@ -93,11 +100,8 @@ writeFileSync(path.join(STAGE, 'package.json'), `${JSON.stringify({
     './package.json': './package.json',
   },
   peerDependencies: {
-    '@react-three/drei': pkg.dependencies['@react-three/drei'],
-    '@react-three/fiber': pkg.dependencies['@react-three/fiber'],
     next: pkg.dependencies.next,
     react: pkg.dependencies.react,
-    three: pkg.dependencies.three,
   },
 }, null, 2)}\n`);
 

@@ -1,5 +1,7 @@
 'use client';
 
+import { StageUnsupported, type StageExit } from './StageUnsupported';
+import { useStageSupport } from './rust/stage';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { Component, useCallback, useEffect, useLayoutEffect, useRef, useState, type ChangeEvent, type ReactNode } from 'react';
@@ -15,7 +17,7 @@ import styles from './character-maker.module.css';
 import OriginalCharacterMaker from './OriginalCharacterMaker';
 import type { OriginalCharacter } from '../../lib/character-maker/original-config';
 
-const CharacterMakerScene = dynamic(() => import('./CharacterMakerScene'), {
+const CharacterMakerScene = dynamic(() => import('./rust/RustMakerScene'), {
   ssr: false,
   loading: () => <div className={styles.loading}>キャラクターを読み込んでいます…</div>,
 });
@@ -93,7 +95,8 @@ function withConfig(document: CharacterMakerDocument, config: CharacterConfig): 
   return { ...makeDocument(document.name.trim() || '新しいキャラクター', config), name: document.name };
 }
 
-export default function CharacterMaker({ originals, onPlay, initialName }: { originals: OriginalCharacter[]; onPlay?: (file: File) => void; initialName?: string }) {
+export default function CharacterMaker({ originals, onPlay, initialName, onExit, exitLabel }: { originals: OriginalCharacter[]; onPlay?: (file: File) => void; initialName?: string } & StageExit) {
+  const support = useStageSupport();
   const [originalMode, setOriginalMode] = useState(false);
   const initial = makeDocument(initialName?.trim() || '新しいキャラクター', DEFAULT_CONFIG);
   const [document, setDocument] = useState<CharacterMakerDocument>(initial);
@@ -417,12 +420,11 @@ export default function CharacterMaker({ originals, onPlay, initialName }: { ori
       const snapshot = makeDocument(document.name, config);
       if (onPlay) {
         // ゲームへの組み込みでは、yukikau.jp がそのまま読める .character.zip を渡す（+Z の正面・背丈つき）。docs/yukikau-route.md
-        const { exportPresetYukikauPackage } = await import('../../lib/character-maker/yukikau-package');
-        await onPlay(await exportPresetYukikauPackage(snapshot.name, snapshot.config, previewColumn.current?.querySelector('canvas')));
+        const canvas = previewColumn.current?.querySelector('canvas');
+        await onPlay(await (await import('./rust/export')).exportPresetYukikauPackageRust(snapshot.name, snapshot.config, canvas));
         setNotice({ type: 'success', text: 'この姿で遊べます。' });
       } else {
-        const { exportCharacterGlb } = await import('../../lib/character-maker/assembly');
-        const bytes = await exportCharacterGlb(snapshot.config);
+        const bytes = (await (await import('./rust/export')).exportPresetGlbRust(snapshot.config)).bytes.slice().buffer;
         const filename = `${downloadFileName(snapshot.name)}.glb`;
         download(new Blob([bytes], { type: 'model/gltf-binary' }), filename);
         setNotice({ type: 'success', text: '3DモデルのGLBを書き出しました。' });
@@ -459,6 +461,9 @@ export default function CharacterMaker({ originals, onPlay, initialName }: { ori
     setOriginalMode(false);
     try { window.sessionStorage.setItem(MAKER_MODE_KEY, 'human'); } catch { /* Mode is still kept in this page. */ }
   }} />;
+
+  // WebGPU が無い端末は、遊べないことを知らせるだけ
+  if (support === 'unsupported') return <main className={styles.shell}><StageUnsupported onExit={onExit} exitLabel={exitLabel} /></main>;
 
   return <main className={styles.shell} data-style={config.style}>
     <header className={styles.header}>

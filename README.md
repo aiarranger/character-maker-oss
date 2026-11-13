@@ -14,7 +14,8 @@
 - 体型・髪型・髪色・顔・目・口・表情・服の色・武器（食べ物の武器12種）を編集
 - 動き: 待機・歩く・走る・武器を構える・武器を振る・**のけぞる（被弾）**、顔: **＞＜**
 - 保存（ブラウザ）、JSON の書き出し・読み込み、GLB の書き出し
-- Next.js 15 / React 19 / three.js / React Three Fiber。サーバーやアカウントは不要
+- Next.js 15 / React 19。3D の下見・組み立て・GLB の書き出しは Rust（wgpu・WebGPU。`rust/game`）。サーバーやアカウントは不要
+- WebGPU が必要（Chrome・Edge の最新版、iOS 26 以降の Safari）。無い端末では「この端末では 3D を開けません」と出す
 
 ## 画面 / Screens
 
@@ -41,6 +42,7 @@ Node.js 22 以上（推奨 24）と pnpm 11 を使います。Requires Node.js �
 ```sh
 pnpm install --frozen-lockfile
 pnpm assets:sync      # parts/ と distribution/ から public/ の実行時素材を作る（public/ のバイナリは git 管理外）
+pnpm stage:build      # 下見の Rust の Stage（wasm）を public/maker-stage/ に作る（Rust 1.99 と wasm-bindgen。rust/web/build.sh）
 pnpm dev
 ```
 
@@ -55,7 +57,7 @@ http://127.0.0.1:4284/character-maker を開きます。開発サーバーは `1
 
 作ったキャラは、ゲーム [yukikau.jp](https://yukikau.jp/) でそのまま遊べます。
 
-1. **ダウンロードして読み込む**: 「書き出し」→ **yukikau.jp 用（.character.zip）** を保存し、表示される「yukikau.jp で読み込む」（`https://yukikau.jp/play?import=1`）で、そのファイルを選びます。中身は yukikau.jp の持ち込み形式（`character.json`・`model.glb`・`thumbnail.png`）で、向き（+Z）・身長・待機／歩く／走る・のけぞり・＞＜ が入ります。
+1. **ダウンロードして読み込む**: 「書き出し」→ **yukikau.jp 用（.character.zip）** を保存し、表示される「yukikau.jp で読み込む」（`https://yukikau.jp/play?import=1`）で、そのファイルを選びます。中身は yukikau.jp の持ち込み形式（`character.json`・`model.glb`・`thumbnail.png`）で、向き（+Z）・身長・待機／歩く／走る・のけぞり・＞＜ と、選んだ武器（`character.json` の `weapon`。素手は `none`）が入ります。武器を読むには、yukikau.jp 側が `weapon` に対応した読み込み（@aiarranger/character-runtime の 0.2.6 より後の版）である必要があります。
 2. **yukikau.jp の中で作る**: yukikau.jp の入口の「キャラメイク」（`/play?make=1`）で、この Character Studio がそのまま開きます。**この姿で遊ぶ** を押すと、作ったキャラでゲームが始まります。
 
 ## ゲームで使う / Use in your game

@@ -19,12 +19,12 @@ import { WeaponPicker, type WeaponPickerHandle } from './WeaponPicker';
 import { requestWeaponForMotion, motionAfterWeaponChoice, type ArmedWeaponMotion } from '../../lib/character-maker/weapon-motion-intent';
 import { selectedMakerWeaponId, type MakerWeaponId } from '../../lib/character-maker/weapon-catalog';
 import { useCharacterReadTool } from './useCharacterReadTool';
-import { defaultOriginalSpeciesParts, originalSpeciesChoices, type OriginalSpeciesParts } from '../../lib/character-maker/original-species';
+import { defaultOriginalSpeciesParts, originalSpeciesChoices, type OriginalSpeciesParts } from '../../lib/character-maker/original-species-parts';
 import { StageBackdrop, StageOverlay } from './StudioStage';
 import { StudioIcon, type StudioIconName } from './StudioIcon';
 import { paintRangeFills } from '../../lib/character-maker/studio-palette';
 
-const OriginalScene = dynamic(() => import('./OriginalCharacterScene'), { ssr: false });
+const OriginalScene = dynamic(() => import('./rust/RustOriginalScene'), { ssr: false });
 type Notice = { error?: boolean; text: string; link?: { href: string; label: string } } | null;
 type Pending = { kind: 'source'; character: OriginalCharacter } | { kind: 'saved'; entry: SavedOriginal } | { kind: 'import'; document: OriginalDocument };
 type Category = 'body' | 'hair' | 'head' | 'ears' | 'eyes' | 'mouth' | 'color' | 'expression' | 'motion';
@@ -439,9 +439,9 @@ export default function OriginalCharacterMaker({ characters, initialCharacterId,
     if (!character || !ready || exporting) return;
     setExporting(true);
     try {
-      const clean = validateOriginalDocument(document), { exportOriginalCharacterGlb } = await import('../../lib/character-maker/original-assembly');
+      const clean = validateOriginalDocument(document);
       const armed = ['sword_idle', 'sword_attack'].includes(clean.config.motion);
-      const bytes = await exportOriginalCharacterGlb(character, clean);
+      const bytes = (await (await import('./rust/export')).exportOriginalGlbRust(character, clean)).bytes.slice().buffer;
       download(new Blob([bytes], { type: 'model/gltf-binary' }), `${downloadFileName(clean.name)}-${armed ? 'armed' : 'standard'}.glb`); setNotice({ text: `${armed ? '武器用（2動作）' : '通常用（3動作）'}のGLBを書き出しました。` });
     } catch (error) { setNotice({ error: true, text: message(error) }); }
     finally { setExporting(false); }
@@ -452,8 +452,9 @@ export default function OriginalCharacterMaker({ characters, initialCharacterId,
     setExporting(true); setPackaging(kind);
     try {
       const clean = validateOriginalDocument(document);
-      const { exportOriginalYukikauPackage, downloadYukikauPackage, YUKIKAU_IMPORT_URL } = await import('../../lib/character-maker/yukikau-package');
-      const file = await exportOriginalYukikauPackage(character, clean, rootRef.current?.querySelector<HTMLCanvasElement>('#studio-stage canvas'));
+      const { downloadYukikauPackage, YUKIKAU_IMPORT_URL } = await import('../../lib/character-maker/yukikau-package');
+      const stageCanvas = rootRef.current?.querySelector<HTMLCanvasElement>('#studio-stage canvas');
+      const file = await (await import('./rust/export')).exportOriginalYukikauPackageRust(character, clean, stageCanvas);
       if (kind === 'play' && onPlay) { await onPlay(file); setNotice({ text: 'この姿で遊べます。' }); }
       else { downloadYukikauPackage(file); setNotice({ text: 'yukikau.jp 用のファイルを書き出しました。', link: { href: YUKIKAU_IMPORT_URL, label: 'yukikau.jp で読み込む' } }); }
     } catch (error) { setNotice({ error: true, text: message(error) }); }

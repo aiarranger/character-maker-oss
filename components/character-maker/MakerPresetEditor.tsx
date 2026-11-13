@@ -19,7 +19,7 @@ import { StageBackdrop, StageOverlay } from './StudioStage';
 import { StudioIcon, type StudioIconName } from './StudioIcon';
 import { paintRangeFills } from '../../lib/character-maker/studio-palette';
 
-const CharacterMakerScene = dynamic(() => import('./CharacterMakerScene'), {
+const CharacterMakerScene = dynamic(() => import('./rust/RustMakerScene'), {
   ssr: false,
   loading: () => null,
 });
@@ -493,8 +493,7 @@ export default function MakerPresetEditor({ selectionKey, initialDocument, initi
     setExporting(true);
     try {
       const snapshot = makeDocument(document.name, config);
-      const { exportCharacterGlb } = await import('../../lib/character-maker/assembly');
-      const bytes = await exportCharacterGlb(snapshot.config);
+      const bytes = (await (await import('./rust/export')).exportPresetGlbRust(snapshot.config)).bytes.slice().buffer;
       if (!alive.current) return;
       download(new Blob([bytes], { type: 'model/gltf-binary' }), `${downloadFileName(snapshot.name)}.glb`);
       setNotice({ type: 'success', text: '3DモデルのGLBを書き出しました。' });
@@ -507,8 +506,9 @@ export default function MakerPresetEditor({ selectionKey, initialDocument, initi
     setExporting(true); setPackaging(kind);
     try {
       const snapshot = makeDocument(document.name, config);
-      const { exportPresetYukikauPackage, downloadYukikauPackage, YUKIKAU_IMPORT_URL } = await import('../../lib/character-maker/yukikau-package');
-      const file = await exportPresetYukikauPackage(snapshot.name, snapshot.config, rootRef.current?.querySelector<HTMLCanvasElement>('#studio-stage canvas'));
+      const { downloadYukikauPackage, YUKIKAU_IMPORT_URL } = await import('../../lib/character-maker/yukikau-package');
+      const stageCanvas = rootRef.current?.querySelector<HTMLCanvasElement>('#studio-stage canvas');
+      const file = await (await import('./rust/export')).exportPresetYukikauPackageRust(snapshot.name, snapshot.config, stageCanvas);
       if (!alive.current) return;
       if (kind === 'play' && onPlay) { await onPlay(file); if (alive.current) setNotice({ type: 'success', text: 'この姿で遊べます。' }); }
       else { downloadYukikauPackage(file); setNotice({ type: 'success', text: 'yukikau.jp 用のファイルを書き出しました。', link: { href: YUKIKAU_IMPORT_URL, label: 'yukikau.jp で読み込む' } }); }

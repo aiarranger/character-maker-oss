@@ -4,6 +4,8 @@ import { fileURLToPath } from 'node:url';
 import { ensureStudioModel, studioModelCacheDir, studioModelFile, studioModels } from './studio-models.mjs';
 
 export { ensureStudioModels, studioModels, STUDIO_MODELS_COMMIT } from './studio-models.mjs';
+export { ensureStageFiles, stageFiles, STAGE_FILES_COMMIT } from './stage-files.mjs';
+import { ensureStageFile, stageCacheDir, stageFile, stageFiles, STAGE_PREFIX } from './stage-files.mjs';
 
 /**
  * 取り込み先（aisns など）がキャラメイクの部品を届けるための入口。配布パッケージの中で使う。
@@ -27,6 +29,8 @@ function typeOf(name) {
   if (name.endsWith('.json')) return 'application/json';
   if (name.endsWith('.jpg')) return 'image/jpeg';
   if (name.endsWith('.png')) return 'image/png';
+  if (name.endsWith('.wasm')) return 'application/wasm';
+  if (name.endsWith('.js')) return 'text/javascript; charset=utf-8';
   return 'model/gltf-binary';
 }
 
@@ -61,6 +65,18 @@ export function serveMakerAsset(req, res, options = {}) {
     else ensureStudioModel(name, dir).then(ready => send(res, ready), error => {
       if (!res.headersSent) res.writeHead(502, { 'Content-Type': 'text/plain; charset=utf-8' });
       res.end(`キャラメイクのモデルを用意できませんでした。${error.message}`);
+    });
+    return true;
+  }
+  if (url.startsWith(STAGE_PREFIX)) {
+    // 下見の Rust の Stage（wasm と JS）。配布ではキャッシュに無ければ固定コミットから取る（server/stage-files.mjs）
+    const name = decodeURIComponent(url.slice(STAGE_PREFIX.length));
+    const found = safeName(name) ? stageFile(name, options.stageCacheDir ?? stageCacheDir()) : null;
+    if (found === null) { notFound(res); return true; }
+    if (found) send(res, found);
+    else ensureStageFile(name, options.stageCacheDir ?? stageCacheDir()).then(ready => send(res, ready), error => {
+      if (!res.headersSent) res.writeHead(502, { 'Content-Type': 'text/plain; charset=utf-8' });
+      res.end(`下見の Stage を用意できませんでした。${error.message}`);
     });
     return true;
   }
@@ -108,6 +124,14 @@ export function copyMakerAssets(outRoot, options = {}) {
     mkdirSync(modelsOut, { recursive: true });
     copyFileSync(found, path.join(modelsOut, name)); count += 1;
   }
-  if (missing.length) console.warn(`[character-maker] Studio のモデル ${missing.length} 件がありません。先に await ensureStudioModels(cacheDir) を実行してください。`);
+  const stageOut = path.join(outRoot, STAGE_PREFIX.slice(1));
+  const stageNames = stageFiles()?.files.map(entry => entry.public.slice(STAGE_PREFIX.length)) ?? ['character_maker_stage.js', 'character_maker_stage_bg.wasm'];
+  for (const name of stageNames) {
+    const found = stageFile(name, options.stageCacheDir ?? stageCacheDir());
+    if (!found) { missing.push(name); continue; }
+    mkdirSync(stageOut, { recursive: true });
+    copyFileSync(found, path.join(stageOut, name)); count += 1;
+  }
+  if (missing.length) console.warn(`[character-maker] Studio のモデル ${missing.length} 件がありません。先に await ensureStudioModels(cacheDir) と await ensureStageFiles() を実行してください。`);
   return count;
 }

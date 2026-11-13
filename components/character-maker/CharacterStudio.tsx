@@ -5,6 +5,8 @@ import OriginalCharacterMaker, { type OriginalEditorHandle, type OriginalEditorS
 import MakerPresetEditor, { type MakerEditorHandle, type MakerEditorSession } from './MakerPresetEditor';
 import { SwapGhost, captureStageSnapshot, type StageSnapshot } from './StudioStage';
 import { StudioMark } from './StudioIcon';
+import { StageUnsupported, type StageExit } from './StageUnsupported';
+import { useStageSupport } from './rust/stage';
 import type { OriginalCharacter } from '../../lib/character-maker/original-config';
 import { ACTIVE_FANTASY_PRESET_IDS, getPresets, makeDocument, type CharacterConfig } from '../../lib/character-maker/config';
 import { loadStudioSelection, saveStudioSelection } from '../../lib/character-maker/studio-selection';
@@ -60,10 +62,11 @@ export type CharacterStudioProps = {
   initialName?: string;
   /** 置き場所は埋め込み先が決める。Studio は既定で画面いっぱい（100dvh）。 */
   className?: string;
-};
+} & StageExit;
 
 /** Character Studio 本体（/character-maker と埋め込み先で共通）。このリポジトリの globals.css やレイアウトには頼らない。 */
-export default function CharacterStudio({ onPlay, initialName, className }: CharacterStudioProps = {}) {
+export default function CharacterStudio({ onPlay, initialName, className, onExit, exitLabel }: CharacterStudioProps = {}) {
+  const support = useStageSupport();
   const [selection, setSelection] = useState<Selection>({ kind: 'original', characterId: characters[0].id });
   const [hydrated, setHydrated] = useState(false);
   const [selectionWarning, setSelectionWarning] = useState('');
@@ -184,6 +187,9 @@ export default function CharacterStudio({ onPlay, initialName, className }: Char
     setSelectionWarning(saveStudioSelection(window, selectionId(next)) ? '' : '選んだキャラクターを次回に引き継げませんでした。編集内容は各キャラクターの控えに残っています。');
     setSelection(next);
   }
+
+  // WebGPU が無い端末は、遊べないことを知らせるだけ（ボタンは呼ぶ側が戻る口を渡したときだけ）
+  if (support === 'unsupported') return <main className={`${styles.shell}${className ? ` ${className}` : ''}`} data-studio-page><StageUnsupported onExit={onExit} exitLabel={exitLabel} /></main>;
 
   return <main className={`${styles.shell} ${styles.selectionStudio}${className ? ` ${className}` : ''}`} data-studio-page style={{ '--accent': active.look.accent } as CSSProperties}>
     <a className={styles.skipLink} href="#studio-edit">編集へ移動</a>

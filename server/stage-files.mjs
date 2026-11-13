@@ -12,7 +12,7 @@ import { fileURLToPath } from 'node:url';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 export const STAGE_FILES_REPOSITORY = 'aiarranger/character-maker-oss';
 /** 公開リポジトリの固定コミット（distribution/maker-stage/ を含む）。公開リポジトリへ push したあとに書く。未定なら null（pack が止まる） */
-export const STAGE_FILES_COMMIT = null;
+export const STAGE_FILES_COMMIT = '423a1675ed3cd278b73efa9b3665e24e04e3bbf5';
 export const STAGE_PREFIX = '/maker-stage/';
 export const STAGE_SOURCE = 'distribution/maker-stage';
 

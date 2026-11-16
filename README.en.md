@@ -75,7 +75,7 @@ pnpm gyogun:build       # builds the game into public/gyogun/ (Rust 1.99, wasm-b
 pnpm dev
 ```
 
-Open http://127.0.0.1:4284/gyogun/index.html. Controls and layout: [games/gyogun/README.md](games/gyogun/README.md); scope: [docs/gyogun-spec.md](docs/gyogun-spec.md) (both in Japanese). Press the 「魚群繚乱で遊ぶ」 card at the bottom left of the Studio stage (`/character-maker`; it plays a short clip of the game's title screen, and moves into the 書き出し menu on narrow screens) to play as the character you made (run `pnpm gyogun:build` first).
+Open http://127.0.0.1:4284/gyogun/index.html. Controls and layout: [games/gyogun/README.md](games/gyogun/README.md); scope: [docs/gyogun-spec.md](docs/gyogun-spec.md) (both in Japanese). Press the 「魚群繚乱で遊ぶ」 card at the bottom left of the Studio stage (`/character-maker`; it plays a short clip of the game's title screen) to play as the character you made (run `pnpm gyogun:build` first).
 
 ## Use in your game
 

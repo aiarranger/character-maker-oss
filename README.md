@@ -73,7 +73,7 @@ pnpm gyogun:build       # public/gyogun/ にゲームを作る（Rust 1.99・was
 pnpm dev
 ```
 
-http://127.0.0.1:4284/gyogun/index.html を開きます。操作と中身は [games/gyogun/README.md](games/gyogun/README.md)、範囲は [docs/gyogun-spec.md](docs/gyogun-spec.md)。Studio（`/character-maker`）のステージの左下にあるカード「魚群繚乱で遊ぶ」（魚群繚乱のタイトル画面が動いています。狭い画面では「書き出し」メニューの中）を押すと、作ったキャラが主役になります（先に `pnpm gyogun:build`）。
+http://127.0.0.1:4284/gyogun/index.html を開きます。操作と中身は [games/gyogun/README.md](games/gyogun/README.md)、範囲は [docs/gyogun-spec.md](docs/gyogun-spec.md)。Studio（`/character-maker`）のステージの左下にあるカード「魚群繚乱で遊ぶ」（魚群繚乱のタイトル画面が動いています）を押すと、作ったキャラが主役になります（先に `pnpm gyogun:build`）。
 
 ## ゲームで使う / Use in your game
 

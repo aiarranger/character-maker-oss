@@ -39,7 +39,7 @@ impl Floor {
     }
 }
 
-/// classic の床（CharacterMakerScene の studio でない枝: 丸い板と細い輪。動かない）
+/// classic の床（前の three の版の CharacterMakerScene の studio でない枝: 丸い板と細い輪。動かない）
 pub fn classic(kit: &mut Kit) {
     use island_kit::geometry::circle;
     let flat = |kit: &mut Kit, geo: island_kit::geometry::Geometry, hex: u32, opacity: f32, y: f32| {

@@ -13,10 +13,10 @@
   ],
   "entries": [
     {
-      "public": "public/models/15fff552ee550c51132c2b0d761f4cbb38101a63591ad1a823c14d16c3d4b33d.glb",
-      "source": "parts/assets/studio-runtime-v1/models/15fff552ee550c51132c2b0d761f4cbb38101a63591ad1a823c14d16c3d4b33d.glb",
-      "sha256": "15fff552ee550c51132c2b0d761f4cbb38101a63591ad1a823c14d16c3d4b33d",
-      "bytes": 25738144,
+      "public": "public/models/21274ff31b71c047ae5f8ac9f4e6c8c6e7017ec36787a3ea91aa8fdc61146460.glb",
+      "source": "parts/assets/studio-runtime-v1/models/21274ff31b71c047ae5f8ac9f4e6c8c6e7017ec36787a3ea91aa8fdc61146460.glb",
+      "sha256": "21274ff31b71c047ae5f8ac9f4e6c8c6e7017ec36787a3ea91aa8fdc61146460",
+      "bytes": 19851228,
       "kind": "model"
     },
     {
@@ -27,10 +27,10 @@
       "kind": "model"
     },
     {
-      "public": "public/models/337222c108d0ca174a7e44df8c37f84adcbfc3ac0beaf9403813acaee7e46697.glb",
-      "source": "parts/assets/studio-runtime-v1/models/337222c108d0ca174a7e44df8c37f84adcbfc3ac0beaf9403813acaee7e46697.glb",
-      "sha256": "337222c108d0ca174a7e44df8c37f84adcbfc3ac0beaf9403813acaee7e46697",
-      "bytes": 21299840,
+      "public": "public/models/cb538c5149e8b662025282e8dacc6068ee33382f6a9ecf61c80bc1fcd0ab8ece.glb",
+      "source": "parts/assets/studio-runtime-v1/models/cb538c5149e8b662025282e8dacc6068ee33382f6a9ecf61c80bc1fcd0ab8ece.glb",
+      "sha256": "cb538c5149e8b662025282e8dacc6068ee33382f6a9ecf61c80bc1fcd0ab8ece",
+      "bytes": 19314904,
       "kind": "model"
     },
     {
@@ -1359,15 +1359,15 @@
     {
       "public": "public/portraits/haru-maker-quality-20261005.png",
       "source": "parts/assets/studio-runtime-v1/portraits/haru-maker-quality-20261005.png",
-      "sha256": "fcd8374583601669d8890b4c90806fe746691768ab54a86e4756272e3e73ecbd",
-      "bytes": 251429,
+      "sha256": "cd14cbff531e534d67d176d5d9c8b96a61f098bc0c513b94e6a2d67082ffdc6b",
+      "bytes": 109262,
       "kind": "portrait"
     },
     {
       "public": "public/portraits/nagi-selector-quality-v1.jpg",
       "source": "parts/assets/studio-runtime-v1/portraits/nagi-selector-quality-v1.jpg",
-      "sha256": "55cdce4369e4d3b29e63db22bc8619cb8ac2b4863522ac64957cd38ed9689e15",
-      "bytes": 59763,
+      "sha256": "ac50a2bc238b5677d5a8d169fd7b1414ddf59d8813e209e6903c3399baeeb775",
+      "bytes": 31875,
       "kind": "portrait"
     },
     {
@@ -1499,162 +1499,162 @@
     {
       "public": "public/character-maker/original-parts/generic-human-a/eyes-large.jpg",
       "source": "parts/assets/studio-runtime-v1/original-parts/generic-human-a/eyes-large.jpg",
-      "sha256": "7022fa777c52220d710618bc1a821c22c227ff1c4797d6f979b45d84898781e0",
-      "bytes": 32782,
+      "sha256": "9ea9acc9f85d62ab014a53b6363699cc294cb39d5ba64493c60d48476ae328b8",
+      "bytes": 16359,
       "kind": "original-part"
     },
     {
       "public": "public/character-maker/original-parts/generic-human-a/eyes-narrow.jpg",
       "source": "parts/assets/studio-runtime-v1/original-parts/generic-human-a/eyes-narrow.jpg",
-      "sha256": "162a2993b0ea7de162229b41d5e4d90f8cbdd90516da6be180ab26e6b846b674",
-      "bytes": 31700,
+      "sha256": "8502ed51745435e13698ac7a0f46f5ef9d70a8f04643d023899ed1a6416ee5e4",
+      "bytes": 15723,
       "kind": "original-part"
     },
     {
       "public": "public/character-maker/original-parts/generic-human-a/eyes-original.jpg",
       "source": "parts/assets/studio-runtime-v1/original-parts/generic-human-a/eyes-original.jpg",
-      "sha256": "6bb7105bcdc021a59507f53ae5ba6c7198ecbb0bddb37e53abd67261bb70775a",
-      "bytes": 32248,
+      "sha256": "99dbfc4c849fe0ca2f262a5b8b96ba07ae040e11ee4b3ce23eb04d86be5d79a4",
+      "bytes": 16359,
       "kind": "original-part"
     },
     {
       "public": "public/character-maker/original-parts/generic-human-a/hair-haru-buzz-v3.jpg",
       "source": "parts/assets/studio-runtime-v1/original-parts/generic-human-a/hair-haru-buzz-v3.jpg",
-      "sha256": "f96d4359a241c3b2a9a9be1639527e0542076368ffc5a5cf7c604d4c0a097c5e",
-      "bytes": 39834,
+      "sha256": "810afd1d5db6826e4e5622833d3efa60cd869f1f209a124307dc47ff1141d460",
+      "bytes": 27115,
       "kind": "original-part"
     },
     {
       "public": "public/character-maker/original-parts/generic-human-a/hair-haru-center-v2.jpg",
       "source": "parts/assets/studio-runtime-v1/original-parts/generic-human-a/hair-haru-center-v2.jpg",
-      "sha256": "eae99fb8154972ff770dda0524da7ebe4c95361bfc141114be459836719df1d5",
-      "bytes": 44968,
+      "sha256": "3cb3a7250f3f852059c6d73e77de1e62d3e2724f5d5c6036f0ceab57fcb1c10d",
+      "bytes": 29658,
       "kind": "original-part"
     },
     {
       "public": "public/character-maker/original-parts/generic-human-a/hair-haru-crop-v2.jpg",
       "source": "parts/assets/studio-runtime-v1/original-parts/generic-human-a/hair-haru-crop-v2.jpg",
-      "sha256": "f9370c31bc28b301eef17c83fd6870191042b67976cbdcc9fd3e89b9ad5ddb55",
-      "bytes": 44308,
+      "sha256": "9e65a8c9e366e564df27ee9db1f36c4d849cbc3e1a544c0bafe55ee078e54992",
+      "bytes": 26814,
       "kind": "original-part"
     },
     {
       "public": "public/character-maker/original-parts/generic-human-a/hair-haru-short-v2.jpg",
       "source": "parts/assets/studio-runtime-v1/original-parts/generic-human-a/hair-haru-short-v2.jpg",
-      "sha256": "09bf4aed609886a59b961d4c3a786f4df58296ca9aedd1604d12444d4cdf3a20",
-      "bytes": 47894,
+      "sha256": "b6fe629228039e8aa0245c8143b9405f62c590a6caddcf302bc104bfc42defd6",
+      "bytes": 27518,
       "kind": "original-part"
     },
     {
       "public": "public/character-maker/original-parts/generic-human-a/hair-haru-sidepart-v3.jpg",
       "source": "parts/assets/studio-runtime-v1/original-parts/generic-human-a/hair-haru-sidepart-v3.jpg",
-      "sha256": "1de6eaf2bb8b45c4d2c2eb1de02c096a3581b81275c7c312dfcc9e1613ba7896",
-      "bytes": 45500,
+      "sha256": "f2537917bac229cbd31437d30ddb7153793309727c9b7cbfbe29982a73917a8d",
+      "bytes": 28420,
       "kind": "original-part"
     },
     {
       "public": "public/character-maker/original-parts/generic-human-a/hair-haru-swept-v2.jpg",
       "source": "parts/assets/studio-runtime-v1/original-parts/generic-human-a/hair-haru-swept-v2.jpg",
-      "sha256": "d01c6c092015773ad834a8e8c141e53d152c1c43faa7dd5a16ec6fae2ff67a02",
-      "bytes": 46511,
+      "sha256": "0bd3c5dea3c8689bf5ec15ac45dd1e3b011ea1221cfec2af85d6737ed354fc16",
+      "bytes": 26553,
       "kind": "original-part"
     },
     {
       "public": "public/character-maker/original-parts/generic-human-a/head-original.jpg",
       "source": "parts/assets/studio-runtime-v1/original-parts/generic-human-a/head-original.jpg",
-      "sha256": "6bb7105bcdc021a59507f53ae5ba6c7198ecbb0bddb37e53abd67261bb70775a",
-      "bytes": 32248,
+      "sha256": "ae78d1fa5e6c4466151533a4fee2c346f70a26278b753f2760c41adbac0e9925",
+      "bytes": 16390,
       "kind": "original-part"
     },
     {
       "public": "public/character-maker/original-parts/generic-human-a/head-rounded.jpg",
       "source": "parts/assets/studio-runtime-v1/original-parts/generic-human-a/head-rounded.jpg",
-      "sha256": "525d1676df0325ed98eca062f5da2a7c430df4295781da3a22964f1097285b41",
-      "bytes": 32425,
+      "sha256": "6a2218e33499df5f8b7acbb8a227ae7f2ace633f0cafef75126e1746dbfa0169",
+      "bytes": 16854,
       "kind": "original-part"
     },
     {
       "public": "public/character-maker/original-parts/generic-human-a/head-slim.jpg",
       "source": "parts/assets/studio-runtime-v1/original-parts/generic-human-a/head-slim.jpg",
-      "sha256": "c5a407cac5e2e92ad9769bd293eeb7979c87f6bbc2a3b23117d5c447b79c8fd2",
-      "bytes": 31414,
+      "sha256": "9015377090275adafb4c1dad4e0f78ec1261843e19964ff95f4b937716475f95",
+      "bytes": 15554,
       "kind": "original-part"
     },
     {
       "public": "public/character-maker/original-parts/generic-human-a/mouth-original.jpg",
       "source": "parts/assets/studio-runtime-v1/original-parts/generic-human-a/mouth-original.jpg",
-      "sha256": "6bb7105bcdc021a59507f53ae5ba6c7198ecbb0bddb37e53abd67261bb70775a",
-      "bytes": 32248,
+      "sha256": "2bad5c0a5fb87f962f7acf61df32820fc2d02dfe680dbe6a652990186569b6d1",
+      "bytes": 16215,
       "kind": "original-part"
     },
     {
       "public": "public/character-maker/original-parts/generic-human-a/mouth-small.jpg",
       "source": "parts/assets/studio-runtime-v1/original-parts/generic-human-a/mouth-small.jpg",
-      "sha256": "b95218377c373b244a1a64c834abf64d98bf9bac50a2e58e87e3fb2818a2d1ee",
-      "bytes": 32205,
+      "sha256": "21a7adade2ac1e083160bc55e8a10599c22d9b115d19881ca85fd68a2fe17c2a",
+      "bytes": 16213,
       "kind": "original-part"
     },
     {
       "public": "public/character-maker/original-parts/generic-human-a/mouth-wide.jpg",
       "source": "parts/assets/studio-runtime-v1/original-parts/generic-human-a/mouth-wide.jpg",
-      "sha256": "00dad02383a62ef03cff44821e94ce0a9501f95e3b5de570c2a24867636ba408",
-      "bytes": 32332,
+      "sha256": "db6e9cda1851f8fcb175d5eea21c17f1177c0fd90ce061d6e683510bed83c35c",
+      "bytes": 16163,
       "kind": "original-part"
     },
     {
       "public": "public/character-maker/original-parts/generic-human-b/eyes-large.jpg",
       "source": "parts/assets/studio-runtime-v1/original-parts/generic-human-b/eyes-large.jpg",
-      "sha256": "8e4513259cd2defb8a82aef30bf99d649ae668e495ce910f2d450f9b951d4e08",
-      "bytes": 80400,
+      "sha256": "3fff9453ea1d7d5ec399b33bafbb1bb638c2998f1000689398b2fa4cd3a5e915",
+      "bytes": 20041,
       "kind": "original-part"
     },
     {
       "public": "public/character-maker/original-parts/generic-human-b/eyes-narrow.jpg",
       "source": "parts/assets/studio-runtime-v1/original-parts/generic-human-b/eyes-narrow.jpg",
-      "sha256": "75e1f3d252d5de30afd11695706c9e3cc2b7f8e5dc1232642e3bcb7f724d3a95",
-      "bytes": 78506,
+      "sha256": "faf191af6c9054a9b0c91b0a80f2b6389f012183e8671fca21bf4239a339eda9",
+      "bytes": 19049,
       "kind": "original-part"
     },
     {
       "public": "public/character-maker/original-parts/generic-human-b/eyes-original.jpg",
       "source": "parts/assets/studio-runtime-v1/original-parts/generic-human-b/eyes-original.jpg",
-      "sha256": "fefb58e8299693cf7abb5419eca69904bc5488399ef364194f6e1beb3cd68404",
-      "bytes": 79115,
+      "sha256": "e65e81011edf1ce189cf80140f99882119407dfe943dec96fbfb2fdec4aaab7f",
+      "bytes": 19927,
       "kind": "original-part"
     },
     {
       "public": "public/character-maker/original-parts/generic-human-b/hair-nagi-bob-v2.jpg",
       "source": "parts/assets/studio-runtime-v1/original-parts/generic-human-b/hair-nagi-bob-v2.jpg",
-      "sha256": "4dd05f6490a5d20af40c1964ab4e40cbcaa13bfc136616a1582b102370222519",
-      "bytes": 50514,
+      "sha256": "8bd8914826d99430ea5f3704c260f5cbce20fec27e59a17b41a857c680883cb1",
+      "bytes": 33870,
       "kind": "original-part"
     },
     {
       "public": "public/character-maker/original-parts/generic-human-b/hair-nagi-long-v2-front-3ebd4576e87ca87e.jpg",
       "source": "parts/assets/studio-runtime-v1/original-parts/generic-human-b/hair-nagi-long-v2-front-3ebd4576e87ca87e.jpg",
-      "sha256": "3ebd4576e87ca87eaadf170177a6b31345e8c23c843990ac5a9e246a46b549b0",
-      "bytes": 55310,
+      "sha256": "39beef914bdd8e327df40c123cde330e072d4d53c5f7c81f7f60b4edeae73d82",
+      "bytes": 36676,
       "kind": "original-part"
     },
     {
       "public": "public/character-maker/original-parts/generic-human-b/hair-nagi-long-v2.jpg",
       "source": "parts/assets/studio-runtime-v1/original-parts/generic-human-b/hair-nagi-long-v2.jpg",
-      "sha256": "d1102ed9605a03f50796fb1a4e6865365c47115e77600a294d215fe105f4f14f",
-      "bytes": 55925,
+      "sha256": "39beef914bdd8e327df40c123cde330e072d4d53c5f7c81f7f60b4edeae73d82",
+      "bytes": 36676,
       "kind": "original-part"
     },
     {
       "public": "public/character-maker/original-parts/generic-human-b/hair-nagi-pixie-v2.jpg",
       "source": "parts/assets/studio-runtime-v1/original-parts/generic-human-b/hair-nagi-pixie-v2.jpg",
-      "sha256": "a8f3ab133bc0c0cef7f312e48e2d296352f2304c58a1cb587c67d747587c2cc0",
-      "bytes": 49724,
+      "sha256": "badd2c63f8b05d52aadf54fe24c6efe78bf0ecb4a9a52d6d168c486d05818d3b",
+      "bytes": 33039,
       "kind": "original-part"
     },
     {
       "public": "public/character-maker/original-parts/generic-human-b/hair-nagi-pony-v2.jpg",
       "source": "parts/assets/studio-runtime-v1/original-parts/generic-human-b/hair-nagi-pony-v2.jpg",
-      "sha256": "974faf1bef0ee07693b62680f7a0a13c483e15c7a0a65fbc67a9520228267294",
-      "bytes": 51283,
+      "sha256": "6adcccc376ed1f8a243ac91ac56f74be91be3f6d79e9b5209678f162b67394f4",
+      "bytes": 32023,
       "kind": "original-part"
     },
     {
@@ -1667,43 +1667,43 @@
     {
       "public": "public/character-maker/original-parts/generic-human-b/head-original.jpg",
       "source": "parts/assets/studio-runtime-v1/original-parts/generic-human-b/head-original.jpg",
-      "sha256": "a30d8fbfd6ff5019e62f4f9b20d06fa002600e9bc52d3d44cb89aa9ffe03de2a",
-      "bytes": 57304,
+      "sha256": "40a2a141f9421b2952eaedb70c6ba204e77c2502b53ac4866fc1143d77f18018",
+      "bytes": 19996,
       "kind": "original-part"
     },
     {
       "public": "public/character-maker/original-parts/generic-human-b/head-rounded.jpg",
       "source": "parts/assets/studio-runtime-v1/original-parts/generic-human-b/head-rounded.jpg",
-      "sha256": "8f80c00be3d7260563b11f319f79653ebf025a9f64d8848f4900c56bbf8e2f9f",
-      "bytes": 59932,
+      "sha256": "a180db42e4e952e149fcd8311efe120667454326b33f98e96488e2687ed81b09",
+      "bytes": 19296,
       "kind": "original-part"
     },
     {
       "public": "public/character-maker/original-parts/generic-human-b/head-slim.jpg",
       "source": "parts/assets/studio-runtime-v1/original-parts/generic-human-b/head-slim.jpg",
-      "sha256": "5e078f4037e087761624835a247a5d61dc5598ed40f365af38ab70dba75402db",
-      "bytes": 55697,
+      "sha256": "7064df177f89edbfae27ed6515ed72ceacb3a458572d7e692621f0937abe2152",
+      "bytes": 19734,
       "kind": "original-part"
     },
     {
       "public": "public/character-maker/original-parts/generic-human-b/mouth-original.jpg",
       "source": "parts/assets/studio-runtime-v1/original-parts/generic-human-b/mouth-original.jpg",
-      "sha256": "5fcf0e8dd009fa8a452fb97f724ec9108477c37783921a91bd4e1a803651b1a0",
-      "bytes": 66363,
+      "sha256": "4217d85c025bf00f39b53384a1ecb10c04e5c0b54fdf217f9cba21028f46fcd4",
+      "bytes": 19349,
       "kind": "original-part"
     },
     {
       "public": "public/character-maker/original-parts/generic-human-b/mouth-small.jpg",
       "source": "parts/assets/studio-runtime-v1/original-parts/generic-human-b/mouth-small.jpg",
-      "sha256": "efcdb72bbb792083f5fd1816f137d4a1161995cac70b06a7c9f1995fd6a5659d",
-      "bytes": 66237,
+      "sha256": "8ad6f339fafd5a48599d0170ea4b5249bebb7a1ef8ead4ad516225116b88857b",
+      "bytes": 19981,
       "kind": "original-part"
     },
     {
       "public": "public/character-maker/original-parts/generic-human-b/mouth-wide.jpg",
       "source": "parts/assets/studio-runtime-v1/original-parts/generic-human-b/mouth-wide.jpg",
-      "sha256": "e3f339703498200057241aff2456c8e242f931dfb42c4a1e225d0f0865a14b8d",
-      "bytes": 66596,
+      "sha256": "98f688c4d3d8dc361435776d2d216e7a9f3ccd8495c2943082d9c95c0a75ead0",
+      "bytes": 19444,
       "kind": "original-part"
     },
     {
@@ -1779,16 +1779,51 @@
     {
       "public": "public/character-maker/original-parts/hair-manifest.json",
       "source": "parts/assets/studio-runtime-v1/original-parts/hair-manifest.json",
-      "sha256": "ce53065a16b6ae0dd293584ce5d879ce98dd1bd80f8e569dfa521fdc5b669ce1",
-      "bytes": 4148,
+      "sha256": "f8ae5f0cf911d2b86aa3e31017afdfe5121b45ab55a9808db726d0cca1b903ca",
+      "bytes": 3450,
       "kind": "original-part"
     },
     {
       "public": "public/character-maker/original-parts/manifest.json",
       "source": "parts/assets/studio-runtime-v1/original-parts/manifest.json",
-      "sha256": "f7e9375928115117fd58be2c50bc385889a567e852d7d9c3812cb20540819865",
-      "bytes": 8815,
+      "sha256": "c5b691f078b07fffdc20fa6c9bc4d84f2f99782f5edf21e1d064342524ce7766",
+      "bytes": 8327,
       "kind": "original-part"
+    },
+    {
+      "public": "public/maker-assets/comic-feminine-soft-skin.png",
+      "source": "parts/assets/comic-skin-v1/feminine-soft-skin.png",
+      "sha256": "612f68dcbe7c71731398dc9170851dc6d69cb4eb8cf1e23fca3c21ed029f6ce7",
+      "bytes": 385936,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/comic-masculine-soft-skin.png",
+      "source": "parts/assets/comic-skin-v1/masculine-soft-skin.png",
+      "sha256": "648ae4112f0c7cdec94f77cf6ef92c5efd61ea543a98ee8ddc36971ba65b057d",
+      "bytes": 405593,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/studio-backdrop.jpg",
+      "source": "parts/assets/studio-backdrop-v1/studio-backdrop.jpg",
+      "sha256": "73f2db9e076a5a9cf1d9195093a4a6ca86e287684e3d6b8fbb75322714c9867f",
+      "bytes": 32164,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/comic-soft-masculine.glb",
+      "source": "parts/assets/comic-face-v1/masculine.glb",
+      "sha256": "2a685a9803add37e7375e84c6b1660ff3722ead6e39c74217f48d0d3ea8e85c7",
+      "bytes": 3610836,
+      "kind": "maker-asset"
+    },
+    {
+      "public": "public/maker-assets/comic-soft-feminine.glb",
+      "source": "parts/assets/comic-face-v1/feminine.glb",
+      "sha256": "da752c54a942bd2a6506e734e3590ed9b9bd2d50ce8d18709e50257dc78937d2",
+      "bytes": 3822820,
+      "kind": "maker-asset"
     }
   ]
 }

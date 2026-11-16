@@ -1,5 +1,5 @@
 // キャラメイクのプリセット（ファンタジー・アメコミ）の模型: GLB から組み立て、設定を当て、動かす。今の版（three）は
-// lib/character-maker/assembly.ts と components/character-maker/CharacterMakerScene.tsx の Model。式と順はそちらに合わせる。
+// 前の three の版の lib/character-maker/assembly.ts と CharacterMakerScene.tsx の Model（R7 で消した）。式と順はそれに合わせた。
 // 計画と段は docs/rust-stage-plan.md。
 use crate::actor::Actor;
 use crate::expressions::{self, Built, Expressions, PrimMorph, PrimNames};
@@ -137,7 +137,13 @@ pub struct Model {
     pub(crate) hit_layer: Option<HitLayer>,
     pub(crate) hit: Option<f64>,
     /// 振るが終わったことを知らせたか
+    /// 頭を起こす直し: 頭の骨から見た顔の正面（素の姿で測る）・効かせる度合い（0〜1）・直す前と直した後の頭の回転
+    face_forward: Option<Vec3>,
+    head_lift: f32,
+    head_seen: (Quat, Quat),
     pub(crate) attack_done: bool,
+    /// 今の動作は 1 回で止まるか（振る・ゲーム用の 1 回の動作。終わったら motionComplete を出す）
+    pub(crate) once: bool,
     /// TS へ知らせる出来事（motionComplete・hitComplete）
     pub events: Vec<Value>,
     /// 画像の元（TexId → 元）
@@ -295,6 +301,13 @@ impl Model {
                 if let Some(file) = spec["mature"][key].as_str() { let im = assets.image(file)?; let t = image_texture(kit, &im); tex_src.insert(t.0, TexSrc::Image(im)); swaps.insert(suffix, t); }
             }
         }
+        // 材質の絵の差し替え（spec.swap: 材質の名前 → 画像の名前。アメコミのならした肌など）
+        let mut named_swaps: Vec<(String, TexId)> = Vec::new();
+        if let Some(map) = spec["swap"].as_object() {
+            for (material, file) in map {
+                if let Some(file) = file.as_str() { let im = assets.image(file)?; let t = image_texture(kit, &im); tex_src.insert(t.0, TexSrc::Image(im)); named_swaps.push((material.clone(), t)); }
+            }
+        }
         let root = kit.scene.group(None);
         kit.scene[root].name = "CharacterMaker".into();
         let mut mats: Vec<Mat> = Vec::new();
@@ -307,6 +320,7 @@ impl Model {
             let name = m.map_or(String::new(), |m| m.name.clone());
             if let Some(t) = outfit.get(&name) && (name == "maker-outfit" || name.ends_with("_CLOTH")) && mat.map.is_some() { mat.map = Some(*t); }
             for (suffix, t) in &swaps { if name.ends_with(suffix) && mat.map.is_some() { mat.map = Some(*t); } }
+            for (material, t) in &named_swaps { if &name == material && mat.map.is_some() { mat.map = Some(*t); } }
             let id = kit.material(mat);
             made.insert((which, index), id);
             mats.push(Mat { id, name });
@@ -389,8 +403,9 @@ impl Model {
         let eyes = if fantasy { ['L', 'R'].iter().filter_map(|side| skel.find(&format!("J_Adj_{side}_FaceEye")).map(|i| (i, *side, skel.r[i], skel.r[i]))).collect::<Vec<_>>() } else { Vec::new() };
         if fantasy && eyes.len() != 2 { return Err("視線の接続点がありません。".into()); }
         let head_rest_scale = head.map_or(Vec3::ONE, |h| skel.s[h]);
-        let mut model = Model { root, variant, body, skel, mixer, actions, current: None, mats, prims, skin_parts, hair, head, head_rest_scale, eyes, expressions, fantasy, masculine, applied: c.clone(), hurt_on: false, hurt_prop: false, hurt_face, weapon, hit_layer, hit: None, attack_done: false, events: Vec::new(), tex_src, mat_of: made, height: 1.0, playing: true, speed: 1.0 };
+        let mut model = Model { root, variant, body, skel, mixer, actions, current: None, mats, prims, skin_parts, hair, head, head_rest_scale, eyes, expressions, fantasy, masculine, applied: c.clone(), hurt_on: false, hurt_prop: false, hurt_face, weapon, hit_layer, hit: None, face_forward: None, head_lift: 0.0, head_seen: (Quat::IDENTITY, Quat::IDENTITY), attack_done: false, once: false, events: Vec::new(), tex_src, mat_of: made, height: 1.0, playing: true, speed: 1.0 };
         model.apply(kit, c);
+        model.face_forward = model.measure_face_forward();
         Ok(model)
     }
 
@@ -442,6 +457,15 @@ impl Model {
         let key = if hurt { "hurt".to_string() } else { c["expression"].as_str().unwrap_or("neutral").to_string() };
         let strength = if hurt { 1.0 } else { c["expressionStrength"].as_f64().unwrap_or(1.0) as f32 };
         if let Some(e) = self.expressions.as_mut() { e.apply(&mut self.prims, &key, strength, c["eyes"].as_str().unwrap_or("")); }
+        // アメコミ: 表情の名前と同じ名前のモーフ（tools/character-maker/build-comic-face.py が足す。無い体では何もしない）。＞＜ の間はふつうの顔に戻す
+        if !self.fantasy {
+            for p in &mut self.prims {
+                for name in ["happy", "angry", "sad", "relaxed", "surprised", "blinkLeft", "blinkRight", "lookLeft", "lookRight", "lookUp", "lookDown", "aa", "ih", "ou", "ee", "oh"] {
+                    let on = !hurt && (key == name || key == "blink" && name.starts_with("blink"));
+                    if let Some(k) = p.names.iter().position(|n| n == name) && k < p.weights.len() { p.weights[k] = if on { strength } else { 0.0 }; }
+                }
+            }
+        }
         for e in &mut self.eyes {
             let yaw: f32 = match key.as_str() { "lookLeft" => if e.1 == 'L' { 12.0 } else { 8.0 }, "lookRight" => if e.1 == 'L' { -8.0 } else { -12.0 }, _ => 0.0 };
             let pitch: f32 = match key.as_str() { "lookUp" => 10.0, "lookDown" => -10.0, _ => 0.0 };
@@ -471,18 +495,75 @@ impl Model {
         h.update(kit, &self.variant.glb, &|node| prims.iter().find(|p| p.glb_node == node).map_or(Vec::new(), |p| p.weights.clone()));
     }
 
+    /// 頭の骨から見た顔の正面。素の姿で、頭の骨から目（ファンタジーは目の骨、アメコミは目のメッシュ）への向きの水平の成分。
+    /// 骨の軸の向きや、体の系統ごとの向きの違いに頼らない
+    fn measure_face_forward(&self) -> Option<Vec3> {
+        let h = self.head?;
+        let mut rest = self.skel.clone();
+        rest.update_world(Mat4::IDENTITY);
+        let head = rest.world[h].w_axis.truncate();
+        let eye = if !self.eyes.is_empty() {
+            self.eyes.iter().map(|e| rest.world[e.0].w_axis.truncate()).sum::<Vec3>() / self.eyes.len() as f32
+        } else {
+            let g = &self.variant.glb;
+            let part = self.skin_parts.iter().find(|p| g.meshes[p.mesh].name == "maker-eyes")?;
+            let prim = &g.meshes[part.mesh].primitives[part.prim];
+            let skin = &g.skins[part.skin];
+            let bones: Vec<Mat4> = skin.joints.iter().zip(&skin.inverse_bind).map(|(j, ib)| rest.world[*j] * *ib).collect();
+            let weights = normalize_skin_weights(&prim.weights);
+            let mut sum = Vec3::ZERO;
+            for (v, pos) in prim.positions.iter().enumerate() { for c in 0..4 { if weights[v][c] != 0.0 { sum += bones[prim.joints[v][c] as usize].transform_point3(Vec3::from(*pos)) * weights[v][c]; } } }
+            sum / prim.positions.len().max(1) as f32
+        };
+        let flat = Vec3::new(eye.x - head.x, 0.0, eye.z - head.z);
+        if flat.length() < 1e-4 { return None; }
+        let (_, rotation, _) = rest.world[h].to_scale_rotation_translation();
+        Some(rotation.inverse() * flat.normalize())
+    }
+    /// 頭を起こす（毎コマ、動作のあと）。UAL1 の立ち姿の動作は首を前へ倒していて、顔の大きい体では下を向いた不機嫌な顔に見える。
+    /// 立って動く動作（待機・歩く・走る・構える・話す）の間だけ、顔の正面が水平より下を向いた分を戻す（最大 30°）。ほかの動作へは 0.15 秒ほどでなだらかに切り替える。
+    /// 動作が頭を書き直さなかったコマは、前に直す前の値から直す（重ねない）
+    fn apply_head_lift(&mut self, dt: f64) {
+        let (Some(h), Some(forward)) = (self.head, self.face_forward) else { return };
+        let standing = self.current.as_ref().is_some_and(|(name, _)| ["idle", "walk", "run", "sword_idle", "talk"].contains(&name.as_str())) && self.hit.is_none();
+        let target = if standing { 1.0 } else { 0.0 };
+        self.head_lift += (target - self.head_lift) * (dt as f32 * 7.0).min(1.0);
+        let cur = self.skel.r[h];
+        let base = if cur == self.head_seen.1 { self.head_seen.0 } else { cur };
+        self.skel.r[h] = base;
+        if self.head_lift < 1e-3 { self.head_seen = (base, base); return; }
+        let posed = self.posed();
+        let (_, now, _) = posed.world[h].to_scale_rotation_translation();
+        let facing = (now * forward).normalize();
+        let down = (-facing.y).clamp(-1.0, 1.0).asin();
+        let flat = Vec3::new(facing.x, 0.0, facing.z);
+        // ファンタジーの男性は、素の姿の顔が骨に対して下を向いているので、水平より少し上まで起こす（目で合わせた値）
+        let extra = if self.fantasy && self.masculine { 13f32.to_radians() } else { 0.0 };
+        if down + extra <= 0.02 || flat.length() < 1e-3 { self.head_seen = (base, base); return; }
+        let keep = down - (down + extra).min(35f32.to_radians()) * self.head_lift;
+        let wanted = flat.normalize() * keep.cos() - Vec3::Y * keep.sin();
+        let lift = Quat::from_rotation_arc(facing, wanted.normalize());
+        let parent = self.skel.parent[h].map_or(Quat::IDENTITY, |p| posed.world[p].to_scale_rotation_translation().1);
+        let out = (parent.inverse() * lift * parent * base).normalize();
+        self.head_seen = (base, out);
+        self.skel.r[h] = out;
+    }
+
     /// applyEyeGaze: 動作のあと、目の骨を選んだ向きへ戻す（毎コマ）
     fn apply_eye_gaze(&mut self) { for e in &self.eyes { self.skel.r[e.0] = e.3; } }
 
     /// 動作を始める（CharacterMakerScene の Model の useEffect と同じ: 同じ動作を押し直したら止めて始め直す。振るは 1 回で止める）
-    pub fn play(&mut self, motion: &str) {
+    pub fn play(&mut self, motion: &str, once: Option<bool>) {
+        // 基準姿勢: 動作を全部止めて、骨を素の姿（休止の姿）へ戻す（キャラクター一覧の「基準姿勢」と同じ）
+        if motion == "rest" { self.mixer.stop_all(&mut self.skel); self.current = None; self.once = false; self.attack_done = false; return; }
         let Some(&(_, id)) = self.actions.iter().find(|(n, _)| n == motion) else { return };
         let previous = self.current.as_ref().map(|(_, a)| *a);
         if previous == Some(id) { self.mixer.stop(id, &mut self.skel); }
         self.mixer.reset(id);
         self.mixer.actions[id].time_scale = 1.0;
         self.mixer.set_effective_weight(id, 1.0);
-        let once = motion == "sword_attack";
+        let once = once.unwrap_or(motion == "sword_attack");
+        self.once = once;
         self.mixer.actions[id].once = once;
         self.mixer.actions[id].clamp_when_finished = once;
         self.mixer.play(id, &self.skel);
@@ -519,10 +600,11 @@ impl Model {
         let face = self.hurt_prop || self.hit.is_some();
         if face != self.hurt_on { self.set_hurt_face(kit, face); }
         // 振るが終わった（一回再生で止まった）
-        if let Some((name, id)) = &self.current && name == "sword_attack" && !self.attack_done && self.mixer.actions[*id].paused {
+        if let Some((_, id)) = &self.current && self.once && !self.attack_done && self.mixer.actions[*id].paused {
             self.attack_done = true;
             self.events.push(json!({ "t": "motionComplete" }));
         }
+        self.apply_head_lift(dt);
         self.apply_eye_gaze();
         self.write_pose(kit);
     }
@@ -686,7 +768,10 @@ impl Model {
             let on: serde_json::Map<String, Value> = m.names.iter().zip(&m.weights).filter(|(_, w)| **w != 0.0).map(|(n, w)| (n.clone(), json!(w))).collect();
             json!({ "mesh": m.mesh, "prim": m.prim, "on": on, "kit": kit.morph_weights(m.node).iter().filter(|w| **w != 0.0).count() })
         }).collect();
-        json!({ "morphs": m, "clips": self.actions.iter().map(|a| a.0.clone()).collect::<Vec<_>>(), "current": self.current.as_ref().map(|c| c.0.clone()) })
+        json!({ "morphs": m, "clips": self.actions.iter().map(|a| a.0.clone()).collect::<Vec<_>>(), "current": self.current.as_ref().map(|c| c.0.clone()),
+            "headLift": self.head_lift, "faceForward": self.face_forward.map(|f| f.to_array()),
+            "facing": self.head.zip(self.face_forward).map(|(h, f)| { let p = self.posed(); let (_, r, _) = p.world[h].to_scale_rotation_translation(); (r * f).to_array() }),
+            "facingBase": self.head.zip(self.face_forward).map(|(h, f)| { let mut k = self.skel.clone(); k.r[h] = self.head_seen.0; k.update_world(Mat4::IDENTITY); let (_, r, _) = k.world[h].to_scale_rotation_translation(); (r * f).to_array() }) })
     }
 
     pub fn remove(self, kit: &mut Kit) {
@@ -701,7 +786,7 @@ impl Actor for Model {
     fn signal(&mut self, kit: &mut Kit, v: &Value) {
         if let Some(b) = v["playing"].as_bool() { self.playing = b; }
         if let Some(s) = v["speed"].as_f64() { self.speed = s as f32; }
-        if let Some(motion) = v["motion"].as_str() { self.play(motion); }
+        if let Some(motion) = v["motion"].as_str() { self.play(motion, v["once"].as_bool()); }
         if let Some(on) = v["hurtFace"].as_bool() { self.set_hurt_prop(on); }
         if v["hit"].as_bool() == Some(true) { self.start_hit(); }
         if let Some(on) = v["weaponVisible"].as_bool() { self.set_weapon_visible(kit, on); }
@@ -717,5 +802,7 @@ impl Actor for Model {
     fn take_events(&mut self) -> Vec<Value> { std::mem::take(&mut self.events) }
     fn debug(&self, kit: &Kit) -> Value { Model::debug(self, kit) }
     fn export(&mut self, kit: &mut Kit, v: &Value) -> Result<Vec<u8>, String> { crate::export::preset(self, kit, v) }
+    fn look(&self, _kit: &Kit) -> crate::look::Subject { crate::look::Subject { root: self.root, head: self.head.map(|h| self.posed().world[h]), flat: Vec::new() } }
+    fn head_box(&self, kit: &Kit) -> Option<(Vec3, Vec3)> { let [_, head, _] = self.pose_bounds(kit, &self.posed()); Some(head) }
     fn remove(self: Box<Self>, kit: &mut Kit) { Model::remove(*self, kit); }
 }

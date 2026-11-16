@@ -1,0 +1,850 @@
+{
+  "version": "original-action-v1",
+  "sourceAnimation": {
+    "path": "distribution/characters/_shared/character-maker/sources/animations/UAL1_Standard.glb",
+    "sha256": "69591853d817488edaa8fd9bf8fc1d821eaeaf789f8627b3cd23b41c4ed67997",
+    "license": "CC0 (parts/sources/animations/License.txt)"
+  },
+  "frameStep": 2,
+  "builder": {
+    "path": "tools/character-maker/build-original-action-motions.mjs",
+    "sha256": "7906c9ff8dd46c759156808bfdd80d0f97d6c6913b27ffb80b58345cfaeea07c"
+  },
+  "method": "world-quaternion-delta-over-anatomically-aligned-reference (as the original sword and hit clips); additive output only; source models, sword clips and preset clips untouched",
+  "mapping": [
+    [
+      "root",
+      "Root"
+    ],
+    [
+      "pelvis",
+      "Hip"
+    ],
+    [
+      "spine_01",
+      "Waist"
+    ],
+    [
+      "spine_02",
+      "Spine01"
+    ],
+    [
+      "spine_03",
+      "Spine02"
+    ],
+    [
+      "neck_01",
+      "NeckTwist01"
+    ],
+    [
+      "Head",
+      "Head"
+    ],
+    [
+      "clavicle_l",
+      "L_Clavicle"
+    ],
+    [
+      "upperarm_l",
+      "L_Upperarm"
+    ],
+    [
+      "lowerarm_l",
+      "L_Forearm"
+    ],
+    [
+      "hand_l",
+      "L_Hand"
+    ],
+    [
+      "thigh_l",
+      "L_Thigh"
+    ],
+    [
+      "calf_l",
+      "L_Calf"
+    ],
+    [
+      "foot_l",
+      "L_Foot"
+    ],
+    [
+      "ball_l",
+      "L_ToeBase"
+    ],
+    [
+      "clavicle_r",
+      "R_Clavicle"
+    ],
+    [
+      "upperarm_r",
+      "R_Upperarm"
+    ],
+    [
+      "lowerarm_r",
+      "R_Forearm"
+    ],
+    [
+      "hand_r",
+      "R_Hand"
+    ],
+    [
+      "thigh_r",
+      "R_Thigh"
+    ],
+    [
+      "calf_r",
+      "R_Calf"
+    ],
+    [
+      "foot_r",
+      "R_Foot"
+    ],
+    [
+      "ball_r",
+      "R_ToeBase"
+    ]
+  ],
+  "characters": [
+    {
+      "id": "generic-human-a",
+      "model": {
+        "path": "parts/assets/studio-runtime-v1/models/cb538c5149e8b662025282e8dacc6068ee33382f6a9ecf61c80bc1fcd0ab8ece.glb",
+        "sha256": "cb538c5149e8b662025282e8dacc6068ee33382f6a9ecf61c80bc1fcd0ab8ece"
+      },
+      "output": {
+        "path": "parts/assets/original-action-v1/generic-human-a-actions.json",
+        "sha256": "9a2187802923be7fe081c182e927c6e230133a0266ad3ec00558d8096d06c8f7",
+        "bytes": 867437
+      },
+      "bindResidual": 0.00000497564867740774,
+      "clips": {
+        "jump": {
+          "segments": [
+            [
+              "Jump_Start"
+            ],
+            [
+              "Jump_Loop",
+              0,
+              0.28
+            ],
+            [
+              "Jump_Land"
+            ]
+          ],
+          "duration": 2.86667,
+          "samples": 44,
+          "tracks": 42,
+          "floorOffset": 0.04063
+        },
+        "dodge": {
+          "segments": [
+            [
+              "Roll"
+            ]
+          ],
+          "duration": 1.46667,
+          "samples": 23,
+          "tracks": 42,
+          "floorOffset": 0.03791
+        },
+        "skill": {
+          "segments": [
+            [
+              "Spell_Simple_Enter"
+            ],
+            [
+              "Spell_Simple_Shoot"
+            ],
+            [
+              "Spell_Simple_Idle_Loop",
+              0,
+              0.5
+            ],
+            [
+              "Spell_Simple_Exit"
+            ]
+          ],
+          "duration": 1.96667,
+          "samples": 32,
+          "tracks": 42,
+          "floorOffset": 0.05066
+        },
+        "punch": {
+          "segments": [
+            [
+              "Punch_Jab"
+            ],
+            [
+              "Punch_Cross"
+            ]
+          ],
+          "duration": 1.86667,
+          "samples": 29,
+          "tracks": 42,
+          "floorOffset": 0.05727
+        },
+        "down": {
+          "segments": [
+            [
+              "Death01"
+            ]
+          ],
+          "duration": 2.4,
+          "samples": 37,
+          "tracks": 42,
+          "floorOffset": 0.05066
+        },
+        "dance": {
+          "segments": [
+            [
+              "Dance_Loop"
+            ]
+          ],
+          "duration": 1,
+          "samples": 16,
+          "tracks": 42,
+          "floorOffset": 0.05056
+        },
+        "talk": {
+          "segments": [
+            [
+              "Idle_Talking_Loop"
+            ]
+          ],
+          "duration": 2.93333,
+          "samples": 45,
+          "tracks": 42,
+          "floorOffset": 0.05047
+        },
+        "crouch": {
+          "segments": [
+            [
+              "Crouch_Idle_Loop"
+            ]
+          ],
+          "duration": 2.93333,
+          "samples": 45,
+          "tracks": 42,
+          "floorOffset": 0.03848
+        },
+        "interact": {
+          "segments": [
+            [
+              "Interact"
+            ]
+          ],
+          "duration": 2,
+          "samples": 31,
+          "tracks": 42,
+          "floorOffset": 0.05058
+        },
+        "banzai": {
+          "segments": "posed",
+          "duration": 2.4,
+          "samples": 37,
+          "tracks": 42,
+          "floorOffset": 0.05058
+        },
+        "greet": {
+          "segments": "posed",
+          "duration": 2.2,
+          "samples": 34,
+          "tracks": 42,
+          "floorOffset": 0.05058
+        },
+        "restDown": {
+          "segments": "posed",
+          "duration": 1.2,
+          "samples": 19,
+          "tracks": 42,
+          "floorOffset": 0.05058
+        },
+        "restLoop": {
+          "segments": "posed",
+          "duration": 3.2,
+          "samples": 49,
+          "tracks": 42,
+          "floorOffset": -0.00219
+        },
+        "restUp": {
+          "segments": "posed",
+          "duration": 1.2,
+          "samples": 19,
+          "tracks": 42,
+          "floorOffset": -0.00219
+        },
+        "eat": {
+          "segments": "posed",
+          "duration": 4,
+          "samples": 61,
+          "tracks": 42,
+          "floorOffset": -0.00219
+        },
+        "spinKick": {
+          "segments": "posed",
+          "duration": 1.13333,
+          "samples": 18,
+          "tracks": 42,
+          "floorOffset": 0.05058
+        }
+      }
+    },
+    {
+      "id": "generic-human-b",
+      "model": {
+        "path": "parts/assets/studio-runtime-v1/models/21274ff31b71c047ae5f8ac9f4e6c8c6e7017ec36787a3ea91aa8fdc61146460.glb",
+        "sha256": "21274ff31b71c047ae5f8ac9f4e6c8c6e7017ec36787a3ea91aa8fdc61146460"
+      },
+      "output": {
+        "path": "parts/assets/original-action-v1/generic-human-b-actions.json",
+        "sha256": "a1dc059a4f39eb3a164b802a7ef1543f9b09dec572442a4b2c20c4e172685784",
+        "bytes": 866057
+      },
+      "bindResidual": 0.0006845590498766891,
+      "clips": {
+        "jump": {
+          "segments": [
+            [
+              "Jump_Start"
+            ],
+            [
+              "Jump_Loop",
+              0,
+              0.28
+            ],
+            [
+              "Jump_Land"
+            ]
+          ],
+          "duration": 2.86667,
+          "samples": 44,
+          "tracks": 42,
+          "floorOffset": 0.02128
+        },
+        "dodge": {
+          "segments": [
+            [
+              "Roll"
+            ]
+          ],
+          "duration": 1.46667,
+          "samples": 23,
+          "tracks": 42,
+          "floorOffset": 0.01799
+        },
+        "skill": {
+          "segments": [
+            [
+              "Spell_Simple_Enter"
+            ],
+            [
+              "Spell_Simple_Shoot"
+            ],
+            [
+              "Spell_Simple_Idle_Loop",
+              0,
+              0.5
+            ],
+            [
+              "Spell_Simple_Exit"
+            ]
+          ],
+          "duration": 1.96667,
+          "samples": 32,
+          "tracks": 42,
+          "floorOffset": 0.04225
+        },
+        "punch": {
+          "segments": [
+            [
+              "Punch_Jab"
+            ],
+            [
+              "Punch_Cross"
+            ]
+          ],
+          "duration": 1.86667,
+          "samples": 29,
+          "tracks": 42,
+          "floorOffset": 0.04972
+        },
+        "down": {
+          "segments": [
+            [
+              "Death01"
+            ]
+          ],
+          "duration": 2.4,
+          "samples": 37,
+          "tracks": 42,
+          "floorOffset": 0.03693
+        },
+        "dance": {
+          "segments": [
+            [
+              "Dance_Loop"
+            ]
+          ],
+          "duration": 1,
+          "samples": 16,
+          "tracks": 42,
+          "floorOffset": 0.04041
+        },
+        "talk": {
+          "segments": [
+            [
+              "Idle_Talking_Loop"
+            ]
+          ],
+          "duration": 2.93333,
+          "samples": 45,
+          "tracks": 42,
+          "floorOffset": 0.042
+        },
+        "crouch": {
+          "segments": [
+            [
+              "Crouch_Idle_Loop"
+            ]
+          ],
+          "duration": 2.93333,
+          "samples": 45,
+          "tracks": 42,
+          "floorOffset": 0.00517
+        },
+        "interact": {
+          "segments": [
+            [
+              "Interact"
+            ]
+          ],
+          "duration": 2,
+          "samples": 31,
+          "tracks": 42,
+          "floorOffset": 0.04212
+        },
+        "banzai": {
+          "segments": "posed",
+          "duration": 2.4,
+          "samples": 37,
+          "tracks": 42,
+          "floorOffset": 0.04213
+        },
+        "greet": {
+          "segments": "posed",
+          "duration": 2.2,
+          "samples": 34,
+          "tracks": 42,
+          "floorOffset": 0.04213
+        },
+        "restDown": {
+          "segments": "posed",
+          "duration": 1.2,
+          "samples": 19,
+          "tracks": 42,
+          "floorOffset": 0.04213
+        },
+        "restLoop": {
+          "segments": "posed",
+          "duration": 3.2,
+          "samples": 49,
+          "tracks": 42,
+          "floorOffset": -0.01509
+        },
+        "restUp": {
+          "segments": "posed",
+          "duration": 1.2,
+          "samples": 19,
+          "tracks": 42,
+          "floorOffset": -0.01509
+        },
+        "eat": {
+          "segments": "posed",
+          "duration": 4,
+          "samples": 61,
+          "tracks": 42,
+          "floorOffset": -0.01509
+        },
+        "spinKick": {
+          "segments": "posed",
+          "duration": 1.13333,
+          "samples": 18,
+          "tracks": 42,
+          "floorOffset": 0.04213
+        }
+      }
+    },
+    {
+      "id": "generic-robot",
+      "model": {
+        "path": "distribution/characters/generic-robot/experiments/character-maker-species-2026-10-03-v5/editable.glb",
+        "sha256": "7136ac1a4a1c32801ba8d927533eaba9379abdbbc4f9d0bee9e00f6b5604682f"
+      },
+      "output": {
+        "path": "parts/assets/original-action-v1/generic-robot-actions.json",
+        "sha256": "a323d479a60c1af0ead6edab3379b042050344705bc52133249b22ccde2d2708",
+        "bytes": 867166
+      },
+      "bindResidual": 0.0000035145857091552085,
+      "clips": {
+        "jump": {
+          "segments": [
+            [
+              "Jump_Start"
+            ],
+            [
+              "Jump_Loop",
+              0,
+              0.28
+            ],
+            [
+              "Jump_Land"
+            ]
+          ],
+          "duration": 2.86667,
+          "samples": 44,
+          "tracks": 42,
+          "floorOffset": 0.06937
+        },
+        "dodge": {
+          "segments": [
+            [
+              "Roll"
+            ]
+          ],
+          "duration": 1.46667,
+          "samples": 23,
+          "tracks": 42,
+          "floorOffset": 0.06976
+        },
+        "skill": {
+          "segments": [
+            [
+              "Spell_Simple_Enter"
+            ],
+            [
+              "Spell_Simple_Shoot"
+            ],
+            [
+              "Spell_Simple_Idle_Loop",
+              0,
+              0.5
+            ],
+            [
+              "Spell_Simple_Exit"
+            ]
+          ],
+          "duration": 1.96667,
+          "samples": 32,
+          "tracks": 42,
+          "floorOffset": 0.04805
+        },
+        "punch": {
+          "segments": [
+            [
+              "Punch_Jab"
+            ],
+            [
+              "Punch_Cross"
+            ]
+          ],
+          "duration": 1.86667,
+          "samples": 29,
+          "tracks": 42,
+          "floorOffset": 0.05056
+        },
+        "down": {
+          "segments": [
+            [
+              "Death01"
+            ]
+          ],
+          "duration": 2.4,
+          "samples": 37,
+          "tracks": 42,
+          "floorOffset": 0.04805
+        },
+        "dance": {
+          "segments": [
+            [
+              "Dance_Loop"
+            ]
+          ],
+          "duration": 1,
+          "samples": 16,
+          "tracks": 42,
+          "floorOffset": 0.06613
+        },
+        "talk": {
+          "segments": [
+            [
+              "Idle_Talking_Loop"
+            ]
+          ],
+          "duration": 2.93333,
+          "samples": 45,
+          "tracks": 42,
+          "floorOffset": 0.04807
+        },
+        "crouch": {
+          "segments": [
+            [
+              "Crouch_Idle_Loop"
+            ]
+          ],
+          "duration": 2.93333,
+          "samples": 45,
+          "tracks": 42,
+          "floorOffset": 0.09263
+        },
+        "interact": {
+          "segments": [
+            [
+              "Interact"
+            ]
+          ],
+          "duration": 2,
+          "samples": 31,
+          "tracks": 42,
+          "floorOffset": 0.04801
+        },
+        "banzai": {
+          "segments": "posed",
+          "duration": 2.4,
+          "samples": 37,
+          "tracks": 42,
+          "floorOffset": 0.04801
+        },
+        "greet": {
+          "segments": "posed",
+          "duration": 2.2,
+          "samples": 34,
+          "tracks": 42,
+          "floorOffset": 0.04801
+        },
+        "restDown": {
+          "segments": "posed",
+          "duration": 1.2,
+          "samples": 19,
+          "tracks": 42,
+          "floorOffset": 0.04801
+        },
+        "restLoop": {
+          "segments": "posed",
+          "duration": 3.2,
+          "samples": 49,
+          "tracks": 42,
+          "floorOffset": 0.08093
+        },
+        "restUp": {
+          "segments": "posed",
+          "duration": 1.2,
+          "samples": 19,
+          "tracks": 42,
+          "floorOffset": 0.08093
+        },
+        "eat": {
+          "segments": "posed",
+          "duration": 4,
+          "samples": 61,
+          "tracks": 42,
+          "floorOffset": 0.08093
+        },
+        "spinKick": {
+          "segments": "posed",
+          "duration": 1.13333,
+          "samples": 18,
+          "tracks": 42,
+          "floorOffset": 0.04801
+        }
+      }
+    },
+    {
+      "id": "generic-cat",
+      "model": {
+        "path": "distribution/characters/generic-cat/experiments/character-maker-species-2026-10-03-v11/editable.glb",
+        "sha256": "40cf7018765408408598e3d5411f81f15ec33e96ef7bb271f2d8fa7be626b21a"
+      },
+      "output": {
+        "path": "parts/assets/original-action-v1/generic-cat-actions.json",
+        "sha256": "3fabeee772d296fb50d8c00fced974e1dc3a2efa5bbb3763a44fe3bb113c5354",
+        "bytes": 866336
+      },
+      "bindResidual": 0.0000012078924473760474,
+      "clips": {
+        "jump": {
+          "segments": [
+            [
+              "Jump_Start"
+            ],
+            [
+              "Jump_Loop",
+              0,
+              0.28
+            ],
+            [
+              "Jump_Land"
+            ]
+          ],
+          "duration": 2.86667,
+          "samples": 44,
+          "tracks": 42,
+          "floorOffset": 0.03359
+        },
+        "dodge": {
+          "segments": [
+            [
+              "Roll"
+            ]
+          ],
+          "duration": 1.46667,
+          "samples": 23,
+          "tracks": 42,
+          "floorOffset": 0.03272
+        },
+        "skill": {
+          "segments": [
+            [
+              "Spell_Simple_Enter"
+            ],
+            [
+              "Spell_Simple_Shoot"
+            ],
+            [
+              "Spell_Simple_Idle_Loop",
+              0,
+              0.5
+            ],
+            [
+              "Spell_Simple_Exit"
+            ]
+          ],
+          "duration": 1.96667,
+          "samples": 32,
+          "tracks": 42,
+          "floorOffset": 0.03976
+        },
+        "punch": {
+          "segments": [
+            [
+              "Punch_Jab"
+            ],
+            [
+              "Punch_Cross"
+            ]
+          ],
+          "duration": 1.86667,
+          "samples": 29,
+          "tracks": 42,
+          "floorOffset": 0.04435
+        },
+        "down": {
+          "segments": [
+            [
+              "Death01"
+            ]
+          ],
+          "duration": 2.4,
+          "samples": 37,
+          "tracks": 42,
+          "floorOffset": 0.03841
+        },
+        "dance": {
+          "segments": [
+            [
+              "Dance_Loop"
+            ]
+          ],
+          "duration": 1,
+          "samples": 16,
+          "tracks": 42,
+          "floorOffset": 0.04365
+        },
+        "talk": {
+          "segments": [
+            [
+              "Idle_Talking_Loop"
+            ]
+          ],
+          "duration": 2.93333,
+          "samples": 45,
+          "tracks": 42,
+          "floorOffset": 0.0397
+        },
+        "crouch": {
+          "segments": [
+            [
+              "Crouch_Idle_Loop"
+            ]
+          ],
+          "duration": 2.93333,
+          "samples": 45,
+          "tracks": 42,
+          "floorOffset": 0.01522
+        },
+        "interact": {
+          "segments": [
+            [
+              "Interact"
+            ]
+          ],
+          "duration": 2,
+          "samples": 31,
+          "tracks": 42,
+          "floorOffset": 0.0397
+        },
+        "banzai": {
+          "segments": "posed",
+          "duration": 2.4,
+          "samples": 37,
+          "tracks": 42,
+          "floorOffset": 0.0397
+        },
+        "greet": {
+          "segments": "posed",
+          "duration": 2.2,
+          "samples": 34,
+          "tracks": 42,
+          "floorOffset": 0.0397
+        },
+        "restDown": {
+          "segments": "posed",
+          "duration": 1.2,
+          "samples": 19,
+          "tracks": 42,
+          "floorOffset": 0.0397
+        },
+        "restLoop": {
+          "segments": "posed",
+          "duration": 3.2,
+          "samples": 49,
+          "tracks": 42,
+          "floorOffset": 0.07131
+        },
+        "restUp": {
+          "segments": "posed",
+          "duration": 1.2,
+          "samples": 19,
+          "tracks": 42,
+          "floorOffset": 0.07131
+        },
+        "eat": {
+          "segments": "posed",
+          "duration": 4,
+          "samples": 61,
+          "tracks": 42,
+          "floorOffset": 0.07131
+        },
+        "spinKick": {
+          "segments": "posed",
+          "duration": 1.13333,
+          "samples": 18,
+          "tracks": 42,
+          "floorOffset": 0.0397
+        }
+      }
+    }
+  ]
+}

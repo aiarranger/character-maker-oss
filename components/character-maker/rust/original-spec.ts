@@ -16,8 +16,9 @@ import haruHit from '../../../parts/assets/original-hit-v1/generic-human-a-hit.j
 import nagiHit from '../../../parts/assets/original-hit-v1/generic-human-b-hit.json';
 import luxHit from '../../../parts/assets/original-hit-v1/generic-robot-hit.json';
 import mokaHit from '../../../parts/assets/original-hit-v1/generic-cat-hit.json';
-import haruHand from '../../../distribution/characters/generic-human-a/experiments/character-maker-sword-hand-2026-10-03-v1/hand.json';
-import nagiHand from '../../../distribution/characters/generic-human-b/experiments/character-maker-sword-hand-2026-10-03-v1/hand.json';
+// ハル・ナミは体を作り直したので、握った手の「元の手の三角形」は作り直した体の番号（docs/original-remake-spec.md）
+import haruHand from '../../../parts/assets/original-remake-v1/generic-human-a-hand.json';
+import nagiHand from '../../../parts/assets/original-remake-v1/generic-human-b-hand.json';
 import { currentOriginalAppearance, originalHurtFaceStyle, originalModelAsset, type OriginalCharacter, type OriginalConfig } from '../../../lib/character-maker/original-config';
 import { selectedMakerWeaponId, type MakerWeaponId } from '../../../lib/character-maker/weapon-catalog';
 import { makerWeaponFit, type MakerWeaponRig } from '../../../lib/character-maker/weapon-fit';
@@ -30,6 +31,13 @@ const packages = {
   'generic-human-b': { clips: nagiClips, manifest: nagiManifest, hit: nagiHit },
   'generic-robot': { clips: luxClips, manifest: luxManifest, hit: luxHit },
   'generic-cat': { clips: mokaClips, manifest: mokaManifest, hit: mokaHit },
+} as const;
+/** ゲーム用の動作（parts/assets/original-action-v1。大きいので、そのキャラを開いたときに読む） */
+const actionClips = {
+  'generic-human-a': () => import('../../../parts/assets/original-action-v1/generic-human-a-actions.json'),
+  'generic-human-b': () => import('../../../parts/assets/original-action-v1/generic-human-b-actions.json'),
+  'generic-robot': () => import('../../../parts/assets/original-action-v1/generic-robot-actions.json'),
+  'generic-cat': () => import('../../../parts/assets/original-action-v1/generic-cat-actions.json'),
 } as const;
 const closedHands = { 'generic-human-a': haruHand, 'generic-human-b': nagiHand } as const;
 const bodyMaps = { 'generic-human-a': [haruBodyMap], 'generic-human-b': [nagiBodyMapV1, nagiBodyMapV18] } as const;
@@ -66,7 +74,7 @@ export async function originalSpec(stage: MakerStage, character: OriginalCharact
   const parts = config.appearance.parts;
   // ネコとロボットは、独自の頂点の値（_SPECIES_*。形の歪みと GLB の書き出しが使う）を読むため GLB の生のバイト列も渡す
   const raw = (['generic-cat', 'generic-robot'] as string[]).includes(id) ? `bytes-${asset.sha256}` : null;
-  const sword = `original-sword-${id}.json`, hit = `original-hit-${id}.json`;
+  const sword = `original-sword-${id}.json`, hit = `original-hit-${id}.json`, actions = `original-actions-${id}.json`;
   let weapon = null;
   if (weaponId !== 'none') {
     const entry = weapons.get(weaponId);
@@ -86,11 +94,12 @@ export async function originalSpec(stage: MakerStage, character: OriginalCharact
     })(),
     stage.has(sword) ? null : Promise.resolve().then(() => stage.asset(sword, json(pack.clips))),
     stage.has(hit) ? null : Promise.resolve().then(() => stage.asset(hit, json(pack.hit))),
+    stage.has(actions) ? null : actionClips[id]().then(module => { if (!stage.has(actions)) stage.asset(actions, json(module.default)); }),
     weapon && !stage.has(weapon.asset) ? fetchRegisteredWeapon(weaponId).then(bytes => { if (!stage.has(weapon.asset)) stage.asset(weapon.asset, bytes); }) : null,
   ]);
   const current = currentOriginalAppearance(id, config.appearance);
   return {
-    kind: 'original', character: id, model, raw, clips: [sword, hit], weapon,
+    kind: 'original', character: id, model, raw, clips: [sword, actions, hit], weapon,
     closedHand: hand, bodyMaps: hand ? bodyMaps[id as keyof typeof bodyMaps] : [],
     hurtStyle: originalHurtFaceStyle(id, parts) ?? null,
     viewer: { bodyHz: character.viewer.bodyHz ?? null, modelOffsetY: character.viewer.modelOffsetY ?? 0, modelScale: character.viewer.modelScale ?? 2 },

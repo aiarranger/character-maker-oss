@@ -14,10 +14,16 @@ export const ORIGINAL_FACE_CONTROLS = [
   ['aa', 'あ'], ['ee', 'い'], ['ou', 'う・お'], ['happy', '口角を上げる'],
 ] as const;
 export type OriginalFaceKey = typeof ORIGINAL_FACE_CONTROLS[number][0];
-export type OriginalFace = Record<OriginalFaceKey, number>;
+/** 気持ちの表情（2026-11-15）。眉と目のモーフは読み込むときに Rust が作る（rust/game/src/original_emotion.rs）。
+ * 0 のときは保存に書かない。書くときは schemaVersion 7（前の版は 7 を断るので、気持ちだけ黙って落ちない） */
+export const ORIGINAL_EMOTION_CONTROLS = [['angry', '怒る'], ['sad', '悲しむ'], ['surprised', '驚く'], ['relaxed', '穏やか'],
+  ['lookLeft', '本人の左'], ['lookRight', '本人の右'], ['lookUp', '上'], ['lookDown', '下']] as const;
+export type OriginalEmotionKey = typeof ORIGINAL_EMOTION_CONTROLS[number][0];
+export type OriginalFace = Record<OriginalFaceKey, number> & Partial<Record<OriginalEmotionKey, number>>;
+const hasEmotion = (face: OriginalFace) => ORIGINAL_EMOTION_CONTROLS.some(([key]) => (face[key] ?? 0) > 0);
 export type OriginalMotion = 'idle' | 'walk' | 'run' | 'sword_idle' | 'sword_attack';
 export const ORIGINAL_MOTIONS = [
-  ['idle', '待機'], ['walk', '歩く'], ['run', '走る'], ['sword_idle', '武器を構える'], ['sword_attack', '武器を振る'],
+  ['idle', '待機'], ['walk', '歩行'], ['run', '走行'], ['sword_idle', '武器を構える'], ['sword_attack', '武器を振る'],
 ] as const;
 export const ORIGINAL_APPEARANCE_VERSION = 'original-appearance-v1' as const;
 export const ORIGINAL_SPECIES_VERSION = 'original-appearance-v2' as const;
@@ -82,7 +88,7 @@ export type OriginalConfig = {
   weaponId?: MakerWeaponId;
 };
 export type OriginalDocument = {
-  format: 'characters.character-maker'; sourceKind: 'original'; schemaVersion: 4 | 5 | 6;
+  format: 'characters.character-maker'; sourceKind: 'original'; schemaVersion: 4 | 5 | 6 | 7;
   assetVersion: 'original-maker-v1' | 'original-maker-v2'; name: string; characterId: string; modelSha256: string;
   config: OriginalConfig;
 };
@@ -106,10 +112,11 @@ export function currentOriginalDocument<T extends OriginalDocument>(document: T)
   const hasWeaponSelection = document.config.weaponId !== undefined;
   // Editor snapshots can gain a weapon before their old schema has been upgraded.
   // Serialized imports are checked strictly before reaching this normalization.
-  if (hasWeaponSelection && appearance.version === ORIGINAL_APPEARANCE_VERSION) {
+  const emotion = hasEmotion(document.config.face);
+  if ((hasWeaponSelection || emotion) && appearance.version === ORIGINAL_APPEARANCE_VERSION) {
     appearance = { ...appearance, version: ORIGINAL_SPECIES_VERSION, parts: appearance.parts ?? defaultOriginalSpeciesParts() };
   }
-  const schemaVersion = hasWeaponSelection || document.schemaVersion === 6 ? 6
+  const schemaVersion = emotion ? 7 : hasWeaponSelection || document.schemaVersion >= 6 ? 6
     : appearance !== document.config.appearance ? 5 : document.schemaVersion;
   const assetVersion = schemaVersion >= 5 ? 'original-maker-v2' : document.assetVersion;
   const motion = selectedMakerWeaponId(document.config) === 'none'
@@ -165,7 +172,8 @@ export function validateOriginalDocument(value: unknown): OriginalDocument {
   const input = object(value, '設定ファイル');
   if (input.format !== 'characters.character-maker' || input.sourceKind !== 'original') throw new Error('オリジナルキャラクターの設定JSONを選んでください。');
   const legacy = input.schemaVersion === 4 && input.assetVersion === 'original-maker-v1';
-  const weaponDocument = input.schemaVersion === 6 && input.assetVersion === 'original-maker-v2';
+  const emotionDocument = input.schemaVersion === 7 && input.assetVersion === 'original-maker-v2';
+  const weaponDocument = (input.schemaVersion === 6 || emotionDocument) && input.assetVersion === 'original-maker-v2';
   if (!legacy && !weaponDocument && !(input.schemaVersion === 5 && input.assetVersion === 'original-maker-v2')) throw new Error('このオリジナル設定のバージョンには対応していません。');
   if (typeof input.name !== 'string' || !input.name.trim()) throw new Error('キャラクターの名前を入力してください。');
   if (typeof input.characterId !== 'string' || !/^[a-z][a-z0-9-]{1,48}$/.test(input.characterId)) throw new Error('元のキャラクターを特定できません。');
@@ -185,9 +193,15 @@ export function validateOriginalDocument(value: unknown): OriginalDocument {
   if (parts && originalHumanHairstyles(input.characterId).length && !usesModularOriginal(currentAppearance)
     && ['head', 'eyes', 'mouth'].some(key => parts[key as 'head'] !== 'original')) throw new Error('顔のパーツを変えるには、新しい髪型を選んでください。');
   const face = Object.fromEntries(ORIGINAL_FACE_CONTROLS.map(([key, label]) => [key, number(rawFace[key], 0, 1, label)])) as OriginalFace;
+  for (const [key, label] of ORIGINAL_EMOTION_CONTROLS) {
+    if (rawFace[key] === undefined) continue;
+    if (!emotionDocument) throw new Error('気持ちの表情を保存するにはバージョン7の設定ファイルが必要です。');
+    const value = number(rawFace[key], 0, 1, label);
+    if (value > 0) face[key] = value;
+  }
   if (!(legacy ? ['idle', 'walk', 'run'] : ORIGINAL_MOTIONS.map(([id]) => id)).includes(String(config.motion) as OriginalMotion)) throw new Error('動作の選択が読み込めません。');
   return currentOriginalDocument({
-    format: 'characters.character-maker', sourceKind: 'original', schemaVersion: weaponDocument ? 6 : legacy ? 4 : 5, assetVersion: legacy ? 'original-maker-v1' : 'original-maker-v2',
+    format: 'characters.character-maker', sourceKind: 'original', schemaVersion: emotionDocument && hasEmotion(face) ? 7 : weaponDocument ? 6 : legacy ? 4 : 5, assetVersion: legacy ? 'original-maker-v1' : 'original-maker-v2',
     name: input.name.trim(), characterId: input.characterId, modelSha256: input.modelSha256.toLowerCase(),
     config: {
       size: number(config.size, ORIGINAL_SIZE_RANGE.min, ORIGINAL_SIZE_RANGE.max, '大きさ'), face,

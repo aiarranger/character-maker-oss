@@ -21,8 +21,26 @@ function pixels(canvas: HTMLCanvasElement) {
   return { width: canvas.width, height: canvas.height, rgba: new Uint8Array(context.getImageData(0, 0, canvas.width, canvas.height).data.buffer) };
 }
 
-/** 閉じた目：目の絵の白目と瞳を、ぼかした肌の色で覆う */
-export async function comicCoverImage(bodyGlb: Uint8Array) {
+/** 肌の絵（アトラス）の肌の色: 灰色の所（下着）と透ける所を除いた平均 */
+async function skinTone(png: Uint8Array): Promise<string | null> {
+  const image = await createImageBitmap(new Blob([png.slice()], { type: 'image/png' }), { premultiplyAlpha: 'none', colorSpaceConversion: 'none' });
+  const canvas = document.createElement('canvas');
+  canvas.width = 64; canvas.height = 64;
+  const context = canvas.getContext('2d', { willReadFrequently: true });
+  if (!context) return null;
+  context.drawImage(image, 0, 0, 64, 64);
+  const data = context.getImageData(0, 0, 64, 64).data;
+  const sum = [0, 0, 0]; let count = 0;
+  for (let i = 0; i < data.length; i += 4) {
+    const r = data[i], g = data[i + 1], b = data[i + 2];
+    if (data[i + 3] < 200 || Math.max(r, g, b) - Math.min(r, g, b) < 28) continue;
+    sum[0] += r; sum[1] += g; sum[2] += b; count += 1;
+  }
+  return count ? `rgb(${sum.map(value => Math.round(value / count)).join(',')})` : null;
+}
+
+/** 閉じた目：目の絵の白目と瞳を、ぼかした肌の色で覆う。skinPng（肌の絵）があれば、その肌の色を使う（Studio。無ければ目の絵のまわりの色＝今までどおり） */
+export async function comicCoverImage(bodyGlb: Uint8Array, skinPng?: Uint8Array) {
   const size = 256;
   const canvas = document.createElement('canvas');
   canvas.width = size; canvas.height = size;
@@ -37,6 +55,8 @@ export async function comicCoverImage(bodyGlb: Uint8Array) {
   } else {
     context.fillStyle = skin; context.fillRect(0, 0, size, size);
   }
+  const tone = skinPng ? await skinTone(skinPng) : null;
+  if (tone) { skin = tone; context.fillStyle = skin; context.fillRect(0, 0, size, size); }
   context.save();
   context.filter = 'blur(6px)';
   context.fillStyle = skin;

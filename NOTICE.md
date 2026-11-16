@@ -10,11 +10,19 @@ Character Studio (character-maker) — Copyright (c) 2026 AI Arranger. Code: MIT
   Provenance and the official announcement URLs: `parts/sources/fantasy-v1/README.md`, `parts/sources/fantasy-v1/provenance.json`.
   These are the individual CC0 releases from the VRoid β period, not the current VRoid Studio AvatarSample A–Z (different terms).
 
+- **Fish Kit** — fish models used as the enemies in `games/gyogun/`. CC0 1.0. https://cda-social.github.io/fish/gallery.html — license text: `games/gyogun/public/models/fish/LICENSE.txt`.
+- **Kenney** (www.kenney.nl) — Impact Sounds, Interface Sounds, RPG Audio, converted to MP3 for `games/gyogun/public/aisns/sounds/wilds/`. CC0 1.0. File-by-file sources: `CREDITS.txt` in that folder.
+
 Attribution is not required for CC0, but we credit the authors with thanks.
 
 ## Generative tools
 
 The original characters (ハル, ナミ, ルクス, モカ) and the food weapons were made with ChatGPT image generation and Tripo, then edited by AI Arranger. See LICENSE-ASSETS.md §1.
+In `games/gyogun/`: きゃしー (Cassie) and the pickup models were made with Tripo and edited by AI Arranger; the eight sound effects in `public/sfx/` were generated with Stable Audio 3; Cassie's voice line was generated with Gemini TTS; the four music tracks in `public/music/` were generated with Stable Audio 3. See LICENSE-ASSETS.md §4.
+
+## Fonts (SIL OFL 1.1)
+
+`games/gyogun/rust/game/assets/fonts/`: Zen Kaku Gothic New, Shippori Mincho B1, Dela Gothic One, Yuji Syuku (subset to the glyphs the game uses). License texts: `games/gyogun/rust/game/assets/fonts/licenses/`.
 
 ## npm dependencies
 
@@ -25,3 +33,4 @@ Installed by the package manager, not bundled in this repository: Next.js, React
 - **three.js r178** (MIT, Copyright © 2010-2025 three.js authors): the math classes in `lib/engine/r178/*.mjs`, and the OrbitControls, Camera and Object3D logic in `lib/engine/orbit-controls.ts`, `camera.ts`, `node.ts` (copied through the aisns project).
 - **@types/three 0.178.1** (DefinitelyTyped, MIT, Copyright (c) Microsoft Corporation): the type declarations `lib/engine/r178/*.d.mts`. License text: `lib/engine/r178/LICENSE-types`.
 - The Rust crates in `vendor/rust/` (island-kit and its character crates) are copied from the AI Arranger characters project (MIT).
+- `games/gyogun/` (game code and the Rust crates in `games/gyogun/vendor/rust/`) is copied from the beach stage of AI Arranger's game 百菓繚乱 and from the characters project (MIT).

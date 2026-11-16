@@ -1,0 +1,10 @@
+{
+  "version": "studio-backdrop-v1",
+  "made": "ChatGPT の画像生成（2026-11-15）で作った、何も置いていない撮影スタジオの紙のホリゾントの写真風の画像を、無彩色にして明るさをそろえ、1344×896 にした物。Studio のステージの背景に乗算で重ねる（components/character-maker/studio-stage.module.css）。",
+  "license": "CC BY 4.0（AI Arranger）",
+  "output": {
+    "path": "parts/assets/studio-backdrop-v1/studio-backdrop.jpg",
+    "bytes": 32164,
+    "sha256": "73f2db9e076a5a9cf1d9195093a4a6ca86e287684e3d6b8fbb75322714c9867f"
+  }
+}

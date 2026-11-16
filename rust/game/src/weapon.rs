@@ -51,9 +51,9 @@ pub fn add_skel_node(skel: &mut Skeleton, name: &str, parent: usize, scale: Vec3
     i
 }
 
-/// 動作に武器の見せる・隠すトラックを足す（addWeaponTracks。構える・振る・のけぞりは武器があれば 1、ほかは 0）
+/// 動作に武器の見せる・隠すトラックを足す（addWeaponTracks。構える・振る・のけぞりと、武器を持ったまま動くゲーム用の動作は武器があれば 1、ほかは 0）
 pub fn weapon_track(node: usize, clip: &str, duration: f32, equipped: bool) -> Track {
-    let v = if equipped && ["sword_idle", "sword_attack", "hit"].contains(&clip) { 1.0 } else { 0.0 };
+    let v = if equipped && ["sword_idle", "sword_attack", "hit", "jump", "dodge", "skill", "down", "crouch", "spinKick"].contains(&clip) { 1.0 } else { 0.0 };
     Track { node, prop: Prop::S, interp: Interp::Linear, times: Arc::new(vec![0.0, duration]), values: Arc::new(vec![v; 6]), size: 3 }
 }
 

@@ -1,0 +1,9 @@
+{
+  // 魚群繚乱（/gyogun/）と Character Studio（/character-maker）を、Workers の静的アセットで配る（docs/gyogun-spec.md の「公開先」）。
+  // 中身は pnpm gyogun:site が out/ に書き出す。サーバーの処理は無い（協力プレイは入れない）。/ は out/_redirects で /gyogun/ へ。公開は pnpm gyogun:deploy
+  "$schema": "https://www.unpkg.com/wrangler@4.157.0/config-schema.json",
+  "name": "gyogun-yukikau",
+  "compatibility_date": "2026-11-04",
+  "assets": { "directory": "./out", "not_found_handling": "404-page" },
+  "routes": [{ "pattern": "gyogun.yukikau.jp", "custom_domain": true }]
+}

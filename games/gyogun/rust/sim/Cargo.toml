@@ -1,0 +1,16 @@
+[package]
+name = "sim"
+version = "0.1.0"
+edition = "2021"
+description = "魚群繚乱の戦いの計算（TypeScript 版 src/sim と同じ種なら同じ結果）"
+
+[lib]
+path = "src/lib.rs"
+
+[[bin]]
+name = "bench"
+path = "src/bin/bench.rs"
+
+[dependencies]
+# V8 と同じ結果の三角関数など（node <characters>/scripts/game-parts.mjs --to <このゲーム> --write が vendor/rust へ写す）
+sim-math = { path = "../../vendor/rust/sim-math" }

@@ -16,7 +16,7 @@
 | `vendor/rust/*` | island-kit・character-actor・character-view・character-actor-npc・character-view-npc。正本は characters の `crates/`。`node ../characters/scripts/game-parts.mjs --to . --rust <crate,…> --write` で写す（自分で書き換えない） |
 | `rust/game/`（crate `character-maker-stage`） | 模型（GLB を読む・組み立てる・設定を当てる・動かす・測る・書き出す）と描画（island-kit の Kit）。キャラメイクの種類の物だけ（主役・NPC の部品とは分ける） |
 | `rust/web/build.sh` | wasm を作って `public/maker-stage/` に置く（git に入れない） |
-| `components/character-maker/rust/` | Stage の読み込み、下見の部品（今の `CharacterMakerScene`・`OriginalCharacterScene` と同じ props）、カメラと回す操作（three を読まない TS） |
+| `components/character-maker/rust/` | Stage の読み込み、下見の部品（`RustMakerScene`・`RustOriginalScene`。前の three の版の `CharacterMakerScene`・`OriginalCharacterScene` と同じ props）、カメラと回す操作（three を読まない TS） |
 | `server/` | `/maker-stage/` を届ける。配布では wasm を tgz に入れず、公開リポジトリの固定 commit から SHA-256 を確かめて取る（オリジナル 4 体のモデルと同じ形。下の「配り方」） |
 
 分け方: 模型の計算（頂点・骨・モーフ・クリップ・測り・書き出し）は Rust、画面の操作（React の UI・カメラの決め方・回す操作・アニメの合図）は TS。TS は設定の JSON と、素材のバイト列（今と同じ URL から fetch した物）を Stage へ渡し、毎コマ dt とカメラを渡す。

@@ -13,6 +13,8 @@ A browser-based 3D character creator. Pick a character, customise it on the spot
 - 16 characters: 4 originals (Haru, Nami, Lux, Moka) + 8 fantasy + 4 comic-style
 - Edit body shape, hairstyle, hair colour, face, eyes, mouth, expression, outfit colour and weapon (12 food-themed weapons)
 - Motions: idle, walk, run, weapon ready stance, weapon swing, **hit reaction**; face: **＞＜** (squeezed eyes)
+- Expressions: 18 for fantasy (emotions, vowels, blinks, gaze); 5 emotions plus blinks for comic-style, and smile/angry/sad/surprised/relaxed for the 4 originals (GLB morph targets `happy`, `angry`, `sad`, `relaxed`, `surprised`, `blinkLeft`, `blinkRight`)
+- Game motions (the same set for every character): **jump, dodge, sit down / rest / stand up, banzai, greet, spin kick, eat, skill**, plus punch, interact, down, dance, talk, crouch (exported in the GLB as clips with the same names)
 - Save (in the browser), export/import JSON, export GLB
 - Next.js 15 / React 19. The 3D preview, assembly and GLB export run in Rust (wgpu, WebGPU; `rust/game`). No server or account needed
 - Requires WebGPU (latest Chrome or Edge, Safari on iOS 26 or later). Other devices see a notice that 3D cannot open
@@ -62,9 +64,22 @@ You can play as the characters you make in the game [yukikau.jp](https://yukikau
 1. **Download and import**: choose「書き出し」(Export) →「yukikau.jp 用（.character.zip）」(for yukikau.jp) to save the file, then click the「yukikau.jp で読み込む」(Import on yukikau.jp) link that appears (`https://yukikau.jp/play?import=1`) and select that file. The ZIP uses yukikau.jp's import format (`character.json`, `model.glb`, `thumbnail.png`) and includes the facing direction (+Z), height, idle/walk/run, the hit reaction, ＞＜, and the chosen weapon (`weapon` in `character.json`; `none` when bare-handed). Reading the weapon needs a yukikau.jp importer that accepts `weapon` (@aiarranger/character-runtime newer than 0.2.6).
 2. **Make it inside yukikau.jp**: the「キャラメイク」(Character maker) entry on yukikau.jp (`/play?make=1`) opens this same Character Studio. Press「この姿で遊ぶ」(Play as this character) to start the game with the character you made.
 
+## Play the fish game
+
+Playable version: https://gyogun.yukikau.jp/ (checked in Chrome on a PC)
+
+魚群繚乱 (Gyogun Ryoran), a 3D action game where you cut down a horde of fish alone, lives in this repository (`games/gyogun/`, Rust + WebGPU). The playable characters are きゃしー (Cassie) and the one you make in the Studio. It is single-player; the 「百菓繚乱でみんなで遊ぶ ↗」 button on the title screen opens 百菓繚乱 (https://hyakka.yukikau.jp/), which has co-op, and 「キャラを作って出陣」 opens the Studio.
+
+```sh
+pnpm gyogun:build       # builds the game into public/gyogun/ (Rust 1.99, wasm-bindgen, wasm-opt; games/gyogun/rust/web/build.sh)
+pnpm dev
+```
+
+Open http://127.0.0.1:4284/gyogun/index.html. Controls and layout: [games/gyogun/README.md](games/gyogun/README.md); scope: [docs/gyogun-spec.md](docs/gyogun-spec.md) (both in Japanese). Press the 「魚群繚乱で遊ぶ」 card at the bottom left of the Studio stage (`/character-maker`; it plays a short clip of the game's title screen, and moves into the 書き出し menu on narrow screens) to play as the character you made (run `pnpm gyogun:build` first).
+
 ## Use in your game
 
-Use「書き出し」(Export, top right) →「3Dモデル（GLB）」(3D model) or「編集設定（JSON）」(editing settings) to save the files. The GLB loads as is in three.js, Babylon.js, Unity (glTFast) and other glTF loaders. Materials are unlit (`KHR_materials_unlit`).
+Use「書き出し」(Export, top right) →「3Dモデル（GLB）」(3D model) or「編集設定（JSON）」(editing settings) to save the files. The GLB loads as is in three.js, Babylon.js, Unity (glTFast) and other glTF loaders. Materials are unlit (`KHR_materials_unlit`). The soft shading you see in the Studio is a preview effect and is not baked into the GLB; add your own lighting or rim in the game.
 
 ### Animation clips
 
@@ -74,6 +89,12 @@ Use「書き出し」(Export, top right) →「3Dモデル（GLB）」(3D model)
 | `sword_idle` / `sword_attack` | Weapon ready stance and swing (export with a weapon) | The stance loops; play the swing once, then return to `sword_idle` |
 | `hit` | Hit reaction (recoil). The face turns ＞＜ while it plays | Play once (about 0.66 s), then return to the previous motion |
 | `face_hurt` | The ＞＜ face only (does not move the body) | Loop it on top of another clip |
+| `jump` / `dodge` / `skill` / `punch` / `interact` | Jump, dodge roll, skill (cast a spell), punch, interact | Play once, then return to `idle`. They are in-place; your game decides travel distance and hit timing |
+| `down` | Knocked down | Play once and hold the last pose |
+| `dance` / `talk` / `crouch` | Dance, talk, crouch | Loop |
+| `banzai` / `greet` / `spinKick` | Cheer with both arms, wave, spin kick | Play once, then return to `idle` |
+| `restDown` / `restLoop` / `restUp` | Sit on the ground, rest while seated, stand up | Play `restDown` once, then loop `restLoop`; play `restUp` once, then `idle` |
+| `eat` | Eat while seated | Loop |
 
 To show the ＞＜ face, play `face_hurt` **layered** on the current motion (`hit` already includes it). Depending on the character type, the face is shown either by scaling the face plate (node `maker-hurt-face`) or by morph weights, so use the clip rather than toggling the node yourself. The names are defined in `lib/character-maker/hurt.ts`; see [docs/main-character-spec.md](docs/main-character-spec.md) (Japanese) for details.
 
@@ -155,6 +176,7 @@ await ensureStudioModels('.cache/character-maker-models');
 | `parts/` | Shared parts (CC0 sources and the bodies, hair and motions built from them). See [parts/README.md](parts/README.md) (Japanese) |
 | `distribution/` | Models and motions of the 4 originals (CC BY 4.0). File list and SHA-256 in `distribution/manifest.json` |
 | `public/review-swing-2026-10-02/` | Food-themed weapons (CC BY 4.0) |
+| `games/gyogun/` | The fish game (game code, fish, Cassie, audio). See [games/gyogun/README.md](games/gyogun/README.md) (Japanese) |
 | `tools/character-maker/` | Asset builders, thumbnail capture, export checks, acceptance measurements |
 | `docs/` | Screen design ([studio-quality-spec.md](docs/studio-quality-spec.md)), main-character features ([main-character-spec.md](docs/main-character-spec.md)), routes to yukikau.jp ([yukikau-route.md](docs/yukikau-route.md)) — in Japanese |
 
@@ -178,9 +200,9 @@ Browser E2E tests (`lib/character-maker/*.e2e.mjs`) run against a running dev se
 ## License
 
 - Code: [MIT](LICENSE)
-- Assets: CC BY 4.0 (AI Arranger's 4 original characters and the weapons) and CC0 1.0 (Quaternius and VRoid β sources and their derivatives). Per-path terms in [LICENSE-ASSETS.md](LICENSE-ASSETS.md), sources in [NOTICE.md](NOTICE.md)
+- Assets: CC BY 4.0 (AI Arranger's 4 original characters, the weapons and Cassie) and CC0 1.0 (Quaternius and VRoid β sources and their derivatives, the Fish Kit fish, Kenney sound effects). Per-path terms in [LICENSE-ASSETS.md](LICENSE-ASSETS.md), sources in [NOTICE.md](NOTICE.md)
 - Attribution for CC BY assets: "Character Studio assets by AI Arranger (CC BY 4.0)"
 
 ## Credits
 
-Quaternius (Universal Base Characters / Modular Character Outfits - Fantasy / Universal Animation Library, CC0), VRoid Project (VRoid β CC0 samples). Made by AI Arranger.
+Quaternius (Universal Base Characters / Modular Character Outfits - Fantasy / Universal Animation Library, CC0), VRoid Project (VRoid β CC0 samples), Fish Kit (fish models, CC0), Kenney (sound effects, CC0). Made by AI Arranger.

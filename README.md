@@ -13,6 +13,8 @@
 - 16キャラ: オリジナル4体（ハル・ナミ・ルクス・モカ）＋ファンタジー8体＋アメコミ4体
 - 体型・髪型・髪色・顔・目・口・表情・服の色・武器（食べ物の武器12種）を編集
 - 動き: 待機・歩く・走る・武器を構える・武器を振る・**のけぞる（被弾）**、顔: **＞＜**
+- 表情: ファンタジーは気持ち・口・まばたき・視線の 18 種、コミックは気持ち 5 種とまばたき、オリジナル 4 体は笑顔・怒り・悲しみ・驚き・穏やか（GLB のモーフ `happy`・`angry`・`sad`・`relaxed`・`surprised`・`blinkLeft`・`blinkRight`）
+- ゲーム用の動き（全キャラ共通）: **ジャンプ・回避・座る・休む・立つ・バンザイ・手を振る・回転キック・食べる・必殺技**と、パンチ・調べる・やられ・ダンス・話す・しゃがむ（書き出す GLB に同じ名前のクリップで入る）
 - 保存（ブラウザ）、JSON の書き出し・読み込み、GLB の書き出し
 - Next.js 15 / React 19。3D の下見・組み立て・GLB の書き出しは Rust（wgpu・WebGPU。`rust/game`）。サーバーやアカウントは不要
 - WebGPU が必要（Chrome・Edge の最新版、iOS 26 以降の Safari）。無い端末では「この端末では 3D を開けません」と出す
@@ -60,9 +62,22 @@ http://127.0.0.1:4284/character-maker を開きます。開発サーバーは `1
 1. **ダウンロードして読み込む**: 「書き出し」→ **yukikau.jp 用（.character.zip）** を保存し、表示される「yukikau.jp で読み込む」（`https://yukikau.jp/play?import=1`）で、そのファイルを選びます。中身は yukikau.jp の持ち込み形式（`character.json`・`model.glb`・`thumbnail.png`）で、向き（+Z）・身長・待機／歩く／走る・のけぞり・＞＜ と、選んだ武器（`character.json` の `weapon`。素手は `none`）が入ります。武器を読むには、yukikau.jp 側が `weapon` に対応した読み込み（@aiarranger/character-runtime の 0.2.6 より後の版）である必要があります。
 2. **yukikau.jp の中で作る**: yukikau.jp の入口の「キャラメイク」（`/play?make=1`）で、この Character Studio がそのまま開きます。**この姿で遊ぶ** を押すと、作ったキャラでゲームが始まります。
 
+## 魚群繚乱で遊ぶ / Play the fish game
+
+遊べる版: https://gyogun.yukikau.jp/（PC の Chrome で確認）
+
+魚の大群をひとりでなぎ倒す 3D アクション「魚群繚乱（ぎょぐんりょうらん）」が、このリポジトリに入っています（`games/gyogun/`。Rust・WebGPU）。主役はきゃしーと、Studio で作ったキャラ。ひとり用です（タイトルの「百菓繚乱でみんなで遊ぶ ↗」は、協力プレイのある 百菓繚乱 https://hyakka.yukikau.jp/ を開きます。「キャラを作って出陣」は Studio を開きます）。
+
+```sh
+pnpm gyogun:build       # public/gyogun/ にゲームを作る（Rust 1.99・wasm-bindgen・wasm-opt。games/gyogun/rust/web/build.sh）
+pnpm dev
+```
+
+http://127.0.0.1:4284/gyogun/index.html を開きます。操作と中身は [games/gyogun/README.md](games/gyogun/README.md)、範囲は [docs/gyogun-spec.md](docs/gyogun-spec.md)。Studio（`/character-maker`）のステージの左下にあるカード「魚群繚乱で遊ぶ」（魚群繚乱のタイトル画面が動いています。狭い画面では「書き出し」メニューの中）を押すと、作ったキャラが主役になります（先に `pnpm gyogun:build`）。
+
 ## ゲームで使う / Use in your game
 
-画面右上の「書き出し」から **3Dモデル（GLB）** と **編集設定（JSON）** を保存できます。GLB は three.js・Babylon.js・Unity（glTFast）などでそのまま読めます。素材は光源を使わない unlit（`KHR_materials_unlit`）です。
+画面右上の「書き出し」から **3Dモデル（GLB）** と **編集設定（JSON）** を保存できます。GLB は three.js・Babylon.js・Unity（glTFast）などでそのまま読めます。素材は光源を使わない unlit（`KHR_materials_unlit`）です。Studio の画面のやわらかい陰影は下見の描き方で、GLB には入りません（ゲーム側の光や縁取りで仕上げてください）。
 
 ### 入っているアニメーション / Animation clips
 
@@ -72,6 +87,12 @@ http://127.0.0.1:4284/character-maker を開きます。開発サーバーは `1
 | `sword_idle` / `sword_attack` | 武器を構える・振る（武器ありの書き出し） | 構えはループ、振るは一回再生のあと `sword_idle` へ |
 | `hit` | のけぞり（被弾）。再生中は顔が ＞＜ になる | 一回再生（約0.66秒）のあと元の動きへ |
 | `face_hurt` | ＞＜ の顔だけ（体は動かさない） | 他のクリップと同時にループ再生 |
+| `jump` / `dodge` / `skill` / `punch` / `interact` | ジャンプ・回避（前転）・必殺技（魔法を放つ）・パンチ・調べる | 一回再生のあと `idle` へ。その場の動きなので、進む量や当たりの時刻はゲーム側で決める |
+| `down` | やられ（倒れる） | 一回再生し、最後の姿で止める |
+| `dance` / `talk` / `crouch` | ダンス・話す・しゃがむ | ループ |
+| `banzai` / `greet` / `spinKick` | バンザイ・手を振る・回転キック | 一回再生のあと `idle` へ |
+| `restDown` / `restLoop` / `restUp` | 地面に座る・座って休む・立つ | 座るは一回再生のあと `restLoop`（ループ）へ。立つは一回再生のあと `idle` へ |
+| `eat` | 座ったまま食べる | ループ |
 
 ＞＜ の顔を出すときは、`face_hurt` を今の動きと**重ねて**再生してください（`hit` には最初から入っています）。キャラの種類によって、顔の板（ノード `maker-hurt-face`）の scale かモーフの重みで出すため、ノードを手で表示するのではなくクリップを使います（名前の正本は `lib/character-maker/hurt.ts`、詳しくは [docs/main-character-spec.md](docs/main-character-spec.md)）。
 
@@ -153,8 +174,9 @@ await ensureStudioModels('.cache/character-maker-models');
 | `parts/` | 共通部品（CC0 原本と、そこから組み立てた体・髪・動作）。詳細は [parts/README.md](parts/README.md) |
 | `distribution/` | オリジナル4体のモデルと動作（CC BY 4.0）。一覧と SHA-256 は `distribution/manifest.json` |
 | `public/review-swing-2026-10-02/` | 食べ物の武器（CC BY 4.0） |
+| `games/gyogun/` | 魚群繚乱（ゲームのコード・魚・きゃしー・音）。詳細は [games/gyogun/README.md](games/gyogun/README.md) |
 | `tools/character-maker/` | 部品の組み立て・サムネイル撮影・書き出し確認・受入計測 |
-| `docs/` | 画面の設計（[studio-quality-spec.md](docs/studio-quality-spec.md)）、メインキャラ対応（[main-character-spec.md](docs/main-character-spec.md)）、yukikau.jp への経路（[yukikau-route.md](docs/yukikau-route.md)） |
+| `docs/` | 画面の設計（[studio-quality-spec.md](docs/studio-quality-spec.md)）、陰影とゲーム用の動作（[game-motions-spec.md](docs/game-motions-spec.md)）、メインキャラ対応（[main-character-spec.md](docs/main-character-spec.md)）、yukikau.jp への経路（[yukikau-route.md](docs/yukikau-route.md)） |
 
 ## 確認 / Checks
 
@@ -176,9 +198,9 @@ node tools/character-maker/measure-studio.mjs /tmp/measure     # 画面幅ごと
 ## License
 
 - Code: [MIT](LICENSE)
-- Assets: CC BY 4.0（AI Arranger のオリジナル4体・武器）と CC0 1.0（Quaternius・VRoid β の原本と派生物）。パスごとの条件は [LICENSE-ASSETS.md](LICENSE-ASSETS.md)、出典は [NOTICE.md](NOTICE.md)
+- Assets: CC BY 4.0（AI Arranger のオリジナル4体・武器・きゃしー）と CC0 1.0（Quaternius・VRoid β の原本と派生物、Fish Kit の魚、Kenney の効果音）。パスごとの条件は [LICENSE-ASSETS.md](LICENSE-ASSETS.md)、出典は [NOTICE.md](NOTICE.md)
 - Attribution for CC BY assets: "Character Studio assets by AI Arranger (CC BY 4.0)"
 
 ## Credits
 
-Quaternius（Universal Base Characters / Modular Character Outfits - Fantasy / Universal Animation Library, CC0）、VRoid Project（VRoid β CC0 samples）。Made by AI Arranger.
+Quaternius（Universal Base Characters / Modular Character Outfits - Fantasy / Universal Animation Library, CC0）、VRoid Project（VRoid β CC0 samples）、Fish Kit（魚の模型, CC0）、Kenney（効果音, CC0）。Made by AI Arranger.

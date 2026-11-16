@@ -19,6 +19,10 @@ pub trait Actor {
     fn debug(&self, kit: &Kit) -> Value;
     /// GLB の書き出し（段 R6）
     fn export(&mut self, _kit: &mut Kit, _v: &Value) -> Result<Vec<u8>, String> { Err("書き出しはまだありません。".into()) }
+    /// 下見の陰影に渡す値（根・頭の骨・陰影を付けない材質。look.rs）
+    fn look(&self, kit: &Kit) -> crate::look::Subject;
+    /// 今の姿の頭の箱（世界。頭の球を測る）
+    fn head_box(&self, kit: &Kit) -> Option<(glam::Vec3, glam::Vec3)>;
     /// 場面から外す
     fn remove(self: Box<Self>, kit: &mut Kit);
 }

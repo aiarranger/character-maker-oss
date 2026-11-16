@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no" />
+<meta name="theme-color" content="#120c22" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22%3E%3Cpath d=%22M10 54L50 8%22 stroke=%22%23ffc94a%22 stroke-width=%226%22 stroke-linecap=%22round%22/%3E%3Ccircle cx=%2232%22 cy=%2232%22 r=%2224%22 fill=%22none%22 stroke=%22%23ff4f7a%22 stroke-width=%224%22/%3E%3C/svg%3E" />
+<title>魚群繚乱 — GYOGUN RYORAN</title>
+<meta name="description" content="一騎当千。魚の大群を、ひとりでなぎ倒せ。" />
+<style>
+  html, body { margin: 0; height: 100%; overflow: hidden; background: #0b0a14; touch-action: none; overscroll-behavior: none; user-select: none; -webkit-user-select: none; -webkit-tap-highlight-color: transparent; }
+  #gl { position: fixed; inset: 0; width: 100%; height: 100%; display: block; outline: none; -webkit-touch-callout: none; }
+  #boot, #fatal { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; color: #f3e2c8; font: 16px/1.8 "Hiragino Sans", sans-serif; text-align: center; padding: 24px; }
+  #fatal { display: none; flex-direction: column; gap: 20px; background: #0b0a14; white-space: pre-wrap; overflow-wrap: anywhere; }
+  #fatal .act { display: flex; gap: 12px; white-space: normal; }
+  #fatal button { font: 700 15px/1 "Hiragino Sans", sans-serif; color: #f3e2c8; background: rgba(18, 12, 34, 0.65); border: 1px solid rgba(255, 243, 224, 0.4); padding: 12px 20px; cursor: pointer; }
+</style>
+</head>
+<body>
+<canvas id="gl" tabindex="0"></canvas>
+<div id="boot">陣を敷いています…</div>
+<div id="fatal"></div>
+<script type="module">
+  const fatal = m => { const e = document.getElementById('fatal'); e.textContent = m; e.style.display = 'flex'; };
+  // 指の操作は Safari の長押しメニュー・拡大鏡などへ渡さない（今の版は #touch の touchstart で止めている）。
+  // winit は with_prevent_default(false)（ブラウザのキーを残すため）なので、ここで canvas の指だけ止める。pointer の出来事は届き続ける
+  document.getElementById('gl').addEventListener('touchstart', e => { if (e.cancelable) e.preventDefault(); }, { passive: false });
+  // 失敗の表示（ここと Rust の platform::web::fatal の両方が書く）の下に、続けて遊ぶためのボタンを出す
+  const fatalEl = document.getElementById('fatal');
+  new MutationObserver(() => {
+    if (fatalEl.style.display !== 'flex' || fatalEl.querySelector('.act')) return;
+    // 呼び出し履歴までは見せない（全文は console に出ている）
+    const first = (fatalEl.textContent || '').split('\n')[0];
+    fatalEl.textContent = first.length > 200 ? first.slice(0, 200) + '…' : first;
+    const act = document.createElement('div'); act.className = 'act';
+    const btn = (label, go) => { const b = document.createElement('button'); b.textContent = label; b.onclick = go; act.appendChild(b); };
+    btn('読み込み直す', () => location.reload());
+    fatalEl.appendChild(act);
+  }).observe(fatalEl, { attributes: true, childList: true });
+  // WebGPU が無い・adapter が取れない（取得で例外も）ときは、Rust 版を読む前に案内を出す
+  let adapter = null;
+  try { adapter = navigator.gpu ? await navigator.gpu.requestAdapter({ powerPreference: 'high-performance' }) : null; } catch { adapter = null; }
+  if (adapter == null) fatal('このブラウザでは遊べません（WebGPU が必要です）。最新の Chrome・Edge・Safari で開いてください。');
+  else {
+    adapter = null;
+    // Studio（/character-maker）の「魚群繚乱で遊ぶ」が送ったキャラ: ブラウザの控え（Cache Storage）の決まったキーの .character.zip を、Rust が始めに読める所へ置く。
+    // 名前とキーは lib/character-maker/gyogun-handoff.ts と同じ。無い・読めないときは何もしない（きゃしーだけで始まる）
+    try {
+      const hit = 'caches' in window ? await (await caches.open('character-maker-gyogun-v1')).match(new URL('studio-character.zip', location.href).pathname) : null;
+      if (hit) window.__gyogunStudioZip = new Uint8Array(await hit.arrayBuffer());
+    } catch { /* 控えを読めない */ }
+    const init = (await import('./gyogun_game.js')).default;
+    init().then(() => {
+      document.getElementById('boot').remove(); document.getElementById('gl').focus();
+      // from=studio（Studio から来た直後の印）は Rust が読み終えたので外す（開き直したときは、最後に選んだ主役と武器のまま）
+      const url = new URL(location.href);
+      if (url.searchParams.has('from')) { url.searchParams.delete('from'); history.replaceState(null, '', url); }
+    }).catch(e => fatal(`読み込めません: ${e}`));
+  }
+</script>
+</body>
+</html>

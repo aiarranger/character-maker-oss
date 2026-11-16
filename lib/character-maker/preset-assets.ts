@@ -12,24 +12,30 @@ export function outfitPaletteFiles(config: Pick<CharacterConfig, 'style' | 'base
   return !palette || palette === 'original' ? {} : files[`${config.style}:${config.base}`][palette];
 }
 
-/** 体の GLB */
-export function presetBodyFile(config: CharacterConfig) {
-  return `${config.style === 'fantasy' ? 'fantasy-' : ''}${config.base}.glb`;
+/** 体の GLB。soft: アメコミの顔の形を直した版（tools/character-maker/build-comic-face.py。Studio とその書き出しで使う） */
+export function presetBodyFile(config: CharacterConfig, soft = false) {
+  if (config.style === 'fantasy') return `fantasy-${config.base}.glb`;
+  return soft ? `comic-soft-${config.base}.glb` : `${config.base}.glb`;
 }
 /** 髪の GLB（無しは null） */
 export function presetHairFile(config: CharacterConfig) {
   if (config.hair === 'none') return null;
   return config.style === 'fantasy' ? `fantasy-hair-${config.base}-${config.hair}.glb` : `hair-${config.hair}.glb`;
 }
-/** 動作の JSON。のけぞり（hit）は既存の動作 JSON を変えずに、別のファイルから足す（docs/main-character-spec.md） */
+/** 動作の JSON。のけぞり（hit）とゲーム用の動作（action）は既存の動作 JSON を変えずに、別のファイルから足す（docs/main-character-spec.md・game-motions-spec.md）。hit は最後に置く */
 export function presetMotionFiles(config: CharacterConfig) {
   return config.style === 'fantasy'
-    ? [`fantasy-${config.base}-motions.json`, `fantasy-${config.base}-hit-motions.json`]
-    : [`${config.base}-motions.json`, `comic-${config.base}-sword-motions.json`, `comic-${config.base}-hit-motions.json`];
+    ? [`fantasy-${config.base}-motions.json`, `fantasy-${config.base}-action-motions.json`, `fantasy-${config.base}-hit-motions.json`]
+    : [`${config.base}-motions.json`, `comic-${config.base}-sword-motions.json`, `comic-${config.base}-action-motions.json`, `comic-${config.base}-hit-motions.json`];
 }
 /** 大人の顔の肌（と男性の目のまつげ・目の線）の画像。大人の顔でなければ空 */
 export function presetMatureFiles(config: CharacterConfig): { skin?: string; eyelash?: string; eyeline?: string } {
   if (config.style !== 'fantasy' || config.face !== 'mature') return {};
   return { skin: `fantasy-${config.base}-mature-skin.png`,
     ...(config.base === 'masculine' ? { eyelash: 'fantasy-masculine-mature-eyelash.png', eyeline: 'fantasy-masculine-mature-eyeline.png' } : {}) };
+}
+
+/** 材質の絵の差し替え（材質の名前 → 画像）。アメコミは、むらと濃い陰をならした肌（tools/character-maker/build-comic-skin.py）を使う */
+export function presetSwapFiles(config: CharacterConfig): Readonly<Record<string, string>> {
+  return config.style === 'comic' ? { 'maker-skin': `comic-${config.base}-soft-skin.png` } : {};
 }

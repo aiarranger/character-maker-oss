@@ -23,7 +23,10 @@
     "import:characters": "node tools/import-characters.mjs --from ../characters",
     "pack:vendor": "node tools/pack.mjs",
     "stage:build": "bash rust/web/build.sh",
-    "stage:release": "node tools/character-maker/release-stage.mjs"
+    "stage:release": "node tools/character-maker/release-stage.mjs",
+    "gyogun:build": "bash games/gyogun/rust/web/build.sh",
+    "gyogun:site": "bash games/gyogun/rust/web/build.sh && bash rust/web/build.sh && node tools/character-maker/sync-studio-runtime-assets.mjs && node tools/gyogun-site.mjs",
+    "gyogun:deploy": "pnpm gyogun:site && npx -y wrangler@4.157.0 deploy"
   },
   "dependencies": {
     "next": "^15.3.0",

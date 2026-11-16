@@ -28,7 +28,7 @@
 ## 実装メモ：2 の組み込み（v0.2.0）
 
 - 本体は `components/character-maker/CharacterStudio.tsx`。`/character-maker`（`app/character-maker/page.tsx`）は `<CharacterStudio />` を出すだけ。
-  - props: `onPlay?(file)`（各エディタへそのまま渡す）、`initialName?`（プリセットを開いたときの名前。控えがあれば控えが優先。オリジナルはキャラクターの名前のまま）、`className?`。
+  - props: `onPlay?(file)`（各エディタへそのまま渡す）、`initialName?`（プリセットを開いたときの名前。控えがあれば控えが優先。オリジナルはキャラクターの名前のまま）、`className?`。`gyogun?`（2026-11-16。このリポジトリの単体のページ用の「魚群繚乱で遊ぶ」。既定は出さない。`docs/gyogun-spec.md`）。
   - Studio に要る全体の指定（`@property --accent`、Studio があるときの `html`/`body` の背景と `body` の余白 0、スマホの `scroll-padding-top`、リンクの色）は `character-studio.module.css` に移した。埋め込み先は `globals.css` を読まなくてよい。
 - パッケージ `@aiarranger/character-maker@0.2.0`（`node tools/pack.mjs`）
   - 入口: `./CharacterMaker`（従来どおり）、`./CharacterStudio`（追加）、`./server`（従来の `serveMakerAsset`・`copyMakerAssets` に加えて `ensureStudioModels`・`studioModels`・`STUDIO_MODELS_COMMIT`）。

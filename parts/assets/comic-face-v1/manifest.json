@@ -1,0 +1,269 @@
+{
+  "version": "comic-face-v1",
+  "expressions": {
+    "happy": {
+      "smile": 1.6,
+      "corner": 0.0035,
+      "brow_up": 0.0012,
+      "lid_up": -0.0008,
+      "lid_down": -0.0018
+    },
+    "angry": {
+      "smile": -0.5,
+      "corner": -0.0018,
+      "brow_up": -0.0036,
+      "brow_inner": -12.0,
+      "lid_up": -0.002
+    },
+    "sad": {
+      "smile": -1.0,
+      "corner": -0.003,
+      "brow_up": 0.0008,
+      "brow_inner": 11.0,
+      "lid_up": -0.0016
+    },
+    "relaxed": {
+      "smile": 0.6,
+      "corner": 0.002,
+      "brow_up": 0.0006,
+      "lid_up": -0.002
+    },
+    "surprised": {
+      "full": 0.8,
+      "brow_up": 0.0055,
+      "lid_up": 0.0026,
+      "lid_down": 0.001
+    },
+    "blinkLeft": {
+      "lid_up": "blink",
+      "lid_down": -0.0022,
+      "sides": [
+        1.0
+      ]
+    },
+    "blinkRight": {
+      "lid_up": "blink",
+      "lid_down": -0.0022,
+      "sides": [
+        -1.0
+      ]
+    }
+  },
+  "license": "CC0 (derived from Quaternius Universal Base Characters)",
+  "assets": [
+    {
+      "base": "masculine",
+      "settings": {
+        "brow_up": 0.007,
+        "brow_thin": 0.78,
+        "brow_level": 4.0,
+        "lid_up": 0.0036,
+        "lid_down": 0.001,
+        "nose_back": 0.004,
+        "lips_back": 0.0015,
+        "blink": 0.0122
+      },
+      "measured": {
+        "eye": {
+          "y": [
+            1.6836,
+            1.7135
+          ]
+        },
+        "parts": [
+          {
+            "kind": "brow",
+            "side": "L",
+            "vertices": 243,
+            "y": [
+              1.7141,
+              1.7292
+            ]
+          },
+          {
+            "kind": "brow",
+            "side": "R",
+            "vertices": 243,
+            "y": [
+              1.7141,
+              1.7292
+            ]
+          },
+          {
+            "kind": "lash",
+            "side": "L",
+            "vertices": 80,
+            "y": [
+              1.6944,
+              1.7077
+            ]
+          },
+          {
+            "kind": "lash",
+            "side": "R",
+            "vertices": 80,
+            "y": [
+              1.6944,
+              1.7077
+            ]
+          },
+          {
+            "kind": "nose-lips",
+            "nose_tip": [
+              0.0,
+              1.6569,
+              0.1152
+            ],
+            "lips": [
+              0.0,
+              1.6317,
+              0.0956
+            ],
+            "nose_vertices": 78,
+            "lip_vertices": 73
+          },
+          {
+            "kind": "lids",
+            "vertices": 142,
+            "max_up": 0.0036,
+            "max_down": 0.001
+          }
+        ],
+        "expressions": [
+          "happy",
+          "angry",
+          "sad",
+          "relaxed",
+          "surprised",
+          "blinkLeft",
+          "blinkRight",
+          "lookLeft",
+          "lookRight",
+          "lookUp",
+          "lookDown",
+          "aa",
+          "ih",
+          "ou",
+          "ee",
+          "oh"
+        ]
+      },
+      "input": {
+        "path": "parts/assets/v1/masculine.glb",
+        "sha256": "16c878b8d1ce17f61fb22c54a19e40da8062a3be9db2181f7aead1ae9147b2e0"
+      },
+      "output": {
+        "path": "parts/assets/comic-face-v1/masculine.glb",
+        "bytes": 3610836,
+        "sha256": "2a685a9803add37e7375e84c6b1660ff3722ead6e39c74217f48d0d3ea8e85c7"
+      }
+    },
+    {
+      "base": "feminine",
+      "settings": {
+        "brow_up": 0.0065,
+        "brow_thin": 0.65,
+        "brow_level": 3.5,
+        "lid_up": 0.0036,
+        "lid_down": 0.001,
+        "nose_back": 0.0035,
+        "lips_back": 0.0015,
+        "blink": 0.0138
+      },
+      "measured": {
+        "eye": {
+          "y": [
+            1.6395,
+            1.6726
+          ]
+        },
+        "parts": [
+          {
+            "kind": "lash",
+            "side": "L",
+            "vertices": 262,
+            "y": [
+              1.6483,
+              1.6647
+            ]
+          },
+          {
+            "kind": "brow",
+            "side": "L",
+            "vertices": 194,
+            "y": [
+              1.6796,
+              1.6894
+            ]
+          },
+          {
+            "kind": "lash",
+            "side": "R",
+            "vertices": 262,
+            "y": [
+              1.6483,
+              1.6647
+            ]
+          },
+          {
+            "kind": "brow",
+            "side": "R",
+            "vertices": 194,
+            "y": [
+              1.6796,
+              1.6894
+            ]
+          },
+          {
+            "kind": "nose-lips",
+            "nose_tip": [
+              0.0,
+              1.617,
+              0.1119
+            ],
+            "lips": [
+              0.0,
+              1.5933,
+              0.0969
+            ],
+            "nose_vertices": 92,
+            "lip_vertices": 74
+          },
+          {
+            "kind": "lids",
+            "vertices": 142,
+            "max_up": 0.0036,
+            "max_down": 0.001
+          }
+        ],
+        "expressions": [
+          "happy",
+          "angry",
+          "sad",
+          "relaxed",
+          "surprised",
+          "blinkLeft",
+          "blinkRight",
+          "lookLeft",
+          "lookRight",
+          "lookUp",
+          "lookDown",
+          "aa",
+          "ih",
+          "ou",
+          "ee",
+          "oh"
+        ]
+      },
+      "input": {
+        "path": "parts/assets/v1/feminine.glb",
+        "sha256": "dc2c09a99b8922bab4b8042ccb8f5bc9484a2ff00ebe2bb2a22eb9aeeeb87c95"
+      },
+      "output": {
+        "path": "parts/assets/comic-face-v1/feminine.glb",
+        "bytes": 3822820,
+        "sha256": "da752c54a942bd2a6506e734e3590ed9b9bd2d50ce8d18709e50257dc78937d2"
+      }
+    }
+  ]
+}

@@ -12,10 +12,12 @@ import {
 import { createDraftWriter } from '../../lib/character-maker/draft-writer';
 import styles from './character-studio.module.css';
 import { WeaponPicker, type WeaponPickerHandle } from './WeaponPicker';
+import { ACTION_MOTIONS, actionHolds, actionNext, type ActionMotion } from '../../lib/character-maker/actions';
 import { requestWeaponForMotion, motionAfterWeaponChoice, type ArmedWeaponMotion } from '../../lib/character-maker/weapon-motion-intent';
 import { selectedMakerWeaponId, type MakerWeaponId } from '../../lib/character-maker/weapon-catalog';
 import { makerAssetUrl } from '../../lib/character-maker/asset-url';
 import { StageBackdrop, StageOverlay } from './StudioStage';
+import { GyogunCard, useGyogunCardFit } from './GyogunCard';
 import { StudioIcon, type StudioIconName } from './StudioIcon';
 import { paintRangeFills } from '../../lib/character-maker/studio-palette';
 
@@ -43,13 +45,15 @@ export type MakerPresetEditorProps = {
   editorRef?: Ref<MakerEditorHandle>;
   /** ゲームへ渡す（yukikau.jp への組み込み）。あるときは「この姿で遊ぶ」を出し、yukikau.jp 用の .character.zip を渡す。docs/yukikau-route.md */
   onPlay?: (file: File) => void | Promise<void>;
+  /** 「魚群繚乱で遊ぶ」を出す（単体の Studio のページだけ。既定は出さない）。docs/gyogun-spec.md */
+  gyogun?: boolean;
   /** Studio の表紙の情報（page から渡す）。docs/studio-quality-spec.md §8 */
   accent?: string;
   look?: string;
   groupLabel?: string;
   poster?: string;
 };
-const MOTIONS = [['idle', '待機'], ['walk', '歩く'], ['run', '走る'], ['sword_idle', '武器を構える'], ['sword_attack', '武器を振る']] as const;
+const MOTIONS = [['idle', '待機'], ['walk', '歩行'], ['run', '走行'], ['sword_idle', '武器を構える'], ['sword_attack', '武器を振る']] as const;
 const MOTION_ICONS: Record<MakerMotion, StudioIconName> = { idle: 'idle', walk: 'walk', run: 'run', sword_idle: 'guard', sword_attack: 'swing' };
 const CATEGORIES: Array<{ id: Category; label: string; subtitle: string }> = [
   { id: 'body', label: '体型', subtitle: 'ベース・身長・体つき' },
@@ -119,7 +123,7 @@ function withConfig(document: CharacterMakerDocument, config: CharacterConfig): 
 }
 
 /** Mount with key={selectionKey}; only a matching explicitly supplied session is restored. */
-export default function MakerPresetEditor({ selectionKey, initialDocument, initialSession, initialEntry, onBackToList, embedded = false, editorRef, onPlay, accent, look = '', groupLabel = '', poster }: MakerPresetEditorProps) {
+export default function MakerPresetEditor({ selectionKey, initialDocument, initialSession, initialEntry, onBackToList, embedded = false, editorRef, onPlay, gyogun = false, accent, look = '', groupLabel = '', poster }: MakerPresetEditorProps) {
   const [initial] = useState(() => makeDocument(initialDocument.name, initialDocument.config));
   const session = initialSession?.selectionKey === selectionKey ? initialSession : undefined;
   const [document, setDocument] = useState<CharacterMakerDocument>(() => currentCharacterDocument(session?.document ?? (initialEntry ? makeDocument(initialEntry.name, initialEntry.config) : initial)));
@@ -151,16 +155,29 @@ export default function MakerPresetEditor({ selectionKey, initialDocument, initi
   const [playing, setPlaying] = useState(session?.preview.playing ?? true);
   const [speed, setSpeed] = useState(session?.preview.speed ?? 1);
   const [motionRevision, setMotionRevision] = useState(0);
+  // ゲーム用の動作（その場の再生。保存しない。1 回の動作は終わると元の動きへ戻る）
+  const [action, setAction] = useState<ActionMotion | null>(null);
+  const actionRef = useRef(action); actionRef.current = action;
   // のけぞり・＞＜ はその場の再生操作で、保存データには入れない（docs/main-character-spec.md）。
   const [hitRevision, setHitRevision] = useState(0);
   const [hurtFace, setHurtFace] = useState(false);
+  /** 被弾を選んでいる間: のけぞりを繰り返し、＞＜ の顔を出したままにする（キャラクター一覧の「被弾」と同じ。ほかの動きを選ぶと終わる） */
+  const [hitLoop, setHitLoop] = useState(false);
+  useEffect(() => {
+    if (!hitLoop) return;
+    setPlaying(true); setHitRevision(value => value + 1);
+    const timer = window.setInterval(() => setHitRevision(value => value + 1), 900);
+    return () => window.clearInterval(timer);
+  }, [hitLoop]);
   const [cameraRevision, setCameraRevision] = useState(0);
   const [sceneRevision, setSceneRevision] = useState(0);
   const [ready, setReady] = useState(false);
   const [sceneError, setSceneError] = useState('');
   const [exporting, setExporting] = useState(false);
-  // yukikau.jp 用の .character.zip を作っている間（'download' は書き出し、'play' は「この姿で遊ぶ」）
-  const [packaging, setPackaging] = useState<'download' | 'play' | null>(null);
+  // .character.zip を作っている間（'download' は yukikau.jp 用の書き出し、'play' は「この姿で遊ぶ」、'gyogun' は「魚群繚乱で遊ぶ」）
+  const [packaging, setPackaging] = useState<'download' | 'play' | 'gyogun' | null>(null);
+  // 「魚群繚乱で遊ぶ」の入口の形（ステージのカード・札。いつもステージに出す）。docs/gyogun-spec.md の「入口のカード」
+  const gyogunFit = useGyogunCardFit(rootRef, gyogun && hydrated, framing);
   const [notice, setNotice] = useState<Notice>(null);
   const [storageError, setStorageError] = useState('');
   const [importing, setImporting] = useState(false);
@@ -188,7 +205,7 @@ export default function MakerPresetEditor({ selectionKey, initialDocument, initi
   useEffect(() => {
     if (previousWeapon.current === weaponId) return;
     previousWeapon.current = weaponId;
-    setMotion(chosenWeaponMotion.current ?? (weaponId === 'none' ? 'idle' : 'sword_idle')); chosenWeaponMotion.current = null; setPlaying(true);
+    setMotion(chosenWeaponMotion.current ?? (weaponId === 'none' ? 'idle' : 'sword_idle')); chosenWeaponMotion.current = null; setPlaying(true); setAction(null);
     setFraming('full'); setView('front'); setMotionRevision(value => value + 1); setCameraRevision(value => value + 1);
   }, [weaponId]);
   const dirty = !sameDocument(document, baseline);
@@ -363,7 +380,15 @@ export default function MakerPresetEditor({ selectionKey, initialDocument, initi
     return () => window.clearTimeout(done);
   }, [saveDone]);
 
-  const onMotionComplete = useCallback(() => { setMotion(selectedMakerWeaponId(documentRef.current.config) === 'none' ? 'idle' : 'sword_idle'); }, []);
+  const onMotionComplete = useCallback(() => {
+    if (actionRef.current) {
+      // 座る → 休む のように続きがあれば続け、無ければ元の動きへ戻る（やられは倒れたまま）
+      const next = actionNext(actionRef.current);
+      if (next) { setAction(next); setMotionRevision(value => value + 1); } else if (!actionHolds(actionRef.current)) setAction(null);
+      return;
+    }
+    setMotion(selectedMakerWeaponId(documentRef.current.config) === 'none' ? 'idle' : 'sword_idle');
+  }, []);
 
   useEffect(() => {
     const handleHistoryShortcut = (event: KeyboardEvent) => {
@@ -394,7 +419,7 @@ export default function MakerPresetEditor({ selectionKey, initialDocument, initi
 
   function chooseMotion(next: typeof motion) {
     const request = requestWeaponForMotion(next, weaponId);
-    setPendingWeaponMotion(request); chosenWeaponMotion.current = null;
+    setPendingWeaponMotion(request); chosenWeaponMotion.current = null; setAction(null); setHitLoop(false);
     if (request) { weaponPicker.current?.focusChoices(); return; }
     // Ready and swing share one view; replaying a motion must not reset an orbit.
     const keepCamera = framing === 'full' && (next === motion || (next.startsWith('sword_') && motion.startsWith('sword_')));
@@ -402,9 +427,16 @@ export default function MakerPresetEditor({ selectionKey, initialDocument, initi
     if (next !== 'idle') { setFraming('full'); if (!keepCamera) setCameraRevision(value => value + 1); }
   }
 
-  /** のけぞる：今の動作の上で1回のけぞり、終わると元の動作へ戻る。連打は最初から。 */
+  /** ゲーム用の動作：1 回の動作は終わると元の動きへ戻る。同じボタンは最初から。繰り返す動作は、ほかの動きを選ぶまで続く。 */
+  function chooseAction(next: ActionMotion) {
+    setPendingWeaponMotion(null); chosenWeaponMotion.current = null;
+    setHitLoop(false);
+    setAction(next); setPlaying(true); setMotionRevision(value => value + 1); setFraming('full');
+  }
+
+  /** 被弾：選んでいる間、今の動作の上でのけぞりを繰り返し、＞＜ の顔を出す。もう一度押すか、ほかの動きを選ぶと終わる。 */
   function playHit() {
-    setPlaying(true); setHitRevision(value => value + 1);
+    setAction(null); setHitLoop(value => !value);
   }
 
   function changeConfig<K extends keyof CharacterConfig>(key: K, value: CharacterConfig[K], group = '') {
@@ -493,7 +525,7 @@ export default function MakerPresetEditor({ selectionKey, initialDocument, initi
     setExporting(true);
     try {
       const snapshot = makeDocument(document.name, config);
-      const bytes = (await (await import('./rust/export')).exportPresetGlbRust(snapshot.config)).bytes.slice().buffer;
+      const bytes = (await (await import('./rust/export')).exportPresetGlbRust(snapshot.config, embedded)).bytes.slice().buffer;
       if (!alive.current) return;
       download(new Blob([bytes], { type: 'model/gltf-binary' }), `${downloadFileName(snapshot.name)}.glb`);
       setNotice({ type: 'success', text: '3DモデルのGLBを書き出しました。' });
@@ -508,11 +540,25 @@ export default function MakerPresetEditor({ selectionKey, initialDocument, initi
       const snapshot = makeDocument(document.name, config);
       const { downloadYukikauPackage, YUKIKAU_IMPORT_URL } = await import('../../lib/character-maker/yukikau-package');
       const stageCanvas = rootRef.current?.querySelector<HTMLCanvasElement>('#studio-stage canvas');
-      const file = await (await import('./rust/export')).exportPresetYukikauPackageRust(snapshot.name, snapshot.config, stageCanvas);
+      const file = await (await import('./rust/export')).exportPresetYukikauPackageRust(snapshot.name, snapshot.config, stageCanvas, embedded);
       if (!alive.current) return;
       if (kind === 'play' && onPlay) { await onPlay(file); if (alive.current) setNotice({ type: 'success', text: 'この姿で遊べます。' }); }
       else { downloadYukikauPackage(file); setNotice({ type: 'success', text: 'yukikau.jp 用のファイルを書き出しました。', link: { href: YUKIKAU_IMPORT_URL, label: 'yukikau.jp で読み込む' } }); }
     } catch (error) { if (alive.current) setNotice({ type: 'error', text: `yukikau.jp 用のファイルを作れませんでした。${errorMessage(error)}` }); }
+    finally { if (alive.current) { setExporting(false); setPackaging(null); } }
+  }
+  /** 魚群繚乱で遊ぶ: 魚群繚乱用の .character.zip を作り、ブラウザの控えに置いてから魚群繚乱を開く。docs/gyogun-spec.md */
+  async function playGyogun() {
+    if (exporting || !ready) return;
+    setExporting(true); setPackaging('gyogun');
+    try {
+      const snapshot = makeDocument(document.name, config);
+      const { assertGyogunBuilt, storeGyogunCharacter, GYOGUN_PLAY_URL } = await import('../../lib/character-maker/gyogun-handoff');
+      await assertGyogunBuilt();
+      const stageCanvas = rootRef.current?.querySelector<HTMLCanvasElement>('#studio-stage canvas');
+      await storeGyogunCharacter(await (await import('./rust/export')).exportPresetGyogunPackageRust(snapshot.name, snapshot.config, stageCanvas, embedded));
+      window.location.assign(GYOGUN_PLAY_URL);
+    } catch (error) { if (alive.current) setNotice({ type: 'error', text: errorMessage(error) }); }
     finally { if (alive.current) { setExporting(false); setPackaging(null); } }
   }
 
@@ -589,7 +635,7 @@ export default function MakerPresetEditor({ selectionKey, initialDocument, initi
       <StageBackdrop look={look} />
       <div className={styles.canvasSlot} data-entered={entered}>
         <SceneBoundary resetKey={`${sceneRevision}-${config.style}-${config.base}-${config.hair}`} onError={onSceneError}>
-          <CharacterMakerScene config={config} modelRevision={sceneRevision} framing={framing} view={view} motion={motion} motionRevision={motionRevision} onMotionComplete={onMotionComplete} hitRevision={hitRevision} hurtFace={hurtFace} cameraRevision={cameraRevision} onReady={onReady} onError={embedded ? onSceneLoadError : onSceneError} playing={playing} speed={speed} studio={embedded} accent={accent} onFramingToggle={toggleFraming} />
+          <CharacterMakerScene config={config} modelRevision={sceneRevision} framing={framing} view={view} motion={action ?? motion} motionRevision={motionRevision} onMotionComplete={onMotionComplete} hitRevision={hitRevision} hurtFace={hurtFace || hitLoop} cameraRevision={cameraRevision} onReady={onReady} onError={embedded ? onSceneLoadError : onSceneError} playing={playing} speed={speed} studio={embedded} accent={accent} onFramingToggle={toggleFraming} />
         </SceneBoundary>
       </div>
       <StageOverlay poster={poster} entered={entered} weaponId={weaponId} view={view} framing={framing} />
@@ -602,6 +648,7 @@ export default function MakerPresetEditor({ selectionKey, initialDocument, initi
         <i className={styles.pillDivider} aria-hidden="true" />
         <div className={styles.pillGroup} role="group" aria-label="見る方向">{([['front', '正面'], ['side', '横'], ['back', '後ろ']] as const).map(([value, label]) => <button type="button" key={value} aria-pressed={view === value} onClick={() => { setView(value); setCameraRevision(revision => revision + 1); }}>{label}</button>)}</div>
       </div>
+      {gyogun && <GyogunCard fit={gyogunFit} busy={packaging === 'gyogun'} disabled={!ready || exporting} onPlay={playGyogun} />}
       <WeaponPicker value={weaponId} onChange={chooseWeapon} pickerRef={weaponPicker} requestedMotion={pendingWeaponMotion} onCancelRequest={() => setPendingWeaponMotion(null)} />
       <div className={styles.stageAlert}>
         {sceneError && <div className={styles.error} role="alert"><span>{sceneError}</span><button type="button" className={styles.retryButton} onClick={() => { setSceneError(''); setReady(false); setSceneRevision(value => value + 1); }}>もう一度読み込む</button></div>}
@@ -620,7 +667,8 @@ export default function MakerPresetEditor({ selectionKey, initialDocument, initi
         </div>
         <div className={styles.commonMotion}>
           <div className={styles.motionHeading}><span id="maker-common-motion">動き</span><button type="button" className={styles.playToggle} aria-label={playing ? '動作を一時停止' : '動作を再生'} aria-pressed={playing} onClick={() => setPlaying(value => !value)}><StudioIcon name={playing ? 'pause' : 'play'} /></button></div>
-          <div className={styles.motionGrid} role="group" aria-labelledby="maker-common-motion" style={{ '--n': MOTIONS.length + 1 } as CSSProperties}>{MOTIONS.map(([value, label]) => <button type="button" key={value} aria-label={label} title={label} aria-pressed={(pendingWeaponMotion ?? motion) === value} onClick={() => chooseMotion(value)}><StudioIcon name={MOTION_ICONS[value]} /><span>{label.replace('武器を', '')}</span></button>)}<button type="button" aria-label="のけぞる" title="のけぞる（1回のけぞって元の動きへ戻る）" onClick={playHit}><StudioIcon name="hit" /><span>のけぞる</span></button></div>
+          <div className={styles.motionGrid} role="group" aria-labelledby="maker-common-motion" style={{ '--n': MOTIONS.length + 1 } as CSSProperties}>{MOTIONS.map(([value, label]) => <button type="button" key={value} aria-label={label} title={label} aria-pressed={!action && !hitLoop && (pendingWeaponMotion ?? motion) === value} onClick={() => chooseMotion(value)}><StudioIcon name={MOTION_ICONS[value]} /><span>{label.replace('武器を', '')}</span></button>)}<button type="button" aria-label="被弾" title="被弾（のけぞりと ＞＜ の顔。もう一度押すと終わる）" aria-pressed={hitLoop} onClick={playHit}><StudioIcon name="hit" /><span>被弾</span></button></div>
+          <div className={styles.actionChips} role="group" aria-label="ゲーム用の動作">{ACTION_MOTIONS.flatMap(item => [<button type="button" key={item.id} aria-pressed={!hitLoop && action === item.id} onClick={() => chooseAction(item.id)}>{item.label}</button>, ...(item.id === 'dodge' ? [<button type="button" key="hit" aria-pressed={hitLoop} onClick={playHit}>被弾</button>] : [])])}</div>
         </div>
         {!detailsOpen && <button ref={detailsButton} type="button" className={styles.detailsToggle} aria-expanded={false} aria-controls="maker-details" onClick={() => chooseCategory(category)}><StudioIcon name="plus" />細かくカスタマイズ</button>}
       </section>}
@@ -648,8 +696,14 @@ export default function MakerPresetEditor({ selectionKey, initialDocument, initi
         {category === 'eyes' && shapeChoices(EYES, config.eyes, value => changeConfig('eyes', value), 'eyes')}
         {category === 'mouth' && shapeChoices(MOUTHS, config.mouth, value => changeConfig('mouth', value), 'mouth')}
         {category === 'expression' && <div className={styles.originalOptions}>
-          <fieldset className={styles.originalFieldset}><legend>のけぞったときの顔</legend><div className={styles.expressionButtons}><button type="button" aria-label="＞＜の顔" aria-pressed={hurtFace} onClick={() => setHurtFace(value => !value)}><StudioIcon name="hurtFace" size={18} />＞＜</button></div></fieldset>
-          <p className={styles.help}>＞＜ はプレビューの表示で、保存しません。のけぞると自動で出ます。</p>
+          <fieldset className={styles.originalFieldset}><legend>痛がる</legend><div className={styles.expressionButtons}><button type="button" aria-label="痛がる" title="痛がる（＞＜の顔）" aria-pressed={hurtFace} onClick={() => setHurtFace(value => !value)}><StudioIcon name="hurtFace" size={18} />痛がる</button></div></fieldset>
+          <p className={styles.help}>痛がる（＞＜）はプレビューの表示で、保存しません。被弾すると自動で出ます。</p>
+          {config.style === 'comic' && <>
+          <fieldset className={styles.originalFieldset}><legend>気持ち</legend><div className={styles.expressionButtons} role="group" aria-label="気持ちを選ぶ">{EXPRESSION_CHOICES.filter(item => item.group === 'emotion').map(item => <button type="button" key={item.id} aria-pressed={config.expression === item.id} onClick={() => chooseExpression(item.id)}>{item.label}</button>)}</div></fieldset>
+          <label className={styles.slider}><span>表情の強さ<output>{Math.round(config.expressionStrength * 100)}%</output></span><input aria-label="表情の強さ" type="range" {...EXPRESSION_STRENGTH_RANGE} value={config.expressionStrength} disabled={config.expression === 'neutral'} onChange={event => changeConfig('expressionStrength', Number(event.target.value), 'slider:expressionStrength')} /><small><span>ひかえめ</span><span>はっきり</span></small></label>
+          {([['blink', '目を閉じる'], ['mouth', '口の動き'], ['gaze', '視線']] as const).map(([group, label]) => <fieldset key={group} className={styles.originalFieldset}><legend>{label}</legend><div className={styles.expressionButtons}>{EXPRESSION_CHOICES.filter(item => item.group === group).map(item => <button type="button" key={item.id} aria-pressed={config.expression === item.id} onClick={() => chooseExpression(item.id)}>{item.label}</button>)}</div></fieldset>)}
+          <button type="button" className={styles.resetButton} onClick={() => chooseExpression('neutral')}>通常に戻す</button>
+          </>}
           {config.style === 'fantasy' && <>
           <div className={styles.originalHairChoices} role="group" aria-label="気持ちを選ぶ">{EXPRESSION_CHOICES.filter(item => item.group === 'emotion').map(item => <button type="button" key={item.id} className={`${''} ${config.expression === item.id ? styles.selected : ''}`} aria-pressed={config.expression === item.id} onClick={() => chooseExpression(item.id)}>
             <CharacterThumbnail config={config} kind="expression" value={item.id} className={styles.originalPartThumb} /><span>{item.label}</span>{config.expression === item.id && <b  aria-hidden="true">✓</b>}
@@ -658,11 +712,12 @@ export default function MakerPresetEditor({ selectionKey, initialDocument, initi
           <details className={styles.expressionDetails}><summary>目・口・視線も試す</summary><p>選んだ表情に切り替わります。</p>
             {([['blink', '目を閉じる'], ['mouth', '口の動き'], ['gaze', '視線']] as const).map(([group, label]) => <fieldset key={group} className={styles.originalFieldset}><legend>{label}</legend><div className={styles.expressionButtons}>{EXPRESSION_CHOICES.filter(item => item.group === group).map(item => <button type="button" key={item.id} aria-pressed={config.expression === item.id} onClick={() => chooseExpression(item.id)}>{item.label}</button>)}</div></fieldset>)}
           </details>
-          <button type="button" className={styles.resetButton} onClick={() => chooseExpression('neutral')}>ふつうの表情に戻す</button>
+          <button type="button" className={styles.resetButton} onClick={() => chooseExpression('neutral')}>通常に戻す</button>
           </>}
         </div>}
         {category === 'motion' && <div className={styles.originalOptions}>
-          <fieldset className={styles.originalFieldset}><legend>動作を選ぶ</legend><div className={styles.motionChoices} role="group" aria-label="動作">{MOTIONS.map(([value, label]) => <button type="button" key={value} aria-pressed={(pendingWeaponMotion ?? motion) === value} onClick={() => chooseMotion(value)}>{label}</button>)}</div></fieldset>
+          <fieldset className={styles.originalFieldset}><legend>動作を選ぶ</legend><div className={styles.motionChoices} role="group" aria-label="動作">{MOTIONS.map(([value, label]) => <button type="button" key={value} aria-pressed={!action && (pendingWeaponMotion ?? motion) === value} onClick={() => chooseMotion(value)}>{label}</button>)}</div></fieldset>
+          <fieldset className={styles.originalFieldset}><legend>ゲーム用の動作</legend><div className={styles.motionChoices} role="group" aria-label="ゲーム用の動作を選ぶ">{ACTION_MOTIONS.map(item => <button type="button" key={item.id} aria-pressed={action === item.id} onClick={() => chooseAction(item.id)}>{item.label}</button>)}</div></fieldset>
           <label className={styles.slider}><span>再生速度<output>{speed.toFixed(2)}倍</output></span><input aria-label="再生速度" type="range" min={0.25} max={2} step={0.05} value={speed} onChange={event => setSpeed(Number(event.target.value))} /><small><span>ゆっくり</span><span>速く</span></small></label>
           <p className={styles.help}>再生速度と一時停止はプレビューの設定です。</p>
         </div>}

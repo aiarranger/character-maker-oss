@@ -45,10 +45,14 @@ const source = [
   ...walk('distribution').filter(file => file.endsWith('.json')),
   // original-weapon.ts が読む、オリジナル4体ののけぞり
   ...walk('parts/assets/original-hit-v1').filter(file => file.endsWith('.json')),
+  // original-spec.ts が読む、オリジナル4体のゲーム用の動作
+  ...walk('parts/assets/original-action-v1').filter(file => file.endsWith('.json')),
   ...walk('public/maker-assets'), ...walk('public/review-swing-2026-10-02'), ...walk('public/character-maker'), ...walk('public/portraits'),
 ].filter(file => !/\.(test|e2e)\.(mjs|cjs|ts)$/.test(file))
   // look-*.jpg は Studio 用に同期されるが、どのコードからも読まれない
-  .filter(file => !/^public\/maker-assets\/look-.+\.jpg$/.test(file));
+  .filter(file => !/^public\/maker-assets\/look-.+\.jpg$/.test(file))
+  // 魚群繚乱の入口のカードの動画と止め絵は単体の Studio のページだけが使う（埋め込み先には出ない。docs/gyogun-spec.md「入口のカード」）
+  .filter(file => !/^public\/character-maker\/gyogun-title\./.test(file));
 for (const file of source) copy(file);
 
 // /api/character-maker/assets の名前 → parts の実ファイル（aisns の旧 server/character-maker-assets.mjs と同じ対応）

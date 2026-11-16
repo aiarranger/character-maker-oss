@@ -34,7 +34,7 @@
     "hairMotion": false,
     "modularModel": {
       "version": "original-human-modular-v1",
-      "sha256": "15fff552ee550c51132c2b0d761f4cbb38101a63591ad1a823c14d16c3d4b33d",
+      "sha256": "21274ff31b71c047ae5f8ac9f4e6c8c6e7017ec36787a3ea91aa8fdc61146460",
       "hairstyles": [
         "nagi-bob-v2",
         "nagi-pixie-v2",
@@ -42,7 +42,7 @@
         "nagi-pony-v2",
         "nagi-wavy-lob-v3"
       ],
-      "url": "/models/15fff552ee550c51132c2b0d761f4cbb38101a63591ad1a823c14d16c3d4b33d.glb"
+      "url": "/models/21274ff31b71c047ae5f8ac9f4e6c8c6e7017ec36787a3ea91aa8fdc61146460.glb"
     }
   },
   {
@@ -87,7 +87,7 @@
     },
     "modularModel": {
       "version": "original-human-modular-v1",
-      "sha256": "337222c108d0ca174a7e44df8c37f84adcbfc3ac0beaf9403813acaee7e46697",
+      "sha256": "cb538c5149e8b662025282e8dacc6068ee33382f6a9ecf61c80bc1fcd0ab8ece",
       "hairstyles": [
         "haru-short-v2",
         "haru-crop-v2",
@@ -96,7 +96,7 @@
         "haru-sidepart-v3",
         "haru-buzz-v3"
       ],
-      "url": "/models/337222c108d0ca174a7e44df8c37f84adcbfc3ac0beaf9403813acaee7e46697.glb"
+      "url": "/models/cb538c5149e8b662025282e8dacc6068ee33382f6a9ecf61c80bc1fcd0ab8ece.glb"
     }
   },
   {

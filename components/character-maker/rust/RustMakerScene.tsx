@@ -1,12 +1,13 @@
 'use client';
 
-// プリセット（ファンタジー・アメコミ）の Studio の下見を Rust の Stage で描く（今の版は ../CharacterMakerScene.tsx の studio の枝。props は同じ）。
+// プリセット（ファンタジー・アメコミ）の Studio の下見を Rust の Stage で描く（前の three の版は CharacterMakerScene.tsx の studio の枝。R7 で消した。props は同じ）。
 // 模型（組み立て・設定・動き・のけぞり・＞＜・武器・測り）は Rust（rust/game/src/maker.rs）、カメラと回す操作と床の動きは three なしの TS。docs/rust-stage-plan.md
 import { useEffect, useRef, useState } from 'react';
 import type { CharacterConfig } from '../../../lib/character-maker/config';
 import { currentCharacterConfig } from '../../../lib/character-maker/config';
+import { actionPlaysOnce, type ActionMotion } from '../../../lib/character-maker/actions';
 import { makerAssetUrl } from '../../../lib/character-maker/asset-url';
-import { outfitPaletteFiles, presetBodyFile, presetHairFile, presetMatureFiles, presetMotionFiles } from '../../../lib/character-maker/preset-assets';
+import { outfitPaletteFiles, presetBodyFile, presetHairFile, presetMatureFiles, presetMotionFiles, presetSwapFiles } from '../../../lib/character-maker/preset-assets';
 import { fetchRegisteredWeapon, presetWeaponSpec } from '../../../lib/character-maker/weapon-assets';
 import { Box3, Vector3 } from '../../../lib/engine/math';
 import { useStageDoubleTap } from '../stage-camera';
@@ -16,7 +17,9 @@ import { createMakerStage, markUnsupported, type MakerStage } from './stage';
 import { ClassicCameraRig, StudioCameraRig, type Subject } from './studio-camera';
 import { StageFloorMotion, sendFloorShadow } from './stage-floor';
 
-type Motion = 'idle' | 'walk' | 'run' | 'sword_idle' | 'sword_attack';
+type Motion = 'idle' | 'walk' | 'run' | 'sword_idle' | 'sword_attack' | ActionMotion;
+/** 1 回で止まる動作か（振る・ゲーム用の 1 回の動作） */
+const playsOnce = (motion: Motion) => motion === 'sword_attack' || actionPlaysOnce(motion);
 type Props = {
   config: CharacterConfig; modelRevision?: number; framing: 'full' | 'face'; view: 'front' | 'side' | 'back';
   motion: Motion; motionRevision?: number; playing?: boolean; speed?: number;
@@ -47,18 +50,19 @@ export async function fetchAsset(stage: MakerStage, name: string, load = () => a
 }
 
 /** 組み立ての値（素材の名前と設定）。書き出しも同じ物を使う */
-export async function presetSpec(stage: MakerStage, config: CharacterConfig) {
+/** studio: Studio の見え方（アメコミのならした肌）。旧画面 classic とその書き出しは今までどおり */
+export async function presetSpec(stage: MakerStage, config: CharacterConfig, studio = false) {
   const c = currentCharacterConfig(config);
-  const body = presetBodyFile(c), hair = presetHairFile(c), motions = presetMotionFiles(c), outfit = outfitPaletteFiles(c), mature = presetMatureFiles(c);
+  const body = presetBodyFile(c, studio), hair = presetHairFile(c), motions = presetMotionFiles(c), outfit = outfitPaletteFiles(c), mature = presetMatureFiles(c), swap = studio ? presetSwapFiles(c) : {};
   const weapon = presetWeaponSpec(c);
   const hurtFace = c.style === 'comic' ? { cover: `hurt-cover-${body}.png`, marks: 'hurt-marks.png' } : null;
   await Promise.all([
-    ...[body, ...(hair ? [hair] : []), ...motions, ...Object.values(outfit), ...Object.values(mature)].map(name => fetchAsset(stage, name)),
+    ...[body, ...(hair ? [hair] : []), ...motions, ...Object.values(outfit), ...Object.values(mature), ...Object.values(swap)].map(name => fetchAsset(stage, name)),
     ...(weapon ? [fetchAsset(stage, weapon.asset, () => fetchRegisteredWeapon(weapon.id))] : []),
-    ...(hurtFace ? [assetBytes(body).then(comicCoverImage).then(image => stage.image(hurtFace.cover, image.width, image.height, image.rgba)),
+    ...(hurtFace ? [Promise.all([assetBytes(body), swap['maker-skin'] ? assetBytes(swap['maker-skin']) : undefined]).then(([glb, skin]) => comicCoverImage(glb, skin)).then(image => stage.image(hurtFace.cover, image.width, image.height, image.rgba)),
       Promise.resolve(comicMarkImage()).then(image => stage.image(hurtFace.marks, image.width, image.height, image.rgba))] : []),
   ]);
-  return { body, hair, motions, outfit, mature, weapon, hurtFace, config: c };
+  return { body, hair, motions, outfit, mature, swap, weapon, hurtFace, config: c };
 }
 
 const v3 = (a: number[]) => new Vector3(a[0], a[1], a[2]);
@@ -84,7 +88,7 @@ export default function RustMakerScene(props: Props) {
     const el = canvas.current, holder = root.current;
     if (!el || !holder) return;
     let live = true, made: MakerStage | null = null;
-    createMakerStage(el, { dpr: Math.min(Math.max(devicePixelRatio, 1), 2) }).then(s => {
+    createMakerStage(el, { dpr: Math.min(Math.max(devicePixelRatio, 1), 2), look: latest.current.studio ? 'studio' : 'flat' }).then(s => {
       if (!live) { s.free(); return; }
       made = s;
       if (latest.current.studio) { sendFloorShadow(s); rig.current = new StudioCameraRig(holder, holder); }
@@ -109,11 +113,11 @@ export default function RustMakerScene(props: Props) {
     setInfo(null); setError('');
     subject.current = null;
     latest.current.onReady?.(false);
-    presetSpec(stage, latest.current.config).then(spec => {
+    presetSpec(stage, latest.current.config, latest.current.studio ?? false).then(spec => {
       if (cancelled) return;
       const made = JSON.parse(stage.assemble(JSON.stringify({ ...spec, config: currentCharacterConfig(latest.current.config) }))) as Info;
       const p = latest.current;
-      stage.play(JSON.stringify({ motion: p.motion, playing: p.playing ?? true, speed: p.speed ?? 1, hurtFace: p.hurtFace ?? false, weaponVisible: p.framing !== 'face' }));
+      stage.play(JSON.stringify({ motion: p.motion, once: playsOnce(p.motion), playing: p.playing ?? true, speed: p.speed ?? 1, hurtFace: p.hurtFace ?? false, weaponVisible: p.framing !== 'face' }));
       const key = `${Date.now()}:${Math.random()}`;
       subject.current = {
         key, rest: made, headY: made.headY, hasHead: made.portrait.hasHead, portrait: new Box3(v3(made.portrait.min), v3(made.portrait.max)),
@@ -142,7 +146,7 @@ export default function RustMakerScene(props: Props) {
   // 作り直さずに当てる設定（instance.apply(config)）
   const configKey = JSON.stringify(config);
   useEffect(() => { if (stage && info) stage.apply(configKey); }, [stage, info, configKey]);
-  useEffect(() => { if (stage && info) stage.play(JSON.stringify({ motion })); }, [stage, info, motion, motionRevision]);
+  useEffect(() => { if (stage && info) stage.play(JSON.stringify({ motion, once: playsOnce(motion) })); }, [stage, info, motion, motionRevision]);
   useEffect(() => { if (stage && info) stage.play(JSON.stringify({ playing: props.playing ?? true, speed: props.speed ?? 1 })); }, [stage, info, props.playing, props.speed]);
   useEffect(() => { if (stage && info) stage.play(JSON.stringify({ hurtFace: props.hurtFace ?? false })); }, [stage, info, props.hurtFace]);
   // のけぞりを 1 回（値が変わるたびに最初から。最初の値では再生しない）

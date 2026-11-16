@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "characters": {
+    "cassie": {
+      "current": "a5e616ffbac738edbc1829e7",
+      "releases": {
+        "a5e616ffbac738edbc1829e7": {
+          "path": "releases/cassie/a5e616ffbac738edbc1829e7.json",
+          "sha256": "d8d6d38385809301c65826d682dbf1c5ccb57caa3849f136ebdee45418027c2e",
+          "bytes": 7498
+        }
+      }
+    }
+  }
+}

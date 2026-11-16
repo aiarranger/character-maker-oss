@@ -524,7 +524,7 @@ export default function CharacterMaker({ originals, onPlay, initialName, onExit,
           <div className={styles.viewControls} role="group" aria-label="見る方向">{([['front', '正面'], ['side', '横'], ['back', '後ろ']] as const).map(([value, label]) => <button type="button" key={value} aria-pressed={view === value} onClick={() => { setView(value); setCameraRevision(revision => revision + 1); }}>{label}</button>)}</div>
         </div>
         <div className={styles.stageFooter}>
-          <div className={styles.motionChoices} role="group" aria-label="動作">{([['idle', '待機'], ['walk', '歩く'], ['run', '走る'], ['sword_idle', '剣を構える']] as const).map(([value, label]) => <button type="button" key={value} aria-pressed={motion === value} onClick={() => chooseMotion(value)}>{label}</button>)}</div>
+          <div className={styles.motionChoices} role="group" aria-label="動作">{([['idle', '待機'], ['walk', '歩行'], ['run', '走行'], ['sword_idle', '剣を構える']] as const).map(([value, label]) => <button type="button" key={value} aria-pressed={motion === value} onClick={() => chooseMotion(value)}>{label}</button>)}</div>
           <button type="button" className={styles.swordButton} disabled={!ready} onClick={() => chooseMotion('sword_attack')}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" aria-hidden="true"><path d="m7 17 11-13 3-1-1 4L9 19M5 13l6 6M3 21l4-4M2 19l3 3" /></svg>剣を振る</button>
         </div>
         {sceneError && <div className={styles.error} role="alert">{sceneError}<button type="button" onClick={() => { setSceneError(''); setSceneRevision(value => value + 1); }}>もう一度読み込む</button></div>}
@@ -551,7 +551,7 @@ export default function CharacterMaker({ originals, onPlay, initialName, onExit,
           <details className={styles.expressionDetails}><summary>目・口・視線も試す</summary><p>選んだ表情に切り替わります。</p>
             {([['blink', '目を閉じる'], ['mouth', '口の動き'], ['gaze', '視線']] as const).map(([group, label]) => <fieldset key={group}><legend>{label}</legend><div className={styles.expressionButtons}>{EXPRESSION_CHOICES.filter(item => item.group === group).map(item => <button type="button" key={item.id} aria-pressed={config.expression === item.id} onClick={() => chooseExpression(item.id)}>{item.label}</button>)}</div></fieldset>)}
           </details>
-          <button type="button" className={styles.resetButton} onClick={() => chooseExpression('neutral')}>ふつうの表情に戻す</button>
+          <button type="button" className={styles.resetButton} onClick={() => chooseExpression('neutral')}>通常に戻す</button>
         </div>}
         <section className={styles.presets} aria-labelledby="maker-presets"><div className={styles.presetHeading}><h3 id="maker-presets">スタイルから選ぶ</h3><span>迷ったら、ここから。</span></div>
           {presetGroups.map(group => <div key={group.id} className={styles.presetGroup} role={group.label ? 'group' : undefined} aria-labelledby={group.label ? `maker-presets-${group.id}` : undefined}>

@@ -1,0 +1,39 @@
+ゆうあかりの野（/play の wilds）の効果音
+
+出典: Kenney (www.kenney.nl) — License: Creative Commons Zero (CC0 1.0)
+  http://creativecommons.org/publicdomain/zero/1.0/
+原本: assets/field-packs/kenney-audio/（git 管理外）の次の3パック
+  - Impact Sounds 1.0      (kenney_impact-sounds)
+  - Interface Sounds       (kenney_interface-sounds)
+  - RPG Audio              (kenney_rpg-audio)
+
+加工: ffmpeg でモノラル 44.1 kHz・MP3 64 kbps に変換し、音量だけ揃えた（iOS Safari でも decodeAudioData できる形式にするため）。
+再生側（lib/wilds/audio.ts）が既定で小さめの音量にし、音程を ±6% ゆらす。TP1000・リキャスト明け・レベルアップのチャイムは WebAudio の合成音（ファイルなし）。
+
+ファイル ← 原本
+  hit-1.mp3   ← kenney_impact-sounds/Audio/impactSoft_medium_000.ogg
+  hit-2.mp3   ← kenney_impact-sounds/Audio/impactSoft_medium_001.ogg
+  hit-3.mp3   ← kenney_impact-sounds/Audio/impactSoft_medium_002.ogg
+  crit.mp3    ← kenney_impact-sounds/Audio/impactSoft_heavy_000.ogg
+  taken.mp3   ← kenney_impact-sounds/Audio/impactSoft_heavy_002.ogg
+  ws.mp3      ← kenney_rpg-audio/Audio/knifeSlice2.ogg
+  swish.mp3   ← kenney_rpg-audio/Audio/cloth1.ogg
+  engage.mp3  ← kenney_rpg-audio/Audio/drawKnife2.ogg
+  cast.mp3    ← kenney_interface-sounds/Audio/maximize_003.ogg
+  spell.mp3   ← kenney_interface-sounds/Audio/glass_004.ogg
+  select.mp3  ← kenney_interface-sounds/Audio/select_002.ogg
+  deny.mp3    ← kenney_interface-sounds/Audio/tick_002.ogg
+  notice.mp3  ← kenney_interface-sounds/Audio/pluck_001.ogg
+  ready.mp3   ← kenney_interface-sounds/Audio/drop_002.ogg
+  defeat.mp3  ← kenney_interface-sounds/Audio/maximize_006.ogg
+  lit.mp3     ← kenney_interface-sounds/Audio/bong_001.ogg
+  warp.mp3    ← kenney_interface-sounds/Audio/maximize_008.ogg
+  ko.mp3      ← kenney_interface-sounds/Audio/minimize_006.ogg
+
+--- 2026-10-01 追加: 剣を振る・当たる音（合成） ---
+slash-swing-1/2.mp3 ・ slash-hit-1/2/3.mp3 ・ slash-crit.mp3 は、外部の音源を使わず、numpy・scipy で波形から合成した（tools/make-wilds-slash-sounds.py。実行すると同じ音ができる）。
+  振る音（slash-swing）: 帯域ノイズ（中心周波数が上がって下がる）＋ 低めの風圧 ＋ 終わりの控えめな高域
+  当たる音（slash-hit）: 音程が落ちる低い芯・中域の芯・肉厚な叩き・高域の「パシッ」・短い金属の「チッ」
+  会心（slash-crit）  : 重い芯 ＋ 5 度のチン ＋ 上がるきらめき ＋ 短い残響
+これらは上の Kenney の hit-1〜3・crit の代わりに、lib/wilds/audio.ts の hit・crit・swing に使う（hit-1〜3.mp3・crit.mp3 は残してあるが、いまは鳴らさない）。
+合成した音のライセンス: このプロジェクトが作ったもの（外部の著作物を含まない）。

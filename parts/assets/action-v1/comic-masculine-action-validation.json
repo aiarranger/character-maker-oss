@@ -1,0 +1,238 @@
+{
+  "input": {
+    "path": "parts/assets/v1/masculine.glb",
+    "bytes": 3040184,
+    "sha256": "16c878b8d1ce17f61fb22c54a19e40da8062a3be9db2181f7aead1ae9147b2e0"
+  },
+  "sourceSHA256": "69591853d817488edaa8fd9bf8fc1d821eaeaf789f8627b3cd23b41c4ed67997",
+  "pelvisHeightRatio": 1.0353441818666547,
+  "clips": {
+    "jump": {
+      "segments": [
+        [
+          "Jump_Start"
+        ],
+        [
+          "Jump_Loop",
+          0,
+          0.28
+        ],
+        [
+          "Jump_Land"
+        ]
+      ],
+      "duration": 2.86667,
+      "samples": 44,
+      "tracks": 66,
+      "worldRotationError": 0.0000018654444640313854,
+      "floorY": [
+        -0.16577,
+        0.27343
+      ]
+    },
+    "dodge": {
+      "segments": [
+        [
+          "Roll"
+        ]
+      ],
+      "duration": 1.46667,
+      "samples": 23,
+      "tracks": 66,
+      "worldRotationError": 0.0000016718545052714536,
+      "floorY": [
+        0.00101,
+        0.04986
+      ]
+    },
+    "skill": {
+      "segments": [
+        [
+          "Spell_Simple_Enter"
+        ],
+        [
+          "Spell_Simple_Shoot"
+        ],
+        [
+          "Spell_Simple_Idle_Loop",
+          0,
+          0.5
+        ],
+        [
+          "Spell_Simple_Exit"
+        ]
+      ],
+      "duration": 1.96667,
+      "samples": 32,
+      "tracks": 66,
+      "worldRotationError": 0.0000024154593846742345,
+      "floorY": [
+        -0.00816,
+        -0.0067
+      ]
+    },
+    "punch": {
+      "segments": [
+        [
+          "Punch_Jab"
+        ],
+        [
+          "Punch_Cross"
+        ]
+      ],
+      "duration": 1.86667,
+      "samples": 29,
+      "tracks": 66,
+      "worldRotationError": 0.0000013892486120232224,
+      "floorY": [
+        -0.01911,
+        -0.01715
+      ]
+    },
+    "down": {
+      "segments": [
+        [
+          "Death01"
+        ]
+      ],
+      "duration": 2.4,
+      "samples": 37,
+      "tracks": 66,
+      "worldRotationError": 0.0000022188224310201793,
+      "floorY": [
+        -0.08156,
+        0.00455
+      ]
+    },
+    "dance": {
+      "segments": [
+        [
+          "Dance_Loop"
+        ]
+      ],
+      "duration": 1,
+      "samples": 16,
+      "tracks": 66,
+      "worldRotationError": 0.0000014787478721208048,
+      "floorY": [
+        -0.00558,
+        0.00507
+      ]
+    },
+    "talk": {
+      "segments": [
+        [
+          "Idle_Talking_Loop"
+        ]
+      ],
+      "duration": 2.93333,
+      "samples": 45,
+      "tracks": 66,
+      "worldRotationError": 8.601468616522505e-7,
+      "floorY": [
+        -0.00754,
+        -0.00604
+      ]
+    },
+    "crouch": {
+      "segments": [
+        [
+          "Crouch_Idle_Loop"
+        ]
+      ],
+      "duration": 2.93333,
+      "samples": 45,
+      "tracks": 66,
+      "worldRotationError": 7.794318694247069e-7,
+      "floorY": [
+        0.02481,
+        0.02709
+      ]
+    },
+    "interact": {
+      "segments": [
+        [
+          "Interact"
+        ]
+      ],
+      "duration": 2,
+      "samples": 31,
+      "tracks": 66,
+      "worldRotationError": 8.709215638758285e-7,
+      "floorY": [
+        -0.00819,
+        -0.0056
+      ]
+    },
+    "banzai": {
+      "segments": "posed",
+      "duration": 2.4,
+      "samples": 37,
+      "tracks": 66,
+      "worldRotationError": 8.280541890531721e-7,
+      "floorY": [
+        -0.02174,
+        -0.00792
+      ]
+    },
+    "greet": {
+      "segments": "posed",
+      "duration": 2.2,
+      "samples": 34,
+      "tracks": 66,
+      "worldRotationError": 8.280541890531721e-7,
+      "floorY": [
+        -0.00792,
+        -0.00792
+      ]
+    },
+    "restDown": {
+      "segments": "posed",
+      "duration": 1.2,
+      "samples": 19,
+      "tracks": 66,
+      "worldRotationError": 0.0000018262283444230632,
+      "floorY": "snap"
+    },
+    "restLoop": {
+      "segments": "posed",
+      "duration": 3.2,
+      "samples": 49,
+      "tracks": 66,
+      "worldRotationError": 0.0000016507366209181096,
+      "floorY": "snap"
+    },
+    "restUp": {
+      "segments": "posed",
+      "duration": 1.2,
+      "samples": 19,
+      "tracks": 66,
+      "worldRotationError": 0.0000018262283444230632,
+      "floorY": "snap"
+    },
+    "eat": {
+      "segments": "posed",
+      "duration": 4,
+      "samples": 61,
+      "tracks": 66,
+      "worldRotationError": 0.0000016507366209181096,
+      "floorY": "snap"
+    },
+    "spinKick": {
+      "segments": "posed",
+      "duration": 1.13333,
+      "samples": 18,
+      "tracks": 66,
+      "worldRotationError": 0.0000017926041176108204,
+      "floorY": [
+        -0.09322,
+        -0.00792
+      ]
+    }
+  },
+  "output": {
+    "path": "public/maker-assets/comic-masculine-action-motions.json",
+    "bytes": 1525035,
+    "sha256": "f7d0265f299dc550efd662c1fd45c03d52307af32693c59c844c0561d991227c"
+  }
+}

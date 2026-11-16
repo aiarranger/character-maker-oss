@@ -18,9 +18,9 @@ export async function withExportStage<T>(work: (stage: MakerStage) => Promise<T>
 }
 
 /** プリセットの GLB（とその高さ） */
-export async function exportPresetGlbRust(config: CharacterConfig): Promise<{ bytes: Uint8Array; height: number }> {
+export async function exportPresetGlbRust(config: CharacterConfig, studio = false): Promise<{ bytes: Uint8Array; height: number }> {
   return withExportStage(async stage => {
-    const spec = await presetSpec(stage, config);
+    const spec = await presetSpec(stage, config, studio);
     stage.assemble(JSON.stringify(spec));
     const bytes = stage.export('{}');
     return { bytes, height: stage.glb_height(bytes) };
@@ -28,14 +28,15 @@ export async function exportPresetGlbRust(config: CharacterConfig): Promise<{ by
 }
 
 /** yukikau.jp 用（.character.zip）。武器を外した通常の GLB（選んだ武器は character.json の weapon） */
-export async function exportPresetYukikauPackageRust(name: string, config: CharacterConfig, canvas?: HTMLCanvasElement | null): Promise<File> {
-  const { bytes, height } = await exportPresetGlbRust({ ...config, weaponId: 'none' });
+export async function exportPresetYukikauPackageRust(name: string, config: CharacterConfig, canvas?: HTMLCanvasElement | null, studio = false): Promise<File> {
+  const { bytes, height } = await exportPresetGlbRust({ ...config, weaponId: 'none' }, studio);
   return packageMeasured(name, bytes, height, canvas, 'preset', selectedMakerWeaponId(config));
 }
 
 /** オリジナル 4 体の GLB（今の版の exportOriginalCharacterGlb。variant を渡さなければ動作で武器用・通常用を選ぶ）。
+ * 'game' はゲーム用（魚群繚乱）: 通常用の形（武器も握った手も無い）に、待機・歩く・走ると構える・振るの両方を入れる。
  * Rust の版は形を常に 32bit 浮動小数で書く（KHR_mesh_quantization を使わない） */
-export async function exportOriginalGlbRust(character: OriginalCharacter, source: OriginalDocument, options: { variant?: 'standard' | 'armed' } = {}): Promise<{ bytes: Uint8Array; height: number }> {
+export async function exportOriginalGlbRust(character: OriginalCharacter, source: OriginalDocument, options: { variant?: 'standard' | 'armed' | 'game' } = {}): Promise<{ bytes: Uint8Array; height: number }> {
   const document = validateOriginalDocument(source);
   resolveOriginalCharacter(document, [character]);
   const weaponId = selectedMakerWeaponId(document.config);
@@ -54,7 +55,7 @@ export async function exportOriginalGlbRust(character: OriginalCharacter, source
       autoBlinkAndSpeaking: 'settings-only-not-baked',
       headTurn: 'applied-to-static-pose-original-animation-tracks-take-precedence',
       variant,
-      motionScope: armed ? 'sword-idle-and-attack-plus-hit' : 'idle-walk-and-run-plus-hit',
+      motionScope: armed ? 'sword-idle-and-attack-plus-hit' : variant === 'game' ? 'idle-walk-run-and-sword-idle-attack-plus-hit' : 'idle-walk-and-run-plus-hit',
       clips: [] as string[],
       reactions: { hit: { clip: 'hit', loop: 'once', hurtFace: true }, hurtFace: { clip: 'face_hurt', node: 'maker-hurt-face', switch: 'node-scale-0-hidden-1-shown' } },
       weapon: armed ? originalSwordMetadata(character.id, weaponId) : { included: false, selectedId: weaponId, reason: 'standard-variant-excludes-weapon-and-closed-hand' },
@@ -75,5 +76,21 @@ export async function exportOriginalGlbRust(character: OriginalCharacter, source
 export async function exportOriginalYukikauPackageRust(character: OriginalCharacter, document: OriginalDocument, canvas?: HTMLCanvasElement | null): Promise<File> {
   const clean = validateOriginalDocument(document);
   const { bytes, height } = await exportOriginalGlbRust(character, clean, { variant: 'standard' });
+  return packageMeasured(clean.name, bytes, height, canvas, 'original', selectedMakerWeaponId(clean.config));
+}
+
+// ---- 魚群繚乱用（docs/gyogun-spec.md の「Studio で作ったキャラで遊ぶ」） ----
+// 形は yukikau.jp 用と同じ .character.zip（character.json・model.glb・thumbnail.png。武器は character.json の weapon、GLB に武器の形は無い）。
+// GLB に、待機・歩く・走るに加えて 構える・振る（sword_idle・sword_attack）と jump・dodge・skill・hit・face_hurt が入っていること。
+
+/** プリセット: yukikau.jp 用と同じ GLB（武器を外した書き出しに、構える・振るとゲーム用の動作が全部入っている） */
+export function exportPresetGyogunPackageRust(name: string, config: CharacterConfig, canvas?: HTMLCanvasElement | null, studio = false): Promise<File> {
+  return exportPresetYukikauPackageRust(name, config, canvas, studio);
+}
+
+/** オリジナル 4 体: ゲーム用の GLB（yukikau.jp 用の通常用には構える・振るが無い） */
+export async function exportOriginalGyogunPackageRust(character: OriginalCharacter, document: OriginalDocument, canvas?: HTMLCanvasElement | null): Promise<File> {
+  const clean = validateOriginalDocument(document);
+  const { bytes, height } = await exportOriginalGlbRust(character, clean, { variant: 'game' });
   return packageMeasured(clean.name, bytes, height, canvas, 'original', selectedMakerWeaponId(clean.config));
 }

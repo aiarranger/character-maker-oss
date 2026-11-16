@@ -11,6 +11,7 @@ require.extensions['.ts'] = (module, filename) => module._compile(ts.transpileMo
 const { requestWeaponForMotion } = require('../lib/character-maker/weapon-motion-intent.ts');
 const { selectedMakerWeaponId } = require('../lib/character-maker/weapon-catalog.ts');
 const { replaceEditPresent, createEditHistory } = require('../lib/character-maker/edit-history.ts');
+const { actionHolds, actionNext } = require('../lib/character-maker/actions.ts');
 
 // Execute the real editor handlers without a browser or WebGL.
 function sourceNode(filename, predicate) {
@@ -38,6 +39,9 @@ function choose(filename, current, next, framing = 'full', weaponId = 'cake_swor
     setCameraRevision: update => { result.cameraRevision = update(result.cameraRevision); },
     setAttackRevision: update => { result.attackRevision = update(result.attackRevision); },
     setMotionRevision: update => { result.motionRevision = update(result.motionRevision); },
+    setAction: value => { result.action = value; },
+    // 被弾を選んでいる間の繰り返しは、ほかの動きを選ぶと終わる
+    setHitLoop: value => { result.hitLoop = value; },
   };
   run(`${handlers[filename]}; chooseMotion(next);`, context);
   return result;
@@ -102,9 +106,28 @@ test('automatic attack completion returns to ready without touching the camera',
     run(`const ${presetComplete}; onMotionComplete();`, {
       useCallback: value => value, selectedMakerWeaponId, documentRef: { current: { config: { weaponId } } },
       setMotion: value => { motion = value; }, setCameraRevision: failCamera, setFraming: failCamera,
+      actionRef: { current: null }, actionHolds, actionNext, setAction: () => assert.fail('No action was playing'),
     });
     assert.equal(motion, weaponId === 'none' ? 'idle' : 'sword_idle');
   }
+  // ゲーム用の 1 回の動作が終わったら、選んでいた動き（待機・歩くなど）を変えずに戻る。やられは倒れたまま
+  for (const [action, cleared] of [['jump', true], ['down', false]]) {
+    let wasCleared = false;
+    run(`const ${presetComplete}; onMotionComplete();`, {
+      useCallback: value => value, selectedMakerWeaponId, documentRef: { current: { config: { weaponId: 'none' } } },
+      setMotion: () => assert.fail('An action must not change the chosen motion'), setCameraRevision: failCamera, setFraming: failCamera,
+      actionRef: { current: action }, actionHolds, actionNext, setMotionRevision: () => {}, setAction: value => { assert.equal(value, null); wasCleared = true; },
+    });
+    assert.equal(wasCleared, cleared, action);
+  }
+  // 座る（restDown）が終わったら、休む（restLoop）へ続く
+  let followed = null;
+  run(`const ${presetComplete}; onMotionComplete();`, {
+    useCallback: value => value, selectedMakerWeaponId, documentRef: { current: { config: { weaponId: 'none' } } },
+    setMotion: () => assert.fail('An action must not change the chosen motion'), setCameraRevision: failCamera, setFraming: failCamera,
+    actionRef: { current: 'restDown' }, actionHolds, actionNext, setMotionRevision: () => {}, setAction: value => { followed = value; },
+  });
+  assert.equal(followed, 'restLoop');
   const historyRef = { current: createEditHistory({ config: { motion: 'sword_attack', weaponId: 'cake_sword' } }) };
   let writes = 0;
   run(`const ${originalComplete}; onAttackComplete();`, {

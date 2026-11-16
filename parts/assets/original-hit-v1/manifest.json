@@ -110,18 +110,18 @@
     {
       "id": "generic-human-a",
       "model": {
-        "path": "parts/assets/studio-runtime-v1/models/337222c108d0ca174a7e44df8c37f84adcbfc3ac0beaf9403813acaee7e46697.glb",
-        "sha256": "337222c108d0ca174a7e44df8c37f84adcbfc3ac0beaf9403813acaee7e46697"
+        "path": "parts/assets/studio-runtime-v1/models/cb538c5149e8b662025282e8dacc6068ee33382f6a9ecf61c80bc1fcd0ab8ece.glb",
+        "sha256": "cb538c5149e8b662025282e8dacc6068ee33382f6a9ecf61c80bc1fcd0ab8ece"
       },
       "output": {
         "path": "parts/assets/original-hit-v1/generic-human-a-hit.json",
-        "sha256": "170c5c67d7358e1ac380675809ba45b697fd934b1e5f952e2c8a294f7d647047"
+        "sha256": "1d9630807471a1d4913cfb818275e6cc0edf7d886d897aaa467e754cd9c88aca"
       },
       "clip": "hit",
       "duration": 0.666667,
       "samples": 11,
       "tracks": 42,
-      "floorOffset": 0.056080251610352114,
+      "floorOffset": 0.05367506376342781,
       "bindResidual": 0.00000497564867740774,
       "headOffsetAlongForward": {
         "start": -0.07716344998292878,
@@ -131,18 +131,18 @@
     {
       "id": "generic-human-b",
       "model": {
-        "path": "parts/assets/studio-runtime-v1/models/15fff552ee550c51132c2b0d761f4cbb38101a63591ad1a823c14d16c3d4b33d.glb",
-        "sha256": "15fff552ee550c51132c2b0d761f4cbb38101a63591ad1a823c14d16c3d4b33d"
+        "path": "parts/assets/studio-runtime-v1/models/21274ff31b71c047ae5f8ac9f4e6c8c6e7017ec36787a3ea91aa8fdc61146460.glb",
+        "sha256": "21274ff31b71c047ae5f8ac9f4e6c8c6e7017ec36787a3ea91aa8fdc61146460"
       },
       "output": {
         "path": "parts/assets/original-hit-v1/generic-human-b-hit.json",
-        "sha256": "4d18ea9c0bec20d79e0075baebd33692ac1c76ea204881b7ed75ea30b050281f"
+        "sha256": "e98413d2e7e1c289bca1ae85bca81a0b6478db21f8c0babcaf83ae6f37926f9d"
       },
       "clip": "hit",
       "duration": 0.666667,
       "samples": 11,
       "tracks": 42,
-      "floorOffset": 0.04250552973019948,
+      "floorOffset": 0.04639026934955471,
       "bindResidual": 0.0006845590498766891,
       "headOffsetAlongForward": {
         "start": -0.06720722877832339,

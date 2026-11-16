@@ -1,4 +1,4 @@
-// Studio のプリセットのカメラ（今の版は components/character-maker/CharacterMakerScene.tsx の StudioCamera と drei の OrbitControls）を three なしで。
+// Studio のプリセットのカメラ（前の three の版の CharacterMakerScene.tsx の StudioCamera と drei の OrbitControls。R7 で消した）を three なしで。
 // 数学・カメラ・回す操作は lib/engine（three r178 と aisns の写し）。測り（立った姿・顔の箱・構えの包み・頭の骨）は Rust の Stage から。
 import { Box3, Vector3 } from '../../../lib/engine/math';
 import { PerspectiveCamera } from '../../../lib/engine/camera';
@@ -164,7 +164,7 @@ export class StudioCameraRig {
   }
 }
 
-/** classic（Studio でない下見）のカメラ（CharacterMakerScene の Camera と drei の OrbitControls。fov 32・減衰 0.12） */
+/** classic（Studio でない下見）のカメラ（前の three の版の CharacterMakerScene の Camera と drei の OrbitControls。fov 32・減衰 0.12） */
 export class ClassicCameraRig {
   readonly camera = new PerspectiveCamera(32, 1, .01, 50);
   readonly controls: OrbitControls;

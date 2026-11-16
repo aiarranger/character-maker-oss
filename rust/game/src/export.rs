@@ -331,7 +331,7 @@ pub fn preset(m: &mut Model, kit: &mut Kit, _v: &Value) -> Result<Vec<u8>, Strin
     let c = m.applied.clone();
     let mut maker = json!({
         "assetVersion": if m.fantasy { "fantasy-maker-v1" } else { "human-maker-v1" }, "config": c,
-        "playback": { "sword_attack": { "loop": false, "next": "sword_idle" }, "hit": { "loop": false }, "face_hurt": { "loop": true } },
+        "playback": crate::look::playback(),
         "hurtFace": { "node": crate::hurt_face::NODE, "method": if m.fantasy { "morph" } else { "overlay" } },
     });
     if let Some(e) = &m.expressions { maker["expressionMorphs"] = Value::Object(e.profile.clone()); }

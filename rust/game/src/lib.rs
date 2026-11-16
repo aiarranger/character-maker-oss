@@ -7,6 +7,8 @@ mod export;
 #[cfg(target_arch = "wasm32")]
 mod original;
 #[cfg(target_arch = "wasm32")]
+mod original_emotion;
+#[cfg(target_arch = "wasm32")]
 mod expressions;
 #[cfg(target_arch = "wasm32")]
 mod head;
@@ -18,6 +20,8 @@ mod weapon;
 mod floor;
 #[cfg(target_arch = "wasm32")]
 mod maker;
+#[cfg(target_arch = "wasm32")]
+mod look;
 
 #[cfg(target_arch = "wasm32")]
 mod api {
@@ -35,7 +39,9 @@ mod api {
 
     /// 下見の canvas 1 つ（今の版の R3F の Canvas 1 つに当たる）
     #[wasm_bindgen]
-    pub struct Stage { kit: Kit, assets: Assets, model: Option<Box<dyn Actor>>, floor: Option<Floor> }
+    pub struct Stage { kit: Kit, assets: Assets, model: Option<Box<dyn Actor>>, floor: Option<Floor>, look: crate::look::Look,
+        /// 陰影を付けて描くか（init の look が 'studio'。旧画面 classic と書き出し用の Stage は付けない）
+        shaded: bool }
 
     #[wasm_bindgen]
     impl Stage {
@@ -47,6 +53,7 @@ mod api {
         pub fn assemble(&mut self, json: &str) -> Result<String, JsValue> {
             let spec = parse(json)?;
             if let Some(old) = self.model.take() { old.remove(&mut self.kit); }
+            self.look.reset();
             let model: Box<dyn Actor> = if spec["kind"].as_str() == Some("original") {
                 crate::original::assemble(&mut self.kit, &mut self.assets, &spec).map_err(err)?
             } else {
@@ -60,6 +67,7 @@ mod api {
         pub fn apply(&mut self, json: &str) -> Result<(), JsValue> {
             let c = parse(json)?;
             if let Some(m) = self.model.as_mut() { m.apply(&mut self.kit, &c); }
+            self.look.measure = true;
             Ok(())
         }
         /// 動作の合図: { motion?, playing?, speed? }
@@ -77,6 +85,11 @@ mod api {
                 c.position = Vec3::new(cam[0] as f32, cam[1] as f32, cam[2] as f32);
                 c.quaternion = glam::Quat::from_xyzw(cam[3] as f32, cam[4] as f32, cam[5] as f32, cam[6] as f32);
                 c.fov = cam[7] as f32; c.near = cam[8] as f32; c.far = cam[9] as f32; c.aspect = cam[10] as f32;
+            }
+            if let (Some(m), true) = (self.model.as_ref(), self.shaded) {
+                let subject = m.look(&self.kit);
+                if self.look.measure { self.look.set_head(subject.head, m.head_box(&self.kit)); }
+                self.look.refresh(&mut self.kit, &subject);
             }
             self.kit.render(&RenderOpts { outline: false, hidden: false, clear: Color { r: 0.0, g: 0.0, b: 0.0 } });
             drop(self.kit.take_shader_errors());
@@ -135,7 +148,7 @@ mod api {
         Ok(made)
     }
 
-    /// init: { dpr }。色の出口は今の版の Canvas（composer なし・ACES・透ける canvas。材質は toneMapped なし）
+    /// init: { dpr, look }。look が 'studio' なら陰影を付けて描く（look.rs）。色の出口は今の版の Canvas（composer なし・ACES・透ける canvas。材質は toneMapped なし）
     #[wasm_bindgen]
     pub async fn create_stage(canvas: web_sys::HtmlCanvasElement, init: String) -> Result<Stage, JsValue> {
         console_error_panic_hook::set_once();
@@ -151,6 +164,6 @@ mod api {
         kit.set_final_uniform(&[0u8; 16]);
         kit.set_canvas_alpha(true);
         kit.clear_alpha = 0.0;
-        Ok(Stage { kit, assets: Assets::default(), model: None, floor: None })
+        Ok(Stage { kit, assets: Assets::default(), model: None, floor: None, look: crate::look::Look::default(), shaded: v["look"].as_str() == Some("studio") })
     }
 }

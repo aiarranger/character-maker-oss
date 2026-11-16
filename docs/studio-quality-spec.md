@@ -8,7 +8,7 @@
   - キャラクターが画面の主役になる。1440×900 で身長約520px（現状約150px）、スマホでも最初の画面に全身が入る。
   - キャラごとに色の世界を持つ。
   - 選ぶ、持たせる、向きを変える、保存する、のすべてで手応えが返る。
-- **維持すること**: 全機能、保存形式、unlit（MeshBasicMaterial）の規則、新しい依存を足さないこと。
+- **維持すること**: 全機能、保存形式、新しい依存を足さないこと。書き出す GLB の材質は unlit（KHR_materials_unlit）のまま。Studio の下見だけ、2026-11-15 から陰影を付けて描く（[game-motions-spec.md](game-motions-spec.md) の「陰影」）。
 - **合格ライン**: §10 のルーブリック10項目がすべて8点以上。
 
 ## 1. 採用案と接ぎ木
@@ -465,8 +465,8 @@ page.tsx の `selectCharacter` で、次の順に処理する。
 
 **props**
 
-- `OriginalCharacterScene` / `CharacterMakerScene`: `accent?: string`、`onFramingToggle?: () => void`。
-- `CharacterMakerScene` には `studio?: boolean` も足す。既定は false で、classic は今のまま。MakerPresetEditor は `studio={embedded}` を渡す。
+- `OriginalCharacterScene` / `CharacterMakerScene`（2026-11-13 の R7 から `rust/RustOriginalScene` / `rust/RustMakerScene`。props は同じ）: `accent?: string`、`onFramingToggle?: () => void`。
+- `CharacterMakerScene`（今は `RustMakerScene`）には `studio?: boolean` も足す。既定は false で、classic は今のまま。MakerPresetEditor は `studio={embedded}` を渡す。
 - `StageBackdrop`: `{ look: string }`
 - `StageOverlay`: `{ poster?: string; entered: boolean; weaponId: string; view: 'front'|'side'|'back'; framing: 'full'|'face' }`
 - `captureStageSnapshot(): { src: string; rect: DOMRect } | null`
@@ -582,10 +582,10 @@ page.tsx の `selectCharacter` で、次の順に処理する。
 
 ## 11. 変えないもの
 
-- **素材と照明**: unlit（MeshBasicMaterial）の素材。ライトや lit な素材を足さない。
+- **素材と照明**: 模型と書き出す GLB の素材は unlit のまま。Studio の下見は、同じ色と絵に陰影を重ねて描く（2026-11-15。[game-motions-spec.md](game-motions-spec.md)）。旧画面 classic は陰影なし。
 - **データの既定値**: 全キャラが「ケーキの剣＋構える」で始まる（`tests/maker-cake-default` で固定）。
 - **データとアセット**: 保存形式、JSON・GLB の中身、`studio-catalog.json`（aisns と共有）、モデル・テクスチャ・アニメーション。
-- **旧画面**: `/character-maker/classic`（`CharacterMaker.tsx`、`character-maker.module.css`、`CharacterMakerScene` の studio=false の経路、`makerArmedCameraDistance` の既定の動作）。
+- **旧画面**: `/character-maker/classic`（`CharacterMaker.tsx`、`character-maker.module.css`、`CharacterMakerScene`（今は `RustMakerScene`）の studio=false の経路、`makerArmedCameraDistance` の既定の動作）。
 - **依存とフォント**: 新しい依存パッケージを足さない。外部フォントを読み込まない。
 - **編集ロジック**: 次の関数の本文は変えない。テストが本文を読むため（`chooseMotion` は AST で抜き出して実行される）。
   - `chooseMotion`、`chooseWeapon`、`resetAppearance`、`apply` / `applyCharacter`、`save`、`captureSession`、元に戻す／やり直す。

@@ -138,20 +138,32 @@ fn mat_info(g: &Glb, model: &str, index: Option<usize>) -> MatInfo {
 // ---- 動きの値 ----
 
 #[derive(Clone, Copy, PartialEq, Default)]
-struct Face { blink_left: f64, blink_right: f64, mouth_close: f64, aa: f64, ee: f64, ou: f64, happy: f64 }
+struct Face { blink_left: f64, blink_right: f64, mouth_close: f64, aa: f64, ee: f64, ou: f64, happy: f64, angry: f64, sad: f64, surprised: f64, relaxed: f64, look_left: f64, look_right: f64, look_up: f64, look_down: f64 }
 impl Face {
     fn read(v: &Value) -> Face {
         let n = |k: &str| v[k].as_f64().unwrap_or(0.0);
-        Face { blink_left: n("blinkLeft"), blink_right: n("blinkRight"), mouth_close: if v["mouthClose"].is_null() { 1.0 } else { n("mouthClose") }, aa: n("aa"), ee: n("ee"), ou: n("ou"), happy: n("happy") }
+        Face { blink_left: n("blinkLeft"), blink_right: n("blinkRight"), mouth_close: if v["mouthClose"].is_null() { 1.0 } else { n("mouthClose") }, aa: n("aa"), ee: n("ee"), ou: n("ou"), happy: n("happy"), angry: n("angry"), sad: n("sad"), surprised: n("surprised"), relaxed: n("relaxed"), look_left: n("lookLeft"), look_right: n("lookRight"), look_up: n("lookUp"), look_down: n("lookDown") }
     }
     fn get(&self, k: &str) -> Option<f64> {
-        Some(match k { "blinkLeft" => self.blink_left, "blinkRight" => self.blink_right, "mouthClose" => self.mouth_close, "aa" => self.aa, "ee" => self.ee, "ou" => self.ou, "happy" => self.happy, _ => return None })
+        Some(match k { "blinkLeft" => self.blink_left, "blinkRight" => self.blink_right, "mouthClose" => self.mouth_close, "aa" => self.aa, "ee" => self.ee, "ou" => self.ou, "happy" => self.happy, "angry" => self.angry, "sad" => self.sad, "surprised" => self.surprised, "relaxed" => self.relaxed, "lookLeft" => self.look_left, "lookRight" => self.look_right, "lookUp" => self.look_up, "lookDown" => self.look_down, _ => return None })
     }
     fn set(&mut self, k: &str, v: f64) {
-        match k { "blinkLeft" => self.blink_left = v, "blinkRight" => self.blink_right = v, "mouthClose" => self.mouth_close = v, "aa" => self.aa = v, "ee" => self.ee = v, "ou" => self.ou = v, "happy" => self.happy = v, _ => {} }
+        match k { "blinkLeft" => self.blink_left = v, "blinkRight" => self.blink_right = v, "mouthClose" => self.mouth_close = v, "aa" => self.aa = v, "ee" => self.ee = v, "ou" => self.ou = v, "happy" => self.happy = v, "angry" => self.angry = v, "sad" => self.sad = v, "surprised" => self.surprised = v, "relaxed" => self.relaxed = v, "lookLeft" => self.look_left = v, "lookRight" => self.look_right = v, "lookUp" => self.look_up = v, "lookDown" => self.look_down = v, _ => {} }
+    }
+    /// 気持ちの表情の口: 元の口のモーフの組み合わせで出す（怒りと悲しみは口角を下げる＝happy を負に、驚きは口を少し開ける、穏やかは少し口角を上げる）。
+    /// keep: 気持ちを残す量（＞＜ の間は 0 へ）
+    /// own_mouth: 口に気持ちのモーフを持つ模型（ルクス）。元の口のモーフは足さない
+    pub(crate) fn with_emotion_mouth(mut self, keep: f64, own_mouth: bool) -> Face {
+        self.angry *= keep; self.sad *= keep; self.surprised *= keep; self.relaxed *= keep;
+        self.look_left *= keep; self.look_right *= keep; self.look_up *= keep; self.look_down *= keep;
+        if own_mouth { return self; }
+        self.happy += -0.45 * self.angry - 0.9 * self.sad + 0.3 * self.relaxed;
+        self.aa = self.aa.max(0.6 * self.surprised);
+        self.mouth_close *= 1.0 - self.surprised;
+        self
     }
 }
-const NEUTRAL: Face = Face { blink_left: 0.0, blink_right: 0.0, mouth_close: 1.0, aa: 0.0, ee: 0.0, ou: 0.0, happy: 0.0 };
+const NEUTRAL: Face = Face { blink_left: 0.0, blink_right: 0.0, mouth_close: 1.0, aa: 0.0, ee: 0.0, ou: 0.0, happy: 0.0, angry: 0.0, sad: 0.0, surprised: 0.0, relaxed: 0.0, look_left: 0.0, look_right: 0.0, look_up: 0.0, look_down: 0.0 };
 /// のけぞりの重みの立ち上がり・戻り（秒）
 const HIT_IN: f64 = 0.06;
 const HIT_OUT: f64 = 0.15;
@@ -279,6 +291,8 @@ impl Original {
         edit::species(&mut parts, &mut mats, &g, &character, species.as_ref(), raw.as_ref().map(|r| r.rgba.as_slice()))?;
         let human = edit::SpeciesParts::read(if appearance["parts"].is_null() { &Value::Null } else { &appearance["parts"] });
         edit::human_parts(&mut parts, &character, &human);
+        // 気持ちの表情のモーフ（眉と目。模型に無いので、ここで作って足す）
+        crate::original_emotion::extend(&mut parts, &character);
         // 体型の場（骨は bind の姿。根は単位）
         edit::body_field(&mut parts, &skel, &g, &character)?;
         // 髪型と髪の色
@@ -571,12 +585,23 @@ impl Original {
     fn set_motion(&mut self, kit: &mut Kit, motion: &str, attack_revision: i64, resume: Option<f64>) {
         self.motion = motion.to_string();
         self.attack_revision = attack_revision;
+        // 基準姿勢: 動作を全部止めて、骨を素の姿（休止の姿）へ戻す（キャラクター一覧の「基準姿勢」と同じ）
+        if motion == "rest" {
+            self.mixer.stop_all(&mut self.skel);
+            self.active = None; self.attack_paused = false;
+            self.head_keep();
+            let base = self.base();
+            self.collar.update(&mut self.skel, base);
+            self.springs.reset(&mut self.skel, base);
+            self.report();
+            return;
+        }
         let Some(&(_, id)) = self.clips.iter().find(|(n, _)| n.ends_with(&format!(":{motion}"))).or_else(|| self.clips.iter().find(|(n, _)| n == motion)) else { return };
         let previous = self.active;
         if !self.playing { self.mixer.stop_all(&mut self.skel); }
         if previous == Some(id) { self.mixer.stop(id, &mut self.skel); }
         self.mixer.reset(id);
-        let once = motion == "sword_attack";
+        let once = plays_once(motion);
         self.mixer.actions[id].once = once;
         self.mixer.actions[id].clamp_when_finished = once;
         self.mixer.play(id, &self.skel);
@@ -639,7 +664,7 @@ impl Original {
             self.report();
         } else {
             let act = &mut self.mixer.actions[a];
-            if self.motion == "sword_attack" && act.time >= act.clip.duration as f64 { act.time = 0.0; }
+            if plays_once(&self.motion) && act.time >= act.clip.duration as f64 { act.time = 0.0; }
             act.paused = false;
             self.attack_paused = false;
         }
@@ -705,7 +730,7 @@ impl Original {
                     if self.body_accumulator + 1e-8 >= self.body_step {
                         if self.step_hit() || self.playing {
                             self.mixer.advance(self.body_accumulator * self.speed, &mut self.skel);
-                            if let Some(a) = self.active && self.motion == "sword_attack" {
+                            if let Some(a) = self.active && plays_once(&self.motion) {
                                 let p = self.mixer.actions[a].paused;
                                 if p && !self.attack_paused { self.events.push(json!({ "t": "motionComplete" })); }
                                 self.attack_paused = p;
@@ -749,7 +774,7 @@ impl Original {
     }
 
     fn update_face(&mut self, kit: &mut Kit, hurt_weight: f64) {
-        let mut shown = self.face;
+        let mut shown = self.face.with_emotion_mouth(1.0 - hurt_weight.clamp(0.0, 1.0), self.character == "generic-robot");
         if hurt_weight > 0.0 { for (k, v) in &self.hurt_mouth { if let Some(cur) = shown.get(k) { shown.set(k, cur + (v - cur) * hurt_weight); } } }
         let next_tick = (self.elapsed * 60.0 + 1e-8).floor() as i64;
         let input = (self.face, self.auto_blink, self.speaking, hurt_weight as f32);
@@ -930,6 +955,9 @@ impl Original {
     }
 }
 
+/// 1 回で止まる動作か（振ると、ゲーム用の 1 回の動作。名前の正本は lib/character-maker/actions.ts。終わると motionComplete を出す）
+fn plays_once(motion: &str) -> bool { ["sword_attack", "jump", "dodge", "skill", "punch", "interact", "down", "restDown", "restUp", "banzai", "greet", "spinKick"].contains(&motion) }
+
 /// glTF の材質の色の絵のサンプラー（GLTFLoader: 無ければ繰り返し・LinearMipmapLinear・Linear）
 fn sampler_opts(json: &Value, material: usize) -> island_kit::texture::TexOpts {
     use island_kit::texture::{TexOpts, Wrap};
@@ -1019,6 +1047,14 @@ impl Actor for Original {
     }
     /// GLB の書き出し（exportOriginalCharacterGlb）。v: { variant: 'armed'|'standard', extras（characterMaker の値）, swordExtras }
     fn export(&mut self, kit: &mut Kit, v: &Value) -> Result<Vec<u8>, String> { export_glb::export(self, kit, v) }
+    fn look(&self, _kit: &Kit) -> crate::look::Subject {
+        // 光る画面（ルクスの顔）には陰影を付けない
+        let flat = self.live.iter().zip(&self.parts).filter(|(_, p)| self.mats.get(p.mat).is_some_and(|m| m.name.starts_with("Lux display"))).map(|(l, _)| l.mat).collect();
+        // ルクスは頭の球を使わない（白い外装の面の向きを、そのまま陰に出す。顔の画面は flat）
+        let head = if self.character == "generic-robot" { None } else { self.head.map(|h| self.posed().world[h]) };
+        crate::look::Subject { root: self.root, head, flat }
+    }
+    fn head_box(&self, kit: &Kit) -> Option<(Vec3, Vec3)> { let [_, head, _] = self.bounds(kit, &self.posed(), None); Some(head) }
     fn remove(self: Box<Self>, kit: &mut Kit) { self.remove_all(kit); }
 }
 

@@ -1,0 +1,99 @@
+{
+  "version": "original-remake-v1",
+  "characters": {
+    "generic-human-a": {
+      "base": {
+        "path": "parts/assets/original-remake-v1/base/generic-human-a.glb",
+        "sha256": "337222c108d0ca174a7e44df8c37f84adcbfc3ac0beaf9403813acaee7e46697"
+      },
+      "replaced": "cb538c5149e8b662025282e8dacc6068ee33382f6a9ecf61c80bc1fcd0ab8ece",
+      "model": {
+        "path": "parts/assets/studio-runtime-v1/models/cb538c5149e8b662025282e8dacc6068ee33382f6a9ecf61c80bc1fcd0ab8ece.glb",
+        "sha256": "cb538c5149e8b662025282e8dacc6068ee33382f6a9ecf61c80bc1fcd0ab8ece",
+        "bytes": 19314904
+      },
+      "sources": {
+        "art-body-back.jpg": "f9e2359d415777ae8a841cccaad6980c8ebd89a5cf0840024586256bad39cd94",
+        "art-body-front.jpg": "dbf8c654e24b8dc2b32ccde3e9a6c61ac962f140fc8376e82977d05b565ca9fa",
+        "art-body-side.jpg": "91db20bb6660911b6aaa15f7d2134d195c8fb352731b0500eae6df3e94523ad9",
+        "art-hair-haru-buzz-v3-back.jpg": "c1e37dd329d6f90b3317b2ab7db99eea2ca0ba8e4f8b793e43368d456336403d",
+        "art-hair-haru-buzz-v3-front.jpg": "a5cbf2347de6b67920e2f208e6eecddfe51b454d0cca57971d3fffe3b0ac1892",
+        "art-hair-haru-buzz-v3-side.jpg": "ed791b349c4277edd033fb1d81477603190ece766023e86bed0693bc7186065d",
+        "art-hair-haru-center-v2-back.jpg": "f14133fac0a462b6245f380b0e0bf99efe5d762e69820ddece902175631a55f9",
+        "art-hair-haru-center-v2-front.jpg": "2ebd64b6616b471fb24a68d8b7d4407c1d841f3e753f2af4b84e08d8b8491dcb",
+        "art-hair-haru-center-v2-side.jpg": "380f44590c67d43178d6a0c1d630c8667fbecd473e71f617228e9a675888f8b4",
+        "art-hair-haru-crop-v2-back.jpg": "e6bba540889cf2318ca3f3af079ec773f177a7e3949cb8120897fb95c9215e5a",
+        "art-hair-haru-crop-v2-front.jpg": "f69d59f08b3c00792bf58c1dc04ade300558b4fc7583f330db7f8f4d86c3405b",
+        "art-hair-haru-crop-v2-side.jpg": "025171a08e839ed4829a6e107edeeed58b1961f6c199d6df1ace65a4cc16401d",
+        "art-hair-haru-short-v2-back.jpg": "388fccbd660de3fb5767038fdc2d6b5905cb6dcc3629cdc2e1d08d621ec572f1",
+        "art-hair-haru-short-v2-front.jpg": "aa78e34ad69ca48b003c64fc12101546d5eceb9f46ce8f3a9b5edf45872c0217",
+        "art-hair-haru-short-v2-side.jpg": "5d44488ed190b2c8ff8dd456fafd630317a65f8efb96126aa4b7d0008792344f",
+        "art-hair-haru-sidepart-v3-back.jpg": "d8118802e7cf538f1ae10b3c44c5f006416fe762dab467f172a57bb1cda3f556",
+        "art-hair-haru-sidepart-v3-front.jpg": "0db7aafa36865ebb3573f78c1aa98ad270d898c60cb2d13126858a39e040b908",
+        "art-hair-haru-sidepart-v3-side.jpg": "53fedbd153e4e662bf4571cf0da5205eadcbff728b029e781a20477dad174248",
+        "art-hair-haru-swept-v2-back.jpg": "7fe0d62f2106c0c505dea0bd97d95f52ff7fbfb20f626108567c90d04ddf3a7e",
+        "art-hair-haru-swept-v2-front.jpg": "dc6283856f510f6d8934bea564e3e8efbe348451b27e80c5961af2c59f21f694",
+        "art-hair-haru-swept-v2-side.jpg": "47120ae0feaf126edf0dc9c96c710da1b90663d2d42dbaf82ab4cc2a50c5b848",
+        "body.glb": "ead7705de6aead80e05ee6c3472d0bd6f1fe2fa2974e7816a3608d2e62395327",
+        "hair-haru-buzz-v3.glb": "f352712a4a9906745366220c0babb181417e8fde4cfc0ba2d7013f939366b20f",
+        "hair-haru-center-v2.glb": "1080af5be396a2e0a99a05a8bd7f890083b588f70f7ac94b11873533c26c5786",
+        "hair-haru-crop-v2.glb": "a0dfdcf589dfeaf015d9b08a1b1faf750e787484241c1bc0059ffa453e34965f",
+        "hair-haru-short-v2.glb": "6975cc8b4add84942d0f955df59d184989077f51262e3fe449080520b6d37465",
+        "hair-haru-sidepart-v3.glb": "c6562920e1a2a038c5d057895aae7d195d34ed53e72879f9ec25e2b4e6ac28e1",
+        "hair-haru-swept-v2.glb": "aa73144d3ceb4f635fa9f7b6368ef0c5e07e808fe889c550334eac54b87e0d40"
+      },
+      "hairstyles": [
+        "haru-buzz-v3",
+        "haru-center-v2",
+        "haru-crop-v2",
+        "haru-short-v2",
+        "haru-sidepart-v3",
+        "haru-swept-v2"
+      ],
+      "body": true,
+      "generator": "Tripo Studio H3.1 (multi-view: front / left / back, ultra mesh, 4K texture, lighting removed); drawings by ChatGPT image generation"
+    },
+    "generic-human-b": {
+      "base": {
+        "path": "parts/assets/original-remake-v1/base/generic-human-b.glb",
+        "sha256": "15fff552ee550c51132c2b0d761f4cbb38101a63591ad1a823c14d16c3d4b33d"
+      },
+      "replaced": "21274ff31b71c047ae5f8ac9f4e6c8c6e7017ec36787a3ea91aa8fdc61146460",
+      "model": {
+        "path": "parts/assets/studio-runtime-v1/models/21274ff31b71c047ae5f8ac9f4e6c8c6e7017ec36787a3ea91aa8fdc61146460.glb",
+        "sha256": "21274ff31b71c047ae5f8ac9f4e6c8c6e7017ec36787a3ea91aa8fdc61146460",
+        "bytes": 19851228
+      },
+      "sources": {
+        "art-body-back.jpg": "3d47daf1487a08f80e98d672f9fd56075d373691e4a2d771750c842f847c6ff3",
+        "art-body-front.jpg": "b2567e69b27c0617ead087ba50780db10aa1665cb03370b351add1b2a93dadb9",
+        "art-body-side.jpg": "0195d3e5805a4fbb3b7de88189996d3943c4ea0337e1e404869b4cc5442fbfc0",
+        "art-hair-nagi-bob-v2-back.jpg": "5c52ff6e30f0cf610550e8f7c8a106866def862b67c5b5556c1a43beece4ef44",
+        "art-hair-nagi-bob-v2-front.jpg": "2dca0adcb05727432d0927bf85fb059accca14d6ddc817b95a8a77c012e8d2c7",
+        "art-hair-nagi-bob-v2-side.jpg": "83c009a1a2cba802991a9537134b97ff5162ecee3a7d9843e03278693cde362a",
+        "art-hair-nagi-long-v2-back.jpg": "f55c83f723c63d8fc5f5ab4502d1e91c85a0f88b1f9374ce739083c2bb35e079",
+        "art-hair-nagi-long-v2-front.jpg": "dd336cdab893d2d0ad0a857a33d3ccc27b5767379cf1ed02d22483f6f6fb4377",
+        "art-hair-nagi-long-v2-side.jpg": "fcba5802f9ae87866d30e55eab98d14ecec6ca29bda4e57bc2299e3da1b1bc33",
+        "art-hair-nagi-pixie-v2-back.jpg": "c8a5a14569e5803045effd316ccd3d16d21fc660ed59e1d1554b0cd6049705db",
+        "art-hair-nagi-pixie-v2-front.jpg": "14e70f19b8fd06bd0ae31ed583626331318059637d49fa7f7a1e5fa1868e6656",
+        "art-hair-nagi-pixie-v2-side.jpg": "f9fc0a9e6a7e56adc7d93c89436fa81f9c33176a956a22954a7224c6713b9b15",
+        "art-hair-nagi-pony-v2-back.jpg": "88cd9d9d692a2f2dbf5d4494420e63abe15baed3f5312fb5ca2bf353a2ac80e6",
+        "art-hair-nagi-pony-v2-front.jpg": "db230563a87eb6a934d568715e277e4a3091ca1bb2a0e19d190eda1fb880e155",
+        "art-hair-nagi-pony-v2-side.jpg": "d3dfe57bcc2db241b1f527defb42ab9d324b68eea2b1e03b96619841402521d7",
+        "body.glb": "77c77ae9ffc4954e9a41704d8be98decb0314f345a077c65bd8ae863f6b12fad",
+        "hair-nagi-bob-v2.glb": "fbc1a2d6e80d097af2433e0287fb81f7cb5e7263f0db0ec409837ace13daf8ae",
+        "hair-nagi-long-v2.glb": "faa2e28690a69837c04e8f36818b4445f387b12d7c0b8387ef9fcbb628d14227",
+        "hair-nagi-pixie-v2.glb": "3be50e8865c8134bf837d060edb1edc62a69df2b117660dffa5cf8465dfb9912",
+        "hair-nagi-pony-v2.glb": "c228143774da202ed880167f07a366640fa14ec472c063428b7d322c0d5243e7"
+      },
+      "hairstyles": [
+        "nagi-bob-v2",
+        "nagi-long-v2",
+        "nagi-pixie-v2",
+        "nagi-pony-v2"
+      ],
+      "body": true,
+      "generator": "Tripo Studio H3.1 (multi-view: front / left / back, ultra mesh, 4K texture, lighting removed); drawings by ChatGPT image generation"
+    }
+  }
+}

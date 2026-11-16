@@ -12,13 +12,15 @@ export const FACE_SHAPES = FANTASY_FACE_SHAPES;
 export const EYE_STYLES = ['almond', 'round', 'slender'] as const;
 export const MOUTH_STYLES = ['natural', 'smile', 'full'] as const;
 export const EXPRESSIONS = ['neutral', 'happy', 'angry', 'sad', 'relaxed', 'surprised', 'aa', 'ih', 'ou', 'ee', 'oh', 'blink', 'blinkLeft', 'blinkRight', 'lookLeft', 'lookRight', 'lookUp', 'lookDown'] as const;
+/** アメコミで選べる表情。ファンタジーと同じ 18 種（どのキャラクターも同じ。モーフは tools/character-maker/build-comic-face.py が作る） */
+export const COMIC_EXPRESSIONS = EXPRESSIONS;
 export const EXPRESSION_CHOICES: ReadonlyArray<{ id: typeof EXPRESSIONS[number]; label: string; group: 'emotion' | 'mouth' | 'blink' | 'gaze' }> = [
-  { id: 'neutral', label: 'ふつう', group: 'emotion' }, { id: 'happy', label: '笑顔', group: 'emotion' },
-  { id: 'angry', label: '怒り', group: 'emotion' }, { id: 'sad', label: '悲しみ', group: 'emotion' },
-  { id: 'relaxed', label: '穏やか', group: 'emotion' }, { id: 'surprised', label: '驚き', group: 'emotion' },
+  { id: 'neutral', label: '通常', group: 'emotion' }, { id: 'happy', label: '笑う', group: 'emotion' },
+  { id: 'angry', label: '怒る', group: 'emotion' }, { id: 'sad', label: '悲しむ', group: 'emotion' },
+  { id: 'relaxed', label: '穏やか', group: 'emotion' }, { id: 'surprised', label: '驚く', group: 'emotion' },
   { id: 'aa', label: 'あ', group: 'mouth' }, { id: 'ih', label: 'い', group: 'mouth' },
   { id: 'ou', label: 'う', group: 'mouth' }, { id: 'ee', label: 'え', group: 'mouth' }, { id: 'oh', label: 'お', group: 'mouth' },
-  { id: 'blink', label: '両目', group: 'blink' }, { id: 'blinkLeft', label: '左目', group: 'blink' }, { id: 'blinkRight', label: '右目', group: 'blink' },
+  { id: 'blink', label: '両目', group: 'blink' }, { id: 'blinkLeft', label: '左まばたき', group: 'blink' }, { id: 'blinkRight', label: '右まばたき', group: 'blink' },
   { id: 'lookLeft', label: '本人の左', group: 'gaze' }, { id: 'lookRight', label: '本人の右', group: 'gaze' },
   { id: 'lookUp', label: '上', group: 'gaze' }, { id: 'lookDown', label: '下', group: 'gaze' },
 ];
@@ -375,7 +377,7 @@ export function validateConfig(value: unknown): CharacterConfig {
   const expression = choice(input.expression === undefined ? 'neutral' : input.expression, EXPRESSIONS, '表情');
   const expressionStrength = numberInRange(input.expressionStrength === undefined ? 1 : input.expressionStrength, 0, 1, '表情の強さ');
   const weaponId = validateMakerWeaponId(input.weaponId);
-  if (style === 'comic' && expression !== 'neutral') throw new Error('この表情はファンタジースタイルで使えます。');
+  if (style === 'comic' && !(COMIC_EXPRESSIONS as readonly string[]).includes(expression)) throw new Error('この表情はファンタジースタイルで使えます。');
   return currentCharacterConfig({
     style,
     base: choice(input.base, BASES, '体のベース'),
@@ -417,7 +419,7 @@ export function validateDocument(value: unknown): CharacterMakerDocument {
 
 export function makeDocument(name: string, config: CharacterConfig): CharacterMakerDocument {
   const clean = validateConfig(config);
-  return validateDocument({ format: DOCUMENT_FORMAT, schemaVersion: clean.weaponId !== undefined ? 5 : clean.outfitPalette ? 4 : clean.style === 'comic' ? 1 : clean.expression === 'neutral' ? 2 : 3, assetVersion: clean.style === 'comic' ? ASSET_VERSION : FANTASY_ASSET_VERSION, name, config: clean });
+  return validateDocument({ format: DOCUMENT_FORMAT, schemaVersion: clean.weaponId !== undefined ? 5 : clean.outfitPalette ? 4 : clean.style === 'comic' ? (clean.expression === 'neutral' ? 1 : 4) : clean.expression === 'neutral' ? 2 : 3, assetVersion: clean.style === 'comic' ? ASSET_VERSION : FANTASY_ASSET_VERSION, name, config: clean });
 }
 
 /** Legacy appearance stays in v1–v4; an explicit weapon selection requires a v5-aware reader. */

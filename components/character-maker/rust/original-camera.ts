@@ -1,4 +1,4 @@
-// Studio のオリジナル 4 体のカメラ（今の版は components/character-maker/OriginalCharacterScene.tsx の OriginalCamera と drei の OrbitControls）を three なしで。
+// Studio のオリジナル 4 体のカメラ（前の three の版の OriginalCharacterScene.tsx の OriginalCamera と drei の OrbitControls。R7 で消した）を three なしで。
 // 正射影（R3F の orthographic の Canvas: left・right・top・bottom は canvas の CSS の大きさの半分、zoom で拡大）。数学・カメラ・回す操作は lib/engine。
 // 測り（今の姿の箱・頭の骨・構えの包み）は Rust の Stage から。Stage のカメラは透視だけなので、write で「同じ見え方になる、とても遠く・とても狭い fov の透視」に直して渡す。
 import { Box3, Matrix4, Vector3 } from '../../../lib/engine/math';

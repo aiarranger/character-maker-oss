@@ -5,6 +5,7 @@
 //   通常用（standard）は武器も握った手も無い。頭の骨の下に ＞＜ の節点（maker-hurt-face。scale 0）と板 2 枚。
 // 形は組み立てたときの値（部品・体型・髪）。表情は設定の値を静止のモーフの重みに（applyStaticFace）、顔の向きは頭の骨の静止の姿へ（applyStaticHeadTurn）。
 // 動作は手を入れていない元の動作（武器用: 構える・振る、通常用: 待機・歩く・走る）＋ hit（＞＜ の節点の scale と、目を閉じるモーフ）＋ face_hurt。
+// ゲーム用（game。魚群繚乱へ渡す）は通常用の木のまま、動作だけ 待機・歩く・走る＋構える・振る＋ゲーム用の動作＋hit・face_hurt。
 // 位置・法線は 32bit 浮動小数で書く（KHR_mesh_quantization を使わない。今の版の yukikau.jp 用の dequantize と同じ形）。
 use super::{Original, PartKind};
 use crate::export::{GlbWriter, MeshOut, TrackOut, UniqueNames, clip_tracks};
@@ -17,7 +18,7 @@ use std::collections::HashMap;
 use std::sync::Arc;
 
 const HURT_FACE_CLIP_DURATION: f32 = 1.0;
-const FACE_KEYS: [&str; 7] = ["blinkLeft", "blinkRight", "mouthClose", "aa", "ee", "ou", "happy"];
+const FACE_KEYS: [&str; 15] = ["blinkLeft", "blinkRight", "mouthClose", "aa", "ee", "ou", "happy", "angry", "sad", "surprised", "relaxed", "lookLeft", "lookRight", "lookUp", "lookDown"];
 
 fn blink_corrective(name: &str, closure: f64) -> Option<f64> { super::rig::blink_corrective(name, closure) }
 
@@ -25,18 +26,20 @@ fn blink_corrective(name: &str, closure: f64) -> Option<f64> { super::rig::blink
 fn static_face(o: &Original, names: &[String], init: &[f32]) -> Vec<f32> {
     let mut w = init.to_vec();
     w.resize(names.len(), 0.0);
+    // 気持ちの表情の口（元の口のモーフの組み合わせ）も、下見と同じに書く
+    let face = o.face.with_emotion_mouth(1.0, o.character == "generic-robot");
     for (i, name) in names.iter().enumerate() {
         if i >= w.len() { break; }
         if let Some(rest) = name.strip_prefix("mouthCloseInbetween") && let Ok(c) = rest.parse::<f64>() && [25.0, 50.0, 75.0].contains(&c) {
-            w[i] = (1.0 - (o.face.mouth_close - c / 100.0).abs() / 0.25).max(0.0) as f32;
+            w[i] = (1.0 - (face.mouth_close - c / 100.0).abs() / 0.25).max(0.0) as f32;
             continue;
         }
-        let blink = if name.starts_with("blinkLeft") { o.face.blink_left } else { o.face.blink_right };
+        let blink = if name.starts_with("blinkLeft") { face.blink_left } else { face.blink_right };
         if let Some(c) = blink_corrective(name, blink) { w[i] = c as f32; continue; }
         let arc = name.ends_with("Arc");
         let key = name.strip_suffix("Arc").unwrap_or(name);
         if !FACE_KEYS.contains(&key) { continue; }
-        let f = o.face.get(key).unwrap_or(0.0);
+        let f = face.get(key).unwrap_or(0.0);
         w[i] = (if arc { (std::f64::consts::PI * f).sin() } else { f }) as f32;
     }
     w
@@ -71,22 +74,29 @@ fn sword_node(w: &mut GlbWriter, kit: &Kit, n: NodeId, parent: usize, wp: &crate
     id
 }
 
+/// ゲーム用の動作の名前（lib/character-maker/actions.ts と同じ）
+const ACTIONS: [&str; 16] = ["jump", "dodge", "restDown", "restLoop", "restUp", "banzai", "greet", "spinKick", "eat", "skill", "punch", "interact", "down", "dance", "talk", "crouch"];
+
 pub fn export(o: &mut Original, kit: &mut Kit, v: &Value) -> Result<Vec<u8>, String> {
     let armed = v["variant"].as_str() == Some("armed");
+    // ゲーム用（魚群繚乱。docs/gyogun-spec.md）: 待機・歩く・走ると構える・振るを 1 つの GLB に入れる。武器と握った手は入れない（武器はゲームが持たせる）
+    let game = v["variant"].as_str() == Some("game");
     let g: Arc<Glb> = o.g.clone();
     let motions: Vec<String> = v["motions"].as_array().map(|a| a.iter().filter_map(|x| x.as_str().map(str::to_string)).collect()).unwrap_or_else(|| ["idle", "walk", "run", "sword_idle", "sword_attack"].iter().map(|s| s.to_string()).collect());
     // ---- 動作の選び（selectOriginalGlbClips） ----
     let glb_count = g.animations.len();
     let candidates: Vec<&Arc<Clip>> = o.raw_clips.iter().enumerate().filter(|(i, c)| {
         let from_glb = *i < glb_count;
-        if armed { !(from_glb && ["sword_idle", "sword_attack", "hit"].contains(&c.name.as_str())) }
-        else { if from_glb { c.name != "hit" } else { c.name == "hit" } }
+        if armed || game { !(from_glb && ["sword_idle", "sword_attack", "hit"].contains(&c.name.as_str())) }
+        else { if from_glb { c.name != "hit" } else { c.name == "hit" || ACTIONS.contains(&c.name.as_str()) } }
     }).map(|(_, c)| c).collect();
-    let families: Vec<&str> = (if armed { vec!["sword_idle", "sword_attack"] } else { vec!["idle", "walk", "run"] }).into_iter().filter(|f| motions.iter().any(|m| m == f)).collect();
+    let families: Vec<&str> = (if game { vec!["idle", "walk", "run", "sword_idle", "sword_attack"] } else if armed { vec!["sword_idle", "sword_attack"] } else { vec!["idle", "walk", "run"] }).into_iter().filter(|f| motions.iter().any(|m| m == f)).collect();
+    // ゲーム用の動作（あれば全部。通常用・武器用のどちらにも入れる）
+    let actions: Vec<&str> = ACTIONS.iter().copied().filter(|f| candidates.iter().any(|c| c.name == *f)).collect();
     let has = |name: &str, family: &str| name == family || name.ends_with(&format!(":{family}"));
     let missing = families.iter().chain(std::iter::once(&"hit")).any(|f| candidates.iter().filter(|c| has(&c.name, f)).count() != 1);
-    if families.is_empty() || missing { return Err(format!("{}GLBに必要な動作が揃っていません。", if armed { "武器用" } else { "通常用" })); }
-    let selected: Vec<Arc<Clip>> = families.iter().flat_map(|f| candidates.iter().filter(|c| has(&c.name, f)).map(|c| (*c).clone()).collect::<Vec<_>>()).collect();
+    if families.is_empty() || missing { return Err(format!("{}GLBに必要な動作が揃っていません。", if game { "ゲーム用" } else if armed { "武器用" } else { "通常用" })); }
+    let selected: Vec<Arc<Clip>> = families.iter().chain(actions.iter()).flat_map(|f| candidates.iter().filter(|c| has(&c.name, f)).map(|c| (*c).clone()).collect::<Vec<_>>()).collect();
     let hit = candidates.iter().find(|c| c.name == "hit").map(|c| (*c).clone()).ok_or("のけぞりの動作がありません。")?;
     let mut clip_names: Vec<String> = selected.iter().map(|c| c.name.clone()).collect();
     clip_names.push("hit".into());

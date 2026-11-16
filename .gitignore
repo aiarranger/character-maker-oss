@@ -1,6 +1,9 @@
 node_modules/
 .next/
 out/
+# 公開用の組み立ての写しと、wrangler の手元の控え（tools/gyogun-site.mjs・wrangler.jsonc）
+.site-build/
+.wrangler/
 .pack/
 *.tgz
 *.log
@@ -21,3 +24,8 @@ next-env.d.ts
 .claude/
 /public/maker-stage/
 /rust/target/
+/public/gyogun/
+/games/gyogun/rust/target/
+.snaps/
+# 魚群繚乱の試験が読む Studio のキャラ ZIP（ブラウザで作る。作り方は games/gyogun/README.md）
+/games/gyogun/rust/game/tests/fixtures/studio/

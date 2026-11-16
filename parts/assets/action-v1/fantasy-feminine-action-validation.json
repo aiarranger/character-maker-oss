@@ -1,0 +1,238 @@
+{
+  "input": {
+    "path": "parts/sources/fantasy-v1/Victoria_Rubin.vrm",
+    "bytes": 15321932,
+    "sha256": "ad5750ce944b708155abb7ac6807e19d7f5e73a939f0ee32daf0539acfca57c0"
+  },
+  "sourceSHA256": "69591853d817488edaa8fd9bf8fc1d821eaeaf789f8627b3cd23b41c4ed67997",
+  "pelvisHeightRatio": 1.1014959491440555,
+  "clips": {
+    "jump": {
+      "segments": [
+        [
+          "Jump_Start"
+        ],
+        [
+          "Jump_Loop",
+          0,
+          0.28
+        ],
+        [
+          "Jump_Land"
+        ]
+      ],
+      "duration": 2.86667,
+      "samples": 44,
+      "tracks": 53,
+      "worldRotationError": 5.960464477539063e-8,
+      "floorY": [
+        -0.08553,
+        0.24391
+      ]
+    },
+    "dodge": {
+      "segments": [
+        [
+          "Roll"
+        ]
+      ],
+      "duration": 1.46667,
+      "samples": 23,
+      "tracks": 53,
+      "worldRotationError": 5.960464477539063e-8,
+      "floorY": [
+        -0.05828,
+        0.04022
+      ]
+    },
+    "skill": {
+      "segments": [
+        [
+          "Spell_Simple_Enter"
+        ],
+        [
+          "Spell_Simple_Shoot"
+        ],
+        [
+          "Spell_Simple_Idle_Loop",
+          0,
+          0.5
+        ],
+        [
+          "Spell_Simple_Exit"
+        ]
+      ],
+      "duration": 1.96667,
+      "samples": 32,
+      "tracks": 53,
+      "worldRotationError": 5.16191365590357e-8,
+      "floorY": [
+        -0.02119,
+        -0.01833
+      ]
+    },
+    "punch": {
+      "segments": [
+        [
+          "Punch_Jab"
+        ],
+        [
+          "Punch_Cross"
+        ]
+      ],
+      "duration": 1.86667,
+      "samples": 29,
+      "tracks": 53,
+      "worldRotationError": 5.16191365590357e-8,
+      "floorY": [
+        -0.04244,
+        -0.03572
+      ]
+    },
+    "down": {
+      "segments": [
+        [
+          "Death01"
+        ]
+      ],
+      "duration": 2.4,
+      "samples": 37,
+      "tracks": 53,
+      "worldRotationError": 5.960464477539063e-8,
+      "floorY": [
+        -0.17399,
+        -0.01833
+      ]
+    },
+    "dance": {
+      "segments": [
+        [
+          "Dance_Loop"
+        ]
+      ],
+      "duration": 1,
+      "samples": 16,
+      "tracks": 53,
+      "worldRotationError": 5.960464477539063e-8,
+      "floorY": [
+        -0.00854,
+        0.00862
+      ]
+    },
+    "talk": {
+      "segments": [
+        [
+          "Idle_Talking_Loop"
+        ]
+      ],
+      "duration": 2.93333,
+      "samples": 45,
+      "tracks": 53,
+      "worldRotationError": 5.960464477539063e-8,
+      "floorY": [
+        -0.01909,
+        -0.01833
+      ]
+    },
+    "crouch": {
+      "segments": [
+        [
+          "Crouch_Idle_Loop"
+        ]
+      ],
+      "duration": 2.93333,
+      "samples": 45,
+      "tracks": 53,
+      "worldRotationError": 5.16191365590357e-8,
+      "floorY": [
+        -0.04626,
+        -0.04184
+      ]
+    },
+    "interact": {
+      "segments": [
+        [
+          "Interact"
+        ]
+      ],
+      "duration": 2,
+      "samples": 31,
+      "tracks": 53,
+      "worldRotationError": 5.16191365590357e-8,
+      "floorY": [
+        -0.0191,
+        -0.01687
+      ]
+    },
+    "banzai": {
+      "segments": "posed",
+      "duration": 2.4,
+      "samples": 37,
+      "tracks": 53,
+      "worldRotationError": 5.960464477539063e-8,
+      "floorY": [
+        -0.0328,
+        -0.01811
+      ]
+    },
+    "greet": {
+      "segments": "posed",
+      "duration": 2.2,
+      "samples": 34,
+      "tracks": 53,
+      "worldRotationError": 5.16191365590357e-8,
+      "floorY": [
+        -0.01811,
+        -0.01811
+      ]
+    },
+    "restDown": {
+      "segments": "posed",
+      "duration": 1.2,
+      "samples": 19,
+      "tracks": 53,
+      "worldRotationError": 5.16191365590357e-8,
+      "floorY": "snap"
+    },
+    "restLoop": {
+      "segments": "posed",
+      "duration": 3.2,
+      "samples": 49,
+      "tracks": 53,
+      "worldRotationError": 5.16191365590357e-8,
+      "floorY": "snap"
+    },
+    "restUp": {
+      "segments": "posed",
+      "duration": 1.2,
+      "samples": 19,
+      "tracks": 53,
+      "worldRotationError": 5.16191365590357e-8,
+      "floorY": "snap"
+    },
+    "eat": {
+      "segments": "posed",
+      "duration": 4,
+      "samples": 61,
+      "tracks": 53,
+      "worldRotationError": 5.960464477539063e-8,
+      "floorY": "snap"
+    },
+    "spinKick": {
+      "segments": "posed",
+      "duration": 1.13333,
+      "samples": 18,
+      "tracks": 53,
+      "worldRotationError": 5.16191365590357e-8,
+      "floorY": [
+        -0.08759,
+        -0.01811
+      ]
+    }
+  },
+  "output": {
+    "path": "public/maker-assets/fantasy-feminine-action-motions.json",
+    "bytes": 1406984,
+    "sha256": "e511dd313e2a7ea46c463d2d8b6851cba68d0e65e8d5065a5701b2e612b00c47"
+  }
+}

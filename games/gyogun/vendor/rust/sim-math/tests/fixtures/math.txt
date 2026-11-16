@@ -1,0 +1,7 @@
+# node v24.22.1 arm64 v8 13.6.233.17-node.58 n=2000000
+sin 899b2830
+cos 56834873
+atan2 b4960f60
+hypot 3684074e
+exp f03df63c
+chain 2c0afb06

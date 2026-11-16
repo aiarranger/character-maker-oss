@@ -1,0 +1,40 @@
+{
+  "version": "comic-skin-v1",
+  "settings": {
+    "fineRadius": 3.5,
+    "fineKeep": [
+      0.03,
+      0.075
+    ],
+    "wideRadius": 16,
+    "wideDark": 0.2,
+    "wideAmount": 0.5
+  },
+  "license": "CC0 (derived from Quaternius Universal Base Characters)",
+  "assets": [
+    {
+      "base": "feminine",
+      "input": {
+        "path": "parts/assets/v1/feminine.glb",
+        "sha256": "dc2c09a99b8922bab4b8042ccb8f5bc9484a2ff00ebe2bb2a22eb9aeeeb87c95"
+      },
+      "output": {
+        "path": "parts/assets/comic-skin-v1/feminine-soft-skin.png",
+        "bytes": 385936,
+        "sha256": "612f68dcbe7c71731398dc9170851dc6d69cb4eb8cf1e23fca3c21ed029f6ce7"
+      }
+    },
+    {
+      "base": "masculine",
+      "input": {
+        "path": "parts/assets/v1/masculine.glb",
+        "sha256": "16c878b8d1ce17f61fb22c54a19e40da8062a3be9db2181f7aead1ae9147b2e0"
+      },
+      "output": {
+        "path": "parts/assets/comic-skin-v1/masculine-soft-skin.png",
+        "bytes": 405593,
+        "sha256": "648ae4112f0c7cdec94f77cf6ef92c5efd61ea543a98ee8ddc36971ba65b057d"
+      }
+    }
+  ]
+}

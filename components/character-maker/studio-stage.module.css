@@ -16,6 +16,16 @@
   box-shadow: inset 0 0 120px rgba(23, 21, 28, .06);
 }
 
+/* 撮影スタジオの紙のホリゾントの写真（無彩色）。キャラごとの色の上に乗算で重ね、光のたまりと壁から床への落ち込みを出す。
+   画像は parts/assets/studio-backdrop-v1（生成した画像。docs/game-motions-spec.md）。 */
+.backdrop::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("/maker-assets/studio-backdrop.jpg") center bottom / cover no-repeat;
+  mix-blend-mode: multiply;
+}
+
 /* Paper grain: feTurbulence, multiplied at 5%. */
 .backdrop::after {
   content: "";
@@ -170,8 +180,8 @@
 /* M8: first-run hint, bottom-left. */
 .hint {
   position: absolute;
-  /* Inside the bottom-left corner mark. */
-  left: 34px;
+  /* Inside the bottom-left corner mark. 「魚群繚乱で遊ぶ」のカードが出ている間は、その右（character-studio.module.css の --gyogun-hint-shift）。 */
+  left: calc(34px + var(--gyogun-hint-shift, 0px));
   bottom: 34px;
   display: inline-flex;
   align-items: center;

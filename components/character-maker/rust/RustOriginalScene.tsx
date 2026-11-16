@@ -1,6 +1,6 @@
 'use client';
 
-// オリジナル 4 体の Studio の下見を Rust の Stage で描く（今の版は ../OriginalCharacterScene.tsx。props は同じ）。
+// オリジナル 4 体の Studio の下見を Rust の Stage で描く（前の three の版は OriginalCharacterScene.tsx。R7 で消した。props は同じ）。
 // 模型（組み立て・体型・部品・髪・武器・＞＜・動き・測り）は Rust（rust/game/src/original.rs）、カメラ（正射影）と回す操作と床の動きは three なしの TS。docs/rust-stage-plan.md
 import { useEffect, useRef, useState } from 'react';
 import { Box3, Matrix4, Vector3 } from '../../../lib/engine/math';
@@ -66,7 +66,7 @@ export default function RustOriginalScene(props: Props) {
     const el = canvas.current, holder = root.current;
     if (!el || !holder) return;
     let live = true, made: MakerStage | null = null;
-    createMakerStage(el, { dpr: Math.min(Math.max(devicePixelRatio, 1), 2) }).then(s => {
+    createMakerStage(el, { dpr: Math.min(Math.max(devicePixelRatio, 1), 2), look: 'studio' }).then(s => {
       if (!live) { s.free(); return; }
       made = s;
       sendFloorShadow(s);
@@ -183,6 +183,9 @@ export default function RustOriginalScene(props: Props) {
     const cam = new Float64Array(11);
     const floor = new StageFloorMotion();
     let floorKey = '';
+    // 画素を読む前に描き直す口（WebGPU の canvas は描いた直後の同じ処理の中でしか読めない。見本画像・切り替えの残像。RustMakerScene と同じ）
+    const el0 = canvas.current as (HTMLCanvasElement & { __makerRedraw?: () => void }) | null;
+    if (el0) el0.__makerRedraw = () => { const r = rig.current; if (!r) return; r.write(cam); stage.draw(cam); };
     const tick = (now: number) => {
       raf = requestAnimationFrame(tick);
       const delta = Math.max(0, (now - last) / 1000); last = now;

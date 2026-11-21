@@ -1,7 +1,10 @@
 // 浜辺の魚（docs/gyogun-spec.md）: Fish Kit（CC0。public/models/fish/）の写真の魚を、種類ごとのインスタンス描画で泳がせる。
 // 遊びの計算（sim）の敵の種類ごとに魚を当てる。うねりは shaders/fish.wgsl。
 // 大将（黄肌大王）も同じシェーダーで描く 1 匹の巨大なキハダ（FishBoss）。
+#[path = "fish_rig.rs"]
+mod rig;
 use crate::assets::load_glb;
+use serde_json::Value;
 use crate::geom::{Geo, Vertex};
 use crate::gfx::{hex, vert_layout, Gfx, MeshBuf, Pipe};
 use crate::view::materials::ORDER_OPAQUE;
@@ -43,34 +46,61 @@ pub struct FishInst {
     model: [[f32; 4]; 4],
     fx: [f32; 4],
     swim: [f32; 4],
+    face: [f32; 4], // 時間、下あごの開き（最大値の比）、えらの角度、個体の位相
 }
-const FISH_ATTRS: [wgpu::VertexAttribute; 6] = wgpu::vertex_attr_array![8 => Float32x4, 9 => Float32x4, 10 => Float32x4, 11 => Float32x4, 12 => Float32x4, 13 => Float32x4];
+const FISH_ATTRS: [wgpu::VertexAttribute; 7] = wgpu::vertex_attr_array![8 => Float32x4, 9 => Float32x4, 10 => Float32x4, 11 => Float32x4, 12 => Float32x4, 13 => Float32x4, 14 => Float32x4];
 fn fish_layout() -> wgpu::VertexBufferLayout<'static> {
     wgpu::VertexBufferLayout { array_stride: std::mem::size_of::<FishInst>() as u64, step_mode: wgpu::VertexStepMode::Instance, attributes: &FISH_ATTRS }
 }
 
 /// 模型と、そのうねりの形（Fish Kit の glb の swim: env = 包絡, lambda = 波長）
-struct Model { geo: Geo, tex: (u32, u32, Vec<u8>), env: [f32; 4] }
+struct Model {
+    geo: Geo,
+    tex: (u32, u32, Vec<u8>),
+    parts: Vec<rig::Parts>,
+    center_len: [f32; 4],
+    env: [f32; 4],
+    jaw: [f32; 4],
+    upper: [f32; 4],
+    upper2: [f32; 4],
+    eye_fin: [f32; 4],
+    fin_style: [f32; 4],
+}
+
+fn numbers<const N: usize>(value: &Value, fallback: [f32; N]) -> [f32; N] {
+    std::array::from_fn(|i| value[i].as_f64().map(|n| n as f32).unwrap_or(fallback[i]))
+}
 
 /// 魚の glb を読み、口先を +Z・長さ 1・体の真ん中を原点にそろえる（Fish Kit の模型は口先が +X・メートル）
 fn load_fish(name: &str) -> Result<Model, String> {
     let g = load_glb(&path(name))?;
-    let ni = g.nodes.iter().position(|n| n.mesh.is_some()).ok_or_else(|| format!("{name}: メッシュが無い"))?;
-    let p = g.meshes[g.nodes[ni].mesh.unwrap()].primitives.first().ok_or_else(|| format!("{name}: 面が無い"))?;
+    let node = g.nodes.iter().find(|n| n.mesh.is_some()).ok_or_else(|| format!("{name}: メッシュが無い"))?;
+    let mesh = node.mesh.unwrap();
+    let p = g.meshes[mesh].primitives.first().ok_or_else(|| format!("{name}: 面が無い"))?;
     let (lo, hi) = p.positions.iter().fold((Vec3::splat(f32::MAX), Vec3::splat(f32::MIN)), |(a, b), q| (a.min(Vec3::from(*q)), b.max(Vec3::from(*q))));
-    let c = (lo + hi) * 0.5;
+    let center = (lo + hi) * 0.5;
     let len = (hi.x - lo.x).max(1e-4);
-    // +X → +Z（y 軸で −90°）: (x, y, z) → (−z, y, x)
-    let turn = |v: Vec3| Vec3::new(-v.z, v.y, v.x);
-    let v = (0..p.positions.len()).map(|k| Vertex {
-        pos: (turn(Vec3::from(p.positions[k]) - c) / len).to_array(),
-        normal: turn(Vec3::from(p.normals.get(k).copied().unwrap_or([0.0, 1.0, 0.0]))).normalize_or_zero().to_array(),
-        uv: p.uvs.get(k).copied().unwrap_or([0.0, 0.0]),
-        color: [1.0; 4], sway: 0.0,
+    let conf = &node.extras["fishRig"];
+    let parts = if conf.is_object() {
+        rig::vertices(p)?
+    } else { vec![rig::Parts::zeroed(); p.positions.len()] };
+    let v = (0..p.positions.len()).map(|i| Vertex {
+        pos: p.positions[i], normal: p.normals[i], uv: p.uvs[i], color: [1.0; 4], sway: 0.0,
     }).collect();
     let tex = p.material.and_then(|m| g.materials[m].texture).map(|t| { let im = &g.images[t]; (im.width, im.height, im.rgba.clone()) }).ok_or_else(|| format!("{name}: 模様が無い"))?;
-    // うねりの形は Fish Kit のアジの値（どの魚もほぼ同じ。尾の付け根から先が大きく振れる）
-    Ok(Model { geo: Geo { v, i: p.indices.clone() }, tex, env: [0.015, -0.07, 0.16, 1.0] })
+    let swim = &node.extras["swim"];
+    let env = numbers(&swim["env"], [0.015, -0.07, 0.16]);
+    let lower = numbers(&conf["uMouthShape"], [0.0; 4]);
+    let eye = numbers(&conf["uEyeBulge"], [1.0, 0.0]);
+    Ok(Model {
+        geo: Geo { v, i: p.indices.clone() }, tex, parts,
+        center_len: [center.x, center.y, center.z, len],
+        env: [env[0], env[1], env[2], swim["lambda"].as_f64().unwrap_or(1.0).max(0.1) as f32],
+        jaw: [lower[0], lower[1], conf["uMouthClose"].as_f64().unwrap_or(0.) as f32, conf["uPectRest"].as_f64().unwrap_or(0.) as f32],
+        upper: numbers(&conf["uMouthUpper"], [0.; 4]), upper2: numbers(&conf["uMouthUpper2"], [0., 1., 0., 0.]),
+        fin_style: [conf["finFlutter"].as_f64().unwrap_or(0.008) as f32, conf["finFlag"].as_f64().unwrap_or(0.035) as f32, conf["finMove"].as_f64().unwrap_or(1.) as f32, 0.],
+        eye_fin: [eye[0], eye[1], conf["foldMax"].as_f64().unwrap_or(1.) as f32, if conf["still"].as_bool().unwrap_or(false) { 1. } else { 0. }],
+    })
 }
 
 struct Pipes { pipe: wgpu::RenderPipeline, line: wgpu::RenderPipeline, shadow: wgpu::RenderPipeline, kind_layout: wgpu::BindGroupLayout }
@@ -79,7 +109,11 @@ fn pipes(gfx: &Gfx) -> Pipes {
     let kind_layout = gfx.device.create_bind_group_layout(&wgpu::BindGroupLayoutDescriptor { label: Some("fish kind"), entries: &[wgpu::BindGroupLayoutEntry {
         binding: 0, visibility: wgpu::ShaderStages::VERTEX_FRAGMENT, ty: wgpu::BindingType::Buffer { ty: wgpu::BufferBindingType::Uniform, has_dynamic_offset: false, min_binding_size: None }, count: None,
     }] });
-    let vb = [vert_layout(), fish_layout()];
+    let parts = wgpu::VertexBufferLayout {
+        array_stride: std::mem::size_of::<rig::Parts>() as u64, step_mode: wgpu::VertexStepMode::Vertex,
+        attributes: &wgpu::vertex_attr_array![5 => Float32x4, 6 => Float32x4, 7 => Float32x3],
+    };
+    let vb = [vert_layout(), fish_layout(), parts];
     let layouts = [&gfx.globals_layout, &gfx.shadow_layout, &gfx.tex_layout, &kind_layout];
     // ひれは切り抜いた板なので両面
     let pipe = Pipe::scene("fish", &shader, "vs", "fs", &layouts, &vb).double().build(&gfx.device);
@@ -93,6 +127,7 @@ fn pipes(gfx: &Gfx) -> Pipes {
 
 struct Batch {
     mesh: MeshBuf,
+    parts: wgpu::Buffer,
     tex: wgpu::BindGroup,
     kind_bg: wgpu::BindGroup,
     inst: wgpu::Buffer,
@@ -101,10 +136,14 @@ struct Batch {
 }
 fn batch(gfx: &Gfx, p: &Pipes, m: &Model, sparkle: [f32; 3], captain: bool, cap: usize) -> Batch {
     let view = gfx.texture(m.tex.0, m.tex.1, &m.tex.2, true);
-    let u: [f32; 12] = [sparkle[0], sparkle[1], sparkle[2], 1.0, if captain { 1.0 } else { 0.0 }, 0.0, 0.0, 0.0, m.env[0], m.env[1], m.env[2], m.env[3]];
+    let u = [[sparkle[0], sparkle[1], sparkle[2], 1.0], [if captain { 1.0 } else { 0.0 }, 0., 0., 0.], m.env,
+        m.center_len, m.jaw, m.upper, m.upper2, m.eye_fin, m.fin_style];
+    let parts = gfx.device.create_buffer_init(&wgpu::util::BufferInitDescriptor {
+        label: Some("fish anatomy"), contents: bytemuck::cast_slice(&m.parts), usage: wgpu::BufferUsages::VERTEX,
+    });
     let ub = gfx.device.create_buffer_init(&wgpu::util::BufferInitDescriptor { label: Some("fish kind"), contents: bytemuck::cast_slice(&u), usage: wgpu::BufferUsages::UNIFORM });
     let kind_bg = gfx.device.create_bind_group(&wgpu::BindGroupDescriptor { label: None, layout: &p.kind_layout, entries: &[wgpu::BindGroupEntry { binding: 0, resource: ub.as_entire_binding() }] });
-    Batch { mesh: gfx.mesh(&m.geo), tex: gfx.tex_bind(&view), kind_bg, inst: gfx.vbuf((cap * std::mem::size_of::<FishInst>()) as u64), data: Vec::with_capacity(cap), cap }
+    Batch { mesh: gfx.mesh(&m.geo), parts, tex: gfx.tex_bind(&view), kind_bg, inst: gfx.vbuf((cap * std::mem::size_of::<FishInst>()) as u64), data: Vec::with_capacity(cap), cap }
 }
 fn draw_batch(gfx: &Gfx, pass: &mut wgpu::RenderPass<'_>, p: &Pipes, b: &Batch) {
     if b.data.is_empty() { return; }
@@ -114,6 +153,7 @@ fn draw_batch(gfx: &Gfx, pass: &mut wgpu::RenderPass<'_>, p: &Pipes, b: &Batch) 
     pass.set_bind_group(3, &b.kind_bg, &[]);
     pass.set_vertex_buffer(0, b.mesh.vb.slice(..));
     pass.set_vertex_buffer(1, b.inst.slice(..));
+    pass.set_vertex_buffer(2, b.parts.slice(..));
     pass.set_index_buffer(b.mesh.ib.slice(..), wgpu::IndexFormat::Uint32);
     pass.draw_indexed(0..b.mesh.n, 0, 0..b.data.len() as u32);
     pass.set_pipeline(&p.line);
@@ -127,6 +167,7 @@ fn shadow_batch(pass: &mut wgpu::RenderPass<'_>, p: &Pipes, b: &Batch, empty: &w
     pass.set_bind_group(3, &b.kind_bg, &[]);
     pass.set_vertex_buffer(0, b.mesh.vb.slice(..));
     pass.set_vertex_buffer(1, b.inst.slice(..));
+    pass.set_vertex_buffer(2, b.parts.slice(..));
     pass.set_index_buffer(b.mesh.ib.slice(..), wgpu::IndexFormat::Uint32);
     pass.draw_indexed(0..b.mesh.n, 0, 0..b.data.len() as u32);
 }
@@ -164,7 +205,12 @@ impl School {
         let Some((_, b)) = self.batches.iter_mut().find(|b| b.0 == e.kind) else { return };
         if b.data.len() >= b.cap { return; }
         let (m, swim) = pose(e, time);
-        b.data.push(FishInst { model: m.to_cols_array_2d(), fx, swim });
+        let bite = match e.state {
+            EnemyState::Windup => (e.st as f32 / 0.8).clamp(0., 1.) * 0.65,
+            EnemyState::Strike => (1. - e.st as f32 / 0.35).clamp(0., 1.),
+            _ => 0.,
+        };
+        b.data.push(FishInst { model: m.to_cols_array_2d(), fx, swim, face: face_motion(time, e.id as f32, bite) });
     }
     pub fn upload(&self, gfx: &Gfx) {
         for (_, b) in &self.batches { if !b.data.is_empty() { gfx.queue.write_buffer(&b.inst, 0, bytemuck::cast_slice(&b.data)); } }
@@ -175,6 +221,13 @@ impl School {
         for (_, b) in &self.batches { draw_batch(gfx, pass, &self.p, b); }
     }
     pub fn drawn(&self) -> usize { self.batches.iter().map(|b| b.1.data.len()).sum() }
+}
+
+/// Fish Kit の呼吸は毎秒 0.8 回。えらと下あごは位相をずらし、攻撃や咆哮ではさらに口を開く。
+fn face_motion(time: f32, id: f32, bite: f32) -> [f32; 4] {
+    let clock = time + id * 0.731;
+    let phase = clock * (TAU * 0.8);
+    [clock, (0.3 * (1. - (phase + 1.4).cos())).max(bite), 0.175 * (1. - phase.cos()), (id * 0.618034).fract()]
 }
 
 /// 1 匹の姿勢（体の真ん中の位置・向き・大きさ）と、うねり (cyc, 振れ, 曲げ, 0)
@@ -352,7 +405,8 @@ impl FishBoss {
         let shake = (hit_t * 80.0).sin() * 0.1 * (1.0 - hit_t / 0.15).max(0.0);
         let q = Quat::from_euler(EulerRot::YXZ, self.yaw as f32 + yaw_off, rx, rz + shake);
         self.model = Mat4::from_scale_rotation_translation(Vec3::splat(BOSS_LEN), q, self.pos);
-        let inst = FishInst { model: self.model.to_cols_array_2d(), fx: [flash, angry * 0.5, 0.0, 1.0], swim: [self.t * freq * 0.7, amp, bend, 0.0] };
+        let bite = if b.state == BossState::Roar { settle(b.st as f32 / 0.5) } else { 0. };
+        let inst = FishInst { face: face_motion(self.t, 5.5, bite), model: self.model.to_cols_array_2d(), fx: [flash, angry * 0.5, 0.0, 1.0], swim: [self.t * freq * 0.7, amp, bend, 0.0] };
         self.b.data.clear();
         self.b.data.push(inst);
         gfx.queue.write_buffer(&self.b.inst, 0, bytemuck::bytes_of(&inst));

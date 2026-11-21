@@ -16,6 +16,8 @@ pub struct Primitive {
     pub colors: Vec<[f32; 4]>,
     /// aisns の草木の揺れ（_SWAY）
     pub sway: Vec<f32>,
+    /// その他のアプリ固有の頂点属性（成分数と値）
+    pub custom: std::collections::BTreeMap<String, (usize, Vec<f32>)>,
     pub joints: Vec<[u16; 4]>,
     pub weights: Vec<[f32; 4]>,
     pub indices: Vec<u32>,
@@ -532,6 +534,13 @@ fn read_primitive(b: &Buffers, pr: &Value) -> Primitive {
         p.colors = if c == 4 { v.chunks_exact(4).map(|x| [x[0], x[1], x[2], x[3]]).collect() } else { v.chunks_exact(3).map(|x| [x[0], x[1], x[2], 1.0]).collect() };
     }
     if let Some(i) = acc("_SWAY").or_else(|| acc("_sway")) { p.sway = b.floats(i).1; }
+    if let Some(attributes) = at.as_object() {
+        for (name, index) in attributes {
+            if name.starts_with('_') && !name.eq_ignore_ascii_case("_SWAY") {
+                if let Some(i) = index.as_u64() { p.custom.insert(name.clone(), b.floats(i as usize)); }
+            }
+        }
+    }
     if let Some(i) = acc("JOINTS_0") { p.joints = b.ints(i).chunks_exact(4).map(|x| [x[0] as u16, x[1] as u16, x[2] as u16, x[3] as u16]).collect(); }
     if let Some(i) = acc("WEIGHTS_0") { p.weights = b.floats(i).1.chunks_exact(4).map(|x| [x[0], x[1], x[2], x[3]]).collect(); }
     p.indices = match pr.get("indices").and_then(Value::as_u64) {

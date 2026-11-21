@@ -265,12 +265,17 @@ impl RunnerView {
 
     /// 選ぶ画面・表彰: その場で動かす
     #[allow(clippy::too_many_arguments)]
-    pub fn pose(&mut self, kit: &mut Kit, x: f64, y: f64, z: f64, yaw: f64, dt: f64, now: f64, speed: f64) {
+    pub fn pose(&mut self, kit: &mut Kit, x: f64, y: f64, z: f64, yaw: f64, dt: f64, now: f64, speed: f64, selection: bool) {
         let p = Vec3::new(x as f32, y as f32, z as f32);
         kit.scene[self.holder].visible = true;
         kit.scene[self.holder].position = p;
         // 魚・イカは体が長いので、選ぶ画面・表彰では斜め前を向けて全身を見せる
-        let turn = if self.creature.is_some() { CREATURE_POSE_TURN } else { 0.0 };
+        let turn = match &self.creature {
+            // 通常の選択画面で、片側の目・えらぶた・口がいっしょに見える角度にする。
+            Some(Creature::Fish(_)) if selection => -1.65,
+            Some(_) => CREATURE_POSE_TURN,
+            None => 0.0,
+        };
         kit.scene[self.holder].rotation = Rot::y((yaw + turn) as f32);
         kit.scene[self.lean].rotation = Rot::euler(0.0, 0.0, 0.0);
         kit.scene[self.lean].scale = Vec3::ONE;
@@ -279,7 +284,7 @@ impl RunnerView {
         kit.scene[self.tag].visible = false;
         if self.creature.is_some() {
             let joy = self.mood == Some(Mood::Joy);
-            self.drive_creature(kit, dt, now, Drive { speed, joy, ..Default::default() });
+            self.drive_creature(kit, dt, now, Drive { speed, joy, showcase: selection, ..Default::default() });
         } else if kit.has_actor(self.actor) {
             let world = kit.actor_world(self.actor);
             let a = kit.actor_mut(self.actor);
@@ -373,7 +378,7 @@ impl RunnerView {
             let joy = r.finished && r.place <= 3;
             let hurt = if r.launch > 0.0 { 1.0 } else if r.stumble > 0.0 { 0.7 } else { 0.0 };
             self.mood = Some(if joy { Mood::Joy } else { Mood::Calm });
-            self.drive_creature(kit, dt, now, Drive { speed: r.speed, dash: r.dash_k, air: r.air, hurt, joy });
+            self.drive_creature(kit, dt, now, Drive { speed: r.speed, dash: r.dash_k, air: r.air, hurt, joy, showcase: false });
         } else if kit.has_actor(self.actor) {
             let cmds = hero_commands(r, &mut self.prev);
             let rate = hero_rate(r.speed, r.dash_k);

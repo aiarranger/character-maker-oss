@@ -20,6 +20,8 @@ mod save;
 mod ui;
 #[cfg(target_arch = "wasm32")]
 pub mod view;
+#[cfg(any(target_arch = "wasm32", test))]
+#[path = "view/fish_rig.rs"] mod fish_rig;
 #[path = "view/squid_shape.rs"] pub mod squid_shape; // イカの形と動きのブラウザに頼らない部分（ネイティブで試験する。view/squid.rs が使う）
 
 #[cfg(target_arch = "wasm32")]

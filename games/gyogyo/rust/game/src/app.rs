@@ -1583,7 +1583,7 @@ impl App {
         // 選んだら少し走って見せてから、手を振る（正面と走り姿。企画 07）
         let run_prev = if now - self.picked_at < 1.9 { 9.0 } else { 0.0 };
         if let Some(v) = self.views.get_mut(&id) && v.loaded(&self.kit) {
-            v.pose(&mut self.kit, p.x, p.y + 0.19, p.z, yaw + 0.22 + (now * 0.5).sin() * 0.08, dt, now, run_prev);
+            v.pose(&mut self.kit, p.x, p.y + 0.19, p.z, yaw + 0.22 + (now * 0.5).sin() * 0.08, dt, now, run_prev, true);
             if run_prev == 0.0 && now - self.last_greet > 7.0 && !v.has_current(&self.kit) { self.last_greet = now; v.gesture(&mut self.kit, Gesture::Greet); }
         }
         // 外側の低い所から、空と内馬場を背に。主役は画面の右寄り
@@ -1617,14 +1617,14 @@ impl App {
                 let k = podium as usize - 1;
                 let p = self.stage_point(X[k], Z[k]);
                 let v = self.views.get_mut(&id).unwrap();
-                v.pose(&mut self.kit, p.x, p.y + H[k] + 0.08, p.z, yaw + if podium == 2 { -0.12 } else if podium == 3 { 0.12 } else { 0.0 }, dt, now, 0.0);
+                v.pose(&mut self.kit, p.x, p.y + H[k] + 0.08, p.z, yaw + if podium == 2 { -0.12 } else if podium == 3 { 0.12 } else { 0.0 }, dt, now, 0.0, false);
                 v.set_mood(&mut self.kit, Mood::Joy);
                 if gest && !v.has_current(&self.kit) { v.gesture(&mut self.kit, if podium == 1 || is_player { Gesture::Banzai } else { Gesture::Greet }); }
             } else if is_player {
                 // 手前で座り込む（台の数字を隠さない所）
                 let p = self.stage_point(0.95, 2.75);
                 let v = self.views.get_mut(&id).unwrap();
-                v.pose(&mut self.kit, p.x, p.y, p.z, yaw - 0.2, dt, now, 0.0);
+                v.pose(&mut self.kit, p.x, p.y, p.z, yaw - 0.2, dt, now, 0.0, false);
                 v.set_mood(&mut self.kit, Mood::Sad);
                 if !v.has_current(&self.kit) { v.gesture(&mut self.kit, Gesture::Rest); }
             } else { self.views[&id].hide(&mut self.kit); }
@@ -2126,11 +2126,14 @@ impl App {
         self.final_u.flash = (self.go_flash * 0.16) as f32;
         self.final_u.desat = if mode == Mode::Paused { 0.45 } else { 0.0 };
         // 結果と出走登録: 背景をぼかして沈め、主役を立たせる
-        let want_blur = if mode == Mode::Result { 0.022 } else if mode == Mode::Select { 0.012 } else { 0.0 };
+        let select_fish = mode == Mode::Select && matches!(&self.heroes[self.hero_i].body, Body::Fish(_));
+        let want_blur = if mode == Mode::Result { 0.022 } else if select_fish { 0.003 } else if mode == Mode::Select { 0.012 } else { 0.0 };
         self.final_u.blur += (want_blur - self.final_u.blur) * (dt as f32 * 5.0).min(1.0);
         self.final_u.dim = if mode == Mode::Result { 0.42 } else if mode == Mode::Select { 0.12 } else { 0.0 };
         // 結果: 表彰台と、手前の自分（右下）がぼけないよう、ぼかさない楕円を下と横へ広げる
         if mode == Mode::Result { self.final_u.blur_at = [0.52, 0.56, 0.3, 0.62]; }
+        // 横向きの魚は頭と尾まで広い。口・眼・えらを楕円内に収める。
+        else if select_fish { self.final_u.blur_at = [0.62, 0.5, 0.56, 0.8]; }
         else if mode == Mode::Select { self.final_u.blur_at = [0.62, 0.5, 0.2, 0.55]; }
         let live_on = matches!(mode, Mode::Race | Mode::Finish | Mode::Paused) && me.is_some();
         if draw {

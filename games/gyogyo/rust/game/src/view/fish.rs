@@ -1,8 +1,9 @@
 // 走る魚（Fish Kit、CC0。public/models/fish/README.md）。走路の上を泳いで進む。
 // 模型は口先が +X・背が +Y・メートル。ここで口先を +Z・体の真ん中を原点にそろえ、走者の大きさへ拡大する。
 // うねりは Fish Kit の fishH と同じ式（魚群繚乱の fish.wgsl と同じ）: 包絡 A(s) = e0 + e1 s + e2 s^2（s = 0 口先〜1 尾の先）× sin(2π(s/λ − cyc))。
-// 値は各 glb の節点の extras.swim。頂点は毎コマ CPU で動かして上げる（1 匹 約 2,700 頂点。走者は最大 8 匹）。
+// 値は節点の extras.swim と extras.fishRig。CPU で各走者の可動部を動かし、体のうねりを重ねる。
 use super::materials::{SoftOptions, soft_material};
+use crate::fish_rig::{FishRig, RigMotion};
 use character_actor::glb::Glb;
 use glam::Vec3;
 use island_kit::geometry::Geometry;
@@ -49,8 +50,11 @@ pub fn vivid(rgba: &mut [u8]) {
     }
 }
 
-/// 長さ 1 にそろえた形と、うねりの値
+/// 模型座標での形・可動部と、走者への換算・うねりの値
 pub struct FishShape {
+    rig: Option<FishRig>,
+    center: Vec3,
+    inv_len: f32,
     pos: Vec<Vec3>,
     nor: Vec<Vec3>,
     uvs: Vec<[f32; 2]>,
@@ -64,30 +68,32 @@ pub struct FishShape {
     env: [f32; 3],
 }
 
-/// glb から形を作る（口先 +X → +Z、長さ 1、体の真ん中を原点）
+fn turn(v: Vec3) -> Vec3 { Vec3::new(-v.z, v.y, v.x) }
+
+/// glb から元キットと同じ模型座標で形を読む。
 pub fn shape_of(g: &Glb) -> Result<FishShape, String> {
     let ni = g.nodes.iter().position(|n| n.mesh.is_some()).ok_or("魚: メッシュが無い")?;
     let p = g.meshes[g.nodes[ni].mesh.unwrap()].primitives.first().ok_or("魚: 面が無い")?;
     let (lo, hi) = p.positions.iter().fold((Vec3::splat(f32::MAX), Vec3::splat(f32::MIN)), |(a, b), q| (a.min(Vec3::from(*q)), b.max(Vec3::from(*q))));
     let c = (lo + hi) * 0.5;
     let len = (hi.x - lo.x).max(1e-4);
-    // +X → +Z（y 軸で −90°）: (x, y, z) → (−z, y, x)
-    let turn = |v: Vec3| Vec3::new(-v.z, v.y, v.x);
-    let pos: Vec<Vec3> = p.positions.iter().map(|q| turn(Vec3::from(*q) - c) / len).collect();
-    let nor: Vec<Vec3> = (0..p.positions.len()).map(|k| turn(Vec3::from(p.normals.get(k).copied().unwrap_or([0.0, 1.0, 0.0]))).normalize_or_zero()).collect();
+    let pos = p.positions.iter().copied().map(Vec3::from).collect();
+    let nor = p.normals.iter().copied().map(Vec3::from).collect();
+    let extras = &g.nodes[ni].extras;
+    let rig = FishRig::load(p, extras)?;
     let tex = p.material.and_then(|m| g.materials[m].texture).map(|t| { let im = &g.images[t]; (im.width, im.height, im.rgba.clone()) }).ok_or("魚: 模様が無い")?;
-    let sw = g.json["nodes"].as_array().and_then(|n| n.iter().find_map(|x| x.get("extras").and_then(|e| e.get("swim")))).cloned().unwrap_or_default();
+    let sw = &extras["swim"];
     let f = |k: &str, d: f64| sw.get(k).and_then(|v| v.as_f64()).unwrap_or(d) as f32;
     let env = sw.get("env").and_then(|e| e.as_array()).map(|a| [0, 1, 2].map(|i| a.get(i).and_then(|v| v.as_f64()).unwrap_or(0.0) as f32)).unwrap_or([0.015, -0.07, 0.16]);
     Ok(FishShape {
-        pos, nor, uvs: p.uvs.clone(), indices: p.indices.clone(), tex,
+        rig, center: c, inv_len: len.recip(), pos, nor, uvs: p.uvs.clone(), indices: p.indices.clone(), tex,
         height: (hi.y - lo.y) / len, lambda: f("lambda", 1.0).max(0.2), freq: f("freq", 1.6), amp: f("amp", 0.7), env,
     })
 }
 
 /// 走りの合図（runner.rs が走者の状態から作る）
 #[derive(Clone, Copy, Default)]
-pub struct Drive { pub speed: f64, pub dash: f64, pub air: bool, pub hurt: f64, pub joy: bool }
+pub struct Drive { pub speed: f64, pub dash: f64, pub air: bool, pub hurt: f64, pub joy: bool, pub showcase: bool }
 
 pub struct FishBody {
     pub mesh: NodeId,
@@ -95,6 +101,7 @@ pub struct FishBody {
     pub mat: MatId,
     shape: Arc<FishShape>,
     g: Geometry,
+    motion: RigMotion,
     len: f32,
     cyc: f64,
     amp: f64,
@@ -115,8 +122,8 @@ impl FishBody {
         m.alpha_test = 0.5;
         let mat = kit.material(m);
         let g = Geometry {
-            positions: shape.pos.iter().map(|p| (*p * len).to_array()).collect(),
-            normals: shape.nor.iter().map(|n| n.to_array()).collect(),
+            positions: shape.pos.iter().map(|p| (turn(*p - shape.center) * shape.inv_len * len).to_array()).collect(),
+            normals: shape.nor.iter().map(|n| turn(*n).to_array()).collect(),
             uvs: shape.uvs.clone(), colors: Vec::new(), sway: Vec::new(),
             indices: Some(shape.indices.clone()), groups: Vec::new(),
         };
@@ -124,7 +131,7 @@ impl FishBody {
         let mesh = kit.scene.mesh(Some(parent), geo, mat);
         kit.scene[mesh].cast_shadow = true;
         kit.scene[mesh].receive_shadow = true;
-        FishBody { mesh, geo, mat, shape: shape.clone(), g, len, cyc: 0.0, amp: shape.amp as f64, bend: 0.0, length: len }
+        FishBody { mesh, geo, mat, shape: shape.clone(), g, motion: RigMotion::default(), len, cyc: 0.0, amp: shape.amp as f64, bend: 0.0, length: len }
     }
 
     /// 体の高さ（parent の空間）
@@ -145,12 +152,19 @@ impl FishBody {
         self.bend += (bend - self.bend) * (dt * 10.0).min(1.0);
         let (cyc, amp, bend) = (self.cyc as f32, self.amp as f32, self.bend as f32);
         let wave = |u: f32| { let a = s.env[0] + s.env[1] * u + s.env[2] * u * u; amp * a * (std::f32::consts::TAU * (u / s.lambda - cyc)).sin() + bend * u * u * 0.45 };
-        for (k, p) in s.pos.iter().enumerate() {
+        let pose = s.rig.as_ref().map(|r| self.motion.advance(r, dt as f32, cyc, amp,
+            d.speed as f32 / self.length, bend, d.air, d.showcase));
+        for (k, (&raw, &normal)) in s.pos.iter().zip(&s.nor).enumerate() {
+            let (local, normal) = match &pose {
+                Some(p) => p.deform(k, raw, normal),
+                None => (raw, normal),
+            };
+            let p = turn(local - s.center) * s.inv_len;
+            let n = turn(normal);
             let u = (0.5 - p.z).clamp(0.0, 1.0);
             let x = wave(u);
             let slope = (wave((u + 0.02).min(1.0)) - x) / 0.02;
             self.g.positions[k] = [(p.x + x) * self.len, p.y * self.len, p.z * self.len];
-            let n = s.nor[k];
             self.g.normals[k] = Vec3::new(n.x + slope * n.z, n.y, n.z).normalize_or_zero().to_array();
         }
         kit.update_geometry(self.geo, &self.g);

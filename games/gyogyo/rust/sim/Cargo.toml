@@ -1,0 +1,12 @@
+[package]
+name = "sim"
+version = "0.1.0"
+edition = "2024"
+description = "魚々娘の遊びの計算（かけっこグランプリから写した）"
+
+[lib]
+path = "src/lib.rs"
+
+[dependencies]
+# V8 と同じ結果の Math（node <characters>/scripts/game-parts.mjs --to <このゲーム> --write が vendor/rust へ写す）
+sim-math = { path = "../../vendor/rust/sim-math" }

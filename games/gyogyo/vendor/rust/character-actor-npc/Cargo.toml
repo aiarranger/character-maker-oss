@@ -1,0 +1,14 @@
+[package]
+name = "character-actor-npc"
+version = "0.1.0"
+edition = "2024"
+
+# NPC・汎用（aisns の @aiarranger/character-runtime-npc・-generic。character-runtime 0.2.5 の凍結した写し）を読んで動かす部品。主役の character-actor とは別（Owner 2026-11-12）。
+# 依存は character-actor 0.1.14 と同じ版（通信と web-sys は使わない）
+[dependencies]
+glam = { version = "0.30", features = ["bytemuck"] }
+bytemuck = { version = "1", features = ["derive", "min_const_generics"] }
+serde_json = "1"
+image = { version = "0.25", default-features = false, features = ["png", "jpeg", "webp"] }
+meshopt-rs = { version = "0.1", features = ["experimental"] }
+sha2 = "0.10"

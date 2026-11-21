@@ -1,0 +1,27 @@
+[package]
+name = "island-kit"
+version = "0.1.36"
+edition = "2024"
+
+[dependencies]
+character-actor = { path = "../character-actor" }
+character-view = { path = "../character-view" }
+# NPC・汎用（主役とは別の部品。kit.set_npc_actor）
+character-actor-npc = { path = "../character-actor-npc" }
+character-view-npc = { path = "../character-view-npc" }
+wgpu = "30"
+glam = { version = "0.30", features = ["bytemuck"] }
+bytemuck = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+[target.'cfg(target_arch = "wasm32")'.dependencies]
+wasm-bindgen = "0.2"
+wasm-bindgen-futures = "0.4"
+js-sys = "0.3"
+web-sys = { version = "0.3", features = [
+  "console", "Window", "Document", "Element", "HtmlElement", "HtmlCanvasElement", "HtmlImageElement", "HtmlMediaElement", "HtmlAudioElement", "DomTokenList", "CssStyleDeclaration", "Node", "NodeList", "HtmlCollection", "Location", "Storage", "Performance", "Navigator", "Response", "Request", "RequestInit",
+  "Event", "EventTarget", "KeyboardEvent", "MouseEvent", "PointerEvent", "TouchEvent", "Touch", "TouchList", "AddEventListenerOptions", "MediaQueryList", "Gamepad", "GamepadButton",
+  "ResizeObserver", "OffscreenCanvas", "OffscreenCanvasRenderingContext2d", "CanvasGradient", "ImageData", "ImageBitmap", "TextMetrics", "Blob", "FontFaceSet",
+  "AudioContext", "AudioContextState", "AudioNode", "AudioParam", "AudioBuffer", "AudioBufferSourceNode", "AudioDestinationNode", "AudioScheduledSourceNode", "BaseAudioContext",
+  "GainNode", "OscillatorNode", "OscillatorType", "BiquadFilterNode", "BiquadFilterType", "ConvolverNode", "DynamicsCompressorNode", "StereoPannerNode", "MediaElementAudioSourceNode",
+] }

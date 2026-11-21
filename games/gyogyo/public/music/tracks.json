@@ -1,0 +1,8 @@
+{
+  "tracks": {
+    "title": { "src": "music/title.m4a", "gain": 0.9 },
+    "play": { "src": "music/race.m4a", "gain": 0.8 },
+    "final": { "src": "music/final.m4a", "gain": 1.0 },
+    "clear": { "src": "music/clear.m4a", "gain": 0.9, "loop": false }
+  }
+}

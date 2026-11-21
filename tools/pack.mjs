@@ -51,8 +51,8 @@ const source = [
 ].filter(file => !/\.(test|e2e)\.(mjs|cjs|ts)$/.test(file))
   // look-*.jpg は Studio 用に同期されるが、どのコードからも読まれない
   .filter(file => !/^public\/maker-assets\/look-.+\.jpg$/.test(file))
-  // 魚群繚乱の入口のカードの動画と止め絵は単体の Studio のページだけが使う（埋め込み先には出ない。docs/gyogun-spec.md「入口のカード」）
-  .filter(file => !/^public\/character-maker\/gyogun-title\./.test(file));
+  // 魚群繚乱・魚々娘の入口のカードの動画と止め絵は単体の Studio のページだけが使う（埋め込み先には出ない。docs/gyogun-spec.md「入口のカード」）
+  .filter(file => !/^public\/character-maker\/(gyogun|gyogyo)-title\./.test(file));
 for (const file of source) copy(file);
 
 // /api/character-maker/assets の名前 → parts の実ファイル（aisns の旧 server/character-maker-assets.mjs と同じ対応）

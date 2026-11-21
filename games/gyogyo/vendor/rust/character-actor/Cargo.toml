@@ -1,0 +1,21 @@
+[package]
+name = "character-actor"
+version = "0.1.16"
+edition = "2024"
+
+[dependencies]
+glam = { version = "0.30", features = ["bytemuck"] }
+bytemuck = { version = "1", features = ["derive", "min_const_generics"] }
+serde_json = "1"
+image = { version = "0.25", default-features = false, features = ["png", "jpeg", "webp"] }
+meshopt-rs = { version = "0.1", features = ["experimental"] }
+sha2 = "0.10"
+
+[target.'cfg(not(target_arch = "wasm32"))'.dependencies]
+ureq = "3"
+
+[target.'cfg(target_arch = "wasm32")'.dependencies]
+wasm-bindgen = "0.2"
+wasm-bindgen-futures = "0.4"
+js-sys = "0.3"
+web-sys = { version = "0.3", features = ["Window", "Document", "Element", "Location", "Storage", "RequestInit", "Response", "Cache", "CacheStorage"] }

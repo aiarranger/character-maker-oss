@@ -1,0 +1,29 @@
+[package]
+name = "gyogyo-game"
+version = "0.1.0"
+edition = "2024"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+sim = { path = "../sim" }
+sim-math = { path = "../../vendor/rust/sim-math" }
+# 土台とキャラの部品は characters の crates から（node <characters>/scripts/game-parts.mjs --to <このゲーム> --write が vendor/rust へ写す）
+island-kit = { path = "../../vendor/rust/island-kit" }
+character-actor = { path = "../../vendor/rust/character-actor" }
+character-view = { path = "../../vendor/rust/character-view" }
+# 画面の文字・ボタンを Rust が描く（muso 式）。characters の crates/game-ui
+game-ui = { path = "../../vendor/rust/game-ui" }
+egui = "0.36"
+wgpu = "30"
+glam = { version = "0.30", features = ["bytemuck"] }
+bytemuck = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+[target.'cfg(target_arch = "wasm32")'.dependencies]
+wasm-bindgen = "0.2"
+wasm-bindgen-futures = "0.4"
+js-sys = "0.3"
+console_error_panic_hook = "0.1"
+web-sys = { version = "0.3", features = ["console", "Window", "Document", "Element", "HtmlElement", "HtmlCanvasElement", "HtmlImageElement", "CanvasRenderingContext2d", "DomTokenList", "Location", "OffscreenCanvasRenderingContext2d", "CanvasGradient", "ImageData", "Performance", "Event", "EventTarget", "KeyboardEvent", "MouseEvent", "HtmlCollection", "MediaQueryList", "ScrollIntoViewOptions", "ScrollLogicalPosition", "Navigator", "Gamepad", "GamepadButton", "SvgElement", "CssStyleDeclaration", "AudioContext", "AudioContextState", "BaseAudioContext", "AudioBuffer", "AudioBufferSourceNode", "AudioDestinationNode", "AudioNode", "AudioParam", "AudioScheduledSourceNode", "BiquadFilterNode", "BiquadFilterType", "DynamicsCompressorNode", "GainNode", "HtmlAudioElement", "HtmlMediaElement", "MediaElementAudioSourceNode", "OscillatorNode", "OscillatorType", "Response", "Touch", "TouchEvent", "TouchList", "Storage", "FontFaceSet", "FontFaceSetLoadStatus", "WebSocket", "MessageEvent", "CloseEvent"] }

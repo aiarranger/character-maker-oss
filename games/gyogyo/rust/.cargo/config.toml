@@ -1,0 +1,3 @@
+# この Mac は Xcode のライセンスが未同意で /usr/bin/cc が止まるので、入っている Command Line Tools でつなぐ。
+[env]
+DEVELOPER_DIR = "/Library/Developer/CommandLineTools"

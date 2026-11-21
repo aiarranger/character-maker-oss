@@ -63,7 +63,7 @@ Owner 2026-11-16「（上のバーのボタンが）目立たない。（ゲー�
 - 動画は魚群繚乱のタイトル画面を録った短い繰り返し（音なし・自動再生・数百 KB）。置き場は `public/character-maker/`。
 - 埋め込み用（`CharacterStudio` を yukikau.jp などへ入れるとき）には出さない（単体のページだけ）。動画と止め絵は、埋め込み用のパッケージ（`pnpm pack:vendor`）には入れない（`tools/pack.mjs`。50 MiB の上限まで余裕が約 0.17 MiB しかないため）。
 
-作り（`components/character-maker/GyogunCard.tsx`、形と大きさは `lib/character-maker/gyogun-card-fit.ts`）:
+作り（`components/character-maker/GameCard.tsx`、形と大きさは `lib/character-maker/game-card-fit.ts`。魚々娘のカードと共通）:
 
 | 項目 | 決まり |
 |---|---|
@@ -71,7 +71,7 @@ Owner 2026-11-16「（上のバーのボタンが）目立たない。（ゲー�
 | 置き場所 | ステージの左下（左から 34px、武器の並びの上 34px）。最初の案内（ドラッグで回す）は、カードの右へずらす |
 | 大きさ | 幅 132〜220px。ステージの幅と高さから、構えたキャラの足もと・武器に重なりにくい幅を選ぶ。狭いステージでもいちばん小さいカードは出す（重なることがある）（3 系統のキャラの「構える」を、全身の正面・横・後ろで測った値） |
 | 顔の表示 | キャラがステージいっぱいになるので、同じ場所で動画を畳んだ札（「魚群繚乱で遊ぶ」と丸い矢印）にする。肩に少し掛かる（Owner 2026-11-16「札でよい」） |
-| 入口は 1 つだけ | ステージのカード（顔の表示では札）だけ。上のバーのボタンと「書き出し」メニューの項目は出さない |
+| 入口は 1 つだけ | ステージのカード（顔の表示では札）だけ。上のバーのボタンと「書き出し」メニューの項目は出さない。2026-11-17 から、このカードの上に魚々娘のカードを積む（docs/gyogyo-spec.md の「Studio の入口」。作りは `GameCard.tsx`・`game-handoff.ts` を共通にした） |
 | 動きを減らす設定 | 動画は読みに行かず、止め絵を出す |
 | 押したとき | キャラを送って開く（作成中は「姿を作っています…」、魚群繚乱が作られていなければ通知） |
 
@@ -91,7 +91,7 @@ Owner 2026-11-16「（上のバーのボタンが）目立たない。（ゲー�
 | GLB（プリセット 12 体） | yukikau.jp 用と同じ書き出し（武器を外した GLB に、構える・振るとゲーム用の動作が全部入っている） |
 | GLB（オリジナル 4 体） | Stage の書き出しの `variant: 'game'`（`rust/game/src/original_export.rs`）: 通常用の形（武器も握った手も無い）に、待機・歩く・走ると `sword_idle`・`sword_attack` の両方を入れる。yukikau.jp 用の通常用には構える・振るが無いため |
 | クリップ（23 本） | 待機・歩く・走る（プリセットは `idle`・`walk`・`run`、オリジナルは `preset:biped:idle` など）、`sword_idle`・`sword_attack`・`hit`・`face_hurt`、ゲーム用の 16 動作（`jump`・`dodge`・`skill` ほか。`docs/game-motions-spec.md`） |
-| 渡し方 | 控え（Cache Storage）の名前 `character-maker-gyogun-v1`、キー `/gyogun/studio-character.zip`（`lib/character-maker/gyogun-handoff.ts` と `games/gyogun/rust/web/index.html` で同じ値）。開く先は `/gyogun/index.html?from=studio` |
+| 渡し方 | 控え（Cache Storage）の名前 `character-maker-gyogun-v1`、キー `/gyogun/studio-character.zip`（`lib/character-maker/game-handoff.ts` の `STUDIO_GAMES.gyogun` と `games/gyogun/rust/web/index.html` で同じ値）。開く先は `/gyogun/index.html?from=studio` |
 | 読み込み | `index.html` が控えを読んで `window.__gyogunStudioZip` に置き、Rust（`platform::studio_zip` → `hero::guest_hero`）が名簿の段で読む。読めた 1 体を、配布の主役の後ろに並べる（id は `studio`。保存のキーは `gyogun.hero`・`gyogun.weapon.studio`・`gyogun.honors.studio`） |
 | `from=studio` | Studio から来た直後の印。そのキャラと Studio で選んだ武器（`none`・知らない id はゲームの既定＝ケーキの剣）を選んだ状態で始め、`gyogun.hero`・`gyogun.weapon.studio` に残す。読み終えたら URL から外す（開き直すと、最後に選んだ主役と武器のまま） |
 | 控えが無い・壊れている | きゃしーだけで普通に始まる（理由は console に出す） |
@@ -102,7 +102,7 @@ Owner 2026-11-16「（上のバーのボタンが）目立たない。（ゲー�
 | 決め台詞の声 | つくったキャラには無い（読みに行かない） |
 | 名前の字 | 魚群繚乱の字体は使う字だけに絞ってある（かな・英数・記号・JIS 第一水準の漢字）。それ以外の字（第二水準の漢字・絵文字）を名前に使うと、魚群繚乱では出ない |
 
-確かめ: `lib/character-maker/ui-gyogun-handoff.e2e.mjs`（16 体。ステージのカード → 控え → ZIP の中身）、`lib/character-maker/gyogun-handoff.test.mjs`・`gyogun-card-fit.test.mjs`、魚群繚乱の `hero::hero::tests`（ZIP を読んで組み立て、構え・振り・跳ぶ・避ける・のけぞり・＞＜）。
+確かめ: `lib/character-maker/ui-gyogun-handoff.e2e.mjs`（16 体。ステージのカード → 控え → ZIP の中身）、`lib/character-maker/game-handoff.test.mjs`・`game-card-fit.test.mjs`、魚群繚乱の `hero::hero::tests`（ZIP を読んで組み立て、構え・振り・跳ぶ・避ける・のけぞり・＞＜）。
 
 ## みんなで（協力プレイは入れない、2026-11-16）
 

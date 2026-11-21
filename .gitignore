@@ -25,6 +25,7 @@ next-env.d.ts
 /public/maker-stage/
 /rust/target/
 /public/gyogun/
+/public/gyogyo/
 /games/gyogun/rust/target/
 .snaps/
 # 魚群繚乱の試験が読む Studio のキャラ ZIP（ブラウザで作る。作り方は games/gyogun/README.md）

@@ -77,6 +77,19 @@ pnpm dev
 
 Open http://127.0.0.1:4284/gyogun/index.html. Controls and layout: [games/gyogun/README.md](games/gyogun/README.md); scope: [docs/gyogun-spec.md](docs/gyogun-spec.md) (both in Japanese). Press the 「魚群繚乱で遊ぶ」 card at the bottom left of the Studio stage (`/character-maker`; it plays a short clip of the game's title screen) to play as the character you made (run `pnpm gyogun:build` first).
 
+## Race with fish and squid
+
+[Play Gyogyo Musume in your browser](https://gyogun.yukikau.jp/gyogyo/)
+
+魚々娘 (Gyogyo Musume), a 3D race where きゃしー (Cassie), fish and squid run on a racetrack above the clouds, lives in `games/gyogyo/` (Rust + WebGPU). You can run as Cassie, the character you made in the Studio, one of 10 fish (Fish Kit) or 2 squid (Squid Kit). It is single-player; the 「かけっこグランプリでみんなで走る ↗」 button on the title screen opens かけっこグランプリ (https://kakekko.yukikau.jp/), where up to four people can race online.
+
+```sh
+pnpm gyogyo:build       # builds the game into public/gyogyo/ (games/gyogyo/rust/web/build.sh)
+pnpm dev
+```
+
+Open http://127.0.0.1:4284/gyogyo/index.html. Controls and layout: [games/gyogyo/README.md](games/gyogyo/README.md); scope: [docs/gyogyo-spec.md](docs/gyogyo-spec.md) (both in Japanese). The 「魚々娘で遊ぶ」 card (above the 魚群繚乱 card on the Studio stage) lets you race as the character you made (run `pnpm gyogyo:build` first).
+
 ## Use in your game
 
 Use「書き出し」(Export, top right) →「3Dモデル（GLB）」(3D model) or「編集設定（JSON）」(editing settings) to save the files. The GLB loads as is in three.js, Babylon.js, Unity (glTFast) and other glTF loaders. Materials are unlit (`KHR_materials_unlit`). The soft shading you see in the Studio is a preview effect and is not baked into the GLB; add your own lighting or rim in the game.
@@ -177,6 +190,7 @@ await ensureStudioModels('.cache/character-maker-models');
 | `distribution/` | Models and motions of the 4 originals (CC BY 4.0). File list and SHA-256 in `distribution/manifest.json` |
 | `public/review-swing-2026-10-02/` | Food-themed weapons (CC BY 4.0) |
 | `games/gyogun/` | The fish game (game code, fish, Cassie, audio). See [games/gyogun/README.md](games/gyogun/README.md) (Japanese) |
+| `games/gyogyo/` | The race game (game code, fish, squid, Cassie, audio). See [games/gyogyo/README.md](games/gyogyo/README.md) (Japanese) |
 | `tools/character-maker/` | Asset builders, thumbnail capture, export checks, acceptance measurements |
 | `docs/` | Screen design ([studio-quality-spec.md](docs/studio-quality-spec.md)), main-character features ([main-character-spec.md](docs/main-character-spec.md)), routes to yukikau.jp ([yukikau-route.md](docs/yukikau-route.md)) — in Japanese |
 

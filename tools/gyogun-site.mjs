@@ -1,10 +1,10 @@
 #!/usr/bin/env node
-// 魚群繚乱と Studio を gyogun.yukikau.jp で静的に配るための書き出し（docs/gyogun-spec.md の「公開先」）。pnpm gyogun:site
+// 魚群繚乱・魚々娘と Studio を gyogun.yukikau.jp で静的に配るための書き出し（docs/gyogun-spec.md の「公開先」・docs/gyogyo-spec.md）。pnpm gyogun:site
 //   1. Studio の写しを .site-build/ に組む（静的書き出しで使えない旧画面 /character-maker/classic と、それだけが使う
 //      app/api/character-maker/assets は写さない）。node_modules・parts・distribution は元を指す
 //      → 作業ツリーは変えない。静的書き出しは中間の .next を必ず使うので、起動中の pnpm dev（根の .next）とぶつからないよう写しの中で組む
 //   2. 写しの中で GYOGUN_SITE=1 next build（next.config.mjs が output: 'export' になる）→ 根の out/ へ
-//   3. 実行時素材（public/ の決まったフォルダ。public/gyogun は pnpm gyogun:build の出来上がり）を out/ へ写し、_redirects（/ → /gyogun/）を書く
+//   3. 実行時素材（public/ の決まったフォルダ。public/gyogun・public/gyogyo は pnpm gyogun:build・gyogyo:build の出来上がり）を out/ へ写し、_redirects（/ → /gyogun/）を書く
 //   4. Workers の静的アセットの上限（1 ファイル 25 MiB・Free で 20,000 ファイル）と、要るファイルがそろっているかを確かめる
 // node tools/gyogun-site.mjs [--check]  （--check は 4 だけ。out/ を作り直さない）
 import { cpSync, existsSync, mkdirSync, readdirSync, renameSync, rmSync, statSync, symlinkSync, writeFileSync } from 'node:fs';
@@ -16,14 +16,14 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const BUILD = join(ROOT, '.site-build');
 const OUT = join(ROOT, 'out');
 /** out/ に入れる public/ のフォルダ（public/muso など古い出来上がりは入れない） */
-export const SITE_PUBLIC = ['gyogun', 'character-maker', 'maker-assets', 'maker-stage', 'models', 'portraits', 'review-swing-2026-10-02'];
+export const SITE_PUBLIC = ['gyogun', 'gyogyo', 'character-maker', 'maker-assets', 'maker-stage', 'models', 'portraits', 'review-swing-2026-10-02'];
 /** 写しに入れない物（静的書き出しで使えない） */
 const SKIP = ['app/character-maker/classic', 'app/api'];
 export const MAX_FILE = 25 * 1024 * 1024;
 export const MAX_FILES = 20000;
 export const REDIRECTS = '/ /gyogun/ 302\n';
 /** out/ に必ずある物 */
-export const REQUIRED = ['gyogun/index.html', 'gyogun/gyogun_game_bg.wasm', 'gyogun/delivery/channels/stable/v1/index.json', 'character-maker.html', 'maker-stage/character_maker_stage_bg.wasm', 'character-maker/gyogun-title.mp4', '404.html', '_redirects'];
+export const REQUIRED = ['gyogun/index.html', 'gyogun/gyogun_game_bg.wasm', 'gyogun/delivery/channels/stable/v1/index.json', 'gyogyo/index.html', 'gyogyo/gyogyo_game_bg.wasm', 'gyogyo/delivery/channels/stable/v1/index.json', 'character-maker.html', 'maker-stage/character_maker_stage_bg.wasm', 'character-maker/gyogun-title.mp4', 'character-maker/gyogyo-title.mp4', '404.html', '_redirects'];
 
 function run(cmd, args, opts) {
   const r = spawnSync(cmd, args, { stdio: 'inherit', ...opts });
@@ -53,8 +53,8 @@ export function inspectSite(out = OUT) {
 }
 
 function build() {
-  for (const dir of ['gyogun/index.html', 'maker-stage/character_maker_stage_bg.wasm']) {
-    if (!existsSync(join(ROOT, 'public', dir))) throw new Error(`public/${dir} がありません。先に pnpm gyogun:build と pnpm stage:build を実行してください。`);
+  for (const dir of ['gyogun/index.html', 'gyogyo/index.html', 'maker-stage/character_maker_stage_bg.wasm']) {
+    if (!existsSync(join(ROOT, 'public', dir))) throw new Error(`public/${dir} がありません。先に pnpm gyogun:build・pnpm gyogyo:build・pnpm stage:build を実行してください。`);
   }
   // 1. 写し
   rmSync(BUILD, { recursive: true, force: true });
@@ -72,6 +72,7 @@ function build() {
   renameSync(join(BUILD, 'out'), OUT);
   // 3. 素材と _redirects
   for (const name of SITE_PUBLIC) cpSync(join(ROOT, 'public', name), join(OUT, name), { recursive: true, filter: src => !src.endsWith('.DS_Store') });
+  cpSync(join(ROOT, 'LICENSE-ASSETS.md'), join(OUT, 'LICENSE-ASSETS.md'));
   writeFileSync(join(OUT, '_redirects'), REDIRECTS);
   rmSync(BUILD, { recursive: true, force: true });
 }

@@ -1,0 +1,11 @@
+[package]
+name = "character-view-npc"
+version = "0.1.0"
+edition = "2024"
+
+# NPC・汎用を wgpu で描く部品（character-view 0.1.8 の凍結した写し。主役の character-view とは別。Owner 2026-11-12）
+[dependencies]
+character-actor-npc = { path = "../character-actor-npc" }
+wgpu = "30"
+glam = { version = "0.30", features = ["bytemuck"] }
+bytemuck = { version = "1", features = ["derive"] }

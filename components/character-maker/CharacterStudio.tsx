@@ -58,8 +58,8 @@ function moveFocusWithArrows(event: ReactKeyboardEvent<HTMLElement>) {
 export type CharacterStudioProps = {
   /** ゲームへ渡す（yukikau.jp への組み込み）。渡すと各エディタに「この姿で遊ぶ」が出て、yukikau.jp 用の .character.zip を受け取る。docs/yukikau-route.md */
   onPlay?: (file: File) => void | Promise<void>;
-  /** 各エディタに「魚群繚乱で遊ぶ」を出す（同じ場所で魚群繚乱 /gyogun/ を配っている単体のページだけ。既定は出さない）。docs/gyogun-spec.md */
-  gyogun?: boolean;
+  /** 各エディタに「魚群繚乱で遊ぶ」「魚々娘で遊ぶ」を出す（同じ場所で魚群繚乱 /gyogun/ と魚々娘 /gyogyo/ を配っている単体のページだけ。既定は出さない）。docs/gyogun-spec.md */
+  games?: boolean;
   /** プリセットを開いたときの名前（控えがないときだけ）。オリジナルはキャラクターの名前のまま。 */
   initialName?: string;
   /** 置き場所は埋め込み先が決める。Studio は既定で画面いっぱい（100dvh）。 */
@@ -67,7 +67,7 @@ export type CharacterStudioProps = {
 } & StageExit;
 
 /** Character Studio 本体（/character-maker と埋め込み先で共通）。このリポジトリの globals.css やレイアウトには頼らない。 */
-export default function CharacterStudio({ onPlay, gyogun = false, initialName, className, onExit, exitLabel }: CharacterStudioProps = {}) {
+export default function CharacterStudio({ onPlay, games = false, initialName, className, onExit, exitLabel }: CharacterStudioProps = {}) {
   const support = useStageSupport();
   const [selection, setSelection] = useState<Selection>({ kind: 'original', characterId: characters[0].id });
   const [hydrated, setHydrated] = useState(false);
@@ -224,10 +224,10 @@ export default function CharacterStudio({ onPlay, gyogun = false, initialName, c
       {selectionWarning && <p className={styles.pageWarning} role="alert">{selectionWarning}</p>}
       {!hydrated ? <div className={`${styles.liveEditor} ${styles.editorLoading}`} aria-busy="true"><span className={styles.srOnly} role="status">編集中のキャラクターを確認しています…</span></div> : selection.kind === 'original' ? <OriginalCharacterMaker
         key={activeId} embedded editorRef={originalEditor} characters={characters}
-        initialCharacterId={selection.characterId} initialSession={originalSessions.current.get(selection.characterId)} onPlay={onPlay} gyogun={gyogun}
+        initialCharacterId={selection.characterId} initialSession={originalSessions.current.get(selection.characterId)} onPlay={onPlay} games={games}
         accent={active.look.accent} look={active.look.look} groupLabel={groupLabel} poster={poster}
       /> : preset ? <MakerPresetEditor key={activeId} embedded editorRef={presetEditor}
-        selectionKey={preset.key} initialDocument={makeDocument(initialName?.trim() || preset.name, preset.config)} initialSession={presetSessions.current.get(preset.key)} onPlay={onPlay} gyogun={gyogun}
+        selectionKey={preset.key} initialDocument={makeDocument(initialName?.trim() || preset.name, preset.config)} initialSession={presetSessions.current.get(preset.key)} onPlay={onPlay} games={games}
         accent={active.look.accent} look={active.look.look} groupLabel={groupLabel} poster={poster}
       /> : null}
     </div>

@@ -1,0 +1,11 @@
+[workspace]
+members = ["sim", "game"]
+resolver = "2"
+
+[profile.release]
+lto = "thin"
+opt-level = 3
+
+# 一致の試験は長いレースを何本も回すので、試験でも最適化する
+[profile.test]
+opt-level = 2

@@ -1,0 +1,15 @@
+[package]
+name = "sim-math"
+version = "0.1.1"
+edition = "2024"
+description = "遊びの計算で V8（Node 24 arm64）とビット単位で同じ結果を返す Math の写し"
+
+[dependencies]
+libm = "0.2.16"
+
+[features]
+# Match the actual browser's angle decisions without changing native Node parity.
+browser-math = ["dep:js-sys"]
+
+[target.'cfg(target_arch = "wasm32")'.dependencies]
+js-sys = { version = "0.3", optional = true }

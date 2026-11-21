@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no" />
+<meta name="theme-color" content="#0f3d2e" />
+<meta name="description" content="きゃしーと魚とイカが、雲の上の競馬場を走る。進路を選び、ダッシュをためて、最後の直線で競り勝つ。" />
+<title>魚々娘 — GYOGYO MUSUME</title>
+<link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+<!-- 3D の板（掲示板・札）の字は canvas 2D で書くので、Web フォントを読む。画面の文字は Rust が fonts/ の字体で描く -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Fredoka:wght@500;600;700&family=Zen+Maru+Gothic:wght@500;700;900&display=swap" rel="stylesheet" />
+<style>
+  html, body { margin: 0; height: 100%; overflow: hidden; background: #0f3d2e; touch-action: none; overscroll-behavior: none; user-select: none; -webkit-user-select: none; -webkit-tap-highlight-color: transparent; }
+  #gl { position: fixed; inset: 0; width: 100%; height: 100%; display: block; outline: none; -webkit-touch-callout: none; }
+  #boot, #fatal { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; color: #fff6e4; font: 700 15px/1.8 'Zen Maru Gothic', 'Hiragino Maru Gothic ProN', 'Hiragino Sans', sans-serif; letter-spacing: 0.08em; text-align: center; padding: 24px; background: #0f3d2e; }
+  #fatal { display: none; flex-direction: column; gap: 20px; white-space: pre-wrap; overflow-wrap: anywhere; }
+  #fatal .act { display: flex; gap: 12px; white-space: normal; }
+  #fatal button { font: 700 15px/1 'Zen Maru Gothic', 'Hiragino Sans', sans-serif; color: #0f3d2e; background: #ffcf4d; border: none; border-radius: 999px; padding: 12px 22px; cursor: pointer; }
+</style>
+</head>
+<body>
+<canvas id="gl" tabindex="0"></canvas>
+<div id="boot">読み込んでいます…</div>
+<div id="fatal"></div>
+<script type="module">
+  const fatal = m => { const e = document.getElementById('fatal'); e.textContent = m; e.style.display = 'flex'; };
+  // Rust の起動の失敗もここへ（lib.rs の start）
+  window.__gyogyoFatal = fatal;
+  // 指の操作は Safari の長押しメニュー・拡大鏡などへ渡さない。pointer の出来事は届き続ける
+  document.getElementById('gl').addEventListener('touchstart', e => { if (e.cancelable) e.preventDefault(); }, { passive: false });
+  // Rust が画面を描き始めたら、起動の文字を外す
+  addEventListener('gyogyo-ready', () => { document.getElementById('boot')?.remove(); document.getElementById('gl').focus(); }, { once: true });
+  // 失敗の表示の下に、続けて遊ぶためのボタンを出す
+  const fatalEl = document.getElementById('fatal');
+  new MutationObserver(() => {
+    if (fatalEl.style.display !== 'flex' || fatalEl.querySelector('.act')) return;
+    const first = (fatalEl.textContent || '').split('\n')[0];
+    fatalEl.textContent = first.length > 200 ? first.slice(0, 200) + '…' : first;
+    const act = document.createElement('div'); act.className = 'act';
+    const btn = (label, go) => { const b = document.createElement('button'); b.textContent = label; b.onclick = go; act.appendChild(b); };
+    btn('読み込み直す', () => location.reload());
+    fatalEl.appendChild(act);
+  }).observe(fatalEl, { attributes: true, childList: true });
+  // WebGPU が無い・adapter が取れない環境では遊べない（旧版は 2026-11-10 に消した）。Rust を読む前に案内を出す
+  let adapter = null;
+  try { adapter = navigator.gpu ? await navigator.gpu.requestAdapter({ powerPreference: 'high-performance' }) : null; } catch { adapter = null; }
+  if (adapter == null) { document.getElementById('boot').remove(); fatal('このブラウザでは遊べません（WebGPU が必要です）。\n最新の Chrome・Edge・Safari で開いてください。'); }
+  else {
+    adapter = null;
+    // Studio（/character-maker）が送ったキャラ: ブラウザの控え（Cache Storage）の決まったキーの .character.zip を、Rust が始めに読める所へ置く。
+    // 名前とキーは lib/character-maker/gyogyo-handoff.ts と同じ。無い・読めないときは何もしない（きゃしーと魚とイカだけで始まる）
+    try {
+      const hit = 'caches' in window ? await (await caches.open('character-maker-gyogyo-v1')).match(new URL('studio-character.zip', location.href).pathname) : null;
+      if (hit) window.__gyogyoStudioZip = new Uint8Array(await hit.arrayBuffer());
+    } catch { /* 控えを読めない */ }
+    // from=studio（Studio から来た直後の印）: Rust が名簿を作るときに読む（window.__gyogyoFromStudio）。URL からはすぐ外す（開き直すと、最後に選んだ走者のまま）
+    const url = new URL(location.href);
+    window.__gyogyoFromStudio = url.searchParams.get('from') === 'studio';
+    if (url.searchParams.has('from')) { url.searchParams.delete('from'); history.replaceState(null, '', url); }
+    const init = (await import('./gyogyo_game.js')).default;
+    init().catch(e => fatal(`読み込めません: ${e}`));
+  }
+</script>
+</body>
+</html>

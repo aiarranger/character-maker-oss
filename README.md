@@ -75,6 +75,19 @@ pnpm dev
 
 http://127.0.0.1:4284/gyogun/index.html を開きます。操作と中身は [games/gyogun/README.md](games/gyogun/README.md)、範囲は [docs/gyogun-spec.md](docs/gyogun-spec.md)。Studio（`/character-maker`）のステージの左下にあるカード「魚群繚乱で遊ぶ」（魚群繚乱のタイトル画面が動いています）を押すと、作ったキャラが主役になります（先に `pnpm gyogun:build`）。
 
+## 魚々娘で走る / Race with fish and squid
+
+[魚々娘をブラウザで遊ぶ](https://gyogun.yukikau.jp/gyogyo/)
+
+きゃしーと魚とイカが、雲の上の競馬場を走る 3D のかけっこ「魚々娘（ぎょぎょむすめ）」も入っています（`games/gyogyo/`。Rust・WebGPU）。走る人は、きゃしー・Studio で作ったキャラ・魚 10 種（Fish Kit）・イカ 2 種（Squid Kit）から選べます。ひとり用です（タイトルの「かけっこグランプリでみんなで走る ↗」は、最大 4 人で走れる かけっこグランプリ https://kakekko.yukikau.jp/ を開きます）。
+
+```sh
+pnpm gyogyo:build       # public/gyogyo/ にゲームを作る（games/gyogyo/rust/web/build.sh）
+pnpm dev
+```
+
+http://127.0.0.1:4284/gyogyo/index.html を開きます。操作と中身は [games/gyogyo/README.md](games/gyogyo/README.md)、範囲は [docs/gyogyo-spec.md](docs/gyogyo-spec.md)。Studio のステージの「魚々娘で遊ぶ」（魚群繚乱のカードの上）を押すと、作ったキャラで走れます（先に `pnpm gyogyo:build`）。
+
 ## ゲームで使う / Use in your game
 
 画面右上の「書き出し」から **3Dモデル（GLB）** と **編集設定（JSON）** を保存できます。GLB は three.js・Babylon.js・Unity（glTFast）などでそのまま読めます。素材は光源を使わない unlit（`KHR_materials_unlit`）です。Studio の画面のやわらかい陰影は下見の描き方で、GLB には入りません（ゲーム側の光や縁取りで仕上げてください）。
@@ -175,6 +188,7 @@ await ensureStudioModels('.cache/character-maker-models');
 | `distribution/` | オリジナル4体のモデルと動作（CC BY 4.0）。一覧と SHA-256 は `distribution/manifest.json` |
 | `public/review-swing-2026-10-02/` | 食べ物の武器（CC BY 4.0） |
 | `games/gyogun/` | 魚群繚乱（ゲームのコード・魚・きゃしー・音）。詳細は [games/gyogun/README.md](games/gyogun/README.md) |
+| `games/gyogyo/` | 魚々娘（ゲームのコード・魚・イカ・きゃしー・音）。詳細は [games/gyogyo/README.md](games/gyogyo/README.md) |
 | `tools/character-maker/` | 部品の組み立て・サムネイル撮影・書き出し確認・受入計測 |
 | `docs/` | 画面の設計（[studio-quality-spec.md](docs/studio-quality-spec.md)）、陰影とゲーム用の動作（[game-motions-spec.md](docs/game-motions-spec.md)）、メインキャラ対応（[main-character-spec.md](docs/main-character-spec.md)）、yukikau.jp への経路（[yukikau-route.md](docs/yukikau-route.md)） |
 

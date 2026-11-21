@@ -24,7 +24,8 @@ import { selectedMakerWeaponId, type MakerWeaponId } from '../../lib/character-m
 import { useCharacterReadTool } from './useCharacterReadTool';
 import { defaultOriginalSpeciesParts, originalSpeciesChoices, type OriginalSpeciesParts } from '../../lib/character-maker/original-species-parts';
 import { StageBackdrop, StageOverlay } from './StudioStage';
-import { GyogunCard, useGyogunCardFit } from './GyogunCard';
+import { GameCard, STUDIO_GAME_ORDER, useGameCardFit } from './GameCard';
+import type { StudioGame } from '../../lib/character-maker/game-handoff';
 import { StudioIcon, type StudioIconName } from './StudioIcon';
 import { paintRangeFills } from '../../lib/character-maker/studio-palette';
 
@@ -81,8 +82,8 @@ type Props = {
   editorRef?: Ref<OriginalEditorHandle>;
   /** ゲームへ渡す（yukikau.jp への組み込み）。あるときは「この姿で遊ぶ」を出し、yukikau.jp 用の .character.zip を渡す。docs/yukikau-route.md */
   onPlay?: (file: File) => void | Promise<void>;
-  /** 「魚群繚乱で遊ぶ」を出す（単体の Studio のページだけ。既定は出さない）。docs/gyogun-spec.md */
-  gyogun?: boolean;
+  /** 「魚群繚乱で遊ぶ」「魚々娘で遊ぶ」を出す（単体の Studio のページだけ。既定は出さない）。docs/gyogun-spec.md・docs/gyogyo-spec.md */
+  games?: boolean;
   /** Studio の表紙の情報（page から渡す）。docs/studio-quality-spec.md §8 */
   accent?: string;
   look?: string;
@@ -92,7 +93,7 @@ type Props = {
 
 const MOTION_ICONS: Record<OriginalConfig['motion'], StudioIconName> = { idle: 'idle', walk: 'walk', run: 'run', sword_idle: 'guard', sword_attack: 'swing' };
 
-export default function OriginalCharacterMaker({ characters, initialCharacterId, initialEntry, initialSession, onBackToList, embedded = false, editorRef, onPlay, gyogun = false, accent, look = '', groupLabel = '', poster }: Props) {
+export default function OriginalCharacterMaker({ characters, initialCharacterId, initialEntry, initialSession, onBackToList, embedded = false, editorRef, onPlay, games = false, accent, look = '', groupLabel = '', poster }: Props) {
   const initialCharacter = characters.find(item => item.id === initialCharacterId) ?? characters[0];
   const matchingSession = initialSession?.history.present.characterId === initialCharacter.id ? initialSession : undefined;
   const [history, setHistory] = useState(() => matchingSession ? currentOriginalHistory(matchingSession.history) : createEditHistory(initialEntry ? validateOriginalDocument(initialEntry) : makeOriginalDocument(initialCharacter)));
@@ -114,14 +115,14 @@ export default function OriginalCharacterMaker({ characters, initialCharacterId,
   const [ready, setReady] = useState(false), [sceneError, setSceneError] = useState(''), [storageError, setStorageError] = useState('');
   const [notice, setNotice] = useState<Notice>(null);
   const [exporting, setExporting] = useState(false), [importing, setImporting] = useState(false);
-  // .character.zip を作っている間（'download' は yukikau.jp 用の書き出し、'play' は「この姿で遊ぶ」、'gyogun' は「魚群繚乱で遊ぶ」）
-  const [packaging, setPackaging] = useState<'download' | 'play' | 'gyogun' | null>(null);
+  // .character.zip を作っている間（'download' は yukikau.jp 用の書き出し、'play' は「この姿で遊ぶ」、'gyogun'・'gyogyo' はゲームで遊ぶ）
+  const [packaging, setPackaging] = useState<'download' | 'play' | StudioGame | null>(null);
   const [pendingWeaponMotion, setPendingWeaponMotion] = useState<ArmedWeaponMotion | null>(null);
   const weaponPicker = useRef<WeaponPickerHandle>(null);
   const [entered, setEntered] = useState(false), [saveDone, setSaveDone] = useState(false);
   const detailsButton = useRef<HTMLButtonElement>(null), refocusDetails = useRef(false), rootRef = useRef<HTMLElement>(null);
-  // 「魚群繚乱で遊ぶ」の入口の形（ステージのカード・札。いつもステージに出す）。docs/gyogun-spec.md の「入口のカード」
-  const gyogunFit = useGyogunCardFit(rootRef, gyogun && hydrated, framing);
+  // ゲームで遊ぶ入口の形（ステージのカード・札。いつもステージに出す）。docs/gyogun-spec.md の「入口のカード」
+  const gameFit = useGameCardFit(rootRef, games && hydrated, framing);
   // スライダーの塗りは値から毎回描く（ドラッグ中も React の再描画で追従する）。
   useLayoutEffect(() => paintRangeFills(rootRef.current));
   const [attackRevision, setAttackRevision] = useState(0);
@@ -503,17 +504,17 @@ export default function OriginalCharacterMaker({ characters, initialCharacterId,
     } catch (error) { setNotice({ error: true, text: message(error) }); }
     finally { setExporting(false); setPackaging(null); }
   }
-  /** 魚群繚乱で遊ぶ: 魚群繚乱用の .character.zip を作り、ブラウザの控えに置いてから魚群繚乱を開く。docs/gyogun-spec.md */
-  async function playGyogun() {
+  /** ゲームで遊ぶ: ゲーム用の .character.zip（魚群繚乱と魚々娘は同じ形）を作り、ブラウザの控えに置いてからゲームを開く。docs/gyogun-spec.md・docs/gyogyo-spec.md */
+  async function playGame(game: StudioGame) {
     if (!character || !ready || exporting) return;
-    setExporting(true); setPackaging('gyogun');
+    setExporting(true); setPackaging(game);
     try {
       const clean = validateOriginalDocument(document);
-      const { assertGyogunBuilt, storeGyogunCharacter, GYOGUN_PLAY_URL } = await import('../../lib/character-maker/gyogun-handoff');
-      await assertGyogunBuilt();
+      const { assertGameBuilt, storeGameCharacter, STUDIO_GAMES } = await import('../../lib/character-maker/game-handoff');
+      await assertGameBuilt(game);
       const stageCanvas = rootRef.current?.querySelector<HTMLCanvasElement>('#studio-stage canvas');
-      await storeGyogunCharacter(await (await import('./rust/export')).exportOriginalGyogunPackageRust(character, clean, stageCanvas));
-      window.location.assign(GYOGUN_PLAY_URL);
+      await storeGameCharacter(game, await (await import('./rust/export')).exportOriginalGyogunPackageRust(character, clean, stageCanvas));
+      window.location.assign(STUDIO_GAMES[game].playUrl);
     } catch (error) { setNotice({ error: true, text: message(error) }); }
     finally { setExporting(false); setPackaging(null); }
   }
@@ -566,7 +567,7 @@ export default function OriginalCharacterMaker({ characters, initialCharacterId,
         <i className={styles.pillDivider} aria-hidden="true" />
         <div className={styles.pillGroup} role="group" aria-label="見る方向">{([['front', '正面'], ['side', '横'], ['back', '後ろ']] as const).map(([value, label]) => <button type="button" key={value} aria-pressed={!cameraCustom && view === value} onClick={() => { setView(value); setCameraCustom(false); setCameraRevision(revision => revision + 1); }}>{label}</button>)}</div>
       </div>
-      {gyogun && <GyogunCard fit={gyogunFit} busy={packaging === 'gyogun'} disabled={!character || !ready || exporting} onPlay={playGyogun} />}
+      {games && STUDIO_GAME_ORDER.map((game, i) => <GameCard key={game} game={game} stack={i} fit={gameFit} busy={packaging === game} disabled={!character || !ready || exporting} onPlay={() => playGame(game)} />)}
       <WeaponPicker value={weaponId} onChange={chooseWeapon} disabled={!character} pickerRef={weaponPicker} requestedMotion={pendingWeaponMotion} onCancelRequest={() => setPendingWeaponMotion(null)} />
       <div className={styles.stageAlert}>
         {sceneError && <div className={styles.error} role="alert"><span>{sceneError}</span><button type="button" className={styles.retryButton} onClick={() => { setSceneError(''); setReady(false); setModelRevision(value => value + 1); }}>もう一度読み込む</button></div>}

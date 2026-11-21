@@ -180,8 +180,8 @@
 /* M8: first-run hint, bottom-left. */
 .hint {
   position: absolute;
-  /* Inside the bottom-left corner mark. 「魚群繚乱で遊ぶ」のカードが出ている間は、その右（character-studio.module.css の --gyogun-hint-shift）。 */
-  left: calc(34px + var(--gyogun-hint-shift, 0px));
+  /* Inside the bottom-left corner mark. 「魚群繚乱で遊ぶ」のカードが出ている間は、その右（character-studio.module.css の --game-hint-shift）。 */
+  left: calc(34px + var(--game-hint-shift, 0px));
   bottom: 34px;
   display: inline-flex;
   align-items: center;
